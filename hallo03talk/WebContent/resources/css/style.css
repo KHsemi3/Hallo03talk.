@@ -44,3 +44,8 @@ footer {
 #search {
   padding-right: 10px;
 }
+
+#headerNav {
+  display: flex;
+  justify-content: center;
+}
