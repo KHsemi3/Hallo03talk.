@@ -1,0 +1,46 @@
+@font-face {
+  font-family: "Somi";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/naverfont_10@1.0/Somi.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+/* 로고 글씨 */
+.hallo {
+  font-family: "Somi";
+  font-size: 30px;
+}
+
+/* 뒷배경 */
+main {
+  background-color: orange;
+}
+
+/* 컨테이너 */
+#container {
+  min-height: 50rem;
+  border: 1px solid red;
+  background-color: white;
+}
+
+/* 푸터 */
+footer {
+  height: 10rem;
+  margin-top: -1rem;
+  background-color: orange;
+}
+
+/* 검색 */
+#search {
+  padding-right: 10px;
+}
+
+/* 장소 카테고리 */
+#place-finder {
+  font-size: 20px;
+  line-height: 3rem;
+}
+
+/* div border */
+/* div {
+  border: 1px solid black;
+} */
