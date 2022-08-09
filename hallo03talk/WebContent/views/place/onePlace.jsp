@@ -1,23 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="onePhoto.css" />
-    <link rel="stylesheet" href="reviewForm.css" />
-  </head>
-  <body>
-    <div id="container" class="container-xxl mt-xxl-5">
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<%@ include file="/views/common/header.jsp"%>
+	<main>
+	   <div id="container" class="container-xxl">
       <!-- 슬라이드 -->
       <div id="onePlacePhotos" class="carousel slide" data-bs-ride="true">
         <div class="carousel-indicators">
@@ -162,8 +154,9 @@
         </div>
       </div>
     </div>
-  </body>
-
+	</main>
+	<footer></footer>
+</body>
   <script src="onePhoto.js"></script>
   <script src="reviewForm.js"></script>
   <script src="delReview.js"></script>

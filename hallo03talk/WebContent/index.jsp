@@ -1,12 +1,14 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>할로영삼talk</title>
+    <title>í ë¡ìì¼talk</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" />
-    <!--head 태그 내 추가-->
+    <!--head íê·¸ ë´ ì¶ê°-->
     <link rel="icon" href="resources/img/favi.png" />
     <style>
       @font-face {
@@ -176,20 +178,20 @@
     <header>
       <nav>
         <ul class="menu1">
-          <li><a href="">공지사항</a></li>
-          <li><a href="">로그인</a></li>
-          <li><a href="">회원가입</a></li>
+          <li><a href="">ê³µì§ì¬í­</a></li>
+          <li><a href="">ë¡ê·¸ì¸</a></li>
+          <li><a href="">íìê°ì</a></li>
         </ul>
       </nav>
       <div id="logo">
-        <h1><a href="">할로영삼talk</a></h1>
+        <h1><a href="">í ë¡ìì¼talk</a></h1>
       </div>
     </header>
     <section id="tripple">
-      <div id="middle">할로영삼 talk</div>
+      <div id="middle">í ë¡ìì¼ talk</div>
     </section>
     <div id="middle2">
-      제주 여행을 위한 여행자들의 커뮤니티 공간 <br />직접 여행자가 되어서 함께 해주세요!
+      ì ì£¼ ì¬íì ìí ì¬íìë¤ì ì»¤ë®¤ëí° ê³µê° <br />ì§ì  ì¬íìê° ëì´ì í¨ê» í´ì£¼ì¸ì!
     </div>
     <div class="search-box">
       <input type="text" class="search-txt" name="focus" placeholder="Type to search" />
@@ -201,12 +203,12 @@
     <div id="footer">
       <ul>
         |
-        <li><a href="">동행</a></li>
+        <li><a href="">ëí</a></li>
         |
 
-        <li><a href="">장소</a></li>
+        <li><a href="">ì¥ì</a></li>
         |
-        <li><a href="">이벤트</a></li>
+        <li><a href="">ì´ë²¤í¸</a></li>
         |
       </ul>
     </div>

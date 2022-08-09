@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+ <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8" />
@@ -8,7 +11,9 @@
       rel="stylesheet"
     />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="resources/css/style.css" />
+  
+    <link href="/hallo03talk/resources/css/style.css" rel="stylesheet" type="text/css" />
+
   </head>
   <body>
     <!-- 헤더-->
@@ -17,8 +22,12 @@
         <div
           class="d-flex flex-item flex-wrap align-items-center justify-content-center justify-content-lg-start"
         >
-          <a href="#" class="nav-link px-2 link-secondary hallo">할로영삼talk</a>
-          <ul class="nav col-12 col-lg-auto ms-lg-auto mb-2 justify-content-center mb-md-0">
+          <a href="#" class="nav-link px-2 link-secondary hallo"
+            >할로영삼talk</a
+          >
+          <ul
+            class="nav col-12 col-lg-auto ms-lg-auto mb-2 justify-content-center mb-md-0"
+          >
             <li><a href="#" class="nav-link px-2 link-dark">동행</a></li>
             <li><a href="#" class="nav-link px-2 link-dark">장소</a></li>
             <li><a href="#" class="nav-link px-2 link-dark">후기</a></li>
@@ -26,21 +35,23 @@
           </ul>
 
           <div class="col-md-3 text-end">
-            <button class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 btn btn-warning" role="search">
+            <button
+              class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 btn btn-warning"
+              role="search"
+            >
               검색
             </button>
-            <button type="button" class="btn btn-outline-primary me-2">Login</button>
+            <button type="button" class="btn btn-outline-primary me-2">
+              Login
+            </button>
             <button type="button" class="btn btn-primary">Sign-up</button>
           </div>
         </div>
       </div>
     </header>
 
-    <main class="d-flex flex-row flex-nowrap justify-content-center w-100">
-      <div id="container" class="container-xxl mt-xxl-5"></div>
-    </main>
-    <footer
-      class="d-flex flex-wrap justify-content-between align-items-center py-3 border-top w-100"
-    ></footer>
+    
+    
+    
   </body>
 </html>
