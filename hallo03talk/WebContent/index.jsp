@@ -6,10 +6,10 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>í ë¡ìì¼talk</title>
+    <title>할로영삼 talk</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" />
     <!--head íê·¸ ë´ ì¶ê°-->
-    <link rel="icon" href="resources/img/favi.png" />
+    <link rel="icon" href="resources/img/main_favi.png" />
     <style>
       @font-face {
         font-family: "Somi";
@@ -31,6 +31,7 @@
       }
       html,
       body {
+      	width:100%;
         height: 100%;
       }
       #img {
@@ -155,13 +156,16 @@
         width: 640px;
         padding: 0 6px;
       }
-      #footer {
+      #withlist {
         font-family: "KyoboHandwriting2020A";
-        width: 68%;
-        margin-top: 200px;
+        width: 100%;
+        display:flex;
         font-size: 26px;
+        justify-content:center;
+        margin-top:200px;
+        
       }
-      #footer ul li {
+      #withlist ul li {
         margin-left: 60px;
         margin-right: 60px;
       }
@@ -171,27 +175,28 @@
     </style>
 
     <meta charset="UTF-8" />
-    <title>Insert title here</title>
+    <title>할로 영삼 TALK</title>
   </head>
   <body>
-    <img id="img" src="resources/img/jeju.jpg" alt="" />
+    <img id="img" src="resources/img/main_2.jpg" alt="" />
     <header>
       <nav>
         <ul class="menu1">
-          <li><a href="">ê³µì§ì¬í­</a></li>
-          <li><a href="">ë¡ê·¸ì¸</a></li>
-          <li><a href="">íìê°ì</a></li>
+          <li><a href="">공지</a></li>
+          <li><a href="">로그인</a></li>
+           <li><a href="">회원가입</a></li>
         </ul>
       </nav>
       <div id="logo">
-        <h1><a href="">í ë¡ìì¼talk</a></h1>
+        <h1><a href="">할로영삼talk</a></h1>
       </div>
     </header>
     <section id="tripple">
-      <div id="middle">í ë¡ìì¼ talk</div>
+      <div id="middle">할로영삼talk</div>
     </section>
     <div id="middle2">
-      ì ì£¼ ì¬íì ìí ì¬íìë¤ì ì»¤ë®¤ëí° ê³µê° <br />ì§ì  ì¬íìê° ëì´ì í¨ê» í´ì£¼ì¸ì!
+    
+     <br />
     </div>
     <div class="search-box">
       <input type="text" class="search-txt" name="focus" placeholder="Type to search" />
@@ -199,18 +204,19 @@
         <i class="fas fa-search"></i>
       </a>
     </div>
+    <div id ="withlist">
+<ul>
+        |
+        <li><a href="">동행</a></li>
+        |
 
-    <div id="footer">
-      <ul>
+        <li><a href="">장소</a></li>
         |
-        <li><a href="">ëí</a></li>
-        |
-
-        <li><a href="">ì¥ì</a></li>
-        |
-        <li><a href="">ì´ë²¤í¸</a></li>
+        <li><a href="">이벤트</a></li>
         |
       </ul>
-    </div>
+   </div>
+      
+  
   </body>
 </html>
