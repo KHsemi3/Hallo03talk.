@@ -1,16 +1,15 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="/hallo03talk/WebContent/resources/css/style.css" />
-  </head>
-  <body>
-    <div id="container" class="container-xxl mt-xxl-5">
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<%@ include file="/views/common/header.jsp"%>
+<main>
+    <div id="container" class="container-xxl">
       <h1 class="text-center py-lg-5">장소</h1>
       <!-- 장소 카테고리들 -->
       <div id="place-finder" class="fw-bolder text-center mt-5">
@@ -53,21 +52,21 @@
           <!-- 장소하나 -->
           <div class="col m-3">
             <div class="row">
-              <img src="/hallo03talk/WebContent/resources/img/place_2.jpg" alt="" class="col" width="350px" height="350px" />
+              <img src="/hallo03talk/resources/img/place_2.jpg" alt="" class="col mb-2" width="350px" height="350px" />
             </div>
             <div class="row text-center"><label for="placeName">장소명</label></div>
           </div>
           <!-- 장소둘 -->
           <div class="col m-3">
             <div class="row">
-              <img src="/hallo03talk/WebContent/resources/img/place_3.jpg" alt="" class="col" width="350px" height="350px" />
+              <img src="/hallo03talk/resources/img/place_3.jpg" alt="" class="col mb-2" width="350px" height="350px" />
             </div>
             <div class="row text-center"><label for="placeName">장소명</label></div>
           </div>
           <!-- 장소셋 -->
           <div class="col m-3">
             <div class="row">
-              <img src="/hallo03talk/WebContent/resources/img/place_1.jpg" alt="" class="col" width="350px" height="350px" />
+              <img src="/hallo03talk/resources/img/place_1.jpg" alt="" class="col mb-2" width="350px" height="350px" />
             </div>
             <div class="row text-center"><label for="placeName">장소명</label></div>
           </div>
@@ -76,27 +75,29 @@
           <!-- 장소하나 -->
           <div class="col m-3">
             <div class="row">
-              <img src="/hallo03talk/WebContent/resources/img/place_1.jpg" alt="" class="col" />
+              <img src="/hallo03talk/resources/img/place_1.jpg" alt="" class="col mb-2" />
             </div>
             <div class="row text-center"><label for="placeName">장소명</label></div>
           </div>
           <!-- 장소둘 -->
           <div class="col m-3">
             <div class="row">
-              <img src="/hallo03talk/WebContent/resources/img/place_1.jpg" alt="" class="col" />
+              <img src="/hallo03talk/resources/img/place_1.jpg" alt="" class="col mb-2" />
             </div>
             <div class="row text-center"><label for="placeName">장소명</label></div>
           </div>
           <!-- 장소셋 -->
           <div class="col m-3">
             <div class="row">
-              <img src="/hallo03talk/WebContent/resources/img/place_1.jpg" alt="" class="col" />
+              <img src="/hallo03talk/resources/img/place_1.jpg" alt="" class="col mb-2" />
             </div>
             <div class="row text-center"><label for="placeName">장소명</label></div>
           </div>
         </div>
       </div>
     </div>
-  </body>
-  <script src="/hallo03talk/WebContent/resources/js/placeList.js"></script>
+</main>
+<footer></footer>
+</body>
+<script src="/hallo03talk/resources/js/placeList.js"></script>
 </html>
