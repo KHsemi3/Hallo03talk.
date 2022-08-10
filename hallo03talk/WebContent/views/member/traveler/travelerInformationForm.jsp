@@ -27,6 +27,10 @@
 .navbar{
   margin-top: 60px;  
 }
+
+
+
+
 /* ----------------내 정보-------------------------------------------------- */
      aside.context {
   text-align: center;
@@ -150,6 +154,7 @@ input.full:focus, textarea.full:focus {
   position: relative;
   padding-left: 5px;
   cursor: pointer;
+  margin-left: 10px;
 }
 .checkbox__wrapper label:before {
   content: "";
@@ -383,7 +388,7 @@ input.full:focus, textarea.full:focus {
                 <div class="container-fluid">      
                       <div class="collapse navbar-collapse" id="navbarNavDropdown">
                             <ul class="navbar-nav">
-                              <li class="nav-item">
+                              <li class="nav-item" style="background-color: rgba(0, 0, 0, 0.2); border-radius: 5px;">
                                 <a class="nav-link active" aria-current="page" href="세미실전_일반회원_마이페이지(메뉴바,내정보).html">내 정보</a>
                               </li>
                               <li class="nav-item">
