@@ -66,7 +66,7 @@
                               <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="세미실전_사장님_마이페이지(메뉴바,내정보).html">내 정보</a>
                               </li>
-                              <li class="nav-item">
+                              <li class="nav-item" style="background-color: rgba(0, 0, 0, 0.2); border-radius: 5px;">
                                 <a class="nav-link active" aria-current="page" href="세미실전_사장님_마이페이지(내가 쓴 글).html">내가 쓴 글</a>
                               </li>
                               <li class="nav-item">

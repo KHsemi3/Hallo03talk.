@@ -22,15 +22,16 @@
         }
         
         .button-wrap {
-            width: 230px;
+            width: 220px;
             margin: 35px auto;
             position: relative;
             box-shadow: 0 0 600px 9px #fcae8f;
-            border-radius: 30px;
+			border-radius: 6px;
             top: 60px;
         }
         .togglebtn {
             padding: 5px;
+			margin-left: 5px;
             width: 100px;
             cursor: pointer;
             background: transparent;
@@ -45,7 +46,7 @@
             top: 0;
             left: 0;
             position: absolute;
-            width: 110px;
+			width: 50%;
             height: 100%;
             background-color: rgb(233, 187, 100);
             border-radius: 6px;
@@ -55,11 +56,9 @@
     
         .input-group {
             top: 80px;
-            /* position: absolute; */
             height: 0px;
             transition: .5s;
             margin-left: 50px;
-            /* background-color: pink; */
         }
         
         .input-field {

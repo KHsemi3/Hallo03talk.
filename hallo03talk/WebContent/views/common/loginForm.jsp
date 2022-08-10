@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <style>
  
-	/* ---------여기서부터 새로운 로그인------------------------------- */
+	/* ---------로그인------------------------------- */
 	.main input[type=radio] {
 		display: none;
 	}
@@ -21,8 +21,7 @@
 		display: none;
 	}
 	#tab-1:checked ~ .content div:nth-child(1),
-	#tab-2:checked ~ .content div:nth-child(2),
-	#tab-3:checked ~ .content div:nth-child(3) {
+	#tab-2:checked ~ .content div:nth-child(2){
 		display: block;
 	}
 	.tab {
@@ -122,7 +121,6 @@
 	            <div class="tab">
 	              <label for="tab-1">일반회원</label>
 	              <label for="tab-2">사장님</label>
-	              <label for="tab-3">관리자</label>
 	            </div>
 	
 	            <div class="content">
@@ -133,7 +131,7 @@
 	                        <form class="login-form">
 	                                <input type="text" placeholder="아이디" />
 	                                <input type="password" placeholder="비밀번호" />
-	                                <button>로그v인 -일반회원-</button>
+	                                <button>로그인</button>
 	        
 	                                <div class="footer">
 	                                    <input type="button" id="find_id" value="아이디 찾기" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#findId">
@@ -151,25 +149,7 @@
 	                        <form class="login-form">
 	                                <input type="text" placeholder="아이디" />
 	                                <input type="password" placeholder="비밀번호" />
-	                                <button>로d그인-사장님</button>
-	        
-	                                <div class="footer">
-	                                    <input type="button" id="find_id" value="아이디 찾기" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#findId">
-	                                    <input type="button" id="find_pwd" value="비밀번호 찾기" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#findPwd">
-	                                </div>
-	                        </form>
-	                    </div>
-	                  </div>
-	              </div>
-	
-	
-	              <div class="content-dis">
-	                <div class="login-page">
-	                    <div class="form">
-	                        <form class="login-form">
-	                                <input type="text" placeholder="아이디" />
-	                                <input type="password" placeholder="비밀번호" />
-	                                <button>로그aa인-관리자</button>
+	                                <button>로그인</button>
 	        
 	                                <div class="footer">
 	                                    <input type="button" id="find_id" value="아이디 찾기" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#findId">

@@ -87,7 +87,7 @@
                               <li class="nav-item">
                                 <a class="nav-link" href="#">찜 목록</a>
                               </li>
-                              <li class="nav-item">
+                              <li class="nav-item" style="background-color: rgba(0, 0, 0, 0.2); border-radius: 5px;">
                                 <a class="nav-link" href="#">좋아요 목록</a>
                               </li>
                               <li class="nav-item dropdown">
