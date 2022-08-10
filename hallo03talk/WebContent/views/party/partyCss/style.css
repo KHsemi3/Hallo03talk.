@@ -1,6 +1,5 @@
 * {
     margin: 0;
-    padding: 0;
 }
 
 html {
@@ -20,16 +19,20 @@ a {
 }
 
 .board_wrap {
-    width: 1000px;
-    margin: 100px auto;
+    margin-left: auto;
+    margin-right: auto;
+    width: 800px;
+    padding: 1rem;
 }
 
-.board_title {
-    margin-bottom: 30;    
-}
 
 .board_title strong {
-    font-size: 3rem;    
+    font-family: 'Somi';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/naverfont_10@1.0/Somi.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;     
+margin-bottom: 30;    
+    font-size: 4rem;    
 }
 
 .board_title p {
