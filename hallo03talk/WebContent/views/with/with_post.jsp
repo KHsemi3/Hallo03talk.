@@ -6,6 +6,17 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+
+<!-- summernote -->
+<script src="summernote/summernote-lite.js"></script>
+<script src="summernote/summernote-ko-KR.min.js"></script>
+<link rel="stylesheet" href="summernote/summernote-lite.css">
+
+<!-- tagify -->
+<script src="https://unpkg.com/@yaireo/tagify"></script>
+<!-- <script src="https://unpkg.com/@yaireo/tagify/dist/tagify.polyfills.min.js"></script> -->
+<link href="https://unpkg.com/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
+
 <style>
 	a {
 		text-decoration: none;
@@ -56,19 +67,24 @@
           <form action="" style="padding: 20px;" class="d-flex flex-column">
             <!-- 글쓰기 요청 폼 -->
 
-            <label for="exampleFormControlInput1" class="form-label mt-1"><h4>제목</h4></label>
+            <label for="exampleFormControlInput1" class="form-label mt-3"><h4>제목</h4></label>
             <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="제목을 입력하세요" name="title">
 
-            <label for="exampleFormControlTextarea1" class="form-label mt-1"><h4>내용</h4></label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="15" style="resize: none;"
-              name="content"></textarea>
 
-            <label for="formDatepicker" class="mb-1 mt-1"><h4>날짜</h4></label>
+            <label for="exampleFormControlTextarea1" class="form-label mt-3"><h4>내용</h4></label>
+			<!-- summernote -->
+           	<textarea class="summernote" name="content" id="exampleFormControlTextarea1"></textarea>
+           	
+           	<!-- 태그 -->
+            <input type="text" class="form-control mt-1" id="tag" placeholder="태그 입력" name="tag">
+            
+
+            <label for="formDatepicker" class="mt-3"><h4>날짜</h4></label>
             <div id="formDatepicker" class="d-flex">
               <input type="date" id="date1" class="flex-grow-1 border" name="startDate"> ~ <input type="date" id="date1" class="flex-grow-1 border" name="endDate">
             </div>
 
-            <label for="formPlace" class="mb-1 mt-1"><h4>장소</h4></label>
+            <label for="formPlace" class="mt-3"><h4>장소</h4></label>
 
             <div id="formPlace">
               <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -148,4 +164,22 @@
       });
     });
   })
+</script>
+
+<script>
+    $('.summernote').summernote({
+        height: 450,
+        lang: "ko-KR"
+    });
+</script>
+
+<!-- tagify -->
+<script>
+var input = document.querySelector('#tag')
+var tagify = new Tagify(input);
+  
+// 태그가 추가되면 이벤트 발생
+tagify.on('add', function() {
+  console.log(tagify.value); // 입력된 태그 정보 객체
+})
 </script>
