@@ -10,6 +10,7 @@
 href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 rel="stylesheet"
 />
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </head>
@@ -20,10 +21,10 @@ rel="stylesheet"
     <main>
             <div id="container" class="container-xxl">
 
-                      <div class="inner">
+            <div class="inner">
 
             <br><br><br><br><br>
-            <div class="text" style=" width: 50%;float: left;">
+            <div class="text" style=" width: 50%; float: left;">
                 <h1 style="margin-left: 60px;"><b>검색</b></h1>
             </div>
             <div style=" width: 45%; float: right; margin-top: 20px; margin-right: 60px;">
@@ -38,7 +39,7 @@ rel="stylesheet"
             <button type="button" class="btn btn-primary" style="float:left; margin-left: 65px; ">이전</button>
             <br><br><br><br><br>
 
-            <h1 style="margin-left: 60px;"><b>장소</b></h1>
+            <h1 style="margin-left: 60px;  font-family: somi; font-size: 60px; font-weight: lighter;"><b>장소</b></h1>
             <br>
             <div class="row">
                 <div class="col-md-4 ">
@@ -81,7 +82,7 @@ rel="stylesheet"
             <hr style="width: 90%; margin: 0 auto;">
             <br><br>
 
-            <h1 style="margin-left: 60px;"><b>후기</b></h1>
+            <h1 style="margin-left: 60px; font-family: somi; font-size: 60px; font-weight: lighter;"><b>후기</b></h1>
             <br>
             <div class="row">
                 <div class="col-md-4">
@@ -116,14 +117,14 @@ rel="stylesheet"
                 </div>
             </div>
             <br>
-            <div style="text-align: right; margin-right: 60px;">
+            <div style="text-align: right; margin-right: 60px; ">
                 <a href="" onclick="" style="text-decoration: none; color: gray;">더보기...</a>
             </div>
             <br>
             <hr style="width: 90%; margin: 0 auto;">
             <br><br>
 
-            <h1 style="margin-left: 60px;"><b>Q&A</b></h1>
+            <h1 style="margin-left: 60px; font-family: somi; font-size: 60px; font-weight: lighter;"><b>Q&A</b></h1>
             <br>
             <div class="row">
                 <div class="col-md-4">

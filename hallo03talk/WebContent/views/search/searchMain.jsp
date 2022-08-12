@@ -8,6 +8,7 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
 
+
 </head>
 <body>
 
@@ -182,17 +183,18 @@
                         </div>
                         <div id="setday" class="fw-bolder text-center mt-5" style="float: left; margin-left: 30px; margin-top: 0px;">
                         <div style="float: left; ">
+          
                             <div id="going" style=" float:left; margin-left: 30px; font-size: 25;">
                             가는날   
                             </div>
-                            <input type="date" style="color: gray; margin-left: 10px; float:left;">
+                            <input type="date" name="startDate" id="stratDate" style="color: gray; margin-left: 10px; float:left;">
                             <div style=" float:left; margin-left: 50px; font-size: 25;">
                             ~
                             </div>
                             <div id="comming" style=" float:left; margin-left: 50px; font-size: 25;">
                                 오는날   
                             </div>
-                                <input type="date" style="color: gray; margin-left: 10px; float:left;">
+                                <input type="date" name="endDate" id="endDate" style="color: gray; margin-left: 10px; float:left;">
                             </div>
                             <br><br>
                         </div>
