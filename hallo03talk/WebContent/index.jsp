@@ -35,12 +35,13 @@
         height: 100%;
       }
       #img {
-        position: absolute;
+        position: fixed;
         background-size: cover;
         width: 100%;
         height: 100%;
         z-index: -10;
         filter: brightness(30%);
+       	
       }
       a {
         text-decoration: none;
@@ -168,6 +169,7 @@
       #withlist ul li {
         margin-left: 60px;
         margin-right: 60px;
+        
       }
       #footer ul li:hover {
         opacity: 0.5;

@@ -11,9 +11,9 @@
       rel="stylesheet"
     />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-  
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link href="/hallo03talk/resources/css/style.css" rel="stylesheet" type="text/css" />
-
+ <link rel="icon" href="resources/img/main_favi.png" />
   </head>
   <body>
     <!-- 헤더-->
