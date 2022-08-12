@@ -9,12 +9,13 @@
 </head>
 
 <body>
-------------------------------------------------------------------------
+
 
 			<%@ include file="/views/common/header.jsp"%>
 
 			<main>
-			    <div class="board_wrap">
+					<div id="container" class="container-xxl">
+					<div class="board_wrap">
         <div class="board_title">
             <strong>이벤트 소식</strong>
             <P>제주도에서만 즐길 수 있는 축제 및 가게들의 행사를 안내해드립니다!</P>
@@ -23,6 +24,7 @@
             <div class="content">
                 <div class="title">
                     글 제목을 입력해주세요.
+                   
                 </div>
                 <div class="info">
                     <dl>
@@ -42,24 +44,26 @@
                         <dd>17</dd>
                     </dl>
                 </div>
-               
-                </div>
                 <div class="cont">
-                    글 내용을 입력해주세요.
+                    <p>
+                      글 내용을 입력해주세요.
+                      욕설과 비방은 금지입니다.
+                    </p>
                 </div>
+              </div>
+
             </div>
             <div class="bt_wrap">
-                <a href="#", class="on">목록</a>
-                <a herf="#">수정</a>
+                <a href="#" class="on">목록</a>
+                <a href="#">수정</a>
             </div>
-
-        </div>
-    </div>
+        </div>			
+      </div>
 			</main>
 
 
 	<footer></footer>
 
-------------------------------------------------------------------------
+
 </body>
 </html>

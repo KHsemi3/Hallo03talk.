@@ -9,7 +9,7 @@
 </head>
 
 <body>
-------------------------------------------------------------------------
+
 
 			<%@ include file="/views/common/header.jsp"%>
 
@@ -77,7 +77,7 @@
                     <a href="#" class="bt last">>></a>
                 </div>
                 <div class="bt_wrap">
-                    <a href="write.jsp", class="on">등록</a>
+                    <a href="write.jsp" class="on">등록</a>
                 </div>
             </div>
         </div>
@@ -90,6 +90,6 @@
 
 	<footer></footer>
 
-------------------------------------------------------------------------
+
 </body>
 </html>
