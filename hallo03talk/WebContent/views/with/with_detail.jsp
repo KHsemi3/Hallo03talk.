@@ -59,8 +59,7 @@ a {
 						</div>
 						<div id="content-header-right"
 							class="d-flex flex-column justify-content-end">
-							<div class="rounded bg-warning align-self-center"
-								style="margin-bottom: 10px;">모집중</div>
+							<div class="rounded bg-warning align-self-center mb-1 p-1" >모집중</div>
 							<!-- 마감시 <div class="rounded bg-secondary text-light align-self-center" id="magam">마감됨</div> -->
 							<span>
 								장소 : <span>어딘가</span> <!--장소 넣기-->
