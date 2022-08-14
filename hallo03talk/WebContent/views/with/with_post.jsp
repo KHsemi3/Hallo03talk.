@@ -1,20 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<%@ include file="/views/common/header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
 
 <!-- summernote -->
-<script src="summernote/summernote-lite.js"></script>
-<script src="summernote/summernote-ko-KR.min.js"></script>
-<link rel="stylesheet" href="summernote/summernote-lite.css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+    
 <!-- tagify -->
 <script src="https://unpkg.com/@yaireo/tagify"></script>
-<!-- <script src="https://unpkg.com/@yaireo/tagify/dist/tagify.polyfills.min.js"></script> -->
 <link href="https://unpkg.com/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
 
 <style>
@@ -48,7 +51,6 @@
 
 <body>
 
-	<%@ include file="/views/common/header.jsp"%>
 
 	<main>
 		<div id="container" class="container-xxl">
@@ -167,10 +169,24 @@
 </script>
 
 <script>
+$(document).ready(function () {
     $('.summernote').summernote({
-        height: 450,
-        lang: "ko-KR"
+        height: 400,
+        toolbar: [
+		    // [groupName, [list of button]]
+		    ['fontname', ['fontname']],
+		    ['fontsize', ['fontsize']],
+		    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+		    ['color', ['color']],
+		    ['para', ['paragraph']],
+		    ['height', ['height']],
+		    ['insert',['picture','link']],
+		    ['view', ['help']]
+		  ],
+		fontNames: ['맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체','Arial', 'Arial Black', 'Comic Sans MS', 'Courier New'],
+		fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
     });
+});
 </script>
 
 <!-- tagify -->
