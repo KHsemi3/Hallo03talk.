@@ -129,6 +129,7 @@ input.full:focus, textarea.full:focus {
 }
 .Email {
   grid-area: codepen;
+  
 }
 .blood {
   grid-area: blood;
@@ -415,71 +416,27 @@ input.full:focus, textarea.full:focus {
                         <label>Id</label>
                         <textarea class="full" type="text" required readonly></textarea>
                       </div>
-                      <div class="Name">
-                        <label>Name</label>
-                        <input class="full" type="text" required readonly/>
-                      </div>
-                      <div class="Nick">
-                        <label>Nick</label>
-                        <input class="full" type="text"/>
-                      </div>
+                      
                       <div class="Phone">
-                        <label>Tel</label> 
+                        <label>Tel</label>
                         <input class="full" type="tel"/>
                       </div>
                       <div class="Email">
                         <label>Email</label>
                         <input class="full" type="email"/>
                       </div>
-                      <div class="blood">
-                        <label>Gender</label>
-                        <div class="checkbox__wrapper">
-                          <div class="checkbox">
-                            <input id="design" type="checkbox" value="female"/>
-                            <label class="label-check" for="design">female</label>
-                          </div>
-                          <div class="checkbox">
-                            <input id="front-end" type="checkbox" value="male"/>
-                            <label class="label-check" for="front-end">male</label>
-                          </div>   
-                        </div>
-                      </div>
+                    
                     </div>
                   </div>
                   <aside class="context">
                     <div class="explanation">
                       <input type="submit" class="js-switch" id="" value="정보변경">
                       <input type="button" class="js-switch" id="" value="비밀번호 변경" data-bs-toggle="modal" data-bs-target="#pwdChange">
-                      <input type="button" class="js-switch" id="" value="회원탈퇴" data-bs-toggle="modal" data-bs-target="#memberOut">
+                      <input type="button" class="js-switch" id="" value="회원탈퇴" data-bs-toggle="modal" data-bs-target="#quit">
                     </div>
                   </aside>
                 
-                  <script>
-                    //toggle for form & badge
-                $(".js-switch").click(function() {
-                  $(".main-content").toggleClass("as-card");
-                });
-                
-                
-                //code for image preview
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                  $("#imager").attr("src", e.target.result);
-                };
-                
-                function readURL(input) {
-                  if (input.files && input.files[0]) {
-                    $("#imager").css("visibility",'visible');
-                    reader.readAsDataURL(input.files[0]);
-                  }
-                }
-                
-                $("#image-input").change(function() {
-                  readURL(this);
-                });
-                
-                </script>
-
+            
                     
                 </form>
 <!-- -------------------------------------------------------------------- -->
@@ -533,7 +490,7 @@ input.full:focus, textarea.full:focus {
              <!-- --모달창_회원탈퇴----------------- -->
                  
                <!-- Modal -->
-               <div class="modal fade" id="memberOut" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+               <div class="modal fade" id="quit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                   <div class="modal-content">
                              
@@ -548,16 +505,16 @@ input.full:focus, textarea.full:focus {
                       <!-- ----- -->
                       <div id="pwdFormOuter">
                         <form action="" method="post">
+  			        		<input type="hidden" name="memberId" value=">">
   
-                          <!-- ----- -->
                           <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="floatingInput" placeholder="name@example.com">
-                            <label for="floatingInput">기존 비밀번호</label>
+                            <input type="password" class="form-control" name="" id="floatingInput" placeholder="name@example.com">
+                            <label for="floatingInput">비밀번호</label>
                           </div>
                           
                           <div class="form-floating">
-                            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                            <label for="floatingPassword">기존 비밀번호 확인</label>
+                            <input type="password" class="form-control" name="" id="floatingPassword" placeholder="Password">
+                            <label for="floatingPassword">비밀번호 확인</label>
                           </div>
                           <!-- -- -->
   
@@ -569,7 +526,7 @@ input.full:focus, textarea.full:focus {
   
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                      <button type="submit" class="btn btn-danger" onclick="return checkPwd();">탈퇴하기</button>
+                      <button type="submit" class="btn btn-danger" ">탈퇴하기</button>
                     </div>
                   </div>
                 </div>

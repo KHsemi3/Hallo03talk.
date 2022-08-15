@@ -404,9 +404,6 @@ input.full:focus, textarea.full:focus {
                               <li class="nav-item">
                                 <a class="nav-link" href="#">찜 목록</a>
                               </li>
-                              <li class="nav-item">
-                                <a class="nav-link" href="#">좋아요 목록</a>
-                              </li>
                               <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                   신고
@@ -469,36 +466,11 @@ input.full:focus, textarea.full:focus {
                   <div class="explanation">
                     <input type="submit" class="js-switch" id="" value="정보변경">
                     <input type="button" class="js-switch" id="" value="비밀번호 변경" data-bs-toggle="modal" data-bs-target="#pwdChange">
-                    <input type="button" class="js-switch" id="" value="회원탈퇴" data-bs-toggle="modal" data-bs-target="#memberOut">
+                    <input type="button" class="js-switch"value="회원탈퇴" class="btn-danger" data-bs-toggle="modal" data-bs-target="#quit">
+                    
                   </div>
                 </aside>
               
-                <script>
-                  //toggle for form & badge
-              $(".js-switch").click(function() {
-                $(".main-content").toggleClass("as-card");
-              });
-              
-              
-              //code for image preview
-              var reader = new FileReader();
-              reader.onload = function(e) {
-                $("#imager").attr("src", e.target.result);
-              };
-              
-              function readURL(input) {
-                if (input.files && input.files[0]) {
-                  $("#imager").css("visibility",'visible');
-                  reader.readAsDataURL(input.files[0]);
-                }
-              }
-              
-              $("#image-input").change(function() {
-                readURL(this);
-              });
-              
-              </script>
-
                   
               </form>
 <!-- -------------------------------------------------------------------- -->
@@ -549,40 +521,38 @@ input.full:focus, textarea.full:focus {
               </div>
             </div>
 
-           <!-- --모달창_회원탈퇴----------------- -->
-               
-             <!-- Modal -->
-             <div class="modal fade" id="memberOut" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <!-- 부트스트랩_모달창_회원탈퇴 -->
+
+		    <!-- Modal -->
+            <div class="modal fade" id="quit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
-                  	     
-                  <!-- Modal Header -->
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">회원탈퇴</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  
-                  <!-- Modal body -->
-                  <div class="modal-body">
-                    <!-- ----- -->
-                    <div id="pwdFormOuter">
-                      <form action="" method="post">
-
-                        <!-- ----- -->
+		
+		      <!-- Modal Header -->
+		      <div class="modal-header">
+		        <h4 class="modal-title">회원탈퇴</h4>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+		      </div>
+		
+		      <!-- Modal body -->
+		      <div class="modal-body">
+		        <div id="pwdFormOuter">
+			        <form action="sasdf/member/quit" method="post">
+			        	<input type="hidden" name="memberId" value=">">
+			        	
+			        	<div class="form-floating mb-3">
+                          <input type="password" class="form-control" name="" id="floatingInput" placeholder="Password">
+                          <label for="floatingInput">비밀번호</label>
+                        </div>
                         <div class="form-floating mb-3">
-                          <input type="password" class="form-control" id="floatingInput" placeholder="name@example.com">
-                          <label for="floatingInput">기존 비밀번호</label>
+                          <input type="password" class="form-control" name=""  id="floatingPassword" placeholder="Password">
+                          <label for="floatingPassword">비밀번호 확인</label>
                         </div>
                         
-                        <div class="form-floating">
-                          <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                          <label for="floatingPassword">기존 비밀번호 확인</label>
-                        </div>
-                        <!-- -- -->
-
-                      </form>
-                    </div>
-                  <!-- ----- -->
+			        </form>
+		        </div>
+		        
+		     <!-- ----- -->
 
                   </div>
 
@@ -593,7 +563,9 @@ input.full:focus, textarea.full:focus {
                 </div>
               </div>
             </div>
-<!-- ------------------------------------------------------------------------------------- -->
+		    
+		 
+		 <!------------------------------------------------------------------------------------>  
         </div>
     </main>
     

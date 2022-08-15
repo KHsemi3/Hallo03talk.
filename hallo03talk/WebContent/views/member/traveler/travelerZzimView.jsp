@@ -34,6 +34,8 @@
 }
 .card{
     margin-top: 20px;
+    float
+    
 }
 .deleteButton{
   border: 1px solid gray;
@@ -43,21 +45,16 @@
 .imgDiv{
     position:relative;
 }
-.zzimImage{
-    width: 100px;
-    position:absolute;
-    margin-top: 30px;
-    margin-left: 100px;
-}
+
 
     </style>
     
 </head>
 <body>
 
-	<%@ include file="/views/common/header.jsp"%>
-    	
-	<main>
+   <%@ include file="/views/common/header.jsp"%>
+       
+   <main>
         <!--하얀색-->
       <div id="container" class="container-xxl">
 
@@ -87,9 +84,7 @@
                               <li class="nav-item" style="background-color: rgba(0, 0, 0, 0.2); border-radius: 5px;">
                                 <a class="nav-link" href="#">찜 목록</a>
                               </li>
-                              <li class="nav-item">
-                                <a class="nav-link" href="#">좋아요 목록</a>
-                              </li>
+                             
                               <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                   신고
@@ -112,30 +107,23 @@
               </div>
               
               <!-- -----찜 리스트------------------------------------------------------ -->
-
-                <div class="card mb-3" style="max-width: 100%;">
-                    <div class="card-header">
-                        <input type="checkbox" style="margin-right: 10px;">선택
-                    </div>
-
-                    <div class="row g-0">
-                        <div class="col-md-4 imgDiv">
-                            <img src="images/heart.png" class="img-fluid rounded-start zzimImage" alt="찜 리스트 사진">
-                        </div>
-
-                        <div class="col-md-8">
-                            <div class="card-body">
-                            <h5 class="card-title">찜Title</h5>
-                            <!-- 말줄임표: text-truncate를 붙이면 됨 -->
-                            <p class="card-text text-truncate">This is a wider with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <p class="card-text text-truncate"><small class="text-muted">어쩌고 저쩌고</small></p>
-                        </div>
-                    </div>
-                    
-                </div>
-                
-                <!-- -------------------------------------------------------- -->
-      
+             
+               <div class="card" style="width: 18rem;">
+                  <div class="card-header">
+                         <input type="checkbox" style="margin-right: 10px;">선택
+                     </div>
+                     
+                 <div class="card-body">
+                      <h5 class="card-title">장소명</h5>
+                      <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                      <p class="card-text text-truncate">여기는 장소 내용 Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <a href="#" class="card-link">Card link</a>
+                      <a href="#" class="card-link">Another link</a>
+                 </div>
+              </div>
+                       
+            <!-- ---------------------------------------------------------- -->                      
+            
 
         </div>
     </main>
