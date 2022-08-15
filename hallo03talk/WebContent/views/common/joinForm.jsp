@@ -197,24 +197,9 @@
 			                      
 			                        <input type="password" name="bossJoinPwd" class="input-field" placeholder="비밀번호" required>
 			                        <input type="password" name="bossJoinPwd2" class="input-field" placeholder="비밀번호 확인" required>
-			    
-			                        <table>
-			                            <tr>
-			                                <td><input type="text" name="bossJoinNick" class="input-field" placeholder="닉네임" required></td>
-			                                <td style="padding-left: 30px;"><button id="doubleCheck">중복확인</button></td>
-			                            </tr>
-			                        </table>
+
 			                       
-			                        <table id="gender_table">
-			                            <tr> 
-			                                <td style="padding-right: 30px; color: gray;">성별</td>
-			                                <td style="padding-right: 10px;"><input type="radio" name="bossJoinGender" value="man" required>남</td>
-			                                <td><input type="radio" name="bossJoinGender" value="woman" required>여</td>
-			                            </tr>
-			                        </table>
-			    
-			                        <input type="text" name="bossJoinStore" class="input-field" placeholder="가게 이름" required>
-			                        <input type="tel" name="bossJoinPhone" class="input-field" placeholder="가게 전화번호" required>
+			                        <input type="tel" name="bossJoinPhone" class="input-field" placeholder="전화번호" required>
 			                        <input type="email" name="bossJoinEmail" class="input-field" placeholder="이메일" required>
 			                        <button type="submit" class="join">회원가입</button>
 			                    </div>
