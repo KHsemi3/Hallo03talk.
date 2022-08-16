@@ -31,14 +31,14 @@
             			<input type="text" placeholder="대표자명을 입력해 주세요">
             			<label>생년월일</label>
             			<input type="text" placeholder="숫자 6자리를 입력해 주세요">
-           				<label>소재지</label>
+           				<label>주소</label>
             			<input type="text" placeholder="주소를 검색하세요">
             			<input type="button" value="주소검색"><br>
             			<input type="button" value="확인">
         			 </form>
     			</div>
 			</div>				
-		</div>
+		
 	</main>
 
 
