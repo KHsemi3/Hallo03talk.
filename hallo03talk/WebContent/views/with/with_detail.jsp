@@ -1,5 +1,7 @@
+<%@page import="com.h3.with.vo.WithVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%WithVo vo = (WithVo) request.getAttribute("vo"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,12 +28,12 @@ a {
 }
 
 #content-heder-left {
-	width: 75%;
+	width: 70%;
 	height: 100%;
 }
 
 #content-heder-rigth {
-	width: 30%;
+	width: 50%;
 	height: 100%;
 }
 </style>
@@ -49,25 +51,29 @@ a {
 				<div id="content">
 					<div id="content-header" class="d-flex">
 						<div id="content-heder-left">
-							<a href="with_bord.html" style="color: orange;" class="h6">동행</a>
-							<h3>제주도 같이 돌아보실분 모집!!</h3>
+							<a href="<%=request.getContextPath()%>/with/list" style="color: orange;" class="h6">동행</a>
+							<h3>${vo.title}</h3>
 							<div>
 								<img src="/hallo03talk/resources/img/with/with_board_defaultMan.png" width="24px"
-									height="24px"> <span style="color: gray;">chan0966</span>
+									height="24px"> <span style="color: gray;">${vo.traveler_no}</span>
 							</div>
 
 						</div>
 						<div id="content-header-right"
 							class="d-flex flex-column justify-content-end">
-							<div class="rounded bg-warning align-self-center mb-1 p-1" >모집중</div>
-							<!-- 마감시 <div class="rounded bg-secondary text-light align-self-center" id="magam">마감됨</div> -->
+							
+							<%if("Y".equals(vo.getStatus())){ %>
+								<div class="rounded bg-warning align-self-center mb-1 p-1" >모집중</div>
+							<%}else{ %>
+								<div class="rounded bg-light align-self-center mb-1 p-1" >마감됨</div>
+							<%} %>
 							<span>
-								장소 : <span>어딘가</span> <!--장소 넣기-->
+								장소 : <span>${vo.place }</span> <!--장소 넣기-->
 							</span> 
 							<span> 
 								<img src="/hallo03talk/resources/img/with/with_detail_cal.svg"
 								width="16px" height="16px" class="me-1"> 
-								<span class="text-muted">22-08-06 ~ 22-08-16</span> <!--날자 집어넣기-->
+								<span class="text-muted">${vo.start_date } ~ ${vo.end_date }</span> <!--날자 집어넣기-->
 							</span>
 						</div>
 					</div>
@@ -77,12 +83,7 @@ a {
 
 					<div class="w-100" style="margin-bottom: 100px;">
 						<!--content-content-->
-						<pre>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis
-                            fugiat dolores molestias veniam et ipsa, vero harum impedit
-                            explicabo placeat labore modi totam autem aliquam reiciendis 
-                            temporibus! Magni, nisi id.
-                        </pre>
+						${vo.content }
 					</div>
 					<!--content-content-->
 
@@ -90,24 +91,25 @@ a {
 						style="height: 100px; width: 100%;">
 						<div class="d-flex align-items-center border">
 							<img src="/hallo03talk/resources/img/with/with_board_defaultMan.png" width="100"
-								height="100"> <span style="margin-right: 50px;">chan0966</span>
-							<a href="https://www.instagram.com/dlwlrma/">
+								height="100"> <span style="margin-right: 50px;">${vo.traveler_no }</span>
+							<a href="https://www.instagram.com/${vo.insta }/">
 								<!--인스타--> <img src="/hallo03talk/resources/img/with/with_detail_instagram.svg"
-								width="60px" height="30px">
-							</a> <a href="https://www.facebook.com/thequiett">
-								<!--페북--> <img src="/hallo03talk/resources/img/with/with_detail_facebook.svg"
 								width="60px" height="30px">
 							</a>
 						</div>
 					</div>
 
-					<div class="text-info" style="margin-top: 20px;">#27남#캠핑#산책#바다구경</div>
+					<div class="text-info" style="margin-top: 20px;">
+						<%for(String tag : vo.getTag()){ %>
+							<a href=""><%=tag%></a>
+						<%} %>
+					</div>
 					<hr>
 
 					<div class="w-100 d-flex justify-content-between">
 						<div class="text-black-50">
 							<div>
-								작성일 : yy-mm-dd hh:mm
+								작성일 : ${vo.enroll_date}
 								<!--날짜넣기-->
 							</div>
 							<div>
@@ -119,7 +121,7 @@ a {
 										id="Color">
                                     </path>
                                 </svg>
-								5
+								${vo.cnt }
 								<!--조회수-->
 							</div>
 
