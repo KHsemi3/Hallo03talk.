@@ -56,7 +56,7 @@ public class PlaceAddController extends HttpServlet{
 		
 		
 		for(int i = 0; i < fileList.size(); i++ ) {
-			if(fileList.get(i).getName().equals("slideImgs")) {
+			if(fileList.get(i).getName().equals("slideImgs") || fileList.get(i).getName().equals("placeImg")) {
 				Part f = fileList.get(i);
 				String originName = f.getSubmittedFileName();
 				String photoName = new PlaceService().changeName(originName);
@@ -93,13 +93,13 @@ public class PlaceAddController extends HttpServlet{
 		int result = new PlaceService().placeAdd(placeVo,photoVoList);
 		
 		if(result == 1) {
-			
+			//성공
 		} else {
+			//실패
 			for(int i = 0; i < delPhotos.size(); i++ ) {
 					new File(realPath + File.separator + delPhotos.get(i)).delete();
 			}
 		}
 		
-		System.out.println(result);
 	}
 }
