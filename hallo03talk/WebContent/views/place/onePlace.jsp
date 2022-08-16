@@ -6,6 +6,7 @@
     <title>Insert title here</title>
     <link href="/hallo03talk/resources/css/onePhoto.css" rel="stylesheet" type="text/css" />
     <link href="/hallo03talk/resources/css/reviewForm.css" rel="stylesheet" type="text/css" />
+    <link href="/hallo03talk/resources/css/star.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
     <%@ include file="/views/common/header.jsp"%>
@@ -50,6 +51,39 @@
         <div class="row">
           <div class="col text-start">
             <button class="btn btn-danger mt-3 mb-0" data-bs-toggle="modal" data-bs-target="#reportMain">장소 신고</button>
+          </div>
+
+          <div class="col text-center mt-3 mb-0">
+            <svg
+              style="color: rgb(253, 195, 86)"
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="34"
+              fill="currentColor"
+              class="bi bi-heart-fill"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
+                fill="#fdc356"
+              ></path>
+            </svg>
+            <svg
+              style="color: #f3da35"
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="32"
+              fill="currentColor"
+              class="bi bi-heart"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"
+                fill="#f3da35"
+              ></path>
+            </svg>
+            <label for="zzim">5</label>
           </div>
           <!-- 사장님만 보임 -->
           <div class="col text-end">
@@ -115,8 +149,15 @@
             <div class="d-flex col-2 justify-content-center align-items-center">
               <label for="review" class="h2">후기</label>
             </div>
-            <div class="d-flex col-6 justify-content-center align-items-center">
+            <div class="d-flex col-5 justify-content-center align-items-center">
               <p>후기후기 후기후기 후기후기 후기후기</p>
+            </div>
+            <div class="d-flex col-1 justify-content-center align-items-center">
+              <span class="star">
+                ★★★★★
+                <span>★★★★★</span>
+                <input type="range" oninput="drawStar(this)" value="1" step="1" min="0" max="10" name="star" />
+              </span>
             </div>
             <!-- 사장님만 보임 -->
             <div class="d-flex col justify-content-end align-items-center">
@@ -304,4 +345,5 @@
   <script src="/hallo03talk/resources/js/onePhoto.js"></script>
   <script src="/hallo03talk/resources/js/reviewForm.js"></script>
   <script src="/hallo03talk/resources/js/updateReview.js"></script>
+  <script src="/hallo03talk/resources/js/star.js"></script>
 </html>
