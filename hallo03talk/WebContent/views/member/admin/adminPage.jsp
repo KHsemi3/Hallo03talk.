@@ -1,5 +1,13 @@
+<%@page import="com.h3.admin.vo.AdminVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+ <%
+	AdminVo loginAdmin = (AdminVo)session.getAttribute("loginMember");
+	
+	String alertMsg = (String)session.getAttribute("alertMsg");
+	session.removeAttribute("alertMsg");
+%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -312,9 +320,17 @@
     <header>
       <nav>
         <ul class="menu1">
-          <li><a href="" class="btn">공지</a></li>
+         <%if(loginAdmin == null){%>
+          <li><a href="" class="btn">공지사항</a></li>
           <li><a  href="" id="testBtn" class="btn" >로그인</a></li>
-          
+           <%} else {%>
+   		<li><%=loginAdmin.getName() %> 님 환영합니다</li>
+    	<li><a href="" class="btn">공지사항</a></li>
+    	<li><a href="" class="btn">숙소관리</a></li>
+    	<li><a href="" class="btn">신고관리</a></li>
+          <li><a  href="" id="testBtn" class="btn" >로그아웃</a></li>
+    	
+   <% }%>
         </ul>
       </nav>
       <div id="logo">
@@ -330,6 +346,7 @@
     </div>
   
     <div id ="withlist">
+   
 <ul>
         |
         <li><a href="">동행</a></li>
@@ -340,6 +357,9 @@
         <li><a href="">이벤트</a></li>
         |
       </ul>
+     
+    
+    %>
    </div>
 
   <!-- 회원가입 확인 Modal-->
@@ -364,8 +384,8 @@
 	                <h5>나는 관리자다..</h5>
 	                    <div class="form">
 	                        <form class="login-form">
-	                                <input type="text" placeholder="아이디" />
-	                                <input type="password" placeholder="비밀번호" />
+	                                <input type="text" placeholder="아이디" name="adminId" />
+	                                <input type="password" placeholder="비밀번호" name="adminPwd" />
 	                                <button>로그인</button>
 	        
 	                                
