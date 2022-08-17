@@ -10,13 +10,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.h3.reportUser.vo.ReportUserVo;
 
-@WebServlet (urlPatterns = "/경로")
+
 public class ReportUser extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		req.getRequestDispatcher("/사용자 신고 경로").forward(req, resp);
+		req.getRequestDispatcher("").forward(req, resp);
 		
 	}
 	
