@@ -1,6 +1,16 @@
+<%@page import="com.h3.boss.vo.BossVo"%>
+<%@page import="com.h3.traveler.vo.TravelerVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <% String contextPath =request.getContextPath();%>
+    <% String contextPath =request.getContextPath();
+   
+	TravelerVo loginTraveler = (TravelerVo)session.getAttribute("travelerLoginMember");
+	BossVo loginBoss = (BossVo)session.getAttribute("BossLoginMember");
+	String alertMsg = (String)session.getAttribute("alertMsg");
+	session.removeAttribute("alertMsg");
+%>
+    
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -96,8 +106,11 @@
         font-weight: normal;
         margin-left: 20px;
       }
+      .menu1 li {
+      }
       .menu1 li a:hover {
         opacity: 0.5;
+        cursor:pointer
       }
       #middle {
         font-family: "Somi";
@@ -170,9 +183,16 @@
       #withlist ul li {
         margin-left: 60px;
         margin-right: 60px;
+        cursor:pointer;
+        
         
       }
-      #footer ul li:hover {
+       #withlist ul li:hover{
+       opacity:0.5;
+        
+        
+      }
+      #footer ul li a:hover {
         opacity: 0.5;
       }
     </style>
@@ -184,29 +204,29 @@
     <img id="img" src="resources/img/main_2.jpg" alt="" />
     <header>
       <nav>
-      <%//if (travlerLogin== null && bossLogin== null){%>
+      <%if (loginTraveler== null && loginBoss== null){%>
         <ul class="menu1">
           <li><a onclick="">공지사항</a></li>
           <li><a onclick="location.href='/hallo03talk/traveler/login'">로그인</a></li>
            <li><a  onclick="location.href='/hallo03talk/traveler/join'">회원가입</a></li>
         </ul>
-        <%//} %>
-        <%//if(travlerLogin!= null && bossLogin == null){%>
+        <%} %>
+        <%if(loginTraveler!= null && loginBoss == null){%>
          <ul class="menu1">
-          <li>님 환영 합니다~!</li>
+          <li><%=loginTraveler.getName() %>님 환영 합니다~ ^^</li>
           <li><a onclick="">공지사항</a></li>
           <li><a onclick="location.href='/hallo03talk/traveler/myPage'">마이페이지</a></li>
            <li><a  onclick="location.href='/hallo03talk/member/logout'">로그아웃</a></li>
         </ul>
-        <%//} %>
-         <%//if(travlerLogin== null && bossLogin != null){%>
+        <%} %>
+         <%if(loginTraveler== null && loginBoss != null){%>
          <ul class="menu1">
-          <li>님 환영 합니다~!</li>
+          <li><%=loginBoss.getId() %>님 환영 합니다~ ^^</li>
           <li><a onclick="">공지사항</a></li>
           <li><a onclick="location.href='/hallo03talk/boss/myPage'">마이페이지</a></li>
            <li><a  onclick="location.href='/hallo03talk/member/logout'">로그아웃</a></li>
         </ul>
-        <%//} %>
+        <%} %>
       </nav>
       <div id="logo">
         <h1><a href="">할로영삼talk</a></h1>
@@ -240,6 +260,16 @@
       </ul>
    </div>
       
-  
+  <script>
+		<%if(alertMsg!=null){%>
+		alert('<%=alertMsg%>');
+		<%}%>
+		
+		
+		
+		
+		
+		
+	</script>
   </body>
 </html>

@@ -33,7 +33,7 @@ public class AdminLoginController extends HttpServlet {
 		req.getSession().setAttribute("alertMsg", "관리자 로그인 성공");
 		
 //		req.getRequestDispatcher("/semi").forward(req, resp);
-		resp.sendRedirect("/semi");
+		resp.sendRedirect("/hallo03talk/views/member/admin/adminPage.jsp");
 		
 	}else{
 		//로그인실패
