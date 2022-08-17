@@ -20,7 +20,6 @@ public class PlaceListController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		
-		int cnt = new PlaceService().getCount();
 		List<PlaceVo> placeList = new PlaceService().getList();
 		List<PlacePhotoVo> photoList = new PlaceService().getProfile();
 		
