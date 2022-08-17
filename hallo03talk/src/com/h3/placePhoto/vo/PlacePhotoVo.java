@@ -6,13 +6,16 @@ public class PlacePhotoVo {
 		super();
 	}
 
-	public PlacePhotoVo(String no, String name, String path, String status, String enrollDate, String placeNo) {
+	public PlacePhotoVo(String no, String name, String path, String status, String enrollDate, String placeNo,
+			String profile) {
+		super();
 		this.no = no;
 		this.name = name;
 		this.path = path;
 		this.status = status;
 		this.enrollDate = enrollDate;
 		this.placeNo = placeNo;
+		Profile = profile;
 	}
 
 	private String no;
@@ -21,6 +24,7 @@ public class PlacePhotoVo {
 	private String status;
 	private String enrollDate;
 	private String placeNo;
+	private String Profile;
 
 	public String getNo() {
 		return no;
@@ -70,10 +74,18 @@ public class PlacePhotoVo {
 		this.placeNo = placeNo;
 	}
 
+	public String getProfile() {
+		return Profile;
+	}
+
+	public void setProfile(String profile) {
+		Profile = profile;
+	}
+
 	@Override
 	public String toString() {
 		return "PlacePhotoVo [no=" + no + ", name=" + name + ", path=" + path + ", status=" + status + ", enrollDate="
-				+ enrollDate + ", placeNo=" + placeNo + "]";
+				+ enrollDate + ", placeNo=" + placeNo + ", Profile=" + Profile + "]";
 	}
 
 }

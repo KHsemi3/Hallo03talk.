@@ -21,10 +21,10 @@ public class PlaceListController extends HttpServlet{
 		req.setCharacterEncoding("UTF-8");
 		
 		int cnt = new PlaceService().getCount();
-		List<PlaceVo> voList = new PlaceService().getList();
+		List<PlaceVo> placeList = new PlaceService().getList();
 		List<PlacePhotoVo> photoList = new PlaceService().getProfile();
 		
-		req.setAttribute("placeList", voList);
+		req.setAttribute("placeList", placeList);
 		req.setAttribute("photoList", photoList);
 		
 		req.getRequestDispatcher("/views/place/placeList.jsp").forward(req, resp);

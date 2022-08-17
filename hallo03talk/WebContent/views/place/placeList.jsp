@@ -5,9 +5,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-ArrayList<PlaceVo> placeList = (ArrayList<PlaceVo>)request.getAttribute("placeList");
-ArrayList<PlacePhotoVo> photoList = (ArrayList<PlacePhotoVo>)request.getAttribute("photoList");
-int x = placeList.size()/3+1;
+ArrayList<PlaceVo> placeList = (ArrayList<PlaceVo>) request.getAttribute("placeList");
+ArrayList<PlacePhotoVo> photoList = (ArrayList<PlacePhotoVo>) request.getAttribute("photoList");
+int x = placeList.size() / 3;
 %>
 <!DOCTYPE html>
 <html>
@@ -57,21 +57,25 @@ int x = placeList.size()/3+1;
 			</div>
 
 			<div id="place-show" class="mt-lg-5 w-100">
-			<%for(int i=0; i<x; i++) { %>
+				<%
+				for (int i = 0; i < x; i++) {
+				%>
 				<div class="row px-lg-5">
-				<%for(int j=0; j<placeList.size(); j++) { %>
+					<%
+					for (int j = 0; j < placeList.size(); j++) {
+					%>
 					<!-- 장소하나 -->
 					<div class="col mb-5">
 						<div class="card" style="width: 350px">
 							<img class="card-img-top"
-								src="/hallo03talk/resources/upload/place/<%=photoList.get(j).getName() %>" alt="Card image"
-								width="350px" height="350px" />
+								src="/hallo03talk/resources/upload/place/<%=photoList.get(j).getName()%>"
+								alt="Card image" width="350px" height="350px" />
 							<div class="card-body">
-								<h4 class="card-title"><%= placeList.get(j).getName() %></h4>
-								<p class="card-text"><%= placeList.get(j).getAddress()%></p>
+								<h4 class="card-title"><%=placeList.get(j).getName()%></h4>
+								<p class="card-text"><%=placeList.get(j).getAddress()%></p>
 
 								<div class="row">
-									<a href="#" class="btn btn-primary col-5 ms-3">더보기</a>
+									<a href="/hallo03talk/place/one?placeNo=<%=placeList.get(j).getNo() %>" class="btn btn-primary col-5 ms-3">더보기</a>
 									<div class="col"></div>
 									<div class="d-flex col align-items-center">
 										<svg width="24px" height="24px" viewBox="0 0 24 24"
@@ -81,7 +85,7 @@ int x = placeList.size()/3+1;
 												d="M11.5,5 C17.293,5 20.813,11.041 20.918,11.298 L20.918,11.298 L21,11.5 L20.918,11.701 C20.813,11.959 17.293,18 11.5,18 C5.707,18 2.187,11.959 2.082,11.701 L2.082,11.701 L2,11.5 L2.082,11.298 C2.187,11.041 5.707,5 11.5,5 Z M11.5,6.036 C6.92,6.036 3.565,10.488 3.089,11.499 C3.567,12.51 6.932,16.964 11.5,16.964 C16.08,16.964 19.435,12.512 19.911,11.5 C19.433,10.49 16.068,6.036 11.5,6.036 Z M11.5,8.25 C13.2949254,8.25 14.75,9.70507456 14.75,11.5 C14.75,13.2949254 13.2949254,14.75 11.5,14.75 C9.70507456,14.75 8.25,13.2949254 8.25,11.5 C8.25,9.70507456 9.70507456,8.25 11.5,8.25 Z M11.5,9.25 C10.2573593,9.25 9.25,10.2573593 9.25,11.5 C9.25,12.7426407 10.2573593,13.75 11.5,13.75 C12.7426407,13.75 13.75,12.7426407 13.75,11.5 C13.75,10.2573593 12.7426407,9.25 11.5,9.25 Z"
 												id="Color"></path>
                       </svg>
-										<%=placeList.get(j).getCnt() %>
+										<%=placeList.get(j).getCnt()%>
 									</div>
 									<div class="d-flex col align-items-center">
 										<svg style="color: rgb(253, 195, 86)"
@@ -104,74 +108,10 @@ int x = placeList.size()/3+1;
 							</div>
 						</div>
 					</div>
-					<%}} %>
-					<!-- 장소둘 -->
-					<div class="col mb-5">
-						<div class="card" style="width: 350px">
-							<img class="card-img-top"
-								src="/hallo03talk/resources/img/place_3.jpg" alt="Card image"
-								width="350px" height="350px" />
-							<div class="card-body">
-								<h4 class="card-title">장소명</h4>
-								<p class="card-text">장소위치</p>
-								<a href="#" class="btn btn-primary">더보기</a>
-							</div>
-						</div>
-					</div>
-					<!-- 장소셋 -->
-					<div class="col mb-5">
-						<div class="card" style="width: 350px">
-							<img class="card-img-top"
-								src="/hallo03talk/resources/img/place_1.jpg" alt="Card image"
-								width="350px" height="350px" />
-							<div class="card-body">
-								<h4 class="card-title">장소명</h4>
-								<p class="card-text">장소위치</p>
-								<a href="#" class="btn btn-primary">더보기</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row px-lg-5">
-					<!-- 장소하나 -->
-					<div class="col mb-5">
-						<div class="card" style="width: 350px">
-							<img class="card-img-top"
-								src="/hallo03talk/resources/img/place_2.jpg" alt="Card image"
-								width="350px" height="350px" />
-							<div class="card-body">
-								<h4 class="card-title">장소명</h4>
-								<p class="card-text">장소위치</p>
-								<a href="#" class="btn btn-primary">더보기</a>
-							</div>
-						</div>
-					</div>
-					<!-- 장소둘 -->
-					<div class="col mb-5">
-						<div class="card" style="width: 350px">
-							<img class="card-img-top"
-								src="/hallo03talk/resources/img/place_3.jpg" alt="Card image"
-								width="350px" height="350px" />
-							<div class="card-body">
-								<h4 class="card-title">장소명</h4>
-								<p class="card-text">장소위치</p>
-								<a href="#" class="btn btn-primary">더보기</a>
-							</div>
-						</div>
-					</div>
-					<!-- 장소셋 -->
-					<div class="col mb-5">
-						<div class="card" style="width: 350px">
-							<img class="card-img-top"
-								src="/hallo03talk/resources/img/place_1.jpg" alt="Card image"
-								width="350px" height="350px" />
-							<div class="card-body">
-								<h4 class="card-title">장소명</h4>
-								<p class="card-text">장소위치</p>
-								<a href="#" class="btn btn-primary">더보기</a>
-							</div>
-						</div>
-					</div>
+					<%
+					}
+					}
+					%>
 				</div>
 			</div>
 		</div>
