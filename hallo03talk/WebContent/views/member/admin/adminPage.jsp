@@ -4,7 +4,7 @@
     
  <%
 	AdminVo loginAdmin = (AdminVo)session.getAttribute("loginAdmin");
-	
+	String contextPath = request.getContextPath();
 	String alertMsg = (String)session.getAttribute("alertMsg");
 	session.removeAttribute("alertMsg");
 %>
@@ -324,11 +324,12 @@
           <li><a href="" class="btn">공지사항</a></li>
           <li><a  href="" id="testBtn" class="btn" >로그인</a></li>
            <%} else {%>
-   		<li><%=loginAdmin.getName() %> 님 환영합니다</li>
+   		
     	<li><a href="" class="btn">공지사항</a></li>
-    	<li><a href="" class="btn">숙소관리</a></li>
-    	<li><a href="" class="btn">신고관리</a></li>
-          <li><a  href="" id="testBtn" class="btn" >로그아웃</a></li>
+    	<li><a  class="btn"  onclick="location.href='/hallo03talk/admin/place'">숙소관리</a></li>
+    	<li><a  class="btn"  onclick="location.href='/hallo03talk/admin/report'">신고관리</a></li>
+          <li><a  href="/hallo03talk/admin/logout"  class="btn" >로그아웃</a></li>
+          <li class=""><%=loginAdmin.getName() %> 님 환영합니다</li>
     	
    <% }%>
         </ul>
@@ -348,18 +349,22 @@
     <div id ="withlist">
    
 <ul>
+       <ul>
         |
-        <li><a href="" onclick>동행</a></li>
+        <li><a onclick="location.href='/hallo03talk/with/list'">동행</a></li>
         |
 
-        <li><a href="">장소</a></li>
+        <li><a onclick="location.href='/hallo03talk/place/list'">장소</a></li>
         |
-        <li><a href="">이벤트</a></li>
+        <li><a onclick="location.href='/hallo03talk/party/list'">이벤트</a></li>
         |
+         <li><a href="">커뮤니티</a></li>
+        |
+      </ul>
       </ul>
      
     
-    %>
+   
    </div>
 
   <!-- 회원가입 확인 Modal-->
@@ -383,7 +388,7 @@
 	                <div class="login-page">
 	                <h5>나는 관리자다..</h5>
 	                    <div class="form">
-	                        <form class="login-form">
+	                        <form class="login-form" action="<%=contextPath%>/admin/login" method="post">
 	                                <input type="text" placeholder="아이디" name="adminId" />
 	                                <input type="password" placeholder="비밀번호" name="adminPwd" />
 	                                <button>로그인</button>
@@ -424,6 +429,12 @@
 			e.preventDefault();
 			$('#testModal').modal("show");
 		});
+	</script>
+	 <script>
+		<%if(alertMsg!=null){%>
+		alert('<%=alertMsg%>');
+		<%}%>
+		
 	</script>
 </body>
   </body>
