@@ -123,7 +123,7 @@ public class BossService {
 	/*
 	 * 다시한번 회원 정보 조회(회원번호): 정보 변경 된 것을 조회
 	 */
-	private BossVo selectOneByNo(int no) {
+	public BossVo selectOneByNo(int no) {
 
 		Connection conn = null;
 		BossVo vo = null;
