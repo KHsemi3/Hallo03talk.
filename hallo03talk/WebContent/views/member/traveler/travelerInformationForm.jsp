@@ -1,10 +1,29 @@
+<%@page import="com.h3.boss.vo.BossVo"%>
+<%@page import="com.h3.traveler.vo.TravelerVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+      <%
+  		TravelerVo travelerLoginMember = (TravelerVo)session.getAttribute("travelerLoginMember");
+      	 BossVo BossLoginMember = (BossVo)session.getAttribute("BossLoginMember");
+      	 
+      //-----------------------------------------------------------------------
+      	String alertMsg = (String)session.getAttribute("alertMsg");
+      	session.removeAttribute("alertMsg");   
+      	
+      //	-----------------------------------------------------------------------
+      	String contextPath = request.getContextPath();
+   %>  
+   
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+ <!-- CDN으로 추가하는 방법 -->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
  <style>
       /*할로영삼talk 폰트*/
       @font-face {
@@ -419,7 +438,10 @@ input.full:focus, textarea.full:focus {
               </nav>
               <!-- ------내 정보-------------------------------------------------------- -->
                 
-              <form action="" method="post">      
+               <form action="/hallo03talk/traveler/myPage" method="post">      
+        		<input type="hidden" value="<%=travelerLoginMember.getNo()%>" name="travelerNo">   
+              
+              
                 <div class="main-content printed">
                   <div class="id__wrapper">
                     <div class="deco"></div>
@@ -429,33 +451,33 @@ input.full:focus, textarea.full:focus {
                     </label>
                     <div class="Id">
                       <label>Id</label>
-                      <textarea class="full" type="text" required readonly></textarea>
+                      <input class="full" type="text"  name="travelerJoinId" value="<%=travelerLoginMember.getId() %>" required readonly></input>
                     </div>
                     <div class="Name">
                       <label>Name</label>
-                      <input class="full" type="text" required readonly/>
+                      <input class="full" type="text"  name="travelerJoinName" value="<%=travelerLoginMember.getName() %>" />
                     </div>
                     <div class="Nick">
                       <label>Nick</label>
-                      <input class="full" type="text"/>
+                      <input class="full" type="text" name="travelerJoinNick" value="<%=travelerLoginMember.getNick() %>"/>
                     </div>
                     <div class="Phone">
                       <label>Tel</label> 
-                      <input class="full" type="tel"/>
+                      <input class="full" type="tel" name="travelerJoinPhone" value="<%=travelerLoginMember.getPhone() %>"/>
                     </div>
                     <div class="Email">
                       <label>Email</label>
-                      <input class="full" type="email"/>
+                      <input class="full" type="email" name="travelerJoinEmail" value="<%=travelerLoginMember.getEmail() %>"/>
                     </div>
                     <div class="blood">
                       <label>Gender</label>
                       <div class="checkbox__wrapper">
                         <div class="checkbox">
-                          <input id="design" type="checkbox" value="female"/>
+                          <input id="design" type="checkbox" name="travelerJoinGender" value="female"/>
                           <label class="label-check" for="design">female</label>
                         </div>
                         <div class="checkbox">
-                          <input id="front-end" type="checkbox" value="male"/>
+                          <input id="front-end" type="checkbox" name="travelerJoinGender" value="male"/>
                           <label class="label-check" for="front-end">male</label>
                         </div>   
                       </div>
@@ -471,9 +493,37 @@ input.full:focus, textarea.full:focus {
                   </div>
                 </aside>
               
+              <!-- ---------------------------------------------------------------------------------- -->
+              
+              <script> 
+			
+              // GENDER 가 보이게 하기 위함
+				$(function(){
+					
+					const travelerJoinGender = '<%=travelerLoginMember.getGender()%>';
+					
+					$('input:radio[name=travelerJoinGender]').each(function(){
+						
+
+				        var result = travelerJoinGender.checked(this.value);
+				        
+				        console.log(result);
+				        
+						if(result != -1){
+							this.checked = true;
+						}
+						
+					});
+					
+					
+				})
+				
+			</script>
                   
-              </form>
-<!-- -------------------------------------------------------------------- -->
+           <!-- ---------------------------------------------------------------------------------- -->
+           
+           </form>
+           
           
             <!-- --모달창_비밀번호 변경----------------- -->
                
@@ -492,22 +542,23 @@ input.full:focus, textarea.full:focus {
                   <div class="modal-body">
                     <!-- ----- -->
                     <div id="pwdFormOuter">
-                      <form action="" method="post">
 
+  					<form action="<%=contextPath%>/traveler/pwd" method="post">
+			        	<input type="hidden" name="travelerJoinId" value="<%=travelerLoginMember.getId()%>">
+			        	
                         <div class="form-floating mb-3">
-                          <input type="password" class="form-control" id="floatingInput" placeholder="name@example.com">
+                          <input type="password" class="form-control" id="floatingInput" name="travelerJoinPwd" placeholder="name@example.com">
                           <label for="floatingInput">기존 비밀번호</label>
                         </div>
                         <div class="form-floating mb-3">
-                          <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                          <input type="password" class="form-control" id="floatingPassword" name="travelerJoinPwdNew" placeholder="Password">
                           <label for="floatingPassword">신규 비밀번호</label>
                         </div>
                         <div class="form-floating">
-                          <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                          <input type="password" class="form-control" id="floatingPassword" name="travelerJoinPwdNew2" placeholder="Password">
                           <label for="floatingPassword">신규 비밀번호 확인</label>
                         </div>
 
-                      </form>
                     </div>
                   <!-- ----- -->
 
@@ -515,12 +566,38 @@ input.full:focus, textarea.full:focus {
 
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                    <button type="submit" class="btn btn-primary">변경하기</button>
+                    <button type="submit" class="btn btn-primary" onclick="return checkPwd();">변경하기</button>
                   </div>
                 </div>
+          	 </form>
+                
               </div>
             </div>
 
+ <!------------------------------------------------------------------------------------>  
+		
+		<!-- 신규 비밀번호 체크 -->
+		<script>
+		
+			function checkPwd(){
+				
+				isSame = $('input[name=travelerJoinPwdNew]').val() == $('input[name=travelerJoinPwdNew2]').val()
+				
+				if(isSame == true){
+					return true;
+				}else{
+					alert("신규 비밀번호가 일치하지 않습니다.")
+					return false;
+				}
+				
+				
+			}
+	
+		</script>
+	
+		
+		<!-- ----------------------------------------------------- -->
+		
         <!-- 부트스트랩_모달창_회원탈퇴 -->
 
 		    <!-- Modal -->
@@ -537,19 +614,19 @@ input.full:focus, textarea.full:focus {
 		      <!-- Modal body -->
 		      <div class="modal-body">
 		        <div id="pwdFormOuter">
-			        <form action="sasdf/member/quit" method="post">
-			        	<input type="hidden" name="memberId" value=">">
+			      
+			        <form action="<%=contextPath%>/traveler/quit" method="post">
+			        	<input type="hidden" name="travelerJoinId" value="<%=travelerLoginMember.getId()%>">
 			        	
 			        	<div class="form-floating mb-3">
-                          <input type="password" class="form-control" name="" id="floatingInput" placeholder="Password">
+                          <input type="password" class="form-control" name="travelerJoinPwd" id="floatingInput" placeholder="Password">
                           <label for="floatingInput">비밀번호</label>
                         </div>
                         <div class="form-floating mb-3">
-                          <input type="password" class="form-control" name=""  id="floatingPassword" placeholder="Password">
+                          <input type="password" class="form-control" name="travelerJoinPwd2"  id="floatingPassword" placeholder="Password">
                           <label for="floatingPassword">비밀번호 확인</label>
                         </div>
                         
-			        </form>
 		        </div>
 		        
 		     <!-- ----- -->
@@ -558,19 +635,39 @@ input.full:focus, textarea.full:focus {
 
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                    <button type="submit" class="btn btn-danger">탈퇴하기</button>
+                    <button type="submit" class="btn btn-danger" onclick="return quit();">탈퇴하기</button>
                   </div>
                 </div>
+               </form>
+               
               </div>
             </div>
 		    
 		 
 		 <!------------------------------------------------------------------------------------>  
-        </div>
+       
+       <!-- 회원탈퇴 체크 -->
+   
+	
+		
+		<!-- ----------------------------------------------------- -->
+		
+		 </div>
     </main>
     
     <footer></footer> 
-
+    
+ <!------------------------------------------->
+      
+    <script>
+    
+		<%if(alertMsg != null){%>
+			alert('<%=alertMsg%>');
+		<%}%>
+		
+	</script>
+	
+      <!------------------------------------------->
 
 </body>
 </html>

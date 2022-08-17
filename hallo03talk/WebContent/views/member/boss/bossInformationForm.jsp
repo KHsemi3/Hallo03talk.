@@ -1,10 +1,26 @@
+<%@page import="com.h3.boss.vo.BossVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+   <%
+   	 BossVo BossLoginMember = (BossVo)session.getAttribute("BossLoginMember");
+   	 
+   //-----------------------------------------------------------------------
+   	String alertMsg = (String)session.getAttribute("alertMsg");
+   	session.removeAttribute("alertMsg");   
+   	
+   //	-----------------------------------------------------------------------
+   	String contextPath = request.getContextPath();
+   %>  
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<!-- CDN으로 추가하는 방법 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 
 <style>
       /*할로영삼talk 폰트*/
@@ -403,8 +419,8 @@ input.full:focus, textarea.full:focus {
               </nav>
               <!-- ------내 정보-------------------------------------------------------- -->
                 
-
-                <form action="" method="post">      
+   			<form action="/hallo03talk/boss/myPage" method="post">      
+        		<input type="hidden" value="<%=BossLoginMember.getNo()%>" name="travelerNo">   
                   <div class="main-content printed">
                     <div class="id__wrapper">
                       <div class="deco"></div>
@@ -414,16 +430,16 @@ input.full:focus, textarea.full:focus {
                       </label>
                       <div class="Id">
                         <label>Id</label>
-                        <textarea class="full" type="text" required readonly></textarea>
+                        <input class="full" type="text" name="bossJoinId" value="<%=BossLoginMember.getId() %>" required readonly></input>
                       </div>
                       
                       <div class="Phone">
                         <label>Tel</label>
-                        <input class="full" type="tel"/>
+                        <input class="full" type="tel" name="bossJoinPhone" value="<%=BossLoginMember.getPhone() %>"/>
                       </div>
                       <div class="Email">
                         <label>Email</label>
-                        <input class="full" type="email"/>
+                        <input class="full" type="email" name="BossJoinEmail" value="<%=BossLoginMember.getEmail() %>"/>
                       </div>
                     
                     </div>
@@ -444,103 +460,165 @@ input.full:focus, textarea.full:focus {
           <!-- --모달창_비밀번호 변경----------------- -->
                
              <!-- Modal -->
-             <div class="modal fade" id="pwdChange" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                  <div class="modal-content">
-                             
-                    <!-- Modal Header -->
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">비밀번호 변경</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    
-                    <!-- Modal body -->
-                    <div class="modal-body">
-                      <!-- ----- -->
-                      <div id="pwdFormOuter">
-                        <form action="" method="post">
-  
-                          <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="floatingInput" placeholder="name@example.com">
-                            <label for="floatingInput">기존 비밀번호</label>
-                          </div>
-                          <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                            <label for="floatingPassword">신규 비밀번호</label>
-                          </div>
-                          <div class="form-floating">
-                            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                            <label for="floatingPassword">신규 비밀번호 확인</label>
-                          </div>
-  
-                        </form>
-                      </div>
+            <div class="modal fade" id="pwdChange" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  	     
+                  <!-- Modal Header -->
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">비밀번호 변경</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  
+                  <!-- Modal body -->
+                  <div class="modal-body">
                     <!-- ----- -->
-  
+                    <div id="pwdFormOuter">
+
+  					<form action="<%=contextPath%>/boss/pwd" method="post">
+			        	<input type="hidden" name="bossJoinId" value="<%=BossLoginMember.getId()%>">
+			        	
+                        <div class="form-floating mb-3">
+                          <input type="password" class="form-control" id="floatingInput" name="bossJoinPwd" placeholder="name@example.com">
+                          <label for="floatingInput">기존 비밀번호</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                          <input type="password" class="form-control" id="floatingPassword" name="bossJoinPwdNew" placeholder="Password">
+                          <label for="floatingPassword">신규 비밀번호</label>
+                        </div>
+                        <div class="form-floating">
+                          <input type="password" class="form-control" id="floatingPassword" name="bossJoinPwdNew2" placeholder="Password">
+                          <label for="floatingPassword">신규 비밀번호 확인</label>
+                        </div>
+
                     </div>
-  
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                      <button type="submit" class="btn btn-primary" onclick="return checkPwd();">변경하기</button>
-                    </div>
+                  <!-- ----- -->
+
+                  </div>
+
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                    <button type="submit" class="btn btn-primary" onclick="return checkPwd();">변경하기</button>
                   </div>
                 </div>
+          	 </form>
+                
               </div>
-  
-             <!-- --모달창_회원탈퇴----------------- -->
-                 
-               <!-- Modal -->
-               <div class="modal fade" id="quit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                  <div class="modal-content">
-                             
-                    <!-- Modal Header -->
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">회원탈퇴</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    
-                    <!-- Modal body -->
-                    <div class="modal-body">
-                      <!-- ----- -->
-                      <div id="pwdFormOuter">
-                        <form action="" method="post">
-  			        		<input type="hidden" name="memberId" value=">">
-  
-                          <div class="form-floating mb-3">
-                            <input type="password" class="form-control" name="" id="floatingInput" placeholder="name@example.com">
-                            <label for="floatingInput">비밀번호</label>
-                          </div>
-                          
-                          <div class="form-floating">
-                            <input type="password" class="form-control" name="" id="floatingPassword" placeholder="Password">
-                            <label for="floatingPassword">비밀번호 확인</label>
-                          </div>
-                          <!-- -- -->
-  
-                        </form>
-                      </div>
-                    <!-- ----- -->
-  
-                    </div>
-  
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                      <button type="submit" class="btn btn-danger" ">탈퇴하기</button>
-                    </div>
+            </div>
+
+ <!------------------------------------------------------------------------------------>  
+		
+		<!-- 신규 비밀번호 체크 -->
+		<script>
+		
+			function checkPwd(){
+				
+				isSame = $('input[name=bossJoinPwdNew]').val() == $('input[name=bossJoinPwdNew2]').val()
+				
+				if(isSame == true){
+					return true;
+				}else{
+					alert("신규 비밀번호가 일치하지 않습니다.")
+					return false;
+				}
+				
+				
+			}
+	
+		</script>
+	
+		
+		<!-- ----------------------------------------------------- -->
+		
+        <!-- 부트스트랩_모달창_회원탈퇴 -->
+
+		    <!-- Modal -->
+            <div class="modal fade" id="quit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+		
+		      <!-- Modal Header -->
+		      <div class="modal-header">
+		        <h4 class="modal-title">회원탈퇴</h4>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+		      </div>
+		
+		      <!-- Modal body -->
+		      <div class="modal-body">
+		        <div id="pwdFormOuter">
+			      
+			        <form action="<%=contextPath%>/boss/quit" method="post">
+			        	<input type="hidden" name="bossJoinId" value="<%=BossLoginMember.getId()%>">
+			        	
+			        	<div class="form-floating mb-3">
+                          <input type="password" class="form-control" name="bossJoinPwd" id="floatingInput" placeholder="Password">
+                          <label for="floatingInput">비밀번호</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                          <input type="password" class="form-control" name="bossJoinPwd2"  id="floatingPassword" placeholder="Password">
+                          <label for="floatingPassword">비밀번호 확인</label>
+                        </div>
+                        
+		        </div>
+		        
+		     <!-- ----- -->
+
+                  </div>
+
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                    <button type="submit" class="btn btn-danger" onclick="return quit();">탈퇴하기</button>
                   </div>
                 </div>
+               </form>
+               
               </div>
+            </div>
+		    
+		 
+		 <!------------------------------------------------------------------------------------>  
+       
+       
+  	  <!-- 회원탈퇴 체크 -->
+   
+      <script>
+      
+         function quit(){
+            
+            quitSame = $('input[name=bossJoinPwd]').val() == $('input[name=bossJoinPwd2]').val()
+            
 
-        
-
-<!-- -------------------------------------------------------- -->
-        </div>
+            if(quitSame == true){
+               return true;
+            }else{
+               alert("회원탈퇴-비밀번호가 서로 일치하지 않습니다.")
+               return false;
+            }
+            
+            
+         }
+   
+      </script>  
+		
+		
+		<!-- ----------------------------------------------------- -->
+		
+		 </div>
     </main>
     
-	<footer></footer> 
-
-
+    <footer></footer> 
+    
+ <!------------------------------------------->
+      
+    <script>
+    
+		<%if(alertMsg != null){%>
+			alert('<%=alertMsg%>');
+		<%}%>
+		
+	</script>
+	
+      <!------------------------------------------->
 
 </body>
 </html>
