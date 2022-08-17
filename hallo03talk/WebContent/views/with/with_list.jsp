@@ -1,9 +1,17 @@
+<%@page import="com.h3.with.vo.PageVo"%>
 <%@page import="com.h3.with.vo.WithVo"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
 ArrayList<WithVo> voList = (ArrayList<WithVo>) request.getAttribute("voList");
+
+PageVo pv = (PageVo)request.getAttribute("pageVo");
+
+int currentPage = pv.getCurrentPage();
+int startPage = pv.getStartPage();
+int endPage = pv.getEndPage();
+int maxPage = pv.getMaxPage();
 %>
 
 <!DOCTYPE html>
@@ -80,7 +88,7 @@ ArrayList<WithVo> voList = (ArrayList<WithVo>) request.getAttribute("voList");
 					id="dropdownMenuButton1" data-bs-toggle="dropdown"
 					aria-expanded="false">최신순</button>
 				<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-					<li><a class="dropdown-item" href="#">최신순</a></li>
+					<li><a class="dropdown-item" href="<%= request.getContextPath()%>/with/list">최신순</a></li>
 					<li><a class="dropdown-item" href="#">조회순</a></li>
 					<li><a class="dropdown-item" href="#">모집중</a></li>
 				</ul>
@@ -133,6 +141,35 @@ ArrayList<WithVo> voList = (ArrayList<WithVo>) request.getAttribute("voList");
 				<%} %>
 
 			</div>
+			
+			<nav id="page-area">
+				<ul class="pagination d-flex justify-content-center">
+					<%if(currentPage != 1){ %>
+						<li class="page-item">
+							<a class="page-link" href="<%=request.getContextPath()%>/with/list?p=<%=currentPage-1%>" aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+							</a>
+						</li>
+					<%} %>
+					
+					<% for(int i = startPage; i <= endPage; ++i) {%>
+						<%if(i == currentPage){%>
+							<li class="page-item active"><a class="page-link" href="#"><%=i%></a></li>
+						<%} else {%>
+							<li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/with/list?p=<%=i%>"><%=i%></a></li>
+						<%} %>
+					<%} %>
+					
+					<%if(currentPage != maxPage){ %>
+						<li class="page-item">
+							<a class="page-link" href="<%=request.getContextPath()%>/with/list?p=<%=currentPage+1%>" aria-label="Next"> 
+								<span aria-hidden="true">&raquo;</span>
+							</a>
+						</li>
+					<%} %>
+				</ul>
+			</nav>
+
+			
 		</div>
 	</main>
 

@@ -5,17 +5,18 @@ import java.util.ArrayList;
 
 import static com.h3.common.JDBCTemplate.*;
 import com.h3.with.dao.WithDao;
+import com.h3.with.vo.PageVo;
 import com.h3.with.vo.WithVo;
 
 public class WithService {
 
-	public ArrayList<WithVo> getList() {
+	public ArrayList<WithVo> getList(PageVo pageVo) {
 		Connection conn = null;
 		ArrayList<WithVo> result =null;
 		
 		try {
 			conn = getConnection();
-			result = new WithDao().getList(conn);
+			result = new WithDao().getList(conn, pageVo);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -47,6 +48,25 @@ public class WithService {
 		} finally {
 			close(conn);
 		}
+		return result;
+	}
+
+	public int getCount() {
+		
+		Connection conn = null;
+		int result = 0;
+		
+		try {
+			conn = getConnection();
+			
+			//DAO 호출
+			result = new WithDao().getCount(conn);	//select count 쿼리
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		
 		return result;
 	}
 
