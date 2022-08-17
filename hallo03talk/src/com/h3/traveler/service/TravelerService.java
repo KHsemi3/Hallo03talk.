@@ -6,8 +6,10 @@ import static com.h3.common.JDBCTemplate.getConnection;
 import static com.h3.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import com.h3.traveler.repository.TravelerDao;
+import com.h3.traveler.vo.MyPageVo;
 import com.h3.traveler.vo.TravelerVo;
 
 public class TravelerService {
@@ -230,6 +232,36 @@ public class TravelerService {
 		
 		
 	}//hallo03talk
+
+
+	/*
+	 * traveler - 내가 쓴 글 조회
+	 */
+	public ArrayList<MyPageVo> selectList() {
+
+	
+		Connection conn = null;
+		ArrayList<MyPageVo> voList = null;
+		
+		try {
+			
+			conn = getConnection();
+			
+			// dao 호출
+			voList = new TravelerDao().selectList(conn);
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		
+		// 실행결과 리턴
+		return voList;
+	
+	
+	}
 	
 	
 	

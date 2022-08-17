@@ -7,7 +7,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
+import com.h3.traveler.vo.MyPageVo;
 import com.h3.traveler.vo.TravelerVo;
 
 public class TravelerDao {
@@ -269,6 +271,53 @@ public class TravelerDao {
 		return result;
 	
 	}//quit
+
+
+	/*
+	 * traveler - 내가 쓴 글 조회
+	 */
+	public ArrayList<MyPageVo> selectList(Connection conn) {
+
+		String sql = "";   // 진행 중
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<MyPageVo> list = new ArrayList<MyPageVo>();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			//SQL 실행
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				String no = rs.getString("NO");
+				String title = rs.getString("TITLE");
+				String content = rs.getString("CONTENT");
+				String writer = rs.getString("WRITER");
+				String status = rs.getString("STATUS");
+				
+				MyPageVo vo = new MyPageVo();
+				vo.setNo(no);
+				vo.setTitle(title);
+				vo.setContent(content);
+				vo.setWriter(writer);
+				vo.setStatus(status);
+				
+				list.add(vo);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		//결과 리턴
+		return list;
+	
+	
+	}
 	
 	
 	
