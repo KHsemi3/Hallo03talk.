@@ -112,4 +112,40 @@ public class PlaceService {
 		return photoList;
 	}
 
+	public PlaceVo placeOne(String placeNo) {
+		Connection conn = null;
+		PlaceVo pv = new PlaceVo();
+		
+		try {
+			conn = getConnection();
+			pv = dao.placeOne(conn,placeNo);
+			
+			return pv;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(conn);
+		}
+		
+		return pv;
+	}
+
+	public ArrayList<PlacePhotoVo> photoOne(String placeNo) {
+		Connection conn = null;
+		ArrayList<PlacePhotoVo> photoList = new ArrayList<PlacePhotoVo>();
+		
+		try {
+			conn = getConnection();
+			photoList = dao.photoOne(conn,placeNo);
+			
+			return photoList;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(conn);
+		}
+		
+		return photoList;
+	}
+
 }

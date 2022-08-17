@@ -1,4 +1,10 @@
+<%@page import="com.h3.place.vo.PlaceVo"%>
+<%@page import="com.h3.placePhoto.vo.PlacePhotoVo"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+ArrayList<PlacePhotoVo> photoList = (ArrayList<PlacePhotoVo>)request.getAttribute("photoList");
+%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -13,29 +19,20 @@
     <main>
       <div id="container" class="container-xxl">
         <!-- 슬라이드 -->
-        <div id="onePlacePhotos" class="carousel slide" data-bs-ride="true">
-          <div class="carousel-indicators">
-            <button
-              type="button"
-              data-bs-target="#onePlacePhotos"
-              data-bs-slide-to="0"
-              class="active"
-              aria-current="true"
-              aria-label="Slide 1"
-            ></button>
-            <button type="button" data-bs-target="#onePlacePhotos" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#onePlacePhotos" data-bs-slide-to="2" aria-label="Slide 3"></button>
-          </div>
+        <div id="onePlacePhotos" class="carousel slide mt-3" data-bs-ride="true">
           <div class="carousel-inner">
+          <%=photoList.size() %>
+          <%for (int i=0; i<photoList.size()-1; i++) {
+        	  if (i==0) {
+        	  %>
             <div class="carousel-item active">
-              <img src="/hallo03talk/resources/img/place_1.jpg" class="d-block w-100" alt="..." height="500px" />
+              <img src="/hallo03talk/resources/upload/place/<%=photoList.get(i).getName() %>" class="d-block w-100" alt="..." height="500px" />
             </div>
+            <%} else { %>
             <div class="carousel-item">
-              <img src="/hallo03talk/resources/img/place_1.jpg" class="d-block w-100" alt="..." height="500px" />
+              <img src="/hallo03talk/resources/upload/place/<%=photoList.get(i).getName() %>" class="d-block w-100" alt="..." height="500px" />
             </div>
-            <div class="carousel-item">
-              <img src="/hallo03talk/resources/img/place_2.jpg" class="d-block w-100" alt="..." height="500px" />
-            </div>
+            <%}} %>
           </div>
           <button class="carousel-control-prev" type="button" data-bs-target="#onePlacePhotos" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -83,7 +80,7 @@
                 fill="#f3da35"
               ></path>
             </svg>
-            <label for="zzim">5</label>
+            <label for="zzim">${ placeVo.cnt }</label>
           </div>
           <!-- 사장님만 보임 -->
           <div class="col text-end">
@@ -94,14 +91,13 @@
         <div class="place-info py-3">
           <div class="row border border-3">
             <!-- 장소사진 -->
-            <img src="/hallo03talk/resources/img/place_1.jpg" alt="" class="col-3" />
+            <img src="/hallo03talk/resources/upload/place/<%=photoList.get(photoList.size()-1).getName() %>" alt="" class="col-3" />
             <div class="col text-center py-5">
               <!-- 장소명 -->
-              <label for="place-title" class="h1">장소명</label>
+              <label for="place-title" class="h1">${ placeVo.name }</label>
               <!-- 장소설명 -->
               <p class="h4 py-2 px-5">
-                장소설명 구구절절 구구절절 구구절절 구구절절 구구절절 구구절절 구구절절 구구절절 구구절절 구구절절 구구절절
-                구구절절
+                ${ placeVo.content }
               </p>
               <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reservation">예약하기</button>
               <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#inquiry">문의하기</button>
