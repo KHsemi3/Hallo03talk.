@@ -8,16 +8,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/*@WebServlet(urlPatterns="party/list")
-public class PartyList extends HttpServlet {
+
+@WebServlet(urlPatterns="/party/list")
+public class PartyListController extends HttpServlet {
 	
+	//페이징
+	int listCount;
+	
+	
+	//이벤트 게시판 목록
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		req.getRequestDispatcher("views/party/list.jsp").forward(req,resp);
+		req.getRequestDispatcher("/views/party/list.jsp").forward(req,resp);
+	}
 
 }
-
-}	*/
-	
-	

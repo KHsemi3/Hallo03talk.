@@ -233,7 +233,7 @@
 
         <li><a onclick="location.href='/hallo03talk/place/list'">장소</a></li>
         |
-        <li><a onclick="location.href='/hallo03talk/party/list'">이벤트</a></li>
+        <li><a onclick="location.href='/hallo03talk/party/list?p=1'">이벤트</a></li>
         |
          <li><a href="">커뮤니티</a></li>
         |

@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>이벤트 안내</title>
- <link rel="stylesheet" href="partyCss/all.css">
+ <link rel="stylesheet" href="/hallo03talk/views/party/partyCss/all.css">
 </head>
 
 <body>
