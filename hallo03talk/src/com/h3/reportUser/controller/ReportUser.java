@@ -40,7 +40,6 @@ public class ReportUser extends HttpServlet{
 		}
 		
 //		ReportUserVo vo = new ReportUserVo(
-//				reUserNo,
 //				reUserGuil,
 //				reUserContent,
 //				reUserPro,
@@ -48,6 +47,19 @@ public class ReportUser extends HttpServlet{
 //				reUserTravelerNo,
 //				guilty
 //				);  
+		
+		//객체 이용해서 신고 진행
+		int result = new reportService().join(vo);
+		
+		//insert 결과를 가지고, 화면 선택
+		if(result == 1) {
+			//신고 성공
+			// + 메세지 담기 //alert 창으로 
+			resp.sendRedirect("/hallo03talk");
+		}else {
+			//신고 실패 //이전 페이지로 옮기기
+			resp.sendRedirect("/hallo03talk/index.jsp");
+		}
 
 
 		
