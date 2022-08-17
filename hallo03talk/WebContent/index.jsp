@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <% String contextPath =request.getContextPath(); %>
+    <% String contextPath =request.getContextPath();%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -184,11 +184,29 @@
     <img id="img" src="resources/img/main_2.jpg" alt="" />
     <header>
       <nav>
+      <%//if (travlerLogin== null && bossLogin== null){%>
         <ul class="menu1">
-          <li><a href="">공지사항</a></li>
-          <li><a href="">로그인</a></li>
-           <li><a href="">회원가입</a></li>
+          <li><a onclick="">공지사항</a></li>
+          <li><a onclick="location.href='/hallo03talk/traveler/login'">로그인</a></li>
+           <li><a  onclick="location.href='/hallo03talk/traveler/join'">회원가입</a></li>
         </ul>
+        <%//} %>
+        <%//if(travlerLogin!= null && bossLogin == null){%>
+         <ul class="menu1">
+          <li>님 환영 합니다~!</li>
+          <li><a onclick="">공지사항</a></li>
+          <li><a onclick="location.href='/hallo03talk/traveler/myPage'">마이페이지</a></li>
+           <li><a  onclick="location.href='/hallo03talk/member/logout'">로그아웃</a></li>
+        </ul>
+        <%//} %>
+         <%//if(travlerLogin== null && bossLogin != null){%>
+         <ul class="menu1">
+          <li>님 환영 합니다~!</li>
+          <li><a onclick="">공지사항</a></li>
+          <li><a onclick="location.href='/hallo03talk/boss/myPage'">마이페이지</a></li>
+           <li><a  onclick="location.href='/hallo03talk/member/logout'">로그아웃</a></li>
+        </ul>
+        <%//} %>
       </nav>
       <div id="logo">
         <h1><a href="">할로영삼talk</a></h1>
@@ -210,12 +228,14 @@
     <div id ="withlist">
 <ul>
         |
-        <li><a href="">동행</a></li>
+        <li><a onclick="location.href='/hallo03talk/with/list'">동행</a></li>
         |
 
-        <li><a href="">장소</a></li>
+        <li><a onclick="location.href='/hallo03talk/place/list'">장소</a></li>
         |
-        <li><a href="">이벤트</a></li>
+        <li><a onclick="location.href='/hallo03talk/party/list'">이벤트</a></li>
+        |
+         <li><a href="">커뮤니티</a></li>
         |
       </ul>
    </div>

@@ -29,7 +29,7 @@ public class AdminLoginController extends HttpServlet {
 	//결과에 따라 화면 선택
 	if (loginAdmin != null) {
 		//로그인 성공 // 세션에 로그인 유저정보 담기
-		req.getSession().setAttribute("loginMember", loginAdmin);	
+		req.getSession().setAttribute("loginAdmin", loginAdmin);	
 		req.getSession().setAttribute("alertMsg", "관리자 로그인 성공");
 		
 //		req.getRequestDispatcher("/semi").forward(req, resp);

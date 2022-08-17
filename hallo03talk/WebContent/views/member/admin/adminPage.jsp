@@ -3,7 +3,7 @@
     pageEncoding="UTF-8"%>
     
  <%
-	AdminVo loginAdmin = (AdminVo)session.getAttribute("loginMember");
+	AdminVo loginAdmin = (AdminVo)session.getAttribute("loginAdmin");
 	
 	String alertMsg = (String)session.getAttribute("alertMsg");
 	session.removeAttribute("alertMsg");
@@ -349,7 +349,7 @@
    
 <ul>
         |
-        <li><a href="">동행</a></li>
+        <li><a href="" onclick>동행</a></li>
         |
 
         <li><a href="">장소</a></li>
