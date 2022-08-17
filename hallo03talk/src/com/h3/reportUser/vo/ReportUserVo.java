@@ -8,6 +8,20 @@ public class ReportUserVo {
 		
 	}
 	
+	//신고 접수시 사용
+	public ReportUserVo(
+			String reUserGuil, 
+			String reUserContent, 
+			String reUserPro, 
+			String reUserType, 
+			String reUserTravelerNo) {
+		this.reUserGuil = reUserGuil;
+		this.reUserContent = reUserContent;
+		this.reUserPro = reUserPro;
+		this.reUserType = reUserType;
+		this.reUserTravelerNo = reUserTravelerNo;
+	}
+	
 	private int reUserNo;
 	private String reUserGuil;
 	private String reUserContent;
