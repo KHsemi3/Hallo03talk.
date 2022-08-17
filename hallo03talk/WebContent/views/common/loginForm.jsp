@@ -125,17 +125,18 @@
 	
 	            <div class="content">
 	
+	              <!-- --------------- 일반회원 ---------------------- -->
 	              <div class="content-dis">
 	                <div class="login-page">
 	                    <div class="form">
-	                        <form class="login-form">
-	                                <input type="text" placeholder="아이디" />
-	                                <input type="password" placeholder="비밀번호" />
+                           <form action="/hallo03talk/traveler/login" method="post" class="login-form">
+	                                <input type="text"  name="travelerJoinId" placeholder="아이디" />
+	                                <input type="password" name="travelerJoinPwd" placeholder="비밀번호" />
 	                                <button>로그인</button>
 	        
 	                                <div class="footer">
-	                                    <input type="button" id="find_id" value="아이디 찾기" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#findId">
-	                                    <input type="button" id="find_pwd" value="비밀번호 찾기" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#findPwd">
+	                                    <input type="button"  id="find_id" value="아이디 찾기" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#travelerFindId">
+	                                    <input type="button"  id="find_pwd" value="비밀번호 찾기" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#travelerFindPwd">
 	                                </div>
 	                        </form>
 	                    </div>
@@ -143,17 +144,18 @@
 	              </div>
 	
 	
+	              <!-- --------------- 사장님 ---------------------- -->
 	              <div class="content-dis">
 	                <div class="login-page">
 	                    <div class="form">
-	                        <form class="login-form">
-	                                <input type="text" placeholder="아이디" />
-	                                <input type="password" placeholder="비밀번호" />
+                           <form action="/hallo03talk/boss/login" method="post" class="login-form">
+	                                <input type="text" name="bossJoinId" placeholder="아이디" />
+	                                <input type="password" name="bossJoinPwd" placeholder="비밀번호" />
 	                                <button>로그인</button>
 	        
 	                                <div class="footer">
-	                                    <input type="button" id="find_id" value="아이디 찾기" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#findId">
-	                                    <input type="button" id="find_pwd" value="비밀번호 찾기" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#findPwd">
+	                                    <input type="button" id="find_id" value="아이디 찾기" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bossFindId">
+	                                    <input type="button" id="find_pwd" value="비밀번호 찾기" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bossFindPwd">
 	                                </div>
 	                        </form>
 	                    </div>
@@ -172,95 +174,183 @@
 	    <footer></footer> 
 	
 	
-	    <!-- -------------------------------------------------------------------------------------------------------------------------------------------------------- -->
-	
-	    <!-- 부트스트랩_모달창_아이디 찾기 -->
-	
-		 <!-- Modal -->
-	   <div class="modal fade" id="findId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	    <div class="modal-dialog modal-dialog-centered">
-	      <div class="modal-content">
-	               
-	        <!-- Modal Header -->
-	        <div class="modal-header">
-	          <h5 class="modal-title" id="exampleModalLabel">아이디 찾기</h5>
-	          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-	        </div>
-	        
-	        <!-- Modal body -->
-	        <div class="modal-body">
-	          <!-- ----- -->
-	          <div id="pwdFormOuter">
-	            <form action="" method="post">
-	
-	              <div class="form-floating mb-3">
-	                <input type="tel" class="form-control" id="floatingInput" placeholder="name@example.com">
-	                <label for="floatingInput">전화번호</label>
-	              </div>
-	              <div class="form-floating mb-3">
-	                <input type="email" class="form-control" id="floatingPassword" placeholder="Password">
-	                <label for="floatingPassword">이메일</label>
-	              </div>
-	
-	            </form>
-	          </div>
-	        <!-- ----- -->
-	
-	        </div>
-	
-	        <div class="modal-footer">
-	          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-	          <button type="submit" class="btn btn-primary">찾기</button>
-	        </div>
-	      </div>
-	    </div>
-	  </div>
-	
-	 <!-- --모달창_비밀번호 찾기----------------- -->
-	     
-	   <!-- Modal -->
-	   <div class="modal fade" id="findPwd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	    <div class="modal-dialog modal-dialog-centered">
-	      <div class="modal-content">
-	               
-	        <!-- Modal Header -->
-	        <div class="modal-header">
-	          <h5 class="modal-title" id="exampleModalLabel">비밀번호 찾기</h5>
-	          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-	        </div>
-	        
-	        <!-- Modal body -->
-	        <div class="modal-body">
-	          <!-- ----- -->
-	          <div id="pwdFormOuter">
-	            <form action="" method="post">
-	
-	              <!-- ----- -->
-	              <div class="form-floating mb-3">
-	                <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
-	                <label for="floatingInput">아이디</label>
-	              </div>
-	              
-	              <div class="form-floating">
-	                <input type="tel" class="form-control" id="floatingPassword" placeholder="Password">
-	                <label for="floatingPassword">전화번호</label>
-	              </div>
-	              <!-- -- -->
-	
-	            </form>
-	          </div>
-	        <!-- ----- -->
-	
-	        </div>
-	
-	        <div class="modal-footer">
-	          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-	          <button type="submit" class="btn btn-primary">찾기</button>
-	        </div>
-	      </div>
-	    </div>
-	  </div>
-		
+	  <!-- -------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+   
+       <!--모달창_일반회원_아이디 찾기 -->
+       
+   
+       <!-- Modal -->
+      <div class="modal fade" id="travelerFindId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+       <div class="modal-dialog modal-dialog-centered">
+         <div class="modal-content">
+                  
+           <!-- Modal Header -->
+           <div class="modal-header">
+             <h5 class="modal-title" id="exampleModalLabel">아이디 찾기</h5>
+             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+           </div>
+           
+           <!-- Modal body -->
+           <div class="modal-body">
+             <!-- ----- -->
+             <div id="pwdFormOuter">
+   				<form action="/semiPracticeSiyeong/traveler/idFind" method="post"> 
+                 <div class="form-floating mb-3">
+                   <input type="tel" name="travelerJoinPhone" class="form-control" id="floatingInput" placeholder="name@example.com">
+                   <label for="floatingInput">전화번호</label>
+                 </div>
+                 <div class="form-floating mb-3">
+                   <input type="email" name="travelerJoinEmail" class="form-control" id="floatingPassword" placeholder="Password">
+                   <label for="floatingPassword">이메일</label>
+                 </div>
+     		 
+             </div>
+           <!-- ----- -->
+   
+           </div>
+   
+           <div class="modal-footer">
+             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+             <button type="submit" class="btn btn-primary" ">찾기</button>
+           </div>
+         </div>
+       </div>
+     </div>
+    </form>
+   
+   
+    <!-- --모달창_일반회원_비밀번호 찾기----------------- -->
+        
+      <!-- Modal -->
+      <div class="modal fade" id="travelerFindPwd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+       <div class="modal-dialog modal-dialog-centered">
+         <div class="modal-content">
+                  
+           <!-- Modal Header -->
+           <div class="modal-header">
+             <h5 class="modal-title" id="exampleModalLabel">비밀번호 찾기</h5>
+             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+           </div>
+           
+           <!-- Modal body -->
+           <div class="modal-body">
+             <!-- ----- -->
+             <div id="pwdFormOuter">
+               <form action="" method="post">
+   
+                 <!-- ----- -->
+                 <div class="form-floating mb-3">
+                   <input type="text" name="" class="form-control" id="floatingInput" placeholder="name@example.com">
+                   <label for="floatingInput">아이디</label>
+                 </div>
+                 
+                 <div class="form-floating">
+                   <input type="tel" name="" class="form-control" id="floatingPassword" placeholder="Password">
+                   <label for="floatingPassword">전화번호</label>
+                 </div>
+                 <!-- -- -->
+   
+               </form>
+             </div>
+           <!-- ----- -->
+   
+           </div>
+   
+           <div class="modal-footer">
+             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+             <button type="submit" class="btn btn-primary">찾기</button>
+           </div>
+         </div>
+       </div>
+     </div>
+  <!-- -------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+   
+       <!--모달창_사장님_아이디 찾기 -->
+   
+       <!-- Modal -->
+      <div class="modal fade" id="bossFindId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+       <div class="modal-dialog modal-dialog-centered">
+         <div class="modal-content">
+                  
+           <!-- Modal Header -->
+           <div class="modal-header">
+             <h5 class="modal-title" id="exampleModalLabel">아이디 찾기</h5>
+             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+           </div>
+           
+           <!-- Modal body -->
+           <div class="modal-body">
+             <!-- ----- -->
+             <div id="pwdFormOuter">
+               <form action="" method="post">
+                 <div class="form-floating mb-3">
+                   <input type="tel" name="bossJoinPhone" class="form-control" id="floatingInput" placeholder="name@example.com">
+                   <label for="floatingInput">가게 전화번호</label>
+                 </div>
+                 <div class="form-floating mb-3">
+                   <input type="email" name="bossJoinEmail" class="form-control" id="floatingPassword" placeholder="Password">
+                   <label for="floatingPassword">이메일</label>
+                 </div>
+   
+               </form>
+             </div>
+           <!-- ----- -->
+   
+           </div>
+   
+           <div class="modal-footer">
+             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+             <button type="submit" class="btn btn-primary">찾기</button>
+           </div>
+         </div>
+       </div>
+     </div>
+   
+    <!-- --모달창_사장님_비밀번호 찾기----------------- -->
+        
+      <!-- Modal -->
+      <div class="modal fade" id="bossFindPwd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+       <div class="modal-dialog modal-dialog-centered">
+         <div class="modal-content">
+                  
+           <!-- Modal Header -->
+           <div class="modal-header">
+             <h5 class="modal-title" id="exampleModalLabel">비밀번호 찾기</h5>
+             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+           </div>
+           
+           <!-- Modal body -->
+           <div class="modal-body">
+             <!-- ----- -->
+             <div id="pwdFormOuter">
+               <form action="" method="post">
+   
+                 <!-- ----- -->
+                 <div class="form-floating mb-3">
+                   <input type="text" name="bossJoinId" class="form-control" id="floatingInput" placeholder="name@example.com">
+                   <label for="floatingInput">아이디</label>
+                 </div>
+                 
+                 <div class="form-floating">
+                   <input type="tel" name="bossJoinPhone" class="form-control" id="floatingPassword" placeholder="Password">
+                   <label for="floatingPassword">가게 전화번호</label>
+                 </div>
+                 <!-- -- -->
+   
+               </form>
+             </div>
+           <!-- ----- -->
+   
+           </div>
+   
+           <div class="modal-footer">
+             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+             <button type="submit" class="btn btn-primary">찾기</button>
+           </div>
+         </div>
+       </div>
+     </div>
+     
 
 
 

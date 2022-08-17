@@ -139,7 +139,7 @@
 			                </div>
 			                
 			                <!-- --------------- 일반회원 ---------------------- -->
-			                  <form action="/semiPracticeSiyeong/traveler/join" method="post">   
+			                  <form action="/hallo03talk/traveler/join" method="post">   
 			              
 			                    <div id="login" action="" class="input-group">
 			                        <div class="ggg">
@@ -184,7 +184,7 @@
 							</form>
 			
 			                     <!-- ---------------사장님 ---------------------- -->
-			             <form action="/semiPracticeSiyeong/boss/join" method="post">   
+			             <form action="/hallo03talk/boss/join" method="post">   
 			                     
 			                <div id="register" action="" class="input-group">
 			                    <div class="ggg">
