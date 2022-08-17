@@ -12,11 +12,20 @@ import com.h3.with.vo.WithVo;
 
 public class WithDao {
 
-	public ArrayList<WithVo> getList(Connection conn, PageVo pageVo) throws Exception {
+	public ArrayList<WithVo> getList(Connection conn, PageVo pageVo, String sort) throws Exception {
 		ArrayList<WithVo> result = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT U.* FROM( SELECT ROWNUM AS RNUM, S.* FROM( SELECT W.NO, W.TITLE, W.CONTENT, W.TAG, W.ENROLL_DATE, W.STATUS, W.START_DATE, W.END_DATE, W.INSTA, T.NICK AS TRAVELER_NO, W.CNT, W.PLACE FROM WITH_ W JOIN traveler T ON W.TRAVELER_NO = T.NO ORDER BY ENROLL_DATE DESC ) S ) U WHERE U.RNUM BETWEEN ? AND ?";
+		String sql = "";
+		
+		if("a".equals(sort)) {
+			sql = "SELECT U.* FROM( SELECT ROWNUM AS RNUM, S.* FROM( SELECT W.NO, W.TITLE, W.CONTENT, W.TAG, W.ENROLL_DATE, W.STATUS, W.START_DATE, W.END_DATE, W.INSTA, T.NICK AS TRAVELER_NO, W.CNT, W.PLACE FROM WITH_ W JOIN traveler T ON W.TRAVELER_NO = T.NO WHERE W.STATUS = 'Y' ORDER BY ENROLL_DATE DESC ) S ) U WHERE U.RNUM BETWEEN ? AND ?";
+		}else if("v".equals(sort)) {
+			sql = "SELECT U.* FROM( SELECT ROWNUM AS RNUM, S.* FROM( SELECT W.NO, W.TITLE, W.CONTENT, W.TAG, W.ENROLL_DATE, W.STATUS, W.START_DATE, W.END_DATE, W.INSTA, T.NICK AS TRAVELER_NO, W.CNT, W.PLACE FROM WITH_ W JOIN traveler T ON W.TRAVELER_NO = T.NO ORDER BY CNT DESC ) S ) U WHERE U.RNUM BETWEEN ? AND ?";
+		}else {
+			sql = "SELECT U.* FROM( SELECT ROWNUM AS RNUM, S.* FROM( SELECT W.NO, W.TITLE, W.CONTENT, W.TAG, W.ENROLL_DATE, W.STATUS, W.START_DATE, W.END_DATE, W.INSTA, T.NICK AS TRAVELER_NO, W.CNT, W.PLACE FROM WITH_ W JOIN traveler T ON W.TRAVELER_NO = T.NO ORDER BY ENROLL_DATE DESC ) S ) U WHERE U.RNUM BETWEEN ? AND ?";			
+		}
+		
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -109,11 +118,14 @@ public class WithDao {
 		return result;
 	}
 
-	public int getCount(Connection conn) {
-		// Connection 준비
+	public int getCount(Connection conn, String sort) {
 
-		// SQL 준비
-		String sql = "SELECT COUNT(NO) AS COUNT FROM WITH_";
+		String sql = "";
+		if("a".equals(sort)) {
+			sql = "SELECT COUNT(NO) AS COUNT FROM WITH_ WHERE STATUS = 'Y'";
+		}else {			
+			sql = "SELECT COUNT(NO) AS COUNT FROM WITH_";
+		}
 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

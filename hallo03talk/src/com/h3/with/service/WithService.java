@@ -10,13 +10,13 @@ import com.h3.with.vo.WithVo;
 
 public class WithService {
 
-	public ArrayList<WithVo> getList(PageVo pageVo) {
+	public ArrayList<WithVo> getList(PageVo pageVo, String sort) {
 		Connection conn = null;
 		ArrayList<WithVo> result =null;
 		
 		try {
 			conn = getConnection();
-			result = new WithDao().getList(conn, pageVo);
+			result = new WithDao().getList(conn, pageVo, sort);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -51,7 +51,7 @@ public class WithService {
 		return result;
 	}
 
-	public int getCount() {
+	public int getCount(String sort) {
 		
 		Connection conn = null;
 		int result = 0;
@@ -60,7 +60,7 @@ public class WithService {
 			conn = getConnection();
 			
 			//DAO 호출
-			result = new WithDao().getCount(conn);	//select count 쿼리
+			result = new WithDao().getCount(conn, sort);	//select count 쿼리
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {

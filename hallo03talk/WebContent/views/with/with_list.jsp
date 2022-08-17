@@ -89,8 +89,8 @@ int maxPage = pv.getMaxPage();
 					aria-expanded="false">최신순</button>
 				<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 					<li><a class="dropdown-item" href="<%= request.getContextPath()%>/with/list">최신순</a></li>
-					<li><a class="dropdown-item" href="#">조회순</a></li>
-					<li><a class="dropdown-item" href="#">모집중</a></li>
+					<li><a class="dropdown-item" href="<%= request.getContextPath()%>/with/list?s=v">조회순</a></li>
+					<li><a class="dropdown-item" href="<%= request.getContextPath()%>/with/list?s=a">모집중</a></li>
 				</ul>
 			</div>
 
@@ -146,7 +146,7 @@ int maxPage = pv.getMaxPage();
 				<ul class="pagination d-flex justify-content-center">
 					<%if(currentPage != 1){ %>
 						<li class="page-item">
-							<a class="page-link" href="<%=request.getContextPath()%>/with/list?p=<%=currentPage-1%>" aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+							<a class="page-link" href="<%=request.getContextPath()%>/with/list?p=<%=currentPage-1%>&s=${sort}" aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 							</a>
 						</li>
 					<%} %>
@@ -155,13 +155,13 @@ int maxPage = pv.getMaxPage();
 						<%if(i == currentPage){%>
 							<li class="page-item active"><a class="page-link" href="#"><%=i%></a></li>
 						<%} else {%>
-							<li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/with/list?p=<%=i%>"><%=i%></a></li>
+							<li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/with/list?p=<%=i%>&s=${sort}"><%=i%></a></li>
 						<%} %>
 					<%} %>
 					
 					<%if(currentPage != maxPage){ %>
 						<li class="page-item">
-							<a class="page-link" href="<%=request.getContextPath()%>/with/list?p=<%=currentPage+1%>" aria-label="Next"> 
+							<a class="page-link" href="<%=request.getContextPath()%>/with/list?p=<%=currentPage+1%>&s=${sort}" aria-label="Next"> 
 								<span aria-hidden="true">&raquo;</span>
 							</a>
 						</li>
