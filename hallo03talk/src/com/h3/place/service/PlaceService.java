@@ -75,23 +75,7 @@ public class PlaceService {
 
 		return voList;
 	}
-
-	public int getCount() {
-		
-		Connection conn = null;
-		int cnt = 0;
-		
-		try {
-			conn = getConnection();
-			cnt = dao.getCount(conn);
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			close(conn);
-		}
-		
-		return cnt;
-	}
+	
 
 	public List<PlacePhotoVo> getProfile() {
 		
@@ -146,6 +130,36 @@ public class PlaceService {
 		}
 		
 		return photoList;
+	}
+
+	public int getCnt(String placeNo) {
+		
+		Connection conn = null;
+		int cnt = 0;
+		int result = 0;
+		try {
+			conn = getConnection();
+			cnt = dao.getCnt(conn, placeNo);
+			cnt += 1;
+			PlaceVo pv = new PlaceVo();
+			pv.setNo(placeNo);
+			pv.setCnt(cnt);
+			result = dao.plusCnt(conn,pv);
+			if (result == 1) {
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+			
+			return result;
+		} catch (Exception e) {
+			rollback(conn);
+			e.printStackTrace();
+		} finally {
+			close(conn);
+		}
+		
+		return result;
 	}
 
 }

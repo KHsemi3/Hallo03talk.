@@ -119,30 +119,6 @@ public class PlaceDao {
 		return voList;
 	}
 
-//	목록 총 개수
-	public int getCount(Connection conn) {
-
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		int cnt = 0;
-		String sql = "SELECT COUNT(NO) FROM PLACE WHERE STATUS='Y'";
-
-		try {
-			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				cnt = rs.getInt(1);
-			}
-			return cnt;
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-
-		return cnt;
-	}
-
 //	장소 프로필 사진 전부 가져오기
 	public List<PlacePhotoVo> getProfile(Connection conn) {
 
@@ -231,7 +207,7 @@ public class PlaceDao {
 				ppv.setPath(rs.getString("PATH"));
 				ppv.setProfile(rs.getString("PHOTO_PROFILE"));
 				ppv.setEnrollDate(rs.getString("ENROLL_DATE"));
-				
+
 				photoList.add(ppv);
 			}
 			return photoList;
@@ -243,6 +219,57 @@ public class PlaceDao {
 		}
 
 		return photoList;
+	}
+
+	public int getCnt(Connection conn, String placeNo) {
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int cnt = 0;
+
+		String sql = "SELECT CNT FROM PLACE WHERE NO=?";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, placeNo);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				cnt = rs.getInt("CNT");
+			}
+
+			return cnt;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+
+		return cnt;
+	}
+
+	public int plusCnt(Connection conn, PlaceVo pv) {
+
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = "UPDATE PLACE SET CNT=? WHERE NO=?";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, pv.getCnt());
+			pstmt.setString(2, pv.getNo());
+
+			result = pstmt.executeUpdate();
+
+			return result;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 
 }
