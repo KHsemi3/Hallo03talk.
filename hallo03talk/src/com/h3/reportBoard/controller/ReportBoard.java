@@ -8,13 +8,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet (urlPatterns = "경로")
+
 public class ReportBoard extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		req.getRequestDispatcher("/게시물 신고 경로").forward(req, resp);
+		req.getRequestDispatcher("").forward(req, resp);
 		
 	}
 	
