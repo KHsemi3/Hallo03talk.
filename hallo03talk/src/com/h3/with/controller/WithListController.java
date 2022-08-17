@@ -18,7 +18,9 @@ public class WithListController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		int listCount;
+		String sort = req.getParameter("s");
+		
+		int listCount = 0;
 		int currentPage;
 		int pageLimit;
 		int boardLimit;
@@ -26,7 +28,7 @@ public class WithListController extends HttpServlet{
 		int startPage;
 		int endPage;
 		
-		listCount = new WithService().getCount();
+		listCount = new WithService().getCount(sort);
 		
 		if(req.getParameter("p") == null) {
 			currentPage = 1;
@@ -54,8 +56,9 @@ public class WithListController extends HttpServlet{
 		pageVo.setStartPage(startPage);
 		
 		
-		ArrayList<WithVo> voList = new WithService().getList(pageVo);
+		ArrayList<WithVo> voList = new WithService().getList(pageVo, sort);
 		
+		req.setAttribute("sort", sort);
 		req.setAttribute("voList", voList);
 		req.setAttribute("pageVo", pageVo);
 		
