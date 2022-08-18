@@ -411,10 +411,10 @@ input.full:focus, textarea.full:focus {
                                 <a class="nav-link active" aria-current="page" href="세미실전_일반회원_마이페이지(메뉴바,내정보).html">내 정보</a>
                               </li>
                               <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="세미실전_일반회원_마이페이지(내가 쓴 글).html">내가 쓴 글</a>
+                                <a class="nav-link active" aria-current="page" href="/hallo03talk/travelerMpgPost/list">내가 쓴 글</a>
                               </li>
                               <li class="nav-item">
-                                <a class="nav-link" href="세미실전_일반회원_마이페이지(내가쓴댓글).html">내가 쓴 댓글</a>
+                                <a class="nav-link" href="/hallo03talk/travelerMpgReply/list">내가 쓴 댓글</a>
                               </li>
                               <li class="nav-item">
                                 <a class="nav-link" href="#">예약 내역</a>

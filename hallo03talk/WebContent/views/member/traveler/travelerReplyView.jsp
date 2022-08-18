@@ -1,5 +1,15 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.h3.community.vo.CommReplyVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    
+ <%
+         ArrayList<CommReplyVo> voList = (ArrayList<CommReplyVo>)request.getAttribute("voList");
+         %>
+ 
+ 
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,13 +72,13 @@
                       <div class="collapse navbar-collapse" id="navbarNavDropdown">
                             <ul class="navbar-nav">
                               <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="세미실전_일반회원_마이페이지(메뉴바,내정보).html">내 정보</a>
+                                <a class="nav-link active" aria-current="page" href="">내 정보</a>
                               </li>
                               <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="세미실전_일반회원_마이페이지(내가 쓴 글).html">내가 쓴 글</a>
+                                <a class="nav-link active" aria-current="page" href="">내가 쓴 글</a>
                               </li>
                               <li class="nav-item" style="background-color: rgba(0, 0, 0, 0.2); border-radius: 5px;">
-                                <a class="nav-link" href="세미실전_일반회원_마이페이지(내가쓴댓글).html">내가 쓴 댓글</a>
+                                <a class="nav-link" href="">내가 쓴 댓글</a>
                               </li>
                               <li class="nav-item">
                                 <a class="nav-link" href="#">예약 내역</a>
@@ -83,8 +93,8 @@
                                   신고
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                  <li><a class="dropdown-item" href="세미실전_일반회원_마이페이지(신고한내역).html">신고 한 내역</a></li>
-                                  <li><a class="dropdown-item" href="세미실전_일반회원_마이페이지(신고받은내역).html">신고 받은 내역</a></li>
+                                  <li><a class="dropdown-item" href="">신고 한 내역</a></li>
+                                  <li><a class="dropdown-item" href="">신고 받은 내역</a></li>
                                 </ul>
                               </li>
                             </ul>
@@ -110,28 +120,19 @@
                     <th scope="col" class="text-center" style="width: 10%;">작성일</th>
                   </tr>
                 </thead>
-
-<!-- ---------------여기서부터는 noticeList처럼 백엔드 코드로 작성해야 함----------------------------------------------- -->
+                
+<!-- -------------------------------------------------------------- -->
                 <tbody>
+                	<%for(int i=0; i < voList.size(); i++){ %>  
                   <tr>
                     <th scope="row">
                       <input type="checkbox">
                     </th>
-                    <th scope="row">1</th>
-                    <td>댓글!</td>
-                    <td class="text-center">22.08.07</td>
+                    <th scope="row"><%=voList.get(i).getNo() %></th>
+                    <td><%=voList.get(i).getContent() %></td>
+                    <td class="text-center"><%=voList.get(i).getEnrollDate() %></td>
                   </tr>     
-
-                  <tr>
-                    <th scope="row">
-                      <input type="checkbox">
-                    </th>
-                    <th scope="row">2</th>
-                    <td>댓글2!</td>
-                    <td class="text-center">22.01.07</td>
-                  </tr>          
-                  
-                  
+					<%}%>
                 </tbody>
 <!-- -------------------------------------------------------------- -->
               </table>
