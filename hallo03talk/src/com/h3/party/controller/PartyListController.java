@@ -8,17 +8,28 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+//import com.h3.party.service.PartyService;
+
 
 @WebServlet(urlPatterns="/party/list")
 public class PartyListController extends HttpServlet {
 	
-	//페이징
-	int listCount;
 	
-	
-	//이벤트 게시판 목록
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		//페이징
+		int listCount;
+		int currentPage;
+		int pageLimit;
+		int boardLimit;
+		int maxPage;
+		int startPage;
+		int endPage;
+		
+		//listCount = new PartyService().getCount();
+		
+		//이벤트 게시판 목록
 		req.getRequestDispatcher("/views/party/list.jsp").forward(req,resp);
 	}
 
