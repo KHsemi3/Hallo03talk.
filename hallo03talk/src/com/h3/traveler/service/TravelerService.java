@@ -8,8 +8,20 @@ import static com.h3.common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
+import com.h3.community.vo.CommReplyVo;
 import com.h3.traveler.repository.TravelerDao;
 import com.h3.traveler.vo.MyPageVo;
+import com.h3.traveler.vo.TravelerVo;
+import static com.h3.common.JDBCTemplate.commit;
+import static com.h3.common.JDBCTemplate.getConnection;
+import static com.h3.common.JDBCTemplate.rollback;
+
+import java.sql.Connection;
+import java.util.ArrayList;
+
+import com.h3.traveler.repository.TravelerDao;
 import com.h3.traveler.vo.TravelerVo;
 
 public class TravelerService {
@@ -126,7 +138,7 @@ public class TravelerService {
 	/*
 	 * 다시한번 회원 정보 조회(회원번호): 정보 변경 된 것을 조회
 	 */
-	private TravelerVo selectOneByNo(int no) {
+	public TravelerVo selectOneByNo(int no) {
 
 		Connection conn = null;
 		TravelerVo vo = null;
@@ -234,10 +246,11 @@ public class TravelerService {
 	}//hallo03talk
 
 
+	
 	/*
 	 * traveler - 내가 쓴 글 조회
 	 */
-	public ArrayList<MyPageVo> selectList() {
+	public ArrayList<MyPageVo> selectList(int no) {
 
 	
 		Connection conn = null;
@@ -245,10 +258,11 @@ public class TravelerService {
 		
 		try {
 			
+			
 			conn = getConnection();
 			
 			// dao 호출
-			voList = new TravelerDao().selectList(conn);
+			voList = dao.selectList(conn, no);
 			
 			
 		}catch(Exception e) {
@@ -261,7 +275,57 @@ public class TravelerService {
 		return voList;
 	
 	
+	
 	}
+	
+	
+
+	/*
+	 * traveler - 내가 쓴 댓글 조회 - 커뮤니티 댓글
+	 */
+	public ArrayList<CommReplyVo> selectReplyList() {
+
+		Connection conn = null;
+		ArrayList<CommReplyVo> voList = null;
+		
+		try {
+			
+			conn = getConnection();
+			
+			// dao 호출
+			voList = dao.selectReplyList(conn);
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		
+		// 실행결과 리턴
+		return voList;
+		
+	
+	}
+
+
+	public void deletePost(String no, String board) {
+		Connection conn = null;
+		try {
+			
+			conn = getConnection();
+			
+			dao.deletePost(conn, no, board);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+	}
+
+
+
 	
 	
 	

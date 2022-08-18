@@ -94,10 +94,8 @@
                 <tr>
                   <th scope="col" style="width: 5%;"></th>
                   <th scope="col" style="width: 5%;">#</th>
-                  <th scope="col" class="text-center" style="width: 60%;">제목</th>
-                  <th scope="col" class="text-center" style=" width: 10%;">작성자</th>
-                  <th scope="col" class="text-center" style="width: 10%;">조회수</th>
-                  <th scope="col" class="text-center" style="width: 10%;">작성일</th>
+                  <th scope="col" class="text-center" style="width: 70%;">제목</th>
+                  <th scope="col" class="text-center" style="width: 20%;">작성일</th>
                 </tr>
               </thead>
 
@@ -109,8 +107,6 @@
                   </th>
                   <th scope="row">1</th>
                   <td >ㅎㅎㅎ</td>
-                  <td class="text-center">사장gg님</td>
-                  <td class="text-center">37</td>
                   <td class="text-center">22.08.07</td>
                 </tr>
                 
@@ -120,8 +116,6 @@
                   </th>
                   <th scope="row">2</th>
                   <td >ㅎㅎ</td>
-                  <td class="text-center">유재석</td>
-                  <td class="text-center">57</td>
                   <td class="text-center">22.08.07</td>
                 </tr>
                 

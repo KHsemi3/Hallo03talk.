@@ -1,5 +1,13 @@
+<%@page import="com.h3.traveler.vo.MyPageVo"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+     
+ <%
+  	ArrayList<MyPageVo> voList = (ArrayList<MyPageVo>)request.getAttribute("voList");
+ %>  
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,7 +76,7 @@
                                 <a class="nav-link active" aria-current="page" href="/hallo03talk/views/member/traveler/travelerDoRePortView.jsp">내가 쓴 글</a>
                               </li>
                               <li class="nav-item">
-                                <a class="nav-link" href="세미실전_일반회원_마이페이지(내가쓴댓글).html">내가 쓴 댓글</a>
+                                <a class="nav-link" href="">내가 쓴 댓글</a>
                               </li>
                               <li class="nav-item">
                                 <a class="nav-link" href="#">예약 내역</a>
@@ -83,8 +91,8 @@
                                   신고
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                  <li><a class="dropdown-item" href="세미실전_일반회원_마이페이지(신고한내역).html">신고 한 내역</a></li>
-                                  <li><a class="dropdown-item" href="세미실전_일반회원_마이페이지(신고받은내역).html">신고 받은 내역</a></li>
+                                  <li><a class="dropdown-item" href="">신고 한 내역</a></li>
+                                  <li><a class="dropdown-item" href="">신고 받은 내역</a></li>
                                 </ul>
                               </li>
                             </ul>
@@ -95,50 +103,36 @@
             <!-- -------삭제 버튼-------------- -->
      
             <div class="deleteCheck">
-              <button class="deleteButton">전체 선택</button>
-              <button class="deleteButton" style="margin-left: 10px;">삭제</button> 
+              <button class="deleteButtonAll">전체 선택</button>
+              <button class="deleteButton" style="margin-left: 10px">삭제</button> 
             </div>
 
             <!-- ------내가 쓴 글-------------------------------------------------------- -->
               
           <table class="table table-hover" id="writeTable">
               <thead>
+             
                 <tr>
                   <th scope="col" style="width: 5%;"></th>
                   <th scope="col" style="width: 5%;">#</th>
-                  <th scope="col" class="text-center" style="width: 60%;">제목</th>
-                  <th scope="col" class="text-center" style=" width: 10%;">작성자</th>
-                  <th scope="col" class="text-center" style="width: 10%;">조회수</th>
-                  <th scope="col" class="text-center" style="width: 10%;">작성일</th>
+                    <th scope="col" class="text-center" style="width: 20%;">게시판</th>
+                  <th scope="col" class="text-center" style="width: 50%;">제목</th>
+                  <th scope="col" class="text-center" style="width: 20%;">작성일</th>
                 </tr>
               </thead>
 
-<!-- ---------------여기서부터는 noticeList처럼 백엔드 코드로 작성해야 함----------------------------------------------- -->
               <tbody>
-                <tr>
-                  <th scope="row">
-                    <input type="checkbox">
-                  </th>
-                  <th scope="row">1</th>
-                  <td >ㅎㅎㅎ</td>
-                  <td class="text-center">유재석</td>
-                  <td class="text-center">57</td>
-                  <td class="text-center">22.08.07</td>
-                </tr>
-                
-                <tr>
-                  <th scope="row">
-                    <input type="checkbox">
-                  </th>
-                  <th scope="row">2</th>
-                  <td >ㅎㅎㅎ</td>
-                  <td class="text-center">일반회원</td>
-                  <td class="text-center">17</td>
-                  <td class="text-center">22.08.07</td>
-                </tr>
-                
-               
-             
+               <%for(int i=0; i < voList.size(); i++){ %> 
+	                <tr>
+		                  <th scope="row">
+		                    <input type="checkbox" name="ckNo" value="<%= voList.get(i).getBoard().concat(",").concat(voList.get(i).getNo()) %>">
+		                  </th>
+		                 	<th scope="row"><%=voList.get(i).getNo() %></th>                    <!-- 번호 - 글 순서 -->
+		                  	<td ><%=voList.get(i).getBoard() %></td>  	
+		                  	<td ><%=voList.get(i).getTitle() %></td>  							<!-- 글 제목 -->
+		                  	<td class="text-center"><%=voList.get(i).getEnrollDate() %></td>	<!-- 글 작성일-->
+	                </tr>
+               <%}%>
               </tbody>
 <!-- -------------------------------------------------------------- -->
             </table>
@@ -151,6 +145,66 @@
     
     
 <footer></footer> 
+
+<script>
+$(document).ready(function() {
+	// crating new click event for save button
+	
+	$(".deleteButtonAll").click(function(e) {
+		$('input:checkbox[name="ckNo"]').each(function() {
+
+			this.checked = true;
+
+			});
+	})
+	
+	$(".deleteButton").click(function(e) {
+	//	var dataList = new Array()
+		$('input:checkbox[name=ckNo]').each(function (index) {
+
+			if($(this).is(":checked")==true){
+		    	console.log($(this).val());
+		    	var query = $(this).val()
+		    	var data = query.split(",")
+		    	
+		    	data = {
+		    		"board" : data[0],
+		    		"no" : data[1]
+		    	} 
+		    	
+		    	console.log(data)
+		    	
+		    	var ans = confirm("선택하신 글을 삭제하시겠습니까?");
+	        if(!ans) return false;
+	        
+	        var url = "${pageContext.request.contextPath}/travelerMpgPost/delete"
+	        
+	         $.ajax({
+	            url  : url,
+	            type : "post",
+	            data : data ,
+	            success : function(data) {
+	                  alert("댓글이 삭제 되었습니다.");
+	                  location.reload();
+	            },
+	            error : function(data) {
+	                alert("댓글이 삭제되지 않았습니다.");
+	            }
+	        }); 
+		    	
+		    //	dataList.push(data)
+		    		
+		    }
+		
+		})
+		
+		//var paramList = {
+		//	"paramList" : JSON.stringify(dataList)
+		//}	
+		
+	})
+});
+</script>
 
 </body>
 </html>
