@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import com.h3.common.RandomName;
 import com.h3.place.service.PlaceService;
 import com.h3.place.vo.PlaceVo;
 import com.h3.placePhoto.vo.PlacePhotoVo;
@@ -44,8 +45,6 @@ public class PlaceAddController extends HttpServlet{
 		placeVo.setBossNo(bossNo);
 		placeVo.setCategoryNo(categoryNo);
 		
-//		사진 한장 저장시
-		PlacePhotoVo photoVo = new PlacePhotoVo();
 //		슬라이드 사진 저장
 		ArrayList<PlacePhotoVo> photoVoList = new ArrayList<PlacePhotoVo>();
 		ArrayList<Part> fileList = (ArrayList<Part>) req.getParts();
@@ -59,7 +58,7 @@ public class PlaceAddController extends HttpServlet{
 			if(fileList.get(i).getName().equals("slideImgs") || fileList.get(i).getName().equals("placeImg")) {
 				Part f = fileList.get(i);
 				String originName = f.getSubmittedFileName();
-				String photoName = new PlaceService().changeName(originName);
+				String photoName = RandomName.changeName(originName);
 				
 				InputStream is = f.getInputStream();
 				BufferedInputStream bis = new BufferedInputStream(is);
