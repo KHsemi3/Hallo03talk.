@@ -37,25 +37,17 @@ public class PlaceService {
 			} else {
 				rollback(conn);
 			}
+			
+			return result*result2;
 
 		} catch (Exception e) {
+			rollback(conn);
 			e.printStackTrace();
 		} finally {
 			close(conn);
 		}
 
 		return result * result2;
-	}
-
-	public String changeName(String originName) {
-		int dot = originName.lastIndexOf(".");
-		String ext = originName.substring(dot);
-
-		String random = UUID.randomUUID().toString().replace("-", "_");
-
-		String changeName = random + ext;
-
-		return changeName;
 	}
 
 	public List<PlaceVo> getList() {

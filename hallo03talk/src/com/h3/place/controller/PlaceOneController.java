@@ -2,6 +2,7 @@ package com.h3.place.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +15,11 @@ import com.h3.boss.vo.BossVo;
 import com.h3.place.service.PlaceService;
 import com.h3.place.vo.PlaceVo;
 import com.h3.placePhoto.vo.PlacePhotoVo;
+import com.h3.placeReview.service.PlaceReviewService;
+import com.h3.placeReview.vo.PlaceReviewVo;
+import com.h3.placeReviewPhoto.vo.PlaceReviewPhotoVo;
+import com.h3.placeReviewReply.service.PlaceReviewReplyService;
+import com.h3.placeReviewReply.vo.PlaceReviewReplyVo;
 
 @WebServlet("/place/one")
 public class PlaceOneController extends HttpServlet {
@@ -27,10 +33,16 @@ public class PlaceOneController extends HttpServlet {
 		int result = new PlaceService().getCnt(placeNo);
 		ArrayList<PlacePhotoVo> photoList = new PlaceService().photoOne(placeNo);
 		BossVo bv = new BossService().selectOneByNo(Integer.parseInt(pv.getBossNo()));
+		List<PlaceReviewVo> prvList = new PlaceReviewService().getReview(placeNo);
+		List<PlaceReviewPhotoVo> prpvList = new PlaceReviewService().getPhoto(prvList);
+		List<PlaceReviewReplyVo> prrvList = new PlaceReviewReplyService().getReview(prvList);
 		
 		req.setAttribute("placeVo", pv);
 		req.setAttribute("photoList", photoList);
 		req.setAttribute("bossVoForShow", bv);
+		req.setAttribute("reviewList", prvList);
+		req.setAttribute("reviewPhotoList", prpvList);
+		req.setAttribute("reviewReplyList", prrvList);
 		
 		if (result==1 && pv != null && photoList != null) {
 			// 성공

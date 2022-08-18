@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
-String contextPath = request.getContextPath();
-%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%
 request.setCharacterEncoding("UTF-8"); //한글깨지면 주석제거
 //request.setCharacterEncoding("EUC-KR"); //해당시스템의 인코딩타입이 EUC-KR일경우에 String inputYn =
@@ -44,7 +43,7 @@ String emdNo = request.getParameter("emdNo");
 	<%@ include file="/views/common/header.jsp"%>
 	<main>
 		<form id="container" class="container-xxl"
-			action="<%=contextPath%>/place/add" method="post"
+			action="/hallo03talk/place/add" method="post"
 			enctype="multipart/form-data">
 			<!-- 슬라이드 -->
 			<div
@@ -82,9 +81,9 @@ String emdNo = request.getParameter("emdNo");
 					</div>
 					<div
 						class="d-flex flex-column col-2 justify-content-center align-items-center">
-						<div>사장명</div>
-						<div>010-0000-0000</div>
-						<div>사업자 정보 사장 정보 등등등</div>
+						<div>${ BossLoginMember.id }</div>
+						<div>${ BossLoginMember.phone }</div>
+						<div>${ BossLoginMember.email }</div>
 					</div>
 				</div>
 			</div>
@@ -139,6 +138,12 @@ String emdNo = request.getParameter("emdNo");
 			</div>
 		</div>
 	</div>
+	<c:if test="${empty BossLoginMember }">
+		<script>
+			alert('사장님만 등록가능합니다');
+			location.href = "/hallo03talk/place/list";
+		</script>
+	</c:if>
 </body>
 <script src="/hallo03talk/resources/js/jusoPopUp.js"></script>
 </html>
