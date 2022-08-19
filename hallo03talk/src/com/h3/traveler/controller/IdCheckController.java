@@ -28,7 +28,10 @@ public class IdCheckController extends HttpServlet{
 
 		// 서비스 호출
 		int idCheck = new TravelerService().idCheck(userId);
-
+		//System.out.println("ccc : " + idCheck);//swy
+		
+		// 인코딩 하기
+		resp.getWriter().write(String.valueOf(idCheck));
 	
 	}
 	

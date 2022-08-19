@@ -119,166 +119,167 @@
 <body>
 
 
-			<%@ include file="/views/common/header.jsp"%>
-			
-			
-			 <main>
-			      <div id="container" class="container-xxl">
-			      
-			
-			        <!-- 내가 작성 한 부분 -->  
-			        <div class="wrap">
-			            
-			            <div class="form-wrap">
-			                <!-- <div class="logo">할로영삼talk</div> -->
-			                
-			                <div class="button-wrap">
-			                    <div id="btn"></div>
-			                    <button type="button" class="togglebtn" onclick="login()">일반회원</button>
-			                    <button type="button" class="togglebtn" onclick="register()">사장님</button>
-			                </div>
-			                
-			                <!-- --------------- 일반회원 ---------------------- -->
-			                  <form action="/hallo03talk/traveler/join" method="post">   
-			              
-			                    <div id="login" action="" class="input-group">
-			                        <div class="ggg">
-			                            <table>
-			                                <tr>
-			                                    <td><input type="text" id="userId" name="travelerJoinId" class="input-field" placeholder="아이디" required></td>
-			                                    <td style="padding-left: 30px;"><button id="travelerIdCheck">중복확인</button></td>
-			                                </tr>
-			                            </table>
-			                          
-			                            <input type="password" name="travelerJoinPwd" class="input-field" placeholder="비밀번호" required>
-			                            <input type="password" name="travelerJoinPwd2" class="input-field" placeholder="비밀번호 확인" required>
-			                            <input type="text" name="travelerJoinName" class="input-field" placeholder="이름" required>
-			        
-			                            <table>
-			                                <tr>
-			                                    <td><input type="text" name="travelerJoinNick" class="input-field" placeholder="닉네임"></td>
-			                                    <td style="padding-left: 30px;"><button id="bossIdCheck">중복확인</button></td>
-			                                </tr>
-			                            </table>
-			                           
-			                            <table id="gender_table">
-			                                <tr> 
-			                                    <td style="padding-right: 30px; color: gray;">성별</td>
-			                                    
-			                                    <td style="padding-right: 10px;">
-			                                    	<input type="radio" name="travelerJoinGender" value="man" required>남
-			                                    </td>
-			                                    <td>
-			                                    	<input type="radio" name="travelerJoinGender" value="woman" required>여
-			                                    </td>
-			                                    
-			                                </tr>
-			                            </table>
-			        
-			                            <input type="tel" name="travelerJoinPhone" class="input-field" placeholder="전화번호" required>
-			                            <input type="email" name="travelerJoinEmail" class="input-field" placeholder="이메일" required>
-			                            <button type="submit" class="join">회원가입</button>
-			                        </div>
-			        
-			                    </div>
-							</form>
-			
-							<!-- ------일반회원_아이디 중복체크-------------------------------------- -->
-							
-							<script>
-							
-								$("#travelerIdCheck").click(function(e){
-									
-									
-									var userId  = $('#userId').val();
-									
-							        var url = "${pageContext.request.contextPath}/traveler/idCheck"
-
+	<%@ include file="/views/common/header.jsp"%>
+	
+	
+	 <main>
+	      <div id="container" class="container-xxl">
+	      
+	
+	        <!-- 내가 작성 한 부분 -->  
+	        <div class="wrap">
+	            
+	            <div class="form-wrap">
+	                <!-- <div class="logo">할로영삼talk</div> -->
+	                
+	                <div class="button-wrap">
+	                    <div id="btn"></div>
+	                    <button type="button" class="togglebtn" onclick="login()">일반회원</button>
+	                    <button type="button" class="togglebtn" onclick="register()">사장님</button>
+	                </div>
+	                
+	                <!-- --------------- 일반회원 ---------------------- -->
+	                  <form action="/hallo03talk/traveler/join" method="post">   
+	              
+	                    <div id="login" action="" class="input-group">
+	                        <div class="ggg">
+	                            <table>
+	                                <tr>
+	                                    <td><input type="text" id="userId" name="travelerJoinId" class="input-field" placeholder="아이디" required></td>
+	                                    <td style="padding-left: 30px;"><button id="travelerIdCheck">중복확인</button></td>
+	                                </tr>
+	                            </table>
+	                          
+	                            <input type="password" name="travelerJoinPwd" class="input-field" placeholder="비밀번호" required>
+	                            <input type="password" name="travelerJoinPwd2" class="input-field" placeholder="비밀번호 확인" required>
+	                            <input type="text" name="travelerJoinName" class="input-field" placeholder="이름" required>
+	        
+	                            <table>
+	                                <tr>
+	                                    <td><input type="text" name="travelerJoinNick" class="input-field" placeholder="닉네임"></td>
+	                                    <td style="padding-left: 30px;"><button id="bossIdCheck">중복확인</button></td>
+	                                </tr>
+	                            </table>
+	                           
+	                            <table id="gender_table">
+	                                <tr> 
+	                                    <td style="padding-right: 30px; color: gray;">성별</td>
+	                                    
+	                                    <td style="padding-right: 10px;">
+	                                    	<input type="radio" name="travelerJoinGender" value="man" required>남
+	                                    </td>
+	                                    <td>
+	                                    	<input type="radio" name="travelerJoinGender" value="woman" required>여
+	                                    </td>
+	                                    
+	                                </tr>
+	                            </table>
+	        
+	                            <input type="tel" name="travelerJoinPhone" class="input-field" placeholder="전화번호" required>
+	                            <input type="email" name="travelerJoinEmail" class="input-field" placeholder="이메일" required>
+	                            <button type="submit" class="join">회원가입</button>
+	                        </div>
+	        
+	                    </div>
+					</form>
+	
+					<!-- ------일반회원_아이디 중복체크-------------------------------------- -->
 					
-									$.ajax({
-										url  : url,
-										method : "post",
-							        	data : { userId : userId },
-							            
-							            success : function(data){
-							            	if(data == 1){
-								               alert("사용할 수 있는 아이디 입니다.");
-							            	}else{
-					  			              alert("이미 존재하는 아이디 입니다.");
-							            	}
-							            },
-							            error : function(e){
-							            	alert('서버요청 실패!');
-							            }
-							            
-									})
-									
-									
-								})
-								
-							
-							</script>
-							
-							<!-- --------------------------------------------- -->
-			              
-			               <!-- ---------------사장님 ---------------------- -->
-			             <form action="/hallo03talk/boss/join" method="post">   
-			                     
-			                <div id="register" action="" class="input-group">
-			                    <div class="ggg">
-			                        <table>
-			                            <tr>
-			                                <td><input type="text" name="bossJoinId" class="input-field" placeholder="아이디" required></td>
-			                                <td style="padding-left: 30px;"><button id="bossIdCheck">중복확인</button></td>
-			                            </tr>
-			                        </table>
-			                      
-			                        <input type="password" name="bossJoinPwd" class="input-field" placeholder="비밀번호" required>
-			                        <input type="password" name="bossJoinPwd2" class="input-field" placeholder="비밀번호 확인" required>
-
-			                       
-			                        <input type="tel" name="bossJoinPhone" class="input-field" placeholder="전화번호" required>
-			                        <input type="email" name="bossJoinEmail" class="input-field" placeholder="이메일" required>
-			                        <button type="submit" class="join">회원가입</button>
-			                    </div>
-			                </div>
-			             </form>  
-			
-			               
-			            </div>
-			        </div>
-			
-			        <script>
-			            var x = document.getElementById("login");
-			            var y = document.getElementById("register");
-			            var z = document.getElementById("btn");
-			            
-			            
-			            function login(){
-			                x.style.left = "50px";
-			                y.style.left = "450px";
-			                z.style.left = "0";
-			            }
-			    
-			            function register(){
-			                x.style.left = "-400px";
-			                y.style.left = "50px";
-			                z.style.left = "110px";
-			            }
-			        </script>
-			
-					<!-- </form> -->
-			
-			      </div>
-			      
-		      
-		    </main>
+					<script>
 					
+						$("#travelerIdCheck").click(function(e){
+							
+							
+							var userId  = $('#userId').val();
+							
+					        var url = "${pageContext.request.contextPath}/traveler/idCheck"
+
 			
+							$.ajax({
+								url  : url,
+								method : "post",
+					        	data : { userId : userId },
+					            
+					            success : function(x){
+					            	//alert("x : " + x);
+					            	if(x == 1){
+						               alert("이미 존재하는 아이디입니다.");
+					            	}else{
+			  			              alert("사용 가능한 아이디 입니다.");
+					            	}
+					            },
+					            error : function(e){
+					            	alert('서버요청 실패!');
+					            } 
+					            
+							})
+							
+							
+						})
+						
+					
+					</script>
+					
+					<!-- --------------------------------------------- -->
+	              
+	               <!-- ---------------사장님 ---------------------- -->
+	             <form action="/hallo03talk/boss/join" method="post">   
+	                     
+	                <div id="register" action="" class="input-group">
+	                    <div class="ggg">
+	                        <table>
+	                            <tr>
+	                                <td><input type="text" name="bossJoinId" class="input-field" placeholder="아이디" required></td>
+	                                <td style="padding-left: 30px;"><button id="bossIdCheck">중복확인</button></td>
+	                            </tr>
+	                        </table>
+	                      
+	                        <input type="password" name="bossJoinPwd" class="input-field" placeholder="비밀번호" required>
+	                        <input type="password" name="bossJoinPwd2" class="input-field" placeholder="비밀번호 확인" required>
+
+	                       
+	                        <input type="tel" name="bossJoinPhone" class="input-field" placeholder="전화번호" required>
+	                        <input type="email" name="bossJoinEmail" class="input-field" placeholder="이메일" required>
+	                        <button type="submit" class="join">회원가입</button>
+	                    </div>
+	                </div>
+	             </form>  
+	
+	               
+	            </div>
+	        </div>
+	
+	        <script>
+	            var x = document.getElementById("login");
+	            var y = document.getElementById("register");
+	            var z = document.getElementById("btn");
+	            
+	            
+	            function login(){
+	                x.style.left = "50px";
+	                y.style.left = "450px";
+	                z.style.left = "0";
+	            }
+	    
+	            function register(){
+	                x.style.left = "-400px";
+	                y.style.left = "50px";
+	                z.style.left = "110px";
+	            }
+	        </script>
+	
+			<!-- </form> -->
+	
+	      </div>
+	      
+      
+    </main>
 			
-			
-			<footer></footer>
-			
+	
+	
+	
+	<footer></footer>
+	
 	
 
 </body>
