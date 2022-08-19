@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.h3.traveler.service.TravelerService;
-import com.h3.traveler.vo.MyPageVo;
+import com.h3.traveler.vo.TravelerMyPageVo;
 import com.h3.traveler.vo.TravelerVo;
 
 @WebServlet(urlPatterns = "/travelerMpgPost/list")
@@ -29,7 +29,7 @@ public class MpgPostViewController extends HttpServlet{
 		TravelerVo loginTraveler = (TravelerVo)req.getSession().getAttribute("travelerLoginMember");
 		
 		// 서비스 호출
-		ArrayList<MyPageVo> voList = new TravelerService().selectList(loginTraveler.getNo());
+		ArrayList<TravelerMyPageVo> voList = new TravelerService().selectList(loginTraveler.getNo());
 		
 		req.setAttribute("voList", voList);
 		

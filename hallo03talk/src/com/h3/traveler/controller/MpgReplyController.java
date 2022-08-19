@@ -24,8 +24,10 @@ public class MpgReplyController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		
+		TravelerVo loginTraveler = (TravelerVo)req.getSession().getAttribute("travelerLoginMember");
+
 		// 서비스 호출
-	    ArrayList<CommReplyVo> voList = new TravelerService().selectReplyList();
+	    ArrayList<CommReplyVo> voList = new TravelerService().selectReplyList(loginTraveler.getNo());
 		
 		
 		req.setAttribute("voList", voList);

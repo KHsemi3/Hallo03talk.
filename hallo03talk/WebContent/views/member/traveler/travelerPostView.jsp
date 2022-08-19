@@ -1,12 +1,13 @@
-<%@page import="com.h3.traveler.vo.MyPageVo"%>
+<%@page import="com.h3.traveler.vo.TravelerMyPageVo"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
      
  <%
-  	ArrayList<MyPageVo> voList = (ArrayList<MyPageVo>)request.getAttribute("voList");
+          ArrayList<TravelerMyPageVo> voList = (ArrayList<TravelerMyPageVo>)request.getAttribute("voList");
  %>  
+    
     
 <!DOCTYPE html>
 <html>
@@ -73,10 +74,10 @@
                                 <a class="nav-link active" aria-current="page" href="/hallo03talk/views/member/traveler/travelerInformationForm.jsp">내 정보</a>
                               </li>
                               <li class="nav-item" style="background-color: rgba(0, 0, 0, 0.2); border-radius: 5px;">
-                                <a class="nav-link active" aria-current="page" href="/hallo03talk/views/member/traveler/travelerDoRePortView.jsp">내가 쓴 글</a>
+                                <a class="nav-link active" aria-current="page" href="/hallo03talk/travelerMpgPost/list">내가 쓴 글</a>
                               </li>
                               <li class="nav-item">
-                                <a class="nav-link" href="">내가 쓴 댓글</a>
+                                <a class="nav-link" href="/hallo03talk/travelerMpgReply/list">내가 쓴 댓글</a>
                               </li>
                               <li class="nav-item">
                                 <a class="nav-link" href="#">예약 내역</a>
@@ -127,10 +128,10 @@
 		                  <th scope="row">
 		                    <input type="checkbox" name="ckNo" value="<%= voList.get(i).getBoard().concat(",").concat(voList.get(i).getNo()) %>">
 		                  </th>
-		                 	<th scope="row"><%=voList.get(i).getNo() %></th>                    <!-- 번호 - 글 순서 -->
+		                 	<th scope="row"><%=voList.get(i).getNo() %></th>                   
 		                  	<td ><%=voList.get(i).getBoard() %></td>  	
-		                  	<td ><%=voList.get(i).getTitle() %></td>  							<!-- 글 제목 -->
-		                  	<td class="text-center"><%=voList.get(i).getEnrollDate() %></td>	<!-- 글 작성일-->
+		                  	<td ><%=voList.get(i).getTitle() %></td>  						
+		                  	<td class="text-center"><%=voList.get(i).getEnrollDate() %></td>	
 	                </tr>
                <%}%>
               </tbody>
@@ -146,9 +147,11 @@
     
 <footer></footer> 
 
+<!-- -------------------------------------------------------- -->
+
 <script>
-$(document).ready(function() {
-	// crating new click event for save button
+
+/* $(document).ready(function() {
 	
 	$(".deleteButtonAll").click(function(e) {
 		$('input:checkbox[name="ckNo"]').each(function() {
@@ -156,14 +159,14 @@ $(document).ready(function() {
 			this.checked = true;
 
 			});
-	})
+	}) */
 	
 	$(".deleteButton").click(function(e) {
-	//	var dataList = new Array()
+
 		$('input:checkbox[name=ckNo]').each(function (index) {
 
 			if($(this).is(":checked")==true){
-		    	console.log($(this).val());
+		    	//console.log($(this).val());
 		    	var query = $(this).val()
 		    	var data = query.split(",")
 		    	
@@ -172,7 +175,7 @@ $(document).ready(function() {
 		    		"no" : data[1]
 		    	} 
 		    	
-		    	console.log(data)
+		    	//console.log(data)
 		    	
 		    	var ans = confirm("선택하신 글을 삭제하시겠습니까?");
 	        if(!ans) return false;
@@ -184,23 +187,19 @@ $(document).ready(function() {
 	            type : "post",
 	            data : data ,
 	            success : function(data) {
-	                  alert("댓글이 삭제 되었습니다.");
+	                  alert("글이 삭제 되었습니다.");
 	                  location.reload();
 	            },
 	            error : function(data) {
-	                alert("댓글이 삭제되지 않았습니다.");
+	                alert("글이 삭제되지 않았습니다.");
 	            }
 	        }); 
 		    	
-		    //	dataList.push(data)
 		    		
 		    }
 		
 		})
 		
-		//var paramList = {
-		//	"paramList" : JSON.stringify(dataList)
-		//}	
 		
 	})
 });

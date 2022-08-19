@@ -7,9 +7,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
+import com.h3.boss.vo.BossMyPageVo;
 import com.h3.boss.vo.BossVo;
-import com.h3.traveler.vo.TravelerVo;
+import com.h3.community.vo.CommReplyVo;
+import com.h3.placeReview.vo.PlaceReviewVo;
+import com.h3.traveler.vo.TravelerMyPageVo;
 
 public class BossDao {
 
@@ -256,6 +260,130 @@ public class BossDao {
 		return result;
 	
 	}//quit
+
+
+
+
+	/*
+	 * boss - 내가 쓴 글 조회
+	 */
+	public ArrayList<BossMyPageVo> selectList(Connection conn,  int userNo) {
+
+		String sql = " (SELECT "
+				+ "        R.BOSS_NO AS WRITER,"
+				+ "        R.NO, "
+				+ "        R.CONTENT, "
+				+ "        TO_CHAR(R.ENROLL_DATE, 'YY/MM/DD HH:MI') AS ENROLLDATE, "
+				+ "        '이벤트 등록' AS BOARD "
+				+ "     FROM PARTY R "
+				+ "     WHERE R.BOSS_NO = ? "
+				+ "     AND R.STATUS = 'Y')  "
+				+ "     UNION  "
+				+ "     (SELECT "
+				+ "        P.BOSS_NO AS WRITER,   "
+				+ "        P.NO,  "
+				+ "        P.CONTENT,  "
+				+ "        TO_CHAR(P.ENROLL_DATE, 'YY/MM/DD HH:MI') AS ENROLLDATE, "
+				+ "        '장소 등록' AS BOARD  "
+				+ "    FROM PLACE P     "
+				+ "    WHERE P.BOSS_NO = ?   "
+				+ "    AND P.STATUS = 'Y')   "
+				+ "    ORDER BY ENROLLDATE DESC";
+		
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		ArrayList <BossMyPageVo> list = new ArrayList<BossMyPageVo>();
+		
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, userNo);
+			pstmt.setInt(2, userNo);
+			
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				String no = rs.getString("no");
+				//String title = rs.getString("title");
+				String enrollDate = rs.getString("enrollDate");
+				String content = rs.getString("content");
+				String writer = rs.getString("writer");
+				String board = rs.getString("board");
+
+				BossMyPageVo vo = new BossMyPageVo();
+				vo.setNo(no);
+				//vo.setTitle(title);
+				vo.setContent(content);
+				vo.setEnrollDate(enrollDate);
+				vo.setWriter(writer);
+				vo.setBoard(board);
+
+				list.add(vo);
+			}
+			
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return list;
+
+	
+	}//selectList
+
+
+
+	
+	/*
+	 * boss - 내가 쓴 댓글 조회 - 커뮤니티 댓글
+	 */
+	public ArrayList<PlaceReviewVo> selectReplyList(Connection conn, int userNo) {
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<PlaceReviewVo> list = new ArrayList<PlaceReviewVo>();
+
+		String sql = "SELECT R.NO , R.CONTENT , TO_CHAR(R.ENROLL_DATE, 'YY/MM/DD HH:MI') AS ENROLL_DATE FROM PLACE_REVIEW_REPLY R JOIN BOSS B ON R.BOSS_NO = B.NO WHERE R.BOSS_NO = ? ORDER BY ENROLL_DATE DESC";
+				
+		
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userNo);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				String no = rs.getString("NO");
+				String content = rs.getString("CONTENT");
+				String enrollDate = rs.getString("ENROLL_DATE");
+
+
+				PlaceReviewVo vo = new PlaceReviewVo();
+				vo.setNo(no);
+				vo.setContent(content);
+				vo.setEnrollDate(enrollDate);
+
+				list.add(vo);
+			}
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return list;
+	
+	}//selectReplyList
 
 	
 }//class

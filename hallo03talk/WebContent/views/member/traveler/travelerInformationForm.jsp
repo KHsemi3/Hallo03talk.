@@ -408,7 +408,7 @@ input.full:focus, textarea.full:focus {
                       <div class="collapse navbar-collapse" id="navbarNavDropdown">
                             <ul class="navbar-nav">
                               <li class="nav-item" style="background-color: rgba(0, 0, 0, 0.2); border-radius: 5px;">
-                                <a class="nav-link active" aria-current="page" href="세미실전_일반회원_마이페이지(메뉴바,내정보).html">내 정보</a>
+                                <a class="nav-link active" aria-current="page" href="">내 정보</a>
                               </li>
                               <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="/hallo03talk/travelerMpgPost/list">내가 쓴 글</a>
@@ -428,8 +428,8 @@ input.full:focus, textarea.full:focus {
                                   신고
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                  <li><a class="dropdown-item" href="세미실전_일반회원_마이페이지(신고한내역).html">신고 한 내역</a></li>
-                                  <li><a class="dropdown-item" href="세미실전_일반회원_마이페이지(신고받은내역).html">신고 받은 내역</a></li>
+                                  <li><a class="dropdown-item" href="">신고 한 내역</a></li>
+                                  <li><a class="dropdown-item" href="">신고 받은 내역</a></li>
                                 </ul>
                               </li>
                             </ul>

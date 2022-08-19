@@ -116,8 +116,8 @@
                   <tr>
                     <th scope="col" style="width: 5%;"></th>        
                     <th scope="col" style="width: 5%;">#</th>
-                    <th scope="col" class="text-center" style="width: 80%;">댓글</th>
-                    <th scope="col" class="text-center" style="width: 10%;">작성일</th>
+                    <th scope="col" class="text-center" style="width: 70%;">댓글</th>
+                    <th scope="col" class="text-center" style="width: 20%;">작성일</th>
                   </tr>
                 </thead>
                 
