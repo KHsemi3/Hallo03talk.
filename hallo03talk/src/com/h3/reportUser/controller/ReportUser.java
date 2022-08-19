@@ -47,7 +47,8 @@ public class ReportUser extends HttpServlet{
 		//insert 결과를 가지고, 화면 선택
 		if(result == 1) {
 			//신고 성공
-			// + 메세지 담기 //alert 창으로 
+			// + 메세지 담기 //alert 창으로
+			req.getSession().setAttribute("alertMsg", "신고가 완료되었습니다!");
 			resp.sendRedirect("/hallo03talk");
 		}else {
 			//신고 실패 //이전 페이지로 옮기기
