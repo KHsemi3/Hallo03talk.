@@ -7,7 +7,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.UUID;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -17,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import com.h3.boss.vo.BossVo;
 import com.h3.common.RandomName;
 import com.h3.place.service.PlaceService;
 import com.h3.place.vo.PlaceVo;
@@ -35,14 +35,14 @@ public class PlaceAddController extends HttpServlet{
 		String name = (String)req.getParameter("placeName");
 		String content = (String)req.getParameter("placeContent");
 		String address = (String)req.getParameter("placeAddr");
-		String bossNo = (String)req.getSession().getAttribute("bossNo");
+		BossVo bv = (BossVo)req.getSession().getAttribute("BossLoginMember");
 		String categoryNo = (String)req.getParameter("category_no");
 		
 		PlaceVo placeVo = new PlaceVo();
 		placeVo.setName(name);
 		placeVo.setContent(content);
 		placeVo.setAddress(address);
-		placeVo.setBossNo(bossNo);
+		placeVo.setBossNo(Integer.toString(bv.getNo()));
 		placeVo.setCategoryNo(categoryNo);
 		
 //		슬라이드 사진 저장
