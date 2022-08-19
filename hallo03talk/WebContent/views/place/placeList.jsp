@@ -21,14 +21,14 @@
 			<h1 class="text-center py-lg-5" style="font-family: 'Somi'">장소</h1>
 			<!-- 장소 카테고리들 -->
 			<div id="place-finder" class="fw-bolder text-center mt-5 mx-5">
-				<div class="row border border-4">
+				<div class="row border border-4" id="category">
 					<div class="row">
-						<div class="col-2 border-end border-3">숙소</div>
-						<div class="col-2 bg-warning border-end border-3" id="jeju">제주</div>
+						<div class="col-2 border-end border-3" id="hotel" onclick="category('hotel')">숙소</div>
+						<div class="col-2 bg-warning border-end border-3">제주</div>
 						<!-- 제주시 -->
-						<div class="col in-jeju">시내</div>
-						<div class="col in-jeju">애월</div>
-						<div class="col in-jeju">한림</div>
+						<div class="col in-jeju" >시내</div>
+						<div class="col in-jeju" id="aewol">애월</div>
+						<div class="col in-jeju" id="hanrim">한림</div>
 
 						<!-- 서귀포 -->
 						<div class="col in-seogwipo d-none">시내</div>
@@ -93,8 +93,8 @@
 														d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
 														fill="#fdc356"></path>
 	                          					</svg>
-                          					</c:if>
-                          					<c:if test="${ p.zzim ne travelerLoginMember.no }">
+											</c:if>
+											<c:if test="${ p.zzim ne travelerLoginMember.no }">
 												<svg style="color: #f3da35; cursor: pointer;"
 													xmlns="http://www.w3.org/2000/svg" width="32" height="32"
 													fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16"
@@ -103,7 +103,7 @@
 														d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"
 														fill="#f3da35"></path>
 	                         					</svg>
-                         					</c:if>
+											</c:if>
 										</div>
 									</div>
 								</div>
@@ -160,6 +160,24 @@
 	<script>
 		function refreshZzim() {
 			history.go(0);
+		}
+	</script>
+
+	<script>
+		function clickCategory(x) {
+			$.ajax({
+				url : "/hallo03talk/place/list/"+"",
+				method : "POST",
+				data :  {
+					 place : x
+				},
+				success : function (item) {
+					refreshZzim();
+				},
+				error : function () {
+					alert('찜하기 실패');
+				}
+			});
 		}
 	</script>
 </body>

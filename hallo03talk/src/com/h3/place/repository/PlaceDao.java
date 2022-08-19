@@ -107,13 +107,12 @@ public class PlaceDao {
 				pv.setEnrollDate(rs.getString("ENROLL_DATE"));
 				pv.setCnt(Integer.parseInt(rs.getString("CNT")));
 				if (rs.getString("TRAVELER_NO") == null) {
-					tno=0;
+					tno = 0;
 					pv.setZzim(tno);
 				} else {
 					pv.setZzim(rs.getInt("TRAVELER_NO"));
 				}
-				
-				
+
 				voList.add(pv);
 			}
 			return voList;
@@ -169,7 +168,7 @@ public class PlaceDao {
 
 		String sql = "SELECT P.NO NO,P.NAME NAME,P.CONTENT CONTENT,P.ADDRESS ADDRESS,P.BOSS_NO BOSS_NO,P.CATEGORY_NO CATEGORY_NO,P.ENROLL_DATE ENROLL_DATE,P.CNT CNT, Z.TRAVELER_NO TRAVELER_NO FROM PLACE P LEFT OUTER JOIN ZZIM Z ON P.NO = Z.PLACE_NO WHERE P.STATUS='Y'AND NO=?";
 		int tno = 0;
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, placeNo);
@@ -184,7 +183,7 @@ public class PlaceDao {
 				pv.setEnrollDate(rs.getString("ENROLL_DATE"));
 				pv.setCnt(Integer.parseInt(rs.getString("CNT")));
 				if (rs.getString("TRAVELER_NO") == null) {
-					tno=-1;
+					tno = -1;
 					pv.setZzim(tno);
 				} else {
 					pv.setZzim(rs.getInt("TRAVELER_NO"));
@@ -264,6 +263,7 @@ public class PlaceDao {
 
 		return cnt;
 	}
+
 //	조회수 증가
 	public int plusCnt(Connection conn, PlaceVo pv) {
 
@@ -287,14 +287,15 @@ public class PlaceDao {
 		}
 		return result;
 	}
+
 //	장소 수정
 	public int placeUpdate(Connection conn, PlaceVo placeVo) {
-		
+
 		PreparedStatement pstmt = null;
 		int result = 0;
-		
+
 		String sql = "UPDATE PLACE SET NAME=?, CONTENT=?, ADDRESS=?, BOSS_NO=?, CATEGORY_NO=? WHERE NO=?";
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, placeVo.getName());
@@ -303,42 +304,115 @@ public class PlaceDao {
 			pstmt.setString(4, placeVo.getBossNo());
 			pstmt.setString(5, placeVo.getCategoryNo());
 			pstmt.setString(6, placeVo.getNo());
-			
+
 			result = pstmt.executeUpdate();
-			
+
 			return result;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
 		}
-		
-		
+
 		return result;
 	}
 
 //	장소 삭제
 	public int placeDel(Connection conn, String placeNo) {
-		
+
 		PreparedStatement pstmt = null;
 		int result = 0;
-		
+
 		String sql = "UPDATE PLACE SET STATUS='N' WHERE NO=?";
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, placeNo);
-			
+
 			result = pstmt.executeUpdate();
-			
+
 			return result;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
 		}
-		
+
 		return result;
+	}
+
+	public List<PlaceVo> getList(Connection conn, String categoryNo) {
+		PreparedStatement pstmt = null;
+		List<PlaceVo> voList = new ArrayList<PlaceVo>();
+		ResultSet rs = null;
+
+		String sql = "SELECT P.NO NO,P.NAME NAME,P.CONTENT CONTENT,P.ADDRESS ADDRESS,P.BOSS_NO BOSS_NO,P.CATEGORY_NO CATEGORY_NO,P.ENROLL_DATE ENROLL_DATE,P.CNT CNT, Z.TRAVELER_NO TRAVELER_NO FROM PLACE P LEFT OUTER JOIN ZZIM Z ON P.NO = Z.PLACE_NO WHERE P.STATUS='Y' AND P.CATEGORY_NO=? ORDER BY P.NO DESC";
+		int tno = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, categoryNo);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				PlaceVo pv = new PlaceVo();
+				pv.setNo(rs.getString("NO"));
+				pv.setName(rs.getString("NAME"));
+				pv.setContent(rs.getString("CONTENT"));
+				pv.setAddress(rs.getString("ADDRESS"));
+				pv.setBossNo(rs.getString("BOSS_NO"));
+				pv.setCategoryNo(rs.getString("CATEGORY_NO"));
+				pv.setEnrollDate(rs.getString("ENROLL_DATE"));
+				pv.setCnt(Integer.parseInt(rs.getString("CNT")));
+				if (rs.getString("TRAVELER_NO") == null) {
+					tno = 0;
+					pv.setZzim(tno);
+				} else {
+					pv.setZzim(rs.getInt("TRAVELER_NO"));
+				}
+
+				voList.add(pv);
+			}
+			return voList;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+
+		return voList;
+	}
+
+	public List<PlacePhotoVo> getProfile(Connection conn, String categoryNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<PlacePhotoVo> photoList = new ArrayList<PlacePhotoVo>();
+
+		String sql = "SELECT H.NO , H.NAME,H.PATH,H.ENROLL_DATE,H.PLACE_NO FROM PLACE_PHOTO H JOIN PLACE P ON P.NO = H.PLACE_NO WHERE H.STATUS='Y' AND H.PHOTO_PROFILE='Y' AND P.CATEGORY_NO=?";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, categoryNo);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				PlacePhotoVo ppv = new PlacePhotoVo();
+				ppv.setNo(rs.getString(1));
+				ppv.setName(rs.getString(2));
+				ppv.setPath(rs.getString(3));
+				ppv.setEnrollDate(rs.getString(4));
+				ppv.setPlaceNo(rs.getString(5));
+				photoList.add(ppv);
+			}
+			return photoList;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+
+		return photoList;
 	}
 
 }

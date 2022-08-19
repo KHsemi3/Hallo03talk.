@@ -21,7 +21,6 @@ public class PlaceListController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setCharacterEncoding("UTF-8");
 		
 		List<PlaceVo> placeList = new PlaceService().getList();
 		List<PlacePhotoVo> photoList = new PlaceService().getProfile();
@@ -30,6 +29,20 @@ public class PlaceListController extends HttpServlet{
 		req.setAttribute("photoList", photoList);
 		
 		req.getRequestDispatcher("/views/place/placeList.jsp").forward(req, resp);
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		if (req.getParameter("categoryNo") != null) {
+			String categoryNo = req.getParameter("categoryNo");
+			
+			List<PlaceVo> placeList = new PlaceService().getList(categoryNo);
+			List<PlacePhotoVo> photoList = new PlaceService().getProfile(categoryNo);
+		}
+		
+		
+		
 	}
 	
 }

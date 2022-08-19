@@ -208,4 +208,39 @@ public class PlaceService {
 		return result;
 	}
 
+	public List<PlaceVo> getList(String categoryNo) {
+		Connection conn = null;
+		List<PlaceVo> voList = null;
+
+		try {
+			conn = getConnection();
+			voList = dao.getList(conn,categoryNo);
+			return voList;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(conn);
+		}
+
+		return voList;
+	}
+
+	public List<PlacePhotoVo> getProfile(String categoryNo) {
+		Connection conn = null;
+		List<PlacePhotoVo> photoList = new ArrayList<PlacePhotoVo>();
+		
+		try {
+			conn = getConnection();
+			photoList = dao.getProfile(conn,categoryNo);
+			
+			return photoList;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(conn);
+		}
+		
+		return photoList;
+	}
+
 }
