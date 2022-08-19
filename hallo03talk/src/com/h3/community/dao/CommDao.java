@@ -7,17 +7,80 @@ import java.util.ArrayList;
 
 import static com.h3.common.JDBCTemplate.*;
 import com.h3.community.vo.CommVo;
+import com.h3.with.vo.PageVo;
 
 public class CommDao {
 
-	public ArrayList<CommVo> getlist(Connection conn) throws Exception {
+	public ArrayList<CommVo> getlist(Connection conn, PageVo pageVo, String sort, String view) throws Exception {
 		ArrayList<CommVo> result = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT C.NO, C.TITLE, C.CONTENT, C.ENROLL_DATE, C.MODIFY_DATE, C.CNT, T.NICK AS WRITER, T.STATUS, CA.NAME AS CATEGORY FROM COMMUNITY C JOIN TRAVELER T ON C.WRITER = T.NO JOIN COMMUNITY_CATEGORY CA ON C.CATEGORY_NO = CA.NO WHERE C.STATUS = 'Y' ORDER BY c.enroll_date DESC";
+		String sql = "";
+		String plusSql = "";
+
+		if(view == null || "all".equals(view) || "".equals(view)) {
+			if("v".equals(sort)) {
+				sql = "SELECT * FROM \r\n"
+						+ "    (SELECT ROWNUM AS RNUM ,S.* FROM \r\n"
+						+ "        (SELECT * FROM\r\n"
+						+ "            (SELECT C.NO, C.TITLE, C.CONTENT, C.ENROLL_DATE, C.MODIFY_DATE, C.CNT, T.NICK AS WRITER, T.STATUS, CA.NAME AS CATEGORY \r\n"
+						+ "                FROM COMMUNITY C JOIN TRAVELER T ON C.WRITER = T.NO JOIN COMMUNITY_CATEGORY CA ON C.CATEGORY_NO = CA.NO \r\n"
+						+ "                WHERE C.STATUS = 'Y' AND CA.NAME = 'notice'\r\n"
+						+ "                ORDER BY C.CNT DESC)\r\n"
+						+ "                \r\n"
+						+ "                union ALL\r\n"
+						+ "                \r\n"
+						+ "                SELECT * FROM\r\n"
+						+ "                (SELECT C.NO, C.TITLE, C.CONTENT, C.ENROLL_DATE, C.MODIFY_DATE, C.CNT, T.NICK AS WRITER, T.STATUS, CA.NAME AS CATEGORY \r\n"
+						+ "                FROM COMMUNITY C JOIN TRAVELER T ON C.WRITER = T.NO JOIN COMMUNITY_CATEGORY CA ON C.CATEGORY_NO = CA.NO \r\n"
+						+ "                WHERE C.STATUS = 'Y' AND CA.NAME != 'notice'\r\n"
+						+ "                ORDER BY C.CNT DESC\r\n"
+						+ "            )\r\n"
+						+ "        ) S\r\n"
+						+ "    ) SU \r\n"
+						+ "WHERE SU.RNUM BETWEEN ? AND ?";
+			
+			}else {
+				sql = "SELECT * FROM \r\n"
+						+ "    (SELECT ROWNUM AS RNUM ,S.* FROM \r\n"
+						+ "        (SELECT * FROM\r\n"
+						+ "            (SELECT C.NO, C.TITLE, C.CONTENT, C.ENROLL_DATE, C.MODIFY_DATE, C.CNT, T.NICK AS WRITER, T.STATUS, CA.NAME AS CATEGORY \r\n"
+						+ "                FROM COMMUNITY C JOIN TRAVELER T ON C.WRITER = T.NO JOIN COMMUNITY_CATEGORY CA ON C.CATEGORY_NO = CA.NO \r\n"
+						+ "                WHERE C.STATUS = 'Y' AND CA.NAME = 'notice'\r\n"
+						+ "                ORDER BY C.ENROLL_DATE DESC)\r\n"
+						+ "                union ALL\r\n"
+						+ "                SELECT * FROM\r\n"
+						+ "                (SELECT C.NO, C.TITLE, C.CONTENT, C.ENROLL_DATE, C.MODIFY_DATE, C.CNT, T.NICK AS WRITER, T.STATUS, CA.NAME AS CATEGORY \r\n"
+						+ "                FROM COMMUNITY C JOIN TRAVELER T ON C.WRITER = T.NO JOIN COMMUNITY_CATEGORY CA ON C.CATEGORY_NO = CA.NO \r\n"
+						+ "                WHERE C.STATUS = 'Y' AND CA.NAME != 'notice'\r\n"
+						+ "                ORDER BY C.ENROLL_DATE DESC\r\n"
+						+ "            )\r\n"
+						+ "        ) S\r\n"
+						+ "    ) SU \r\n"
+						+ "WHERE SU.RNUM BETWEEN ? AND ?";
+			}
+		}else {
+			plusSql = "AND CA.NAME = '" + view + "'";
+			if("v".equals(sort)) {
+				sql = "SELECT * FROM (SELECT ROWNUM AS RNUM ,S.* FROM (SELECT C.NO, C.TITLE, C.CONTENT, C.ENROLL_DATE, C.MODIFY_DATE, C.CNT, T.NICK AS WRITER, T.STATUS, CA.NAME AS CATEGORY FROM COMMUNITY C JOIN TRAVELER T ON C.WRITER = T.NO JOIN COMMUNITY_CATEGORY CA ON C.CATEGORY_NO = CA.NO WHERE C.STATUS = 'Y' "
+						+ plusSql +" ORDER BY c.cnt DESC) S) SU WHERE SU.RNUM BETWEEN ? AND ?";
+			}else {
+				sql = "SELECT * FROM (SELECT ROWNUM AS RNUM ,S.* FROM (SELECT C.NO, C.TITLE, C.CONTENT, C.ENROLL_DATE, C.MODIFY_DATE, C.CNT, T.NICK AS WRITER, T.STATUS, CA.NAME AS CATEGORY FROM COMMUNITY C JOIN TRAVELER T ON C.WRITER = T.NO JOIN COMMUNITY_CATEGORY CA ON C.CATEGORY_NO = CA.NO WHERE C.STATUS = 'Y' "
+						+ plusSql +" ORDER BY c.enroll_date DESC) S) SU WHERE SU.RNUM BETWEEN ? AND ?";			
+			}
+		}
+		
+		
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			
+			int start = (pageVo.getCurrentPage()-1)*pageVo.getBoardLimit() + 1;
+			int end = start + pageVo.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			
 			rs = pstmt.executeQuery();
 			result = new ArrayList<CommVo>();
 			
@@ -42,8 +105,46 @@ public class CommDao {
 			close(pstmt);
 		}
 		
-		
 		return result;
+	}
+
+	
+	public int getCount(Connection conn, String view) {
+
+		String plusSql = "";
+		
+		if(view == null || "all".equals(view) || "".equals(view)) {
+			plusSql = "";
+		}else if("notice".equals(view)){
+			plusSql = "AND CATEGORY_NO = 1";
+		}else if("qna".equals(view)){
+			plusSql = "AND CATEGORY_NO = 2";
+		}else if("free".equals(view)){
+			plusSql = "AND CATEGORY_NO = 3";
+		}
+		
+		String sql = "SELECT COUNT(NO) AS COUNT FROM COMMUNITY WHERE STATUS = 'Y' " + plusSql;
+		
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int count = 0;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				count = rs.getInt("COUNT");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+
+		return count;
 	}
 
 }
