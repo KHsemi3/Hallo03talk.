@@ -64,31 +64,34 @@
 							data-bs-target="#reportMain">장소 신고</button>
 					</div>
 					<div class="col text-center mt-3 mb-0">
-						<c:if test="${!empty travelerLoginMember }">
-							<svg style="color: rgb(253, 195, 86)"
+						<c:if test="${ placeVo.zzim eq travelerLoginMember.no }">
+							<!-- 찜 하기 -->
+							<svg style="color: rgb(253, 195, 86); cursor: pointer;"
 								xmlns="http://www.w3.org/2000/svg" width="32" height="34"
-								fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
-                <path fill-rule="evenodd"
+								fill="currentColor" class="bi bi-heart-fill zzimBtn"
+								viewBox="0 0 16 16" onclick="delZzim(${p.no})">
+	                           									 <path fill-rule="evenodd"
 									d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
 									fill="#fdc356"></path>
-              </svg>
+	                          					</svg>
 						</c:if>
-						<c:if test="${empty travelerLoginMember }">
-							<svg style="color: #f3da35" xmlns="http://www.w3.org/2000/svg"
-								width="32" height="32" fill="currentColor" class="bi bi-heart"
-								viewBox="0 0 16 16">
-                <path
+						<c:if test="${ placeVo.zzim ne travelerLoginMember.no }">
+							<svg style="color: #f3da35; cursor: pointer;"
+								xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+								fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16"
+								onclick="addZzim(${p.no})">
+	                            					<path
 									d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"
 									fill="#f3da35"></path>
-              </svg>
+	                         					</svg>
 						</c:if>
-						<label for="zzim">${ placeVo.cnt }</label>
+						<label for="zzim">${ zzimCnt }</label>
 					</div>
 				</c:if>
 				<!-- 사장님만 보임 -->
 				<c:if test="${ BossLoginMember != null }">
 					<div class="col text-end">
-						<button class="btn btn-warning mt-3 mb-0">장소 수정</button>
+						<button class="btn btn-warning mt-3 mb-0" onclick="location.href='/hallo03talk/place/update?placeNo=${placeVo.no}'">장소 수정</button>
 					</div>
 				</c:if>
 			</div>
@@ -183,7 +186,7 @@
 							</div>
 							<!-- 사장님만 보임 -->
 							<c:if test="${ BossLoginMember.no eq bossVoForShow.no }">
-									<div class="d-flex col justify-content-end align-items-center">${ r.travelerNo }</div>
+								<div class="d-flex col justify-content-end align-items-center">${ r.travelerNo }</div>
 								<div class="d-flex col justify-content-end align-items-center">
 									<button class="btn btn-primary px-1" id="writeReview">
 										답글 등록</button>
@@ -379,6 +382,50 @@
 			</div>
 		</div>
 	</div>
+	<script>
+		function delZzim(x) {
+			$.ajax({
+				url : "/hallo03talk/zzim/del",
+				method : "POST",
+				data :  {
+					 place : x
+				},
+				success : function (item) {
+					refreshZzim();
+				},
+				error : function () {
+					alert('찜하기 실패');
+				}
+			});
+		}
+	</script>
+		<script>
+		function addZzim(x) {
+			
+			$.ajax({
+				url : "/hallo03talk/zzim/add",
+				method : "POST",
+				data :  {
+					 place : x
+				},
+				success : function (item) {
+					if (item == 1) {
+						refreshZzim();
+					} else {
+						alert('로그인 후 할 수 있습니다');
+					}
+				},
+				error : function () {
+					alert('찜하기 실패');
+				}
+			});
+		}
+	</script>
+	<script>
+		function refreshZzim() {
+			history.go(0);
+		}
+	</script>
 </body>
 <script src="/hallo03talk/resources/js/report.js"></script>
 <script src="/hallo03talk/resources/js/onePhoto.js"></script>

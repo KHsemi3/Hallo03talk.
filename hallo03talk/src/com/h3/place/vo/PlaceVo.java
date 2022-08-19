@@ -6,7 +6,8 @@ public class PlaceVo {
 	}
 
 	public PlaceVo(String no, String name, String content, String address, String bossNo, String categoryNo,
-			String status, String enrollDate, int cnt) {
+			String status, String enrollDate, int cnt, int zzim) {
+		super();
 		this.no = no;
 		this.name = name;
 		this.content = content;
@@ -16,6 +17,7 @@ public class PlaceVo {
 		this.status = status;
 		this.enrollDate = enrollDate;
 		this.cnt = cnt;
+		this.zzim = zzim;
 	}
 
 	private String no;
@@ -27,6 +29,7 @@ public class PlaceVo {
 	private String status;
 	private String enrollDate;
 	private int cnt;
+	private int zzim;
 
 	public String getNo() {
 		return no;
@@ -100,11 +103,19 @@ public class PlaceVo {
 		this.cnt = cnt;
 	}
 
+	public int getZzim() {
+		return zzim;
+	}
+
+	public void setZzim(int zzim) {
+		this.zzim = zzim;
+	}
+
 	@Override
 	public String toString() {
 		return "PlaceVo [no=" + no + ", name=" + name + ", content=" + content + ", address=" + address + ", bossNo="
 				+ bossNo + ", categoryNo=" + categoryNo + ", status=" + status + ", enrollDate=" + enrollDate + ", cnt="
-				+ cnt + "]";
+				+ cnt + ", zzim=" + zzim + "]";
 	}
 
 }
