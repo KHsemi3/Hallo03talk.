@@ -178,44 +178,47 @@
 			    ['para', ['paragraph']],
 			    ['height', ['height']],
 			    ['insert',['picture','link']],
-			    ['view', ['help']]
+			    ['view', ['help']],
+			    ['misc',['codeview']]
 			  ],
 			fontNames: ['맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체','Arial', 'Arial Black', 'Comic Sans MS', 'Courier New'],
 			fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
 			callbacks: {
 				onImageUpload : function(files){
-					sendFile(files[0],this);
+					var reader = new FileReader();
+					reader.readAsDataURL(files[0]);
+					
+					reader.onload = function () {
+						
+						const data = reader.result;
+						console.log(data);
+						
+						$.ajax({
+							data : {img : data},
+							url : "/with/imgUpload",
+							method : "POST",
+							success : function(data){
+								console.log('success');
+							}
+						});
+					};
 				}
 			}
+
 	    });
 	    
-	    function sendFile(file, editor){
-			var data = new FormData();
-			data.append("file", file);
-			console.log(file);
-			$.ajax({
-				data : {
-					img : data
-				},
-				type : "POST",
-				url : "/hallo03talk/with/imgUpload",
-				contentType : false,
-				processData : false,
-				success : function(data){
-					console.log(data);
-					console.log(editor);
-					$(editor).summernote("insertImage",data.url);
-				}
-			});
-		}
-	    
-	    var input = document.querySelector('#tag')
+	    //tagify
+	    var input = document.querySelector('#tag');
 	    var tagify = new Tagify(input);
 	      
 	    // 태그가 추가되면 이벤트 발생
 	    tagify.on('add', function() {
 	      console.log(tagify.value); // 입력된 태그 정보 객체
 	    })
+	    
+	    //=========================================
+	    
+		
 	});
 	</script>
 </body>
