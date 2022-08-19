@@ -1,3 +1,5 @@
+<%@page import="com.h3.placeReview.vo.PlaceReviewVo"%>
+<%@page import="com.h3.community.vo.CommVo"%>
 <%@page import="com.h3.with.vo.WithVo"%>
 <%@page import="com.h3.place.vo.PlaceVo"%>
 <%@page import="java.util.ArrayList"%>
@@ -7,8 +9,11 @@
 <%
 
 	ArrayList<PlaceVo> pvoList = (ArrayList<PlaceVo>)request.getAttribute("pvoList");
-
+	ArrayList<CommVo> cvoList = (ArrayList<CommVo>)request.getAttribute("cvoList");
+	ArrayList<PlaceReviewVo> rvoList = (ArrayList<PlaceReviewVo>)request.getAttribute("rvoList");
 %>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,6 +26,7 @@ rel="stylesheet"
 />
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/hallo03talk/resources/js/searchDetail.js"></script>
 
 </head>
 <body>
@@ -65,23 +71,11 @@ rel="stylesheet"
             </div>
             <%}%>
             
-           	<script>
-				$(function(){
-					$('.card').click(function(){
-						//div class = card 클릭 되었을 때, 동작할 내용
-						
-						//글 번호 가져오기
-						const num = $(this).children().eq(0).text();
-						//해당 번호 이용해서 요청 보내기
-						location.href='/hallo03talk/place/detail?num=' + num;
-					});
-				})
-			</script>
             
             <br>
             
             <div style="text-align: right; margin-right: 60px;">
-                <a href="" onclick="" style="text-decoration: none; color: gray;">더보기...</a>
+                <a href="" onclick="" id="load" style="text-decoration: none; color: gray;">더보기...</a>
             </div>
             
             <br>
@@ -90,41 +84,24 @@ rel="stylesheet"
 
             <h1 style="margin-left: 60px; font-family: somi; font-size: 60px; font-weight: lighter;"><b>후기</b></h1>
             <br>
+            <%for(int i = 0 ; i < pvoList.size(); i++){%>
             <div class="row">
                 <div class="col-md-4">
                     <div class="card" onclick="" style="width: 18rem; float: none; margin:0 auto;">
                         <img src="/hallo03talk/resources/img/search_1.jpg" class="card-img-top" alt="">
                         <div class="card-body">
-                          <h5 class="card-title">글제목</h5>
-                          <h6 class="card-subtitle mb-2 text-muted">작성자</h6>
-                          <p class="card-text">어쩌구저쩌구 대충 내용이 들어간다는 소리......더보기...</p>
+                          <h5 class="card-title"><%= cvoList.get(i).getTitle() %></h5>
+                          <h6 class="card-subtitle mb-2 text-muted"><%= cvoList.get(i).getWriter() %></h6>
+                          <p class="card-text"><%= cvoList.get(i).getContent() %></p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="card" onclick="" style="width: 18rem; float: none; margin:0 auto;">
-                        <img src="/hallo03talk/resources/img/search_1.jpg" class="card-img-top" alt="">
-                        <div class="card-body">
-                          <h5 class="card-title">글제목</h5>
-                          <h6 class="card-subtitle mb-2 text-muted">작성자</h6>
-                          <p class="card-text">어쩌구저쩌구 대충 내용이 들어간다는 소리......더보기...</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card" onclick="" style="width: 18rem; float: none; margin:0 auto;">
-                        <img src="/hallo03talk/resources/img/search_1.jpg" class="card-img-top" alt="">
-                        <div class="card-body">
-                          <h5 class="card-title">글제목</h5>
-                          <h6 class="card-subtitle mb-2 text-muted">작성자</h6>
-                          <p class="card-text">어쩌구저쩌구 대충 내용이 들어간다는 소리......더보기...</p>
-                        </div>
-                    </div>
-                </div>
+                <%} %>
+                
             </div>
             <br>
             <div style="text-align: right; margin-right: 60px; ">
-                <a href="" onclick="" style="text-decoration: none; color: gray;">더보기...</a>
+                <a href="" onclick="" id="load" style="text-decoration: none; color: gray;">더보기...</a>
             </div>
             <br>
             <hr style="width: 90%; margin: 0 auto;">
@@ -132,41 +109,24 @@ rel="stylesheet"
 
             <h1 style="margin-left: 60px; font-family: somi; font-size: 60px; font-weight: lighter;"><b>커뮤니티</b></h1>
             <br>
+            <%for(int i = 0 ; i < pvoList.size(); i++){%>
             <div class="row">
                 <div class="col-md-4">
                     <div class="card" onclick="" style="width: 18rem; float: none; margin:0 auto;">
                         <img src="/hallo03talk/resources/img/search_1.jpg" class="card-img-top" alt="">
                         <div class="card-body">
-                          <h5 class="card-title">글제목</h5>
-                          <h6 class="card-subtitle mb-2 text-muted">작성자</h6>
-                          <p class="card-text">어쩌구저쩌구 대충 내용이 들어간다는 소리......더보기...</p>
+                          <h5 class="card-title"><%= cvoList.get(i).getTitle() %></h5>
+                          <h6 class="card-subtitle mb-2 text-muted"><%= cvoList.get(i).getWriter() %></h6>
+                          <p class="card-text"><%= cvoList.get(i).getContent() %></p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="card" onclick="" style="width: 18rem; float: none; margin:0 auto;">
-                        <img src="/hallo03talk/resources/img/search_1.jpg" class="card-img-top" alt="">
-                        <div class="card-body">
-                          <h5 class="card-title">글제목</h5>
-                          <h6 class="card-subtitle mb-2 text-muted">작성자</h6>
-                          <p class="card-text">어쩌구저쩌구 대충 내용이 들어간다는 소리......더보기...</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card" onclick="" style="width: 18rem; float: none; margin:0 auto;">
-                        <img src="/hallo03talk/resources/img/search_1.jpg" class="card-img-top" alt="">
-                        <div class="card-body">
-                          <h5 class="card-title">글제목</h5>
-                          <h6 class="card-subtitle mb-2 text-muted">작성자</h6>
-                          <p class="card-text">어쩌구저쩌구 대충 내용이 들어간다는 소리......더보기...</p>
-                        </div>
-                    </div>
-                </div>
+                <%} %>
+               
             </div>
             <br>
             <div style="text-align: right; margin-right: 60px;">
-                <a href="" onclick="" style="text-decoration: none; color: gray;">더보기...</a>
+                <a href="" onclick="" id="load" style="text-decoration: none; color: gray;">더보기...</a>
             </div>
             <br>
             <hr style="width: 90%; margin: 0 auto;">

@@ -8,9 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.h3.reportUser.controller.reportService;
+import com.h3.report.service.ReportService;
+import com.h3.reportBoard.vo.ReportBoardVo;
 
-
+@WebServlet (urlPatterns = "/reportBoard")
 public class ReportBoard extends HttpServlet{
 	
 	@Override
@@ -25,31 +26,24 @@ public class ReportBoard extends HttpServlet{
 		
 		req.setCharacterEncoding("UTF-8");
 		
-		String reBoardNo = req.getParameter("reBoardNo");
-		String reBoardGuil = req.getParameter("reBoardGuil");
-		String reBoardContent = req.getParameter("reBoardContent");
-		String reBoardPro = req.getParameter("reBoardPro");
-		String reBoardType = req.getParameter("reBoardType");
-		String reBoardContentNo = req.getParameter("reBoardContentNo");
+		String no = req.getParameter("no");
+		String guilty = req.getParameter("guilty");
+		String content = req.getParameter("content");
+		String process = req.getParameter("process");
+		String type = req.getParameter("type");
+		String boardNo = req.getParameter("boardNo");
 		
 		
 		//신고 타입 없을때에 방어
-		String guilty = "";
-		if(reBoardGuil != null) {
-			guilty = String.join(",", reBoardGuil);
+		String bguilty = "";
+		if(guilty != null) {
+			bguilty = String.join(",", guilty);
 		}
 		
-		//		ReportUserVo vo = new ReportUserVo(
-		//		reUserGuil,
-		//		reUserContent,
-		//		reUserPro,
-		//		reUserType,
-		//		reUserTravelerNo,
-		//		guilty
-		//		);  
+		ReportBoardVo vo = new ReportBoardVo();  
 		
 		//객체 이용해서 신고 진행
-		int result = new reportService().join(vo);
+		int result = new ReportService().bjoin(vo);
 		
 		//insert 결과를 가지고, 화면 선택
 		if(result == 1) {

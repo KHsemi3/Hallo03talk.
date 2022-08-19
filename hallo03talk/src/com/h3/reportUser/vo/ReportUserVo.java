@@ -8,111 +8,88 @@ public class ReportUserVo {
 		
 	}
 	
-	//신고 접수시 사용
-	public ReportUserVo(
-			String reUserGuil, 
-			String reUserContent, 
-			String reUserPro, 
-			String reUserType, 
-			String reUserTravelerNo) {
-		this.reUserGuil = reUserGuil;
-		this.reUserContent = reUserContent;
-		this.reUserPro = reUserPro;
-		this.reUserType = reUserType;
-		this.reUserTravelerNo = reUserTravelerNo;
-	}
 	
-	private int reUserNo;
-	private String reUserGuil;
-	private String reUserContent;
-	private String reUserPro;
-	private String reUserType;
-	private String reUserTravelerNo;
+	private int no;
+	private String guilty;
+	private String content;
+	private String process;
+	private String reportedTravelerNo;
 	
 	
-	public ReportUserVo(int reUserNo, String reUserGuil, String reUserContent, String reUserPro, String reUserType,
-			String reUserTravelerNo) {
+	public ReportUserVo(int no, String guilty, String content, String process, String reportedTravelerNo) {
 		super();
-		this.reUserNo = reUserNo;
-		this.reUserGuil = reUserGuil;
-		this.reUserContent = reUserContent;
-		this.reUserPro = reUserPro;
-		this.reUserType = reUserType;
-		this.reUserTravelerNo = reUserTravelerNo;
+		this.no = no;
+		this.guilty = guilty;
+		this.content = content;
+		this.process = process;
+		this.reportedTravelerNo = reportedTravelerNo;
 	}
 
 
-	public int getReUserNo() {
-		return reUserNo;
+	public int getNo() {
+		return no;
 	}
 
 
-	public void setReUserNo(int reUserNo) {
-		this.reUserNo = reUserNo;
+	public void setNo(int no) {
+		this.no = no;
 	}
 
 
-	public String getReUserGuil() {
-		return reUserGuil;
+	public String getGuilty() {
+		return guilty;
 	}
 
 
-	public void setReUserGuil(String reUserGuil) {
-		this.reUserGuil = reUserGuil;
+	public void setGuilty(String guilty) {
+		this.guilty = guilty;
 	}
 
 
-	public String getReUserContent() {
-		return reUserContent;
+	public String getContent() {
+		return content;
 	}
 
 
-	public void setReUserContent(String reUserContent) {
-		this.reUserContent = reUserContent;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 
-	public String getReUserPro() {
-		return reUserPro;
+	public String getProcess() {
+		return process;
 	}
 
 
-	public void setReUserPro(String reUserPro) {
-		this.reUserPro = reUserPro;
+	public void setProcess(String process) {
+		this.process = process;
 	}
 
 
-	public String getReUserType() {
-		return reUserType;
+	public String getReportedTravelerNo() {
+		return reportedTravelerNo;
 	}
 
 
-	public void setReUserType(String reUserType) {
-		this.reUserType = reUserType;
-	}
-
-
-	public String getReUserTravelerNo() {
-		return reUserTravelerNo;
-	}
-
-
-	public void setReUserTravelerNo(String reUserTravelerNo) {
-		this.reUserTravelerNo = reUserTravelerNo;
+	public void setReportedTravelerNo(String reportedTravelerNo) {
+		this.reportedTravelerNo = reportedTravelerNo;
 	}
 
 
 	@Override
 	public String toString() {
-		return "ReportUserVo [reUserNo=" + reUserNo + ", reUserGuil=" + reUserGuil + ", reUserContent=" + reUserContent
-				+ ", reUserPro=" + reUserPro + ", reUserType=" + reUserType + ", reUserTravelerNo=" + reUserTravelerNo
-				+ "]";
+		return "ReportUserVo [no=" + no + ", guilty=" + guilty + ", content=" + content + ", process=" + process
+				+ ", reportedTravelerNo=" + reportedTravelerNo + "]";
 	}
 	
 	
 	
 	
 	
+	
+	
+	
+
 	
 
 	
