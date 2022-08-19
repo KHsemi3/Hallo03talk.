@@ -1,5 +1,5 @@
 function goPopup() {
-  var pop = window.open("jusoPopup.jsp", "pop", "width=570,height=420, scrollbars=yes, resizable=yes");
+  var pop = window.open("/hallo03talk/views/place/jusoPopup.jsp", "pop", "width=570,height=420, scrollbars=yes, resizable=yes");
 }
 function jusoCallBack(
   roadFullAddr,

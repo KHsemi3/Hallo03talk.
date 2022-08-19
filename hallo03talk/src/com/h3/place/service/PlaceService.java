@@ -154,4 +154,58 @@ public class PlaceService {
 		return result;
 	}
 
+	public int placeUpdate(PlaceVo placeVo) {
+		
+		Connection conn = null;
+		int result = 0;
+		
+		try {
+			conn = getConnection();
+			
+			result = dao.placeUpdate(conn, placeVo);
+			
+			if (result == 1) {
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+			
+			return result;
+		} catch (Exception e) {
+			rollback(conn);
+			e.printStackTrace();
+		} finally {
+			close(conn);
+		}
+		
+		return result;
+	}
+
+	public int placeDel(String placeNo) {
+		
+		Connection conn = null;
+		int result = 0;
+		
+		try {
+			conn = getConnection();
+			
+			result = dao.placeDel(conn,placeNo);
+			
+			if (result == 1) {
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+			
+			return result;
+		} catch (Exception e) {
+			rollback(conn);
+			e.printStackTrace();
+		} finally {
+			close(conn);
+		}
+		
+		return result;
+	}
+
 }

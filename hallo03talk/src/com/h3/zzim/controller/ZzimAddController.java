@@ -15,19 +15,21 @@ import com.h3.zzim.service.ZzimService;
 @WebServlet("/zzim/add")
 public class ZzimAddController extends HttpServlet {
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
-		
-		TravelerVo tv = (TravelerVo) req.getSession().getAttribute("travelerLoginMember");
-		PlaceVo pv = (PlaceVo) req.getAttribute("placeVo");
-		
-		
-		System.out.println(pv.getNo());
-		
-		
-		int result = new ZzimService().zzimAdd(tv,pv);
-		
-		
-		
+		resp.setCharacterEncoding("UTF-8");
+
+		if (req.getSession().getAttribute("travelerLoginMember") == null) {
+			resp.getWriter().print(2);
+		} else {
+			TravelerVo tv = (TravelerVo) req.getSession().getAttribute("travelerLoginMember");
+			String no = (String) req.getParameter("place");
+			PlaceVo pv = new PlaceVo();
+			pv.setNo(no);
+
+			int result = new ZzimService().zzimAdd(tv, pv);
+			resp.getWriter().print(result);
+		}
+
 	}
 }

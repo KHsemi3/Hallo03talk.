@@ -87,58 +87,15 @@ String emdNo = request.getParameter("emdNo");
 					</div>
 				</div>
 			</div>
-
 			<div class="text-center">
-				<button class="btn btn-warning my-3" id="placeAddBtn">장소 등록</button>
+				<button class="btn btn-warning my-3">장소 등록</button>
 			</div>
+			<input type="hidden" value="${ BossLoginMember.no }" name="bossNo">
 		</form>
 	</main>
 
 	<footer></footer>
-
-	<div class="modal" id="addJuso">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<!-- Modal Header -->
-				<div class="modal-header">
-					<h4 class="modal-title">주소추가</h4>
-					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-				</div>
-
-				<!-- Modal body -->
-				<div class="modal-body">
-					<div class="d-flex row justify-content-center">
-						<!-- 문의 내용 -->
-						<div class="row text-center">
-							<div class="col h4">우편번호</div>
-						</div>
-						<div class="d-flex row justify-content-center">
-							<input type="hidden" id="confmKey" name="confmKey" value="" /> <input
-								type="text" id="zipNo" name="zipNo" readonly class="col" /> <input
-								type="button" value="주소검색" onclick="goPopup();" class="col" />
-						</div>
-						<div class="row text-center">
-							<div class="col h4">주소</div>
-						</div>
-						<div class="d-flex row justify-content-center">
-							<input type="text" id="roadAddrPart1" />
-						</div>
-					</div>
-					<div class="row">
-						<div class="col">
-							<button type="button" class="btn btn-primary my-1 w-100"
-								id="addJusoConfirm">확인</button>
-						</div>
-						<div class="col">
-							<button type="button" class="btn btn-danger my-1 w-100"
-								class="btn-close" data-bs-dismiss="modal">취소</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<c:if test="${empty BossLoginMember }">
+	<c:if test="${ empty BossLoginMember }">
 		<script>
 			alert('사장님만 등록가능합니다');
 			location.href = "/hallo03talk/place/list";

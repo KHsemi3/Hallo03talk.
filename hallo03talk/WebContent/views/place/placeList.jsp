@@ -3,12 +3,14 @@
 <%@page import="com.h3.place.vo.PlaceVo"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <meta charset="UTF-8" />
 <title>Insert title here</title>
 </head>
@@ -16,7 +18,7 @@
 	<%@ include file="/views/common/header.jsp"%>
 	<main>
 		<div id="container" class="container-xxl">
-			<h1 class="text-center py-lg-5" style="font-family:'Somi'">장소</h1>
+			<h1 class="text-center py-lg-5" style="font-family: 'Somi'">장소</h1>
 			<!-- 장소 카테고리들 -->
 			<div id="place-finder" class="fw-bolder text-center mt-5 mx-5">
 				<div class="row border border-4">
@@ -81,31 +83,33 @@
 											${ p.cnt }
 										</div>
 										<div class="d-flex col align-items-center">
-											<c:if test="${ travelerLoginMember != null }">
-												<svg style="color: rgb(253, 195, 86)"
+											<c:if test="${ p.zzim eq travelerLoginMember.no }">
+												<!-- 찜 하기 -->
+												<svg style="color: rgb(253, 195, 86); cursor: pointer;"
 													xmlns="http://www.w3.org/2000/svg" width="32" height="34"
 													fill="currentColor" class="bi bi-heart-fill zzimBtn"
-													viewBox="0 0 16 16">
-                            <path fill-rule="evenodd"
+													viewBox="0 0 16 16" onclick="delZzim(${p.no})">
+	                           									 <path fill-rule="evenodd"
 														d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
 														fill="#fdc356"></path>
-                          </svg>
-											</c:if>
-											<c:if test="${ travelerLoginMember == null }">
-												<svg style="color: #f3da35"
+	                          					</svg>
+                          					</c:if>
+                          					<c:if test="${ p.zzim ne travelerLoginMember.no }">
+												<svg style="color: #f3da35; cursor: pointer;"
 													xmlns="http://www.w3.org/2000/svg" width="32" height="32"
-													fill="currentColor" class="bi bi-heart zzimBtn" viewBox="0 0 16 16"
-													>
-                            <path
+													fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16"
+													onclick="addZzim(${p.no})">
+	                            					<path
 														d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"
 														fill="#f3da35"></path>
-                          </svg>
-											</c:if>
+	                         					</svg>
+                         					</c:if>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
+
 					</c:forEach>
 					<c:set var="x" value="${ fn:length(placeList)%3 }" />
 					<c:if test="${ x==2 }">
@@ -117,27 +121,47 @@
 	</main>
 	<footer></footer>
 	<script>
-		const zzimBtns = document.querySelectorAll(".zzimBtn");
-	</script>
-	<c:if test="${ travelerLoginMember == null }">
-		<script>
-        zzimBtns.forEach((item) => {
-          item.addEventListener("click", () => {
-            alert("로그인 후 이용 가능합니다.")
-          });
-        });
-      </script>
-	</c:if>
-	<c:if test="${ travelerLoginMember != null }">
-		
-		<script>
-			zzimBtns.forEach((item) => {
-			  item.addEventListener("click", () => {
-				location.href="/hallo03talk/zzim/add"
-			  });
+		function delZzim(x) {
+			$.ajax({
+				url : "/hallo03talk/zzim/del",
+				method : "POST",
+				data :  {
+					 place : x
+				},
+				success : function (item) {
+					refreshZzim();
+				},
+				error : function () {
+					alert('찜하기 실패');
+				}
 			});
-		  </script>
+		}
+	</script>
+	<c:if test="${!empty travelerLoginMember}">
+		<script>
+		function addZzim(x) {
+			
+			$.ajax({
+				url : "/hallo03talk/zzim/add",
+				method : "POST",
+				data :  {
+					 place : x
+				},
+				success : function (item) {
+					refreshZzim();
+				},
+				error : function () {
+					alert('찜하기 실패');
+				}
+			});
+		}
+	</script>
 	</c:if>
+	<script>
+		function refreshZzim() {
+			history.go(0);
+		}
+	</script>
 </body>
 <script src="/hallo03talk/resources/js/placeList.js"></script>
 </html>

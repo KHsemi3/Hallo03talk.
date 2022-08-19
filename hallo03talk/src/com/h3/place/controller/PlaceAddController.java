@@ -35,7 +35,7 @@ public class PlaceAddController extends HttpServlet{
 		String name = (String)req.getParameter("placeName");
 		String content = (String)req.getParameter("placeContent");
 		String address = (String)req.getParameter("placeAddr");
-		String bossNo = "1";
+		String bossNo = (String)req.getSession().getAttribute("bossNo");
 		String categoryNo = (String)req.getParameter("category_no");
 		
 		PlaceVo placeVo = new PlaceVo();

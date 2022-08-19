@@ -20,6 +20,8 @@ import com.h3.placeReview.vo.PlaceReviewVo;
 import com.h3.placeReviewPhoto.vo.PlaceReviewPhotoVo;
 import com.h3.placeReviewReply.service.PlaceReviewReplyService;
 import com.h3.placeReviewReply.vo.PlaceReviewReplyVo;
+import com.h3.zzim.service.ZzimService;
+import com.h3.zzim.vo.ZzimVo;
 
 @WebServlet("/place/one")
 public class PlaceOneController extends HttpServlet {
@@ -31,11 +33,18 @@ public class PlaceOneController extends HttpServlet {
 
 		PlaceVo pv = new PlaceService().placeOne(placeNo);
 		int result = new PlaceService().getCnt(placeNo);
+//		장소 사진 전부
 		ArrayList<PlacePhotoVo> photoList = new PlaceService().photoOne(placeNo);
+//		로그인한 사장님 정보
 		BossVo bv = new BossService().selectOneByNo(Integer.parseInt(pv.getBossNo()));
+//		후기 전부
 		List<PlaceReviewVo> prvList = new PlaceReviewService().getReview(placeNo);
+//		후기 사진 전부
 		List<PlaceReviewPhotoVo> prpvList = new PlaceReviewService().getPhoto(prvList);
+//		후기 댓글 전부
 		List<PlaceReviewReplyVo> prrvList = new PlaceReviewReplyService().getReview(prvList);
+//		찜 개수
+		int zzimCnt = new ZzimService().getCnt(placeNo);
 		
 		req.setAttribute("placeVo", pv);
 		req.setAttribute("photoList", photoList);
@@ -43,6 +52,7 @@ public class PlaceOneController extends HttpServlet {
 		req.setAttribute("reviewList", prvList);
 		req.setAttribute("reviewPhotoList", prpvList);
 		req.setAttribute("reviewReplyList", prrvList);
+		req.setAttribute("zzimCnt", zzimCnt);
 		
 		if (result==1 && pv != null && photoList != null) {
 			// 성공
