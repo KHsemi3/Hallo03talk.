@@ -6,9 +6,13 @@ import static com.h3.common.JDBCTemplate.getConnection;
 import static com.h3.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import com.h3.boss.repository.BossDao;
+import com.h3.boss.vo.BossMyPageVo;
 import com.h3.boss.vo.BossVo;
+import com.h3.community.vo.CommReplyVo;
+import com.h3.placeReview.vo.PlaceReviewVo;
 import com.h3.traveler.repository.TravelerDao;
 import com.h3.traveler.vo.TravelerVo;
 
@@ -228,6 +232,62 @@ public class BossService {
 	
 	
 	}
+
+	/*
+	 * boss - 내가 쓴 글 조회
+	 */
+	public ArrayList<BossMyPageVo> selectList(int no) {
+
+	
+		Connection conn = null;
+		ArrayList<BossMyPageVo> voList = null;
+		
+		try {
+			conn = getConnection();
+			
+			// dao 호출
+			voList = dao.selectList(conn, no);
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		
+		return voList;
+
+	
+	}//selectList
+
+
+	
+	/*
+	 * boss - 내가 쓴 댓글 조회 - 커뮤니티 댓글
+	 */
+	public ArrayList<PlaceReviewVo> selectReplyList(int no) {
+
+		Connection conn = null;
+		ArrayList<PlaceReviewVo> voList = null;
+		
+		try {
+			
+			conn = getConnection();
+			
+			// dao 호출
+			voList = dao.selectReplyList(conn, no);
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		
+		// 실행결과 리턴
+		return voList;
+		
+		
+	}//selectReplyList
 
 	
 }//class

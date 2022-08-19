@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+   <!-- CDN으로 추가하는 방법 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <style>
  
 	/* ---------로그인------------------------------- */
@@ -130,7 +132,7 @@
 	                <div class="login-page">
 	                    <div class="form">
                            <form action="/hallo03talk/traveler/login" method="post" class="login-form">
-	                                <input type="text"  name="travelerJoinId" placeholder="아이디" />
+	                                <input type="text"  name="travelerJoinId" class="input_id" placeholder="아이디" />
 	                                <input type="password" name="travelerJoinPwd" placeholder="비밀번호" />
 	                                <button>로그인</button>
 	        
@@ -149,7 +151,7 @@
 	                <div class="login-page">
 	                    <div class="form">
                            <form action="/hallo03talk/boss/login" method="post" class="login-form">
-	                                <input type="text" name="bossJoinId" placeholder="아이디" />
+	                                <input type="text" name="bossJoinId"  class="input_id" placeholder="아이디" />
 	                                <input type="password" name="bossJoinPwd" placeholder="비밀번호" />
 	                                <button>로그인</button>
 	        
@@ -218,8 +220,7 @@
      </div>
     </form>
    
-   
-    <!-- --모달창_일반회원_비밀번호 찾기----------------- -->
+	<!-- --모달창_일반회원_비밀번호 찾기----------------- -->
         
       <!-- Modal -->
       <div class="modal fade" id="travelerFindPwd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -10,7 +10,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import com.h3.community.vo.CommReplyVo;
-import com.h3.traveler.vo.MyPageVo;
+import com.h3.traveler.vo.TravelerMyPageVo;
 import com.h3.traveler.vo.TravelerVo;
 
 import java.sql.Connection;
@@ -268,20 +268,20 @@ public class TravelerDao {
 	/*
 	 * traveler - 내가 쓴 글 조회
 	 */
-	public ArrayList<MyPageVo> selectList(Connection conn, int userNo) {
+	public ArrayList<TravelerMyPageVo> selectList(Connection conn, int userNo) {
 
-		String sql = "(select t.no as writer, c.no, c.title, c.content, c.enroll_date as enrollDate, '커뮤니티' as board "
-				+ "	from traveler t "
-				+ "	left join community c on t.no = c.writer where t.no = ? and c.status = 'Y') " + "	union "
-				+ "	(select w.traveler_no as writer, w.no, w.title, w.content, w.enroll_date as enrollDate, '동행자 게시판' as board "
-				+ "	from with_ w where w.traveler_no = ? and w.status = 'Y') " + "	union "
-				+ "	(select r.traveler_no as writer, r.no, r.title, r.content, r.enroll_date as enrollDate, '장소 리뷰' as board "
-				+ "	from place_review r where r.traveler_no = ? and r.status = 'Y') " + "	order by enrollDate desc"; // 진행
-																														// 중
-
+		String sql = "(SELECT T.NO AS WRITER, C.NO, C.TITLE, C.CONTENT, TO_CHAR(C.ENROLL_DATE, 'YY/MM/DD HH:MI') AS ENROLLDATE, '커뮤니티' AS BOARD "
+				+ "	FROM TRAVELER T "
+				+ "	LEFT JOIN COMMUNITY C ON T.NO = C.WRITER WHERE T.NO = ? AND C.STATUS = 'Y') " + "	UNION "
+				+ "	(SELECT W.TRAVELER_NO AS WRITER, W.NO, W.TITLE, W.CONTENT, TO_CHAR(W.ENROLL_DATE, 'YY/MM/DD HH:MI') AS ENROLLDATE, '동행자 게시판' AS BOARD "
+				+ "	FROM WITH_ W WHERE W.TRAVELER_NO = ? AND W.STATUS = 'Y') " + "	UNION "
+				+ "	(SELECT R.TRAVELER_NO AS WRITER, R.NO, R.TITLE, R.CONTENT, TO_CHAR(R.ENROLL_DATE, 'YY/MM/DD HH:MI') AS ENROLLDATE, '장소 리뷰' AS BOARD "
+				+ "	FROM PLACE_REVIEW R WHERE R.TRAVELER_NO = ? AND R.STATUS = 'Y') " + "	ORDER BY ENROLLDATE DESC"; 
+																														
+		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		ArrayList<MyPageVo> list = new ArrayList<MyPageVo>();
+		ArrayList<TravelerMyPageVo> list = new ArrayList<TravelerMyPageVo>();
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -301,7 +301,7 @@ public class TravelerDao {
 				String writer = rs.getString("writer");
 				String board = rs.getString("board");
 
-				MyPageVo vo = new MyPageVo();
+				TravelerMyPageVo vo = new TravelerMyPageVo();
 				vo.setNo(no);
 				vo.setTitle(title);
 				vo.setContent(content);
@@ -326,16 +326,18 @@ public class TravelerDao {
 	/*
 	 * traveler - 내가 쓴 댓글 조회 - 커뮤니티 댓글
 	 */
-	public ArrayList<CommReplyVo> selectReplyList(Connection conn) {
+	public ArrayList<CommReplyVo> selectReplyList(Connection conn, int userNo) {
 
 		// SQL 준비
-		String sql = "SELECT R.NO , R.CONTENT , TO_CHAR(R.ENROLL_DATE, 'YY/MM/DD HH:MI') AS ENROLL_DATE , T.NAME AS WRITER FROM REPLY R JOIN TRAVELER T ON R.TRAVELER_NO = T.NO ORDER BY NO DESC";
+		String sql ="SELECT R.NO , R.CONTENT , TO_CHAR(R.ENROLL_DATE, 'YY/MM/DD HH:MI') AS ENROLL_DATE FROM REPLY R JOIN TRAVELER T ON R.TRAVELER_NO = T.NO WHERE R.TRAVELER_NO = ? ORDER BY ENROLL_DATE DESC";
+		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<CommReplyVo> list = new ArrayList<CommReplyVo>();
 
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userNo);
 
 			// SQL 실행
 			rs = pstmt.executeQuery();
@@ -345,13 +347,11 @@ public class TravelerDao {
 				String content = rs.getString("CONTENT");
 				String enrollDate = rs.getString("ENROLL_DATE");
 
-				// String travelerNo = rs.getString("TRAVELER_NO");
 
 				CommReplyVo vo = new CommReplyVo();
 				vo.setNo(no);
 				vo.setContent(content);
 				vo.setEnrollDate(enrollDate);
-				// vo.setTravelerNo(travelerNo);
 
 				list.add(vo);
 			}
@@ -367,6 +367,11 @@ public class TravelerDao {
 
 	}
 
+	
+
+	/*
+	 * traveler - 내가 쓴 글 삭제
+	 */
 	public void deletePost(Connection conn, String no, String board) {
 		// SQL 준비
 		String sql = "delete from " + board+ " where no = ?";
@@ -410,4 +415,42 @@ public class TravelerDao {
 		}
 	}
 
+	
+	
+	/*
+	 * traveler - 아이디 중복 체크
+	 */
+	public int idCheck(Connection conn, String userId) {
+
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int idCheck = 0;
+		
+		String sql = "SELECT * FROM TRAVELER WHERE ID= ? ";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				idCheck = 1;      // 이미 존재하는 경우, 생성 불가
+			}else {
+				idCheck = 0;	 // 존재하지 않는 경우, 생성 가능
+			}
+
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return idCheck;
+		
+	}//deletePost
+
 }// class
+
+

@@ -1,16 +1,16 @@
 package com.h3.traveler.vo;
 
-public class MyPageVo {
+public class TravelerMyPageVo {
 
 	// traveler - 마이페이지  
 	
 	// 기본생성자
-	public MyPageVo() {
+	public TravelerMyPageVo() {
 		
 	}
 	
 	// 매개변수 있는 생성자
-	public MyPageVo(String no, String title, String content, String writer, String enrollDate,  String board) {
+	public TravelerMyPageVo(String no, String title, String content, String writer, String enrollDate,  String board) {
 		//super();
 		this.no = no;
 		this.title = title;
@@ -28,6 +28,7 @@ public class MyPageVo {
 		private String enrollDate;
 		private String status;
 		private String board;
+		
 		
 		public String getNo() {
 			return no;

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import com.h3.community.vo.CommReplyVo;
 import com.h3.traveler.repository.TravelerDao;
-import com.h3.traveler.vo.MyPageVo;
+import com.h3.traveler.vo.TravelerMyPageVo;
 import com.h3.traveler.vo.TravelerVo;
 import static com.h3.common.JDBCTemplate.commit;
 import static com.h3.common.JDBCTemplate.getConnection;
@@ -250,14 +250,13 @@ public class TravelerService {
 	/*
 	 * traveler - 내가 쓴 글 조회
 	 */
-	public ArrayList<MyPageVo> selectList(int no) {
+	public ArrayList<TravelerMyPageVo> selectList(int no) {
 
 	
 		Connection conn = null;
-		ArrayList<MyPageVo> voList = null;
+		ArrayList<TravelerMyPageVo> voList = null;
 		
 		try {
-			
 			
 			conn = getConnection();
 			
@@ -283,7 +282,7 @@ public class TravelerService {
 	/*
 	 * traveler - 내가 쓴 댓글 조회 - 커뮤니티 댓글
 	 */
-	public ArrayList<CommReplyVo> selectReplyList() {
+	public ArrayList<CommReplyVo> selectReplyList(int no) {
 
 		Connection conn = null;
 		ArrayList<CommReplyVo> voList = null;
@@ -293,7 +292,7 @@ public class TravelerService {
 			conn = getConnection();
 			
 			// dao 호출
-			voList = dao.selectReplyList(conn);
+			voList = dao.selectReplyList(conn, no);
 			
 			
 		}catch(Exception e) {
@@ -309,6 +308,9 @@ public class TravelerService {
 	}
 
 
+	/*
+	 * traveler - 내가 쓴 글 삭제
+	 */
 	public void deletePost(String no, String board) {
 		Connection conn = null;
 		try {
@@ -323,6 +325,38 @@ public class TravelerService {
 			close(conn);
 		}
 	}
+
+
+	/*
+	 * traveler - 아이디 중복 체크
+	 */
+	public int idCheck(String userId) {
+		
+		int idCheck = 0;
+		
+		Connection conn = null;
+		try {
+			
+			conn = getConnection();
+			
+			idCheck = dao.idCheck(conn, userId);
+			
+			if(idCheck == 1) {
+				System.out.println("이미 존재하는 아이디입니다.");
+			}else {
+				System.out.println("사용 가능한 아이디입니다.");
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		
+		return idCheck;
+		
+		
+	}//idCheck
 
 
 

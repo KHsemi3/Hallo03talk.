@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.tomcat.util.json.JSONParser;
 
 import com.h3.traveler.service.TravelerService;
-import com.h3.traveler.vo.MyPageVo;
+import com.h3.traveler.vo.TravelerMyPageVo;
 import com.h3.traveler.vo.TravelerVo;
 
 @WebServlet(urlPatterns = "/travelerMpgPost/delete")

@@ -1,5 +1,14 @@
+<%@page import="com.h3.placeReview.vo.PlaceReviewVo"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+        
+<%
+        ArrayList<PlaceReviewVo> voList = (ArrayList<PlaceReviewVo>)request.getAttribute("voList");
+%>
+         
+         
 <!DOCTYPE html>
 <html>
 <head>
@@ -87,37 +96,31 @@
                 <button class="deleteButton" style="margin-left: 10px;">삭제</button> 
               </div>
 
-              <!-- ------내가 쓴 댓글-------------------------------------------------------- -->
+              <!-- ------내가 쓴 답글-------------------------------------------------------- -->
                 
             <table class="table table-hover" id="reviewTable">
                 <thead>
                   <tr>
                     <th scope="col" style="width: 5%;"></th>        
                     <th scope="col" style="width: 5%;">#</th>
-                    <th scope="col" class="text-center" style="width: 80%;">댓글</th>
-                    <th scope="col" class="text-center" style="width: 10%;">작성일</th>
+                    <th scope="col" class="text-center" style="width: 70%;">답글</th>
+                    <th scope="col" class="text-center" style="width: 20%;">작성일</th>
                   </tr>
                 </thead>
 
-<!-- ---------------여기서부터는 noticeList처럼 백엔드 코드로 작성해야 함----------------------------------------------- -->
-                <tbody>
-                  <tr>
-                    <th scope="row">
-                      <input type="checkbox">
-                    </th>
-                    <th scope="row">1</th>
-                    <td>사장님댓글!</td>
-                    <td class="text-center">22.08.07</td>
-                  </tr>     
+<!-- -------------------------------------------------------------- -->
 
+                <tbody>
+              		<%for(int i=0; i < voList.size(); i++){ %>  
                   <tr>
                     <th scope="row">
                       <input type="checkbox">
                     </th>
-                    <th scope="row">2</th>
-                    <td>사장!</td>
-                    <td class="text-center">22.01.07</td>
-                  </tr>          
+                    <th scope="row"><%=voList.get(i).getNo() %></th>
+                    <td><%=voList.get(i).getContent() %></td>
+                    <td class="text-center"><%=voList.get(i).getEnrollDate() %></td>
+                  </tr>     
+                   <%}%>
                 </tbody>
 <!-- -------------------------------------------------------------- -->
               </table>

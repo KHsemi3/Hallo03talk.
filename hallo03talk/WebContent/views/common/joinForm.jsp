@@ -97,14 +97,14 @@
         #register {
             left: 450px;
         } 
-        #doubleCheck{
+        #travelerIdCheck, #bossIdCheck{
             border: 0;
             border-radius: 6px;
             width: 80px;
             background-color: rgb(233, 187, 100);
             color: white;
         }
-        #doubleCheck:hover, .join:hover{
+        #travelerIdCheck:hover, #bossIdCheck:hover, .join:hover{
           background-color: skyblue;
         }
         
@@ -145,8 +145,8 @@
 			                        <div class="ggg">
 			                            <table>
 			                                <tr>
-			                                    <td><input type="text" name="travelerJoinId" class="input-field" placeholder="아이디" required></td>
-			                                    <td style="padding-left: 30px;"><button id="doubleCheck">중복확인</button></td>
+			                                    <td><input type="text" id="userId" name="travelerJoinId" class="input-field" placeholder="아이디" required></td>
+			                                    <td style="padding-left: 30px;"><button id="travelerIdCheck">중복확인</button></td>
 			                                </tr>
 			                            </table>
 			                          
@@ -157,7 +157,7 @@
 			                            <table>
 			                                <tr>
 			                                    <td><input type="text" name="travelerJoinNick" class="input-field" placeholder="닉네임"></td>
-			                                    <td style="padding-left: 30px;"><button id="doubleCheck">중복확인</button></td>
+			                                    <td style="padding-left: 30px;"><button id="bossIdCheck">중복확인</button></td>
 			                                </tr>
 			                            </table>
 			                           
@@ -183,7 +183,45 @@
 			                    </div>
 							</form>
 			
-			                     <!-- ---------------사장님 ---------------------- -->
+							<!-- ------일반회원_아이디 중복체크-------------------------------------- -->
+							
+							<script>
+							
+								$("#travelerIdCheck").click(function(e){
+									
+									
+									var userId  = $('#userId').val();
+									
+							        var url = "${pageContext.request.contextPath}/traveler/idCheck"
+
+					
+									$.ajax({
+										url  : url,
+										method : "post",
+							        	data : { userId : userId },
+							            
+							            success : function(data){
+							            	if(data == 1){
+								               alert("사용할 수 있는 아이디 입니다.");
+							            	}else{
+					  			              alert("이미 존재하는 아이디 입니다.");
+							            	}
+							            },
+							            error : function(e){
+							            	alert('서버요청 실패!');
+							            }
+							            
+									})
+									
+									
+								})
+								
+							
+							</script>
+							
+							<!-- --------------------------------------------- -->
+			              
+			               <!-- ---------------사장님 ---------------------- -->
 			             <form action="/hallo03talk/boss/join" method="post">   
 			                     
 			                <div id="register" action="" class="input-group">
@@ -191,7 +229,7 @@
 			                        <table>
 			                            <tr>
 			                                <td><input type="text" name="bossJoinId" class="input-field" placeholder="아이디" required></td>
-			                                <td style="padding-left: 30px;"><button id="doubleCheck">중복확인</button></td>
+			                                <td style="padding-left: 30px;"><button id="bossIdCheck">중복확인</button></td>
 			                            </tr>
 			                        </table>
 			                      
