@@ -451,6 +451,61 @@ public class TravelerDao {
 		
 	}//deletePost
 
+	
+	
+
+	/*
+	 * traveler - 아이디 찾기
+	 */
+	public TravelerVo idFind(Connection conn, TravelerVo vo) {
+
+
+		PreparedStatement pstmt = null;
+		TravelerVo idFind = null;
+		ResultSet rs = null;
+
+	    String sql ="SELECT ID FROM TRAVELER WHERE PHONE = ? AND EMAIL = ? AND STATUS ='Y'";
+		//String sql ="SELECT ID FROM TRAVELER";
+	    try {
+	    	
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getPhone());
+			pstmt.setString(2, vo.getEmail());
+			
+			System.out.println("====================");
+			System.out.println(vo.getPhone());
+			System.out.println(vo.getEmail());
+			
+			rs = pstmt.executeQuery();
+			
+			System.out.println(pstmt.toString());
+			if(rs.next()) {
+				System.out.println("rs 통과 ");//swy
+				String travelerId = rs.getString("ID");
+				
+				idFind = new TravelerVo();
+				idFind.setId(travelerId);
+			}
+			
+	    }catch(Exception e) {
+	    	e.printStackTrace();
+	    	close(pstmt);
+	    }finally {
+	    	close(conn);
+			close(rs);
+
+	    }
+	    
+	    System.out.println("dao ::: " + idFind);
+	    
+	    return idFind;
+	
+	
+	
+	}//idFind
+	
+	
+
 }// class
 
 

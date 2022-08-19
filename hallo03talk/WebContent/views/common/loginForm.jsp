@@ -196,7 +196,7 @@
            <div class="modal-body">
              <!-- ----- -->
              <div id="pwdFormOuter">
-   				<form action="/semiPracticeSiyeong/traveler/idFind" method="post"> 
+   				<form action="/hallo03talk/traveler/idFind" method="post"> 
                  <div class="form-floating mb-3">
                    <input type="tel" name="travelerJoinPhone" class="form-control" id="floatingInput" placeholder="name@example.com">
                    <label for="floatingInput">전화번호</label>

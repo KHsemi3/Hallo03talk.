@@ -340,6 +340,7 @@ public class TravelerService {
 			conn = getConnection();
 			
 			idCheck = dao.idCheck(conn, userId);
+			//System.out.println("sss : " + idCheck);//swy
 			
 			if(idCheck == 1) {
 				System.out.println("이미 존재하는 아이디입니다.");
@@ -357,6 +358,38 @@ public class TravelerService {
 		
 		
 	}//idCheck
+
+
+	
+	/*
+	 * traveler - 아이디 찾기
+	 */
+	public TravelerVo idFind(TravelerVo vo) {
+
+		Connection conn = null;
+		TravelerVo idFind = null;
+		
+		try {
+			
+			conn = getConnection();
+			
+			// dao 호출
+			idFind = new TravelerDao().idFind(conn, vo);
+			
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			rollback(conn);
+		}finally {
+			close(conn);
+		}
+
+		System.out.println("service ::: " + idFind);
+		return idFind;
+		
+	
+	}//idFind
 
 
 
