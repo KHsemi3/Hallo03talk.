@@ -8,11 +8,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet (urlPatterns = "/searchPlace")
-public class SearchPlaceController extends HttpServlet {
+@WebServlet (urlPatterns = "/searchDetail")
+public class SearchController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		
 		//list?f=title&q=a >>이런 형식으로 받아오는
 		String field_ = req.getParameter("f");
@@ -30,4 +31,7 @@ public class SearchPlaceController extends HttpServlet {
 		}
 	}
 
+	
 }
+
+

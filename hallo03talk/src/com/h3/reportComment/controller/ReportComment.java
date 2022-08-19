@@ -49,6 +49,7 @@ public class ReportComment extends HttpServlet{
 		if(result == 1) {
 			//신고 성공
 			// + 메세지 담기 //alert 창으로 
+			req.getSession().setAttribute("alertMsg", "신고가 완료되었습니다!");
 			resp.sendRedirect("/hallo03talk");
 		}else {
 			//신고 실패 //이전 페이지로 옮기기
