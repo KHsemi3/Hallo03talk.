@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.h3.admin.service.AdminReportService;
 import com.h3.reportUser.vo.ReportUserVo;
-@WebServlet(urlPatterns = "")
+@WebServlet(urlPatterns = "/admin/reportUser")
 public class AdminReportUserController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
