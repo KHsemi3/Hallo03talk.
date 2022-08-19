@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-//import com.h3.party.service.PartyService;
+import com.h3.party.service.PartyService;
 
 
 @WebServlet(urlPatterns="/party/list")
@@ -27,7 +27,10 @@ public class PartyListController extends HttpServlet {
 		int startPage;
 		int endPage;
 		
-		//listCount = new PartyService().getCount();
+		listCount = new PartyService().getCount();
+		
+		//테스트
+		System.out.println(listCount);
 		
 		//이벤트 게시판 목록
 		req.getRequestDispatcher("/views/party/list.jsp").forward(req,resp);
