@@ -22,7 +22,7 @@
                 <h1 style="margin-left: 60px;"><b>검색</b></h1>
             </div>
             <br><br><br>
-            <input type="searchbox" value="" style="width: 90%; height: 50px; border-radius: 10px; border: 1px solid gray; margin-left: 5%;" placeholder="  검색어를 입력하세요.">
+            <input type="searchbox" name="q" value="${param.q}" style="width: 90%; height: 50px; border-radius: 10px; border: 1px solid gray; margin-left: 5%;" placeholder="  검색어를 입력하세요.">
             <br><br>
     
     
@@ -47,32 +47,32 @@
                             <div id="place-finder" class="fw-bolder text-center mt-5">
                             <div class="row border border-4" style="width: 90%; margin: 0 auto;">
                                 <div class="row">
-                                <div class="col-2 in-place border-end border-3 " id="hotel" >숙소</div>
-                                <div class="col-2 border-end border-3" id="jeju">제주</div>
+                                <div class="col-2 in-place border-end border-3 " id="hotel" value = "hotel">숙소</div>
+                                <div class="col-2 border-end border-3" value ="jeju">제주</div>
                                 <!-- 제주시 -->
-                                <div class="col in-jeju">시내</div>
-                                <div class="col in-jeju">애월</div>
-                                <div class="col in-jeju">한림</div>
+                                <div class="col in-jeju" value = "sine">시내</div>
+                                <div class="col in-jeju" value = "aewol">애월</div>
+                                <div class="col in-jeju" value = "hanrim">한림</div>
 
                                 <!-- 서귀포 -->
-                                <div class="col in-seogwipo d-none">시내</div>
-                                <div class="col in-seogwipo d-none">남원</div>
-                                <div class="col in-seogwipo d-none">안덕</div>
+                                <div class="col in-seogwipo d-none" value = "sine">시내</div>
+                                <div class="col in-seogwipo d-none" value = "namwon">남원</div>
+                                <div class="col in-seogwipo d-none" value = "andock">안덕</div>
                                 </div>
                                 <div class="row">
-                                <div class="col-2 in-place border-end border-3" id="food">맛집</div>
-                                <div class="col-2 border-end border-3" id="seogwipo">서귀포</div>
+                                <div class="col-2 in-place border-end border-3" id="food" value = "foods">맛집</div>
+                                <div class="col-2 border-end border-3" id="seogwipo" value = "seoguipo">서귀포</div>
                                 <!-- 제주시 -->
-                                <div class="col in-jeju">한경</div>
-                                <div class="col in-jeju">조천</div>
-                                <div class="col in-jeju">구좌</div>
+                                <div class="col in-jeju" value = "hangeong">한경</div>
+                                <div class="col in-jeju" value = "jocheon">조천</div>
+                                <div class="col in-jeju" value = "gujwa">구좌</div>
                                 <!-- 서귀포 -->
-                                <div class="col in-seogwipo d-none">대정</div>
-                                <div class="col in-seogwipo d-none">표선</div>
-                                <div class="col in-seogwipo d-none">성산</div>
+                                <div class="col in-seogwipo d-none" value = "daejung">대정</div>
+                                <div class="col in-seogwipo d-none" value = "pyoseon">표선</div>
+                                <div class="col in-seogwipo d-none" value = "sungsan">성산</div>
                                 </div>
                                 <div class="row">
-                                <div class="col-2 border-end border-3" id="cafe">카페</div>
+                                <div class="col-2 border-end border-3" id="cafe" value = "cafe">카페</div>
                                 <div class="col-2 border-end border-3"></div>
                                 </div>
                             </div>
@@ -293,7 +293,7 @@
                 </div>
     
           <br>
-          <button type="button" class="btn btn-warning" style="float:right; margin-right: 60px;">검색</button>
+          <button href="/hallo06talk/search/searchDetail.jsp" type="submit" value="검색" class="btn btn-warning" style="float:right; margin-right: 60px;">검색</button>
     
         </body>
     

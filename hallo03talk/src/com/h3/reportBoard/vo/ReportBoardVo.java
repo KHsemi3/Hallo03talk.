@@ -2,94 +2,101 @@ package com.h3.reportBoard.vo;
 
 public class ReportBoardVo {
 	
-	private int reBoardNo;
-	private String reBoardGuil;
-	private String reBoardContent;
-	private String reBoardPro;
-	private String reBoardType;
-	private String reBoardContentNo;
+	public ReportBoardVo() {
+		
+	}
+	
+	private int no;
+	private String guilty;
+	private String content;
+	private String process;
+	private String type;
+	private String boardNo;
 	
 	
-	public ReportBoardVo(int reBoardNo, String reBoardGuil, String reBoardContent, String reBoardPro,
-			String reBoardType, String reBoardContentNo) {
+	public ReportBoardVo(int no, String guilty, String content, String process, String type, String boardNo) {
 		super();
-		this.reBoardNo = reBoardNo;
-		this.reBoardGuil = reBoardGuil;
-		this.reBoardContent = reBoardContent;
-		this.reBoardPro = reBoardPro;
-		this.reBoardType = reBoardType;
-		this.reBoardContentNo = reBoardContentNo;
+		this.no = no;
+		this.guilty = guilty;
+		this.content = content;
+		this.process = process;
+		this.type = type;
+		this.boardNo = boardNo;
 	}
 
 
-	public int getReBoardNo() {
-		return reBoardNo;
+	public int getNo() {
+		return no;
 	}
 
 
-	public void setReBoardNo(int reBoardNo) {
-		this.reBoardNo = reBoardNo;
+	public void setNo(int no) {
+		this.no = no;
 	}
 
 
-	public String getReBoardGuil() {
-		return reBoardGuil;
+	public String getGuilty() {
+		return guilty;
 	}
 
 
-	public void setReBoardGuil(String reBoardGuil) {
-		this.reBoardGuil = reBoardGuil;
+	public void setGuilty(String guilty) {
+		this.guilty = guilty;
 	}
 
 
-	public String getReBoardContent() {
-		return reBoardContent;
+	public String getContent() {
+		return content;
 	}
 
 
-	public void setReBoardContent(String reBoardContent) {
-		this.reBoardContent = reBoardContent;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 
-	public String getReBoardPro() {
-		return reBoardPro;
+	public String getProcess() {
+		return process;
 	}
 
 
-	public void setReBoardPro(String reBoardPro) {
-		this.reBoardPro = reBoardPro;
+	public void setProcess(String process) {
+		this.process = process;
 	}
 
 
-	public String getReBoardType() {
-		return reBoardType;
+	public String getType() {
+		return type;
 	}
 
 
-	public void setReBoardType(String reBoardType) {
-		this.reBoardType = reBoardType;
+	public void setType(String type) {
+		this.type = type;
 	}
 
 
-	public String getReBoardContentNo() {
-		return reBoardContentNo;
+	public String getBoardNo() {
+		return boardNo;
 	}
 
 
-	public void setReBoardContentNo(String reBoardContentNo) {
-		this.reBoardContentNo = reBoardContentNo;
+	public void setBoardNo(String boardNo) {
+		this.boardNo = boardNo;
 	}
 
 
 	@Override
 	public String toString() {
-		return "ReportBoardVo [reBoardNo=" + reBoardNo + ", reBoardGuil=" + reBoardGuil + ", reBoardContent="
-				+ reBoardContent + ", reBoardPro=" + reBoardPro + ", reBoardType=" + reBoardType + ", reBoardContentNo="
-				+ reBoardContentNo + "]";
+		return "ReportBoardVo [no=" + no + ", guilty=" + guilty + ", content=" + content + ", process=" + process
+				+ ", type=" + type + ", boardNo=" + boardNo + "]";
 	}
 	
 	
+	
+	
+	
+	
+
 	
 	
 

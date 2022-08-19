@@ -8,9 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.h3.report.service.ReportService;
 import com.h3.reportUser.vo.ReportUserVo;
 
-
+@WebServlet (urlPatterns = "/reportUser")
 public class ReportUser extends HttpServlet{
 	
 	@Override
@@ -25,31 +26,23 @@ public class ReportUser extends HttpServlet{
 		
 		req.setCharacterEncoding("UTF-8");
 		
-		String reUserNo = req.getParameter("reUserNo");
-		String reUserGuil = req.getParameter("reUserGuil");
-		String reUserContent = req.getParameter("reUserContent");
-		String reUserPro = req.getParameter("reUserPro");
-		String reUserType = req.getParameter("reUserType");
-		String reUserTravelerNo = req.getParameter("reUserTravelerNo");
+		String no = req.getParameter("no");
+		String guilty = req.getParameter("guilty");
+		String content = req.getParameter("content");
+		String process = req.getParameter("process");
+		String reportedTravelerNo = req.getParameter("reportedTravelerNo");
 		
 		
 		//신고 타입 없을때에 방어
-		String guilty = "";
-		if(reUserGuil != null) {
-			guilty = String.join(",", reUserGuil);
+		String tguilty = "";
+		if(guilty != null) {
+			tguilty = String.join(",", guilty);
 		}
 		
-//		ReportUserVo vo = new ReportUserVo(
-//				reUserGuil,
-//				reUserContent,
-//				reUserPro,
-//				reUserType,
-//				reUserTravelerNo,
-//				guilty
-//				);  
+		ReportUserVo vo = new ReportUserVo();  
 		
 		//객체 이용해서 신고 진행
-		int result = new reportService().join(vo);
+		int result = new ReportService().ujoin(vo);
 		
 		//insert 결과를 가지고, 화면 선택
 		if(result == 1) {

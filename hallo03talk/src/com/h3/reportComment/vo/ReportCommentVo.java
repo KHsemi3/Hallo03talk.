@@ -2,95 +2,99 @@ package com.h3.reportComment.vo;
 
 public class ReportCommentVo {
 	
-	private int reCommNo;
-	private String reCommGuil;
-	private String reCommContent;
-	private String reCommPro;
-	private String reCommType;
-	private String reCommContentNo;
+	public ReportCommentVo() {
+		
+	}
+	
+	private int no;
+	private String guilty;
+	private String content;
+	private String process;
+	private String type;
+	private String replyNo;
 	
 	
-	public ReportCommentVo(int reCommNo, String reCommGuil, String reCommContent, String reCommPro, String reCommType,
-			String reCommContentNo) {
+	public ReportCommentVo(int no, String guilty, String content, String process, String type, String replyNo) {
 		super();
-		this.reCommNo = reCommNo;
-		this.reCommGuil = reCommGuil;
-		this.reCommContent = reCommContent;
-		this.reCommPro = reCommPro;
-		this.reCommType = reCommType;
-		this.reCommContentNo = reCommContentNo;
+		this.no = no;
+		this.guilty = guilty;
+		this.content = content;
+		this.process = process;
+		this.type = type;
+		this.replyNo = replyNo;
 	}
 
 
-	public int getReCommNo() {
-		return reCommNo;
+	public int getNo() {
+		return no;
 	}
 
 
-	public void setReCommNo(int reCommNo) {
-		this.reCommNo = reCommNo;
+	public void setNo(int no) {
+		this.no = no;
 	}
 
 
-	public String getReCommGuil() {
-		return reCommGuil;
+	public String getGuilty() {
+		return guilty;
 	}
 
 
-	public void setReCommGuil(String reCommGuil) {
-		this.reCommGuil = reCommGuil;
+	public void setGuilty(String guilty) {
+		this.guilty = guilty;
 	}
 
 
-	public String getReCommContent() {
-		return reCommContent;
+	public String getContent() {
+		return content;
 	}
 
 
-	public void setReCommContent(String reCommContent) {
-		this.reCommContent = reCommContent;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 
-	public String getReCommPro() {
-		return reCommPro;
+	public String getProcess() {
+		return process;
 	}
 
 
-	public void setReCommPro(String reCommPro) {
-		this.reCommPro = reCommPro;
+	public void setProcess(String process) {
+		this.process = process;
 	}
 
 
-	public String getReCommType() {
-		return reCommType;
+	public String getType() {
+		return type;
 	}
 
 
-	public void setReCommType(String reCommType) {
-		this.reCommType = reCommType;
+	public void setType(String type) {
+		this.type = type;
 	}
 
 
-	public String getReCommContentNo() {
-		return reCommContentNo;
+	public String getReplyNo() {
+		return replyNo;
 	}
 
 
-	public void setReCommContentNo(String reCommContentNo) {
-		this.reCommContentNo = reCommContentNo;
+	public void setReplyNo(String replyNo) {
+		this.replyNo = replyNo;
 	}
 
 
 	@Override
 	public String toString() {
-		return "ReportCommentVo [reCommNo=" + reCommNo + ", reCommGuil=" + reCommGuil + ", reCommContent="
-				+ reCommContent + ", reCommPro=" + reCommPro + ", reCommType=" + reCommType + ", reCommContentNo="
-				+ reCommContentNo + "]";
+		return "ReportCommentVo [no=" + no + ", guilty=" + guilty + ", content=" + content + ", process=" + process
+				+ ", type=" + type + ", replyNo=" + replyNo + "]";
 	}
 	
 	
 	
+	
+
 	
 	
 

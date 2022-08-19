@@ -1,5 +1,6 @@
+//더보기 
 $(function(){
-    $("div").slice(0, 10).show(); // 최초 10개 선택
+    $("div").slice(0, 3).show(); // 최초 3개 선택
     $("#load").click(function(e){ // Load More를 위한 클릭 이벤트e
     e.preventDefault();
     $("div:hidden").slice(0, 10).show(); // 숨김 설정된 다음 10개를 선택하여 표시
@@ -8,3 +9,15 @@ $(function(){
     }
     });
     });
+    
+//card 클릭하면 해당 게시글 들어가지는
+$(function(){
+	$('.card').click(function(){
+		//div class = card 클릭 되었을 때, 동작할 내용
+		
+		//글 번호 가져오기
+		const num = $(this).children().eq(0).text();
+		//해당 번호 이용해서 요청 보내기
+		location.href='/hallo03talk/place/detail?num=' + num;
+	});
+})
