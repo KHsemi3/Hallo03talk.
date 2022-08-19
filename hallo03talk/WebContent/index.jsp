@@ -206,7 +206,7 @@
       <nav>
       <%if (loginTraveler== null && loginBoss== null){%>
         <ul class="menu1">
-          <li><a onclick="">공지사항</a></li>
+          <li><a onclick="location.href='/hallo03talk/comm/list?view=notice'">공지사항</a></li>
           <li><a onclick="location.href='/hallo03talk/traveler/login'">로그인</a></li>
            <li><a  onclick="location.href='/hallo03talk/traveler/join'">회원가입</a></li>
         </ul>
@@ -214,7 +214,7 @@
         <%if(loginTraveler!= null && loginBoss == null){%>
          <ul class="menu1">
           <li><%=loginTraveler.getName() %>님 환영 합니다~ ^^</li>
-          <li><a onclick="">공지사항</a></li>
+          <li><a onclick="location.href='/hallo03talk/comm/list?view=notice'">공지사항</a></li>
           <li><a onclick="location.href='/hallo03talk/traveler/myPage'">마이페이지</a></li>
            <li><a  onclick="location.href='/hallo03talk/member/logout'">로그아웃</a></li>
         </ul>
@@ -222,14 +222,14 @@
          <%if(loginTraveler== null && loginBoss != null){%>
          <ul class="menu1">
           <li><%=loginBoss.getId() %>님 환영 합니다~ ^^</li>
-          <li><a onclick="">공지사항</a></li>
+          <li><a onclick="location.href='/hallo03talk/comm/list?view=notice'">공지사항</a></li>
           <li><a onclick="location.href='/hallo03talk/boss/myPage'">마이페이지</a></li>
            <li><a  onclick="location.href='/hallo03talk/member/logout'">로그아웃</a></li>
         </ul>
         <%} %>
       </nav>
       <div id="logo">
-        <h1><a href="">할로영삼talk</a></h1>
+        <h1><a onclick="location.href='/hallo03talk">할로영삼talk</a></h1>
       </div>
     </header>
     <section id="tripple">
@@ -255,7 +255,7 @@
         |
         <li><a onclick="location.href='/hallo03talk/party/list?p=1'">이벤트</a></li>
         |
-         <li><a href="">커뮤니티</a></li>
+         <li><a onclick="location.href='/hallo03talk/comm/list'">커뮤니티</a></li>
         |
       </ul>
    </div>
