@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(urlPatterns = ("/admin/place"))
 public class AdminPlaceController extends HttpServlet{
 		@Override
-		protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 			
 			resp.sendRedirect("/hallo03talk/views/member/admin/placeAdmin.jsp");
 		}

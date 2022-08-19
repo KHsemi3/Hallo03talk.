@@ -326,7 +326,7 @@
            <%} else {%>
    		
     	<li><a href="" class="btn">공지사항</a></li>
-    	<li><a  class="btn"  onclick="location.href='/hallo03talk/admin/place'">숙소관리</a></li>
+    	<li class="btn"  onclick="location.href='/hallo03talk/admin/place'">숙소관리</li>
     	<li><a  class="btn"  onclick="location.href='/hallo03talk/admin/report'">신고관리</a></li>
           <li><a  href="/hallo03talk/admin/logout"  class="btn" >로그아웃</a></li>
           <li class=""><%=loginAdmin.getName() %> 님 환영합니다</li>
