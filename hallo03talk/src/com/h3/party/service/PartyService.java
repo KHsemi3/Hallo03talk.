@@ -3,7 +3,7 @@ package com.h3.party.service;
 import java.sql.Connection;
 
 import static com.h3.common.JDBCTemplate.*;
-/*import com.h3.party.repository.PartyDao;
+import com.h3.party.repository.PartyDao;
 
 public class PartyService {
 	
@@ -15,10 +15,15 @@ public class PartyService {
 		Connection conn = null;
 		int result = 0;
 		
-		conn = getConnection();
-		result = dao.getCount(conn);
-		
+		try {
+			conn = getConnection();
+			result = dao.getCount(conn);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);	
+		}		
 		return result;
 	}
-
-}*/
+}

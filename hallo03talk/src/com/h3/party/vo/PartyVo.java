@@ -15,22 +15,22 @@ public class PartyVo {
 		this.title = title;
 		this.content = content;
 		this.cnt = cnt;
-		this.enroll_date = enroll_date;
+		this.enrollDate = enroll_date;
 		this.status = status;
-		this.party_category = party_category;
+		this.partyCategory = party_category;
 		this.boss_no = boss_no;
-		this.modify_date = modify_date;
+		this.modifyDate = modify_date;
 	}
 	
 	private int no;
 	private String title;
 	private String content;
 	private int cnt;
-	private Timestamp enroll_date;
+	private Timestamp enrollDate;
 	private String status;
-	private int party_category;
+	private int partyCategory;
 	private int boss_no;
-	private Timestamp modify_date;
+	private Timestamp modifyDate;
 	
 	
 	public int getNo() {
@@ -58,10 +58,10 @@ public class PartyVo {
 		this.cnt = cnt;
 	}
 	public Timestamp getEnroll_date() {
-		return enroll_date;
+		return enrollDate;
 	}
 	public void setEnroll_date(Timestamp enroll_date) {
-		this.enroll_date = enroll_date;
+		this.enrollDate = enroll_date;
 	}
 	public String getStatus() {
 		return status;
@@ -70,10 +70,10 @@ public class PartyVo {
 		this.status = status;
 	}
 	public int getParty_category() {
-		return party_category;
+		return partyCategory;
 	}
 	public void setParty_category(int party_category) {
-		this.party_category = party_category;
+		this.partyCategory = party_category;
 	}
 	public int getBoss_no() {
 		return boss_no;
@@ -82,18 +82,18 @@ public class PartyVo {
 		this.boss_no = boss_no;
 	}
 	public Timestamp getModify_date() {
-		return modify_date;
+		return modifyDate;
 	}
 	public void setModify_date(Timestamp modify_date) {
-		this.modify_date = modify_date;
+		this.modifyDate = modify_date;
 	}
 	
 	
 	@Override
 	public String toString() {
 		return "PartyVo [no=" + no + ", title=" + title + ", content=" + content + ", cnt=" + cnt + ", enroll_date="
-				+ enroll_date + ", status=" + status + ", party_category=" + party_category + ", boss_no=" + boss_no
-				+ ", modify_date=" + modify_date + "]";
+				+ enrollDate + ", status=" + status + ", party_category=" + partyCategory + ", boss_no=" + boss_no
+				+ ", modify_date=" + modifyDate + "]";
 	}
 	
 		
