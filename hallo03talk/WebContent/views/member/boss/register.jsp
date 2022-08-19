@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>가게 등록</title>
- <link rel="stylesheet" href="partyCss/all.css">
+ <link rel="stylesheet" href="/hallo03talk/views/party/partyCss/all.css">
 </head>
 
 <body>
