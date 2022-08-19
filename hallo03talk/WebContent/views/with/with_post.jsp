@@ -139,63 +139,85 @@
 
 	<footer></footer>
 
+	<script>
+	  $(function(){
+	    $('#jeju-tab').click(function(){
+	      $('#jeju').css('z-index','1');
+	      $('#souguipo').css('z-index','0');
+	    });
+	
+	    $('#souguipo-tab').click(function(){
+	      $('#jeju').css('z-index','0');
+	      $('#souguipo').css('z-index','1');
+	    });
+	
+	    $('#jeju div').each(function(i){
+	      $(this).click(function(){
+	        $('#input-place').val($(this).text());
+	      });
+	    });
+	
+	    $('#souguipo div').each(function(i){
+	      $(this).click(function(){
+	        $('#input-place').val($(this).text());
+	      });
+	    });
+	  })
+	</script>
+	
+	<script>
+	$(document).ready(function () {
+	    $('.summernote').summernote({
+	        height: 400,
+	        toolbar: [
+			    // [groupName, [list of button]]
+			    ['fontname', ['fontname']],
+			    ['fontsize', ['fontsize']],
+			    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+			    ['color', ['color']],
+			    ['para', ['paragraph']],
+			    ['height', ['height']],
+			    ['insert',['picture','link']],
+			    ['view', ['help']]
+			  ],
+			fontNames: ['맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체','Arial', 'Arial Black', 'Comic Sans MS', 'Courier New'],
+			fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
+			callbacks: {
+				onImageUpload : function(files){
+					sendFile(files[0],this);
+				}
+			}
+	    });
+	    
+	    function sendFile(file, editor){
+			var data = new FormData();
+			data.append("file", file);
+			console.log(file);
+			$.ajax({
+				data : {
+					img : data
+				},
+				type : "POST",
+				url : "/hallo03talk/with/imgUpload",
+				contentType : false,
+				processData : false,
+				success : function(data){
+					console.log(data);
+					console.log(editor);
+					$(editor).summernote("insertImage",data.url);
+				}
+			});
+		}
+	    
+	    var input = document.querySelector('#tag')
+	    var tagify = new Tagify(input);
+	      
+	    // 태그가 추가되면 이벤트 발생
+	    tagify.on('add', function() {
+	      console.log(tagify.value); // 입력된 태그 정보 객체
+	    })
+	});
+	</script>
 </body>
 </html>
 
-<script>
-  $(function(){
-    $('#jeju-tab').click(function(){
-      $('#jeju').css('z-index','1');
-      $('#souguipo').css('z-index','0');
-    });
-
-    $('#souguipo-tab').click(function(){
-      $('#jeju').css('z-index','0');
-      $('#souguipo').css('z-index','1');
-    });
-
-    $('#jeju div').each(function(i){
-      $(this).click(function(){
-        $('#input-place').val($(this).text());
-      });
-    });
-
-    $('#souguipo div').each(function(i){
-      $(this).click(function(){
-        $('#input-place').val($(this).text());
-      });
-    });
-  })
-</script>
-
-<script>
-$(document).ready(function () {
-    $('.summernote').summernote({
-        height: 400,
-        toolbar: [
-		    // [groupName, [list of button]]
-		    ['fontname', ['fontname']],
-		    ['fontsize', ['fontsize']],
-		    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
-		    ['color', ['color']],
-		    ['para', ['paragraph']],
-		    ['height', ['height']],
-		    ['insert',['picture','link']],
-		    ['view', ['help']]
-		  ],
-		fontNames: ['맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체','Arial', 'Arial Black', 'Comic Sans MS', 'Courier New'],
-		fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
-    });
-});
-</script>
-
-<!-- tagify -->
-<script>
-var input = document.querySelector('#tag')
-var tagify = new Tagify(input);
-  
-// 태그가 추가되면 이벤트 발생
-tagify.on('add', function() {
-  console.log(tagify.value); // 입력된 태그 정보 객체
-})
-</script>
