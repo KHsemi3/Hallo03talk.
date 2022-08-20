@@ -29,64 +29,64 @@
 			<div id="place-finder" class="fw-bolder text-center mt-5 mx-5">
 				<div class="row border border-4" id="placeCategory">
 					<div class="row">
-						<div class="col-2 border-end border-3"
+						<div class="col-2 border-end border-3 makePo"
 							onclick="clickCategory(0)" id="categoryAll">모두 보기</div>
-						<div class="col-2 bg-warning border-end border-3"
+						<div class="col-2 bg-warning border-end border-3 makePo"
 							onclick="clickCity(0)" id="cityAll">모두 보기</div>
 						<!-- 제주시 -->
-						<div class="col in-jeju d-none" onclick="clickInside(0)"
+						<div class="col in-jeju d-none makePo" onclick="clickInside(0)"
 							id="jejuAll">모두 보기</div>
-						<div class="col in-jeju d-none" onclick="clickInside(1)"
+						<div class="col in-jeju d-none makePo" onclick="clickInside(1)"
 							id="inJeju">시내</div>
-						<div class="col in-jeju d-none" onclick="clickInside(2)"
+						<div class="col in-jeju d-none makePo" onclick="clickInside(2)"
 							id="aewol">애월</div>
 
 
 						<!-- 서귀포 -->
-						<div class="col in-seogwipo d-none"
+						<div class="col in-seogwipo d-none makePo"
 							onclick="clickInside(0)" id="seogwipoAll">모두 보기</div>
-						<div class="col in-seogwipo d-none"
+						<div class="col in-seogwipo d-none makePo"
 							onclick="clickInside(1)" id="inSeogwipo">시내</div>
-						<div class="col in-seogwipo d-none"
+						<div class="col in-seogwipo d-none makePo"
 							onclick="clickInside(2)" id="namwon">남원</div>
 
 					</div>
 					<div class="row">
-						<div class="col-2 border-end border-3" id="hotel"
+						<div class="col-2 border-end border-3 makePo" id="hotel"
 							onclick="clickCategory(2)">숙소</div>
-						<div class="col-2 border-end border-3" id="jeju"
+						<div class="col-2 border-end border-3 makePo" id="jeju"
 							onclick="clickCity(1)">제주</div>
 						<!-- 제주시 -->
-						<div class="col in-jeju d-none" onclick="clickInside(3)"
+						<div class="col in-jeju d-none makePo" onclick="clickInside(3)"
 							id="hanrim">한림</div>
-						<div class="col in-jeju d-none" onclick="clickInside(4)"
+						<div class="col in-jeju d-none makePo" onclick="clickInside(4)"
 							id="hankyung">한경</div>
-						<div class="col in-jeju d-none" onclick="clickInside(5)"
+						<div class="col in-jeju d-none makePo" onclick="clickInside(5)"
 							id="zochun">조천</div>
 
 						<!-- 서귀포 -->
-						<div class="col in-seogwipo d-none"
+						<div class="col in-seogwipo d-none makePo"
 							onclick="clickInside(3)" id="ahnduk">안덕</div>
-						<div class="col in-seogwipo d-none"
+						<div class="col in-seogwipo d-none makePo"
 							onclick="clickInside(4)" id="daejung">대정</div>
-						<div class="col in-seogwipo d-none"
+						<div class="col in-seogwipo d-none makePo"
 							onclick="clickInside(5)" id="pyosun">표선</div>
 
 					</div>
 					<div class="row">
-						<div class="col-2 border-end border-3"
+						<div class="col-2 border-end border-3 makePo"
 							onclick="clickCategory(3)" id="dinner">맛집</div>
-						<div class="col-2 border-end border-3" id="seogwipo"
+						<div class="col-2 border-end border-3 makePo" id="seogwipo"
 							onclick="clickCity(2)">서귀포</div>
 						<div class="col in-jeju d-none" onclick="clickInside(6)"
 							id="guzwa">구좌</div>
-						<div class="col in-seogwipo d-none"
+						<div class="col in-seogwipo d-none makePo"
 							onclick="clickInside(6)" id="sungsan">성산</div>
 						<div class="col"></div>
 						<div class="col"></div>
 					</div>
 					<div class="row">
-						<div class="col-2 border-end border-3"
+						<div class="col-2 border-end border-3 makePo"
 							onclick="clickCategory(1)" id="cafe">카페</div>
 						<div class="col-2 border-end border-3"></div>
 						<div class="col"></div>
