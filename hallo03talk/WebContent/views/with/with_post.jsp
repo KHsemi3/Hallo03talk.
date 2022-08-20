@@ -73,9 +73,9 @@
             <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="제목을 입력하세요" name="title">
 
 
-            <label for="exampleFormControlTextarea1" class="form-label mt-3"><h4>내용</h4></label>
+            <label for="summernote" class="form-label mt-3"><h4>내용</h4></label>
 			<!-- summernote -->
-           	<textarea class="summernote" name="content" id="exampleFormControlTextarea1"></textarea>
+           	<textarea name="content" id="summernote"></textarea>
            	
            	<!-- 태그 -->
             <input type="text" class="form-control mt-1" id="tag" placeholder="태그 입력" name="tag">
@@ -167,7 +167,7 @@
 	
 	<script>
 	$(document).ready(function () {
-	    $('.summernote').summernote({
+	    $('#summernote').summernote({
 	        height: 400,
 	        toolbar: [
 			    // [groupName, [list of button]]
@@ -190,16 +190,20 @@
 					
 					reader.onload = function () {
 						
-						const data = reader.result;
+						const data = this.result;
 						console.log(data);
 						
 						$.ajax({
 							data : {img : data},
-							url : "/with/imgUpload",
+							url : "/hallo03talk/with/imgUpload",
 							method : "POST",
 							success : function(data){
 								console.log('success');
+								const imgNode = document.createElement('img');
+								imgNode.setAttribute('src',data);
+								$('#summernote').summernote('insertNode', imgNode);
 							}
+							
 						});
 					};
 				}
@@ -216,7 +220,6 @@
 	      console.log(tagify.value); // 입력된 태그 정보 객체
 	    })
 	    
-	    //=========================================
 	    
 		
 	});
