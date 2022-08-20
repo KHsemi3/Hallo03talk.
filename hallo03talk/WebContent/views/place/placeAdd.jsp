@@ -74,7 +74,7 @@ String emdNo = request.getParameter("emdNo");
 						</p>
 						<p class="py-2 px-5 row">
 							<input type="text" name="placeAddr" class="col text-center"
-								readonly placeholder="주소" required />
+								readonly placeholder="주소" required/>
 						</p>
 						<button type="button" class="btn btn-primary col"
 							onclick="goPopup();">주소 검색</button>
@@ -103,4 +103,25 @@ String emdNo = request.getParameter("emdNo");
 	</c:if>
 </body>
 <script src="/hallo03talk/resources/js/jusoPopUp.js"></script>
+<script>
+	$(document).ready(function () {
+		let $juso = $('[name="jusoAddr"]');
+	$('[name="jusoAddr"]').on('input',function () {
+		console.log($(this).val());
+	})
+
+	(function ($) {
+		let origin = $.fn.val;
+		$.fn.val = function(value) {
+			let res = origin.apply(this, arguments);
+
+			if (this.is('input:text') && arguments.length >= 1) {
+				this.trigger('input');
+			}
+
+			return res;
+		}
+	})(jQuery);
+	})
+</script>
 </html>

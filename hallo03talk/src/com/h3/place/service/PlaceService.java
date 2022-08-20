@@ -68,26 +68,6 @@ public class PlaceService {
 		return voList;
 	}
 	
-
-	public List<PlacePhotoVo> getProfile() {
-		
-		Connection conn = null;
-		List<PlacePhotoVo> photoList = new ArrayList<PlacePhotoVo>();
-		
-		try {
-			conn = getConnection();
-			photoList = dao.getProfile(conn);
-			
-			return photoList;
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			close(conn);
-		}
-		
-		return photoList;
-	}
-
 	public PlaceVo placeOne(String placeNo) {
 		Connection conn = null;
 		PlaceVo pv = new PlaceVo();
@@ -208,13 +188,61 @@ public class PlaceService {
 		return result;
 	}
 
-	public List<PlaceVo> getList(String categoryNo) {
+	public List<PlaceVo> getList(int categoryNo, int cityNo, int insideNo ) {
 		Connection conn = null;
 		List<PlaceVo> voList = null;
-
+		
 		try {
 			conn = getConnection();
-			voList = dao.getList(conn,categoryNo);
+			String cityName = "";
+			String insideName = "";
+			if( cityNo == 1 ) {
+				cityName = "제주시";
+				if(insideNo == 1) {
+					insideName = "시내";
+				} else if(insideNo == 2) {
+					insideName = "애월";
+				} else if(insideNo == 3) {
+					insideName = "한림";
+				} else if(insideNo == 4) {
+					insideName = "한경";
+				} else if(insideNo == 5) {
+					insideName = "조천";
+				} else if(insideNo == 6) {
+					insideName = "구좌";
+				} else {
+					insideName = "모두";
+				}
+				
+			} else if ( cityNo == 2 ) {
+				cityName = "서귀포";
+				if(insideNo == 1) {
+					insideName = "시내";
+				} else if(insideNo == 2) {
+					insideName = "남원";
+				} else if(insideNo == 3) {
+					insideName = "안덕";
+				} else if(insideNo == 4) {
+					insideName = "대정";
+				} else if(insideNo == 5) {
+					insideName = "표선";
+				} else if(insideNo == 6) {
+					insideName = "성산";
+				} else {
+					insideName = "모두";
+				}
+			}
+//			카테고리 모두
+			if(categoryNo == 0) {voList = dao.getList(conn,cityName,insideName);}
+//			도시 모두
+			else if(cityNo == 0) {voList = dao.getList(conn, categoryNo);}
+//			읍 모두
+			else if(insideNo == 0) {voList = dao.getList(conn,cityName, categoryNo);}
+//			전부 보기
+			else if (categoryNo == 0 && cityNo == 0 && insideNo == 0){ voList = dao.getList(conn); }
+//			다 다른경우
+			else { voList = dao.getList(conn,cityName,insideName, categoryNo); };
+			
 			return voList;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -225,22 +253,5 @@ public class PlaceService {
 		return voList;
 	}
 
-	public List<PlacePhotoVo> getProfile(String categoryNo) {
-		Connection conn = null;
-		List<PlacePhotoVo> photoList = new ArrayList<PlacePhotoVo>();
-		
-		try {
-			conn = getConnection();
-			photoList = dao.getProfile(conn,categoryNo);
-			
-			return photoList;
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			close(conn);
-		}
-		
-		return photoList;
-	}
 
 }
