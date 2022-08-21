@@ -1,45 +1,32 @@
-const placeCategory = document.querySelector('#placeCategory');
-// 선택시 색 변경, 읍면동 변경
-const jeju = placeCategory.querySelector("#jeju");
-const seogwipo = placeCategory.querySelector("#seogwipo");
-const injeju = placeCategory.querySelectorAll(".in-jeju");
-const inseogwipo = placeCategory.querySelectorAll(".in-seogwipo");
-const allview = placeCategory.querySelector('#allview');
-jeju.addEventListener("click", (e) => {
-  jeju.classList.add("bg-warning");
-  seogwipo.classList.remove("bg-warning");
-  allview.classList.remove("bg-warning");
-  inseogwipo.forEach((item) => {
-    item.classList.add("d-none");
-  });
-  injeju.forEach((item) => {
-    item.classList.remove("d-none");
-  });
-});
+// index로 문자열 변경하기
+String.prototype.replaceAt = function (index, word) {
+  console.log(this.substring(0,index) + word + this.substring(index+1));
+  if (index >= this.length) {
+    return this.valueOf();
+  }
+  return this.substring(0,index) + word + this.substring(index+1);
+}
 
-seogwipo.addEventListener("click", (e) => {
-  seogwipo.classList.add("bg-warning");
-  jeju.classList.remove("bg-warning");
-  allview.classList.remove("bg-warning");
-  injeju.forEach((item) => {
-    item.classList.add("d-none");
-  });
-  inseogwipo.forEach((item) => {
-    item.classList.remove("d-none");
-  });
-});
 
-allview.addEventListener('click',() => {
-  allview.classList.add('bg-warning');
-  jeju.classList.add("bg-warning");
-  seogwipo.classList.add("bg-warning");
-  jeju.classList.remove("bg-warning");
-  seogwipo.classList.remove("bg-warning");
-  injeju.forEach((item) => {
-    item.classList.add("d-none");
-  });
-  inseogwipo.forEach((item) => {
-    item.classList.add("d-none");
-  });
+function clickCategory(x) {
+  const nowURL = location.href.substring(21);
+  let changeURL =  nowURL.replaceAt(nowURL.indexOf('&cityNo=')-1,x);
+  location.href = changeURL;
+}
+
+function clickCity(x) {
+  const nowURL = location.href;
+  let changeURL =  nowURL.replaceAt(nowURL.indexOf('&insideNo=')-1,x);
+  location.href = changeURL;
+}
+
+function clickInside(x) {
+  const nowURL = location.href.substring(21);
+  let changeURL =  nowURL.replaceAt(nowURL.indexOf('insideNo=')+9,x);
+  location.href = changeURL;
+}
+
+const makePointer = document.querySelectorAll('.makePo');
+makePointer.forEach((item) => {
+  item.style.cursor = 'pointer';
 })
-
