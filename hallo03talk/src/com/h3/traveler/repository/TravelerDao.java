@@ -10,16 +10,9 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import com.h3.community.vo.CommReplyVo;
-import com.h3.traveler.vo.TravelerMyPageVo;
-import com.h3.traveler.vo.TravelerVo;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-
+import com.h3.traveler.vo.MpgPostVo;
+import com.h3.traveler.vo.MpgReservationVo;
+import com.h3.traveler.vo.MpgZzimVo;
 import com.h3.traveler.vo.TravelerVo;
 
 public class TravelerDao {
@@ -268,7 +261,7 @@ public class TravelerDao {
 	/*
 	 * traveler - 내가 쓴 글 조회
 	 */
-	public ArrayList<TravelerMyPageVo> selectList(Connection conn, int userNo) {
+	public ArrayList<MpgPostVo> selectList(Connection conn, int userNo) {
 
 		String sql = "(SELECT T.NO AS WRITER, C.NO, C.TITLE, C.CONTENT, TO_CHAR(C.ENROLL_DATE, 'YY/MM/DD HH:MI') AS ENROLLDATE, '커뮤니티' AS BOARD "
 				+ "	FROM TRAVELER T "
@@ -281,7 +274,7 @@ public class TravelerDao {
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		ArrayList<TravelerMyPageVo> list = new ArrayList<TravelerMyPageVo>();
+		ArrayList<MpgPostVo> list = new ArrayList<MpgPostVo>();
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -301,7 +294,7 @@ public class TravelerDao {
 				String writer = rs.getString("writer");
 				String board = rs.getString("board");
 
-				TravelerMyPageVo vo = new TravelerMyPageVo();
+				MpgPostVo vo = new MpgPostVo();
 				vo.setNo(no);
 				vo.setTitle(title);
 				vo.setContent(content);
@@ -457,41 +450,43 @@ public class TravelerDao {
 	/*
 	 * traveler - 아이디 찾기
 	 */
-	public TravelerVo idFind(Connection conn, TravelerVo vo) {
-
+	public String idFind(Connection conn, String travelerJoinPhone, String travelerJoinEmail) {
 
 		PreparedStatement pstmt = null;
-		TravelerVo idFind = null;
+		String idFind = null;
 		ResultSet rs = null;
 
 	    String sql ="SELECT ID FROM TRAVELER WHERE PHONE = ? AND EMAIL = ? AND STATUS ='Y'";
-		//String sql ="SELECT ID FROM TRAVELER";
+//		String sql ="SELECT ID FROM TRAVELER";
 	    try {
 	    	
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, vo.getPhone());
-			pstmt.setString(2, vo.getEmail());
+//			pstmt.setInt(1, Integer.parseInt(travelerJoinPhone));
+			pstmt.setString(1, travelerJoinPhone);
+			pstmt.setString(2, travelerJoinEmail);
 			
 			System.out.println("====================");
-			System.out.println(vo.getPhone());
-			System.out.println(vo.getEmail());
+			System.out.println("입력받은 번호 : " + travelerJoinPhone);
+			System.out.println("입력받은 이메일 : " + travelerJoinEmail);
 			
 			rs = pstmt.executeQuery();
 			
-			System.out.println(pstmt.toString());
 			if(rs.next()) {
 				System.out.println("rs 통과 ");//swy
-				String travelerId = rs.getString("ID");
 				
-				idFind = new TravelerVo();
-				idFind.setId(travelerId);
+				idFind = rs.getString("ID");
+				System.out.println(idFind);//swy
+				
+				//idFind = new TravelerVo();
+				//idFind.setId(travelerId);
+				
 			}
 			
 	    }catch(Exception e) {
 	    	e.printStackTrace();
-	    	close(pstmt);
+	    	
 	    }finally {
-	    	close(conn);
+	    	close(pstmt);
 			close(rs);
 
 	    }
@@ -503,7 +498,247 @@ public class TravelerDao {
 	
 	
 	}//idFind
+
 	
+
+
+		/*
+		 * traveler - 찜 목록 조회
+		 */
+		public ArrayList<MpgZzimVo> selectZzimList(Connection conn, int userNo) {
+
+			
+			String sql = "SELECT Z.TRAVELER_NO, Z.PLACE_NO, P.NAME, P.CONTENT, '장소 게시판' AS BOARD FROM ZZIM Z JOIN PLACE P ON Z.PLACE_NO = P.NO WHERE TRAVELER_NO = ?";
+		
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;		
+			ArrayList<MpgZzimVo> list = new ArrayList<MpgZzimVo>();
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, userNo);
+
+
+				rs = pstmt.executeQuery();
+
+				while(rs.next()) {
+					
+					String travelerNo = rs.getString("TRAVELER_NO");  	 // 회원
+					String placeNo = rs.getString("PLACE_NO");   			 // 장소번호
+					String name = rs.getString("NAME");    	 	 // 장소명
+					String content = rs.getString("CONTENT");    // 내용
+					String board = rs.getString("board");    	 // 게시판 타입
+					
+					MpgZzimVo vo = new MpgZzimVo();
+					vo.setTravelerNo(travelerNo);
+					vo.setPlaceNo(placeNo);
+					vo.setName(name);
+					vo.setContent(content);
+					vo.setBoard(board);
+
+					list.add(vo);
+				}
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+				close(rs);
+			}
+			
+			return list;
+			
+		}//selectZzimList
+
+		
+		
+		/*
+		 * traveler - 비밀번호 찾기
+		 */
+		public String pwdFind(Connection conn, String travelerJoinId, String travelerJoinPhone) {
+
+			PreparedStatement pstmt = null;
+			String pwdFind = null;
+			ResultSet rs = null;
+
+		    String sql ="SELECT PWD FROM TRAVELER WHERE ID = ? AND PHONE = ? AND STATUS ='Y'";
+		    try {
+		    	
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, travelerJoinId);
+				pstmt.setString(2, travelerJoinPhone);
+				
+				System.out.println("====================");
+				System.out.println("입력받은 아이디 : " + travelerJoinId);
+				System.out.println("입력받은 전화번호 : " + travelerJoinPhone);
+				
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					System.out.println("rs 통과 ");
+					
+					pwdFind = rs.getString("PWD");
+					System.out.println(pwdFind);
+					
+					
+				}
+				
+		    }catch(Exception e) {
+		    	e.printStackTrace();
+		    	
+		    }finally {
+		    	close(pstmt);
+				close(rs);
+
+		    }
+		    
+		    System.out.println("dao ::: " + pwdFind);
+		    
+		    return pwdFind;
+		
+		}//pwdFind
+
+		
+		
+		/*
+		 * traveler - 닉네임 중복 체크
+		 */
+		public int nickCheck(Connection conn, String userNick) {
+
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			int nickCheck = 0;
+			
+			String sql = "SELECT * FROM TRAVELER WHERE NICK= ? ";
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, userNick);
+				
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					nickCheck = 1;      // 이미 존재하는 경우, 생성 불가
+				}else {
+					nickCheck = 0;	 // 존재하지 않는 경우, 생성 가능
+				}
+
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+				close(rs);
+			}
+			
+			return nickCheck;
+		
+		}//nickCheck
+
+		
+		
+		/*
+		 * traveler - 예약 내역 조회
+		 */
+		public ArrayList<MpgReservationVo> selectRsvList(Connection conn, int userNo) {
+
+			String sql = "SELECT R.NO, R.TRAVELER_NO, R.PLACE_NO, P.NAME, TO_CHAR(R.START_DATE, 'YY/MM/DD') AS START_DATE FROM RESERVATION R JOIN PLACE P ON R.PLACE_NO = P.NO WHERE TRAVELER_NO=?";
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;		
+			ArrayList<MpgReservationVo> list = new ArrayList<MpgReservationVo>();
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, userNo);
+
+
+				rs = pstmt.executeQuery();
+
+				while(rs.next()) {
+
+					String no = rs.getString("NO");  	 	 // 예약번호
+					String travelerNo = rs.getString("TRAVELER_NO");  	 	 // 회원번호
+					String placeNo = rs.getString("PLACE_NO");   			 // 장소번호
+					String name = rs.getString("NAME");    	 			 	 // 장소명
+					String startDate = rs.getString("START_DATE");   			 // 예약날짜
+					
+					MpgReservationVo vo = new MpgReservationVo();
+					vo.setNo(no);
+					vo.setTravelerNo(travelerNo);
+					vo.setPlaceNo(placeNo);
+					vo.setName(name);
+					vo.setStartDate(startDate);
+
+					list.add(vo);
+				}
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+				close(rs);
+			}
+			
+			return list;
+		
+		
+		}//selectRsvList
+
+		
+		
+		/*
+		 * traveler - 예약내역 상세조회 화면 보여주기
+		 */
+		public MpgReservationVo rsvDetail(Connection conn, int userNo, String num) {
+
+	String sql = "SELECT R.NO, R.TRAVELER_NO, R.PLACE_NO, P.ADDRESS, P.NAME, R.HUMAN, TO_CHAR(R.START_DATE, 'YY/MM/DD') AS START_DATE, TO_CHAR(R.END_DATE, 'YY/MM/DD') AS END_DATE FROM RESERVATION R JOIN PLACE P ON R.PLACE_NO = P.NO WHERE TRAVELER_NO=? AND R.NO = ?";
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;		
+			MpgReservationVo rvo = new MpgReservationVo();
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, userNo);
+				pstmt.setString(2, num);
+
+
+				rs = pstmt.executeQuery();
+
+				while(rs.next()) {
+
+					String no = rs.getString("NO");  	 	 				 // 예약번호
+					String travelerNo = rs.getString("TRAVELER_NO");  	 	 // 회원번호
+					String placeNo = rs.getString("PLACE_NO");   			 // 장소번호
+					String name = rs.getString("NAME");    	 			 	 // 장소명
+					String human = rs.getString("HUMAN");    	 			 // 인원수
+					String startDate = rs.getString("START_DATE");   		 // 예약날짜
+					String endDate = rs.getString("END_DATE");   			 // 예약날짜
+					String address = rs.getString("ADDRESS");   			 // 주소
+
+					rvo = new MpgReservationVo();
+					rvo.setNo(no);
+					rvo.setTravelerNo(travelerNo);
+					rvo.setPlaceNo(placeNo);
+					rvo.setName(name);
+					rvo.setHuman(human);
+					rvo.setStartDate(startDate);
+					rvo.setEndDate(endDate);
+					rvo.setAddress(address);
+
+				}
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+				close(rs);
+			}
+			
+			return rvo;
+		
+		}//rsvDetail
+
+		
 	
 
 }// class

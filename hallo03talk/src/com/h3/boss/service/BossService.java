@@ -289,5 +289,101 @@ public class BossService {
 		
 	}//selectReplyList
 
+
+	/*
+	 * boss - 아이디 찾기
+	 */
+	public String idFind(String bossJoinPhone, String bossJoinEmail) {
+	
+		Connection conn = null;
+		String idFind = null;
+		
+		try {
+			
+			conn = getConnection();
+			
+			// dao 호출
+			idFind = dao.idFind(conn, bossJoinPhone, bossJoinEmail);
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			rollback(conn);
+		}finally {
+			close(conn);
+		}
+
+		System.out.println("service ::: " + idFind);
+		return idFind;
+		
+	
+	
+	
+	}//idFind
+
+
+	
+	/*
+	 * boss - 비밀번호 찾기
+	 */
+	public String pwdFind(String bossJoinId, String bossJoinPhone) {
+
+		Connection conn = null;
+		String pwdFind = null;
+		
+		try {
+			
+			conn = getConnection();
+			
+			// dao 호출
+			pwdFind = dao.pwdFind(conn, bossJoinId, bossJoinPhone);
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			rollback(conn);
+		}finally {
+			close(conn);
+		}
+
+		System.out.println("service ::: " + pwdFind);
+		return pwdFind;
+		
+	
+	}
+
+
+	/*
+	 * boss - 아이디 중복 체크
+	 */
+	public int idCheck(String bossId) {
+
+		int idCheck = 0;
+		
+		Connection conn = null;
+		try {
+			
+			conn = getConnection();
+			
+			idCheck = dao.idCheck(conn, bossId);
+			//System.out.println("sss : " + idCheck);//swy
+			
+			if(idCheck == 1) {
+				System.out.println("이미 존재하는 아이디입니다.");
+			}else {
+				System.out.println("사용 가능한 아이디입니다.");
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		
+		return idCheck;
+		
+	
+	}//idCheck
+
 	
 }//class

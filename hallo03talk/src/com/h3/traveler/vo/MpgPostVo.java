@@ -1,16 +1,16 @@
 package com.h3.traveler.vo;
 
-public class TravelerMyPageVo {
+public class MpgPostVo {
 
 	// traveler - 마이페이지  
 	
 	// 기본생성자
-	public TravelerMyPageVo() {
+	public MpgPostVo() {
 		
 	}
 	
 	// 매개변수 있는 생성자
-	public TravelerMyPageVo(String no, String title, String content, String writer, String enrollDate,  String board) {
+	public MpgPostVo(String no, String title, String content, String writer, String enrollDate,  String board) {
 		//super();
 		this.no = no;
 		this.title = title;

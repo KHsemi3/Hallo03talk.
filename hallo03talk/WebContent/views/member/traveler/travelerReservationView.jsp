@@ -1,5 +1,13 @@
+<%@page import="com.h3.traveler.vo.MpgReservationVo"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+        
+ <%
+         ArrayList<MpgReservationVo> voList = (ArrayList<MpgReservationVo>)request.getAttribute("voList");
+  %>
+  
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,20 +71,20 @@
                       <div class="collapse navbar-collapse" id="navbarNavDropdown">
                             <ul class="navbar-nav">
                               <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="세미실전_일반회원_마이페이지(메뉴바,내정보).html">내 정보</a>
+                                <a class="nav-link active" aria-current="page" href="/hallo03talk/traveler/myPage">내 정보</a>
                               </li>
                               <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="세미실전_일반회원_마이페이지(내가 쓴 글).html">내가 쓴 글</a>
+                                <a class="nav-link active" aria-current="page" href="/hallo03talk/travelerMpgPost/list">내가 쓴 글</a>
                               </li>
                               <li class="nav-item">
-                                <a class="nav-link" href="세미실전_일반회원_마이페이지(내가쓴댓글).html">내가 쓴 댓글</a>
+                                <a class="nav-link" href="/hallo03talk/travelerMpgReply/list">내가 쓴 댓글</a>
                               </li>
                               <li class="nav-item" style="background-color: rgba(0, 0, 0, 0.2); border-radius: 5px;">
-                                <a class="nav-link" href="#">예약 내역</a>
+                                <a class="nav-link" href="/hallo03talk/travelerMpgRsv/list">예약 내역</a>
                               </li>
                               
                               <li class="nav-item">
-                                <a class="nav-link" href="#">찜 목록</a>
+                                <a class="nav-link" href="/hallo03talk/travelerMpgZzim/list">찜 목록</a>
                               </li>
                              
                               <li class="nav-item dropdown">
@@ -84,8 +92,7 @@
                                   신고
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                  <li><a class="dropdown-item" href="세미실전_일반회원_마이페이지(신고한내역).html">신고 한 내역</a></li>
-                                  <li><a class="dropdown-item" href="세미실전_일반회원_마이페이지(신고받은내역).html">신고 받은 내역</a></li>
+                                  <li><a class="dropdown-item" href="/hallo03talk/traveler/getReport">신고 받은 내역</a></li>
                                 </ul>
                               </li>
                             </ul>
@@ -112,25 +119,17 @@
                 </tr>
               </thead>
 
-<!-- ---------------여기서부터는 noticeList처럼 백엔드 코드로 작성해야 함----------------------------------------------- -->
                 <tbody>
-                  <tr>
-                    <th scope="row">
-                      <input type="checkbox">
-                    </th>
-                    <th scope="row">1</th>
-                    <td>예약!</td>
-                    <td class="text-center">22.08.07</td>
-                  </tr>  
-                  
-                  <tr>
-                    <th scope="row">
-                      <input type="checkbox">
-                    </th>
-                    <th scope="row">2</th>
-                    <td>ㅇㅇ</td>
-                    <td class="text-center">22.08.07</td>
-                  </tr>   
+                 <%for(int i=0; i < voList.size(); i++){ %>  
+                    <tr data-bs-toggle="modal" data-bs-target="#exampleModal">
+	                    <th scope="row">
+	                      <input type="checkbox">
+	                    </th>
+	                    <th scope="row"><%=voList.get(i).getNo() %></th>
+	                    <td><%=voList.get(i).getName() %></td>
+	                    <td class="text-center"><%=voList.get(i).getStartDate() %></td>
+	                  </tr>  
+	              <%}%>
                 </tbody>
 <!-- -------------------------------------------------------------- -->
               </table>
@@ -139,6 +138,27 @@
         </div>
     </main>
     
+     <!-- --------행 클릭하면 해당 내용 보이기------------------------------ -->
+   
+<script>
+		$(function(){
+			$('#reservationTable>tbody>tr').click(function(){
+				//행 클릭 되었을 때, 동작할 내용
+				
+				//글 번호 가져오기
+				const num = $(this).children().eq(1).text();
+				
+				//해당 번호 이용해서 요청 보내기
+				//alert(num);				
+				location.href='/hallo03talk/traveler/rsvDetail?num=' + num;
+
+				
+			});
+		})
+	</script>
+	
+	
+	<!-- ------------------------------------------------------------------ -->
     <footer></footer> 
 
 </body>

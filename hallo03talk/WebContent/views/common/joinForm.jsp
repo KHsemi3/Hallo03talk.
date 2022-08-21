@@ -97,14 +97,14 @@
         #register {
             left: 450px;
         } 
-        #travelerIdCheck, #bossIdCheck{
+        #travelerIdCheck, #travelerNickCheck, #bossIdCheck{
             border: 0;
             border-radius: 6px;
             width: 80px;
             background-color: rgb(233, 187, 100);
             color: white;
         }
-        #travelerIdCheck:hover, #bossIdCheck:hover, .join:hover{
+        #travelerIdCheck:hover, #travelerNickCheck:hover, #bossIdCheck:hover, .join:hover{
           background-color: skyblue;
         }
         
@@ -156,8 +156,8 @@
 	        
 	                            <table>
 	                                <tr>
-	                                    <td><input type="text" name="travelerJoinNick" class="input-field" placeholder="닉네임"></td>
-	                                    <td style="padding-left: 30px;"><button id="bossIdCheck">중복확인</button></td>
+	                                    <td><input type="text" id="userNick" name="travelerJoinNick" class="input-field" placeholder="닉네임"></td>
+	                                    <td style="padding-left: 30px;"><button id="travelerNickCheck">중복확인</button></td>
 	                                </tr>
 	                            </table>
 	                           
@@ -219,7 +219,45 @@
 						
 					
 					</script>
+						<!-- ------일반회원_닉네임 중복체크-------------------------------------- -->
 					
+					<script>
+					
+						$("#travelerNickCheck").click(function(e){
+							
+							
+							var userNick  = $('#userNick').val();
+							
+					        var url = "${pageContext.request.contextPath}/traveler/nickCheck"
+
+			
+							$.ajax({
+								url  : url,
+								method : "post",
+					        	data : { userNick : userNick },
+					            
+					            success : function(x){
+					            	//alert("x : " + x);
+					            	if(x == 1){
+						               alert("이미 존재하는 닉네임 입니다.");
+					            	}else{
+			  			              alert("사용 가능한 닉네임 입니다.");
+					            	}
+					            },
+					            error : function(e){
+					            	alert('서버요청 실패!');
+					            } 
+					            
+							})
+							
+							
+						})
+						
+					
+					</script>
+					
+					<!-- --------------------------------------------- -->
+	              
 					<!-- --------------------------------------------- -->
 	              
 	               <!-- ---------------사장님 ---------------------- -->
@@ -229,7 +267,7 @@
 	                    <div class="ggg">
 	                        <table>
 	                            <tr>
-	                                <td><input type="text" name="bossJoinId" class="input-field" placeholder="아이디" required></td>
+	                                <td><input type="text" id="bossId" name="bossJoinId" class="input-field" placeholder="아이디" required></td>
 	                                <td style="padding-left: 30px;"><button id="bossIdCheck">중복확인</button></td>
 	                            </tr>
 	                        </table>
@@ -244,10 +282,49 @@
 	                    </div>
 	                </div>
 	             </form>  
+
+           	<!-- ------사장님_아이디 중복체크-------------------------------------- -->
+					
+			<script>
+			
+				$("#bossIdCheck").click(function(e){
+					
+					
+					var bossId  = $('#bossId').val();
+					
+			        var url = "${pageContext.request.contextPath}/boss/idCheck"
+
 	
+					$.ajax({
+						url  : url,
+						//url : "/hallo03talk/boss/idCheck",
+						method : "post",
+			        	data : { bossId : bossId },
+			            
+			            success : function(x){
+			            	if(x == 1){
+				               alert("이미 존재하는 아이디입니다.");
+			            	}else{
+	  			              alert("사용 가능한 아이디 입니다.");
+			            	}
+			            },
+			            error : function(e){
+			            	alert('서버요청 실패!');
+			            } 
+			            
+					})
+					
+					
+				})
+				
+			
+			</script>
+			
+	<!-- --------------------------------------------- -->  
 	               
 	            </div>
 	        </div>
+		             
 	
 	        <script>
 	            var x = document.getElementById("login");

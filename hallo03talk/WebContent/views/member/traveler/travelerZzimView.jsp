@@ -1,5 +1,15 @@
+<%@page import="com.h3.traveler.vo.MpgZzimVo"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    
+ <%
+         ArrayList<MpgZzimVo> voList = (ArrayList<MpgZzimVo>)request.getAttribute("voList");
+  %>
+  
+  
+  
 <!DOCTYPE html>
 <html>
 <head>
@@ -69,20 +79,20 @@
                       <div class="collapse navbar-collapse" id="navbarNavDropdown">
                             <ul class="navbar-nav">
                               <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="세미실전_일반회원_마이페이지(메뉴바,내정보).html">내 정보</a>
+                                <a class="nav-link active" aria-current="page" href="/hallo03talk/traveler/myPage">내 정보</a>
                               </li>
                               <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="세미실전_일반회원_마이페이지(내가 쓴 글).html">내가 쓴 글</a>
+                                <a class="nav-link active" aria-current="page" href="/hallo03talk/travelerMpgPost/list">내가 쓴 글</a>
                               </li>
                               <li class="nav-item">
-                                <a class="nav-link" href="세미실전_일반회원_마이페이지(내가쓴댓글).html">내가 쓴 댓글</a>
+                                <a class="nav-link" href="/hallo03talk/travelerMpgReply/list">내가 쓴 댓글</a>
                               </li>
                               <li class="nav-item">
-                                <a class="nav-link" href="#">예약 내역</a>
+                                <a class="nav-link" href="/hallo03talk/travelerMpgRsv/list">예약 내역</a>
                               </li>
                               
                               <li class="nav-item" style="background-color: rgba(0, 0, 0, 0.2); border-radius: 5px;">
-                                <a class="nav-link" href="#">찜 목록</a>
+                                <a class="nav-link" href="/hallo03talk/travelerMpgZzim/list">찜 목록</a>
                               </li>
                              
                               <li class="nav-item dropdown">
@@ -90,8 +100,7 @@
                                   신고
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                  <li><a class="dropdown-item" href="세미실전_일반회원_마이페이지(신고한내역).html">신고 한 내역</a></li>
-                                  <li><a class="dropdown-item" href="세미실전_일반회원_마이페이지(신고받은내역).html">신고 받은 내역</a></li>
+                                  <li><a class="dropdown-item" href="/hallo03talk/traveler/getReport">신고 받은 내역</a></li>
                                 </ul>
                               </li>
                             </ul>
@@ -107,6 +116,7 @@
               </div>
               
               <!-- -----찜 리스트------------------------------------------------------ -->
+               <%for(int i=0; i < voList.size(); i++){ %>  
              
                <div class="card" style="width: 18rem;">
                   <div class="card-header">
@@ -114,14 +124,14 @@
                      </div>
                      
                  <div class="card-body">
-                      <h5 class="card-title">장소명</h5>
-                      <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                      <p class="card-text text-truncate">여기는 장소 내용 Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <h5 class="card-title"><%=voList.get(i).getName() %></h5>
+                      <h6 class="card-subtitle mb-2 text-muted"><%=voList.get(i).getBoard() %></h6>  
+                      <p class="card-text text-truncate"><%=voList.get(i).getContent() %></p>
                       <a href="#" class="card-link">Card link</a>
                       <a href="#" class="card-link">Another link</a>
                  </div>
               </div>
-                       
+               	<%}%>        
             <!-- ---------------------------------------------------------- -->                      
             
 

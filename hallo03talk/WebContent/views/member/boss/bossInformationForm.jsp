@@ -408,11 +408,9 @@ input.full:focus, textarea.full:focus {
                                 <a class="nav-link active" aria-current="page" href="/hallo03talk/bossMpgPost/list">내가 쓴 글</a>
                               </li>
                               <li class="nav-item">
-                                <a class="nav-link" href="/hallo03talk/bossMpgReply/list">내가 쓴 댓글</a>
+                                <a class="nav-link" href="/hallo03talk/bossMpgReply/list">내가 쓴 답글</a>
                               </li>
-                              <li class="nav-item">
-                                <a class="nav-link" href="#">신고 한 내역</a>
-                              </li>                             
+                                                        
                             </ul>
                       </div>
                 </div>

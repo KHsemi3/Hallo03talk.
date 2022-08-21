@@ -73,17 +73,14 @@
                       <div class="collapse navbar-collapse" id="navbarNavDropdown">
                             <ul class="navbar-nav">
                               <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="세미실전_사장님_마이페이지(메뉴바,내정보).html">내 정보</a>
+                                <a class="nav-link active" aria-current="page" href="/hallo03talk/boss/myPage">내 정보</a>
                               </li>
                               <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="세미실전_사장님_마이페이지(내가 쓴 글).html">내가 쓴 글</a>
+                                <a class="nav-link active" aria-current="page" href="/hallo03talk/bossMpgPost/list">내가 쓴 글</a>
                               </li>
                               <li class="nav-item" style="background-color: rgba(0, 0, 0, 0.2); border-radius: 5px;">
-                                <a class="nav-link" href="세미실전_사장님_마이페이지(내가쓴댓글).html">내가 쓴 댓글</a>
+                                <a class="nav-link" href="/hallo03talk/bossMpgReply/list">내가 쓴 답글</a>
                               </li>
-                              <li class="nav-item">
-                                <a class="nav-link" href="#">신고 한 내역</a>
-                              </li>                             
                             </ul>
                       </div>
                 </div>

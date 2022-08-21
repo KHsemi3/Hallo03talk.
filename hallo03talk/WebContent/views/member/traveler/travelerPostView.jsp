@@ -1,11 +1,11 @@
-<%@page import="com.h3.traveler.vo.TravelerMyPageVo"%>
+<%@page import="com.h3.traveler.vo.MpgPostVo"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
      
  <%
-          ArrayList<TravelerMyPageVo> voList = (ArrayList<TravelerMyPageVo>)request.getAttribute("voList");
+      ArrayList<MpgPostVo> voList = (ArrayList<MpgPostVo>)request.getAttribute("voList");
  %>  
     
     
@@ -71,7 +71,7 @@
                       <div class="collapse navbar-collapse" id="navbarNavDropdown">
                             <ul class="navbar-nav">
                               <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="/hallo03talk/views/member/traveler/travelerInformationForm.jsp">내 정보</a>
+                                <a class="nav-link active" aria-current="page" href="/hallo03talk/traveler/myPage">내 정보</a>
                               </li>
                               <li class="nav-item" style="background-color: rgba(0, 0, 0, 0.2); border-radius: 5px;">
                                 <a class="nav-link active" aria-current="page" href="/hallo03talk/travelerMpgPost/list">내가 쓴 글</a>
@@ -80,11 +80,11 @@
                                 <a class="nav-link" href="/hallo03talk/travelerMpgReply/list">내가 쓴 댓글</a>
                               </li>
                               <li class="nav-item">
-                                <a class="nav-link" href="#">예약 내역</a>
+                                <a class="nav-link" href="/hallo03talk/travelerMpgRsv/list">예약 내역</a>
                               </li>
                               
                               <li class="nav-item">
-                                <a class="nav-link" href="#">찜 목록</a>
+                                <a class="nav-link" href="/hallo03talk/travelerMpgZzim/list">찜 목록</a>
                               </li>
                             
                               <li class="nav-item dropdown">
@@ -92,7 +92,6 @@
                                   신고
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                  <li><a class="dropdown-item" href="">신고 한 내역</a></li>
                                   <li><a class="dropdown-item" href="">신고 받은 내역</a></li>
                                 </ul>
                               </li>
@@ -144,7 +143,27 @@
         </div>
     </main>
     
-    
+       <!-- --------행 클릭하면 해당 내용 보이기------------------------------ -->
+   
+<script>
+		$(function(){
+			$('#writeTable>tbody>tr').click(function(){
+				//행 클릭 되었을 때, 동작할 내용
+				//글 번호 가져오기
+				const num = $(this).children().eq(1).text();
+				
+				//해당 번호 이용해서 요청 보내기
+				//alert(num);				
+				location.href='/hallo03talk/traveler/travelerPostDetail?num=' + num;
+
+				
+			});
+		})
+	</script>
+	
+	
+	<!-- ------------------------------------------------------------------ -->
+	 
 <footer></footer> 
 
 <!-- -------------------------------------------------------- -->
