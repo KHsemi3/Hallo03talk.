@@ -55,7 +55,7 @@ public class ReportComment extends HttpServlet{
 			//신고 실패 //이전 페이지로 옮기기
 			resp.sendRedirect("/hallo03talk/index.jsp");
 		}
-
+ 
 	}
 
 }

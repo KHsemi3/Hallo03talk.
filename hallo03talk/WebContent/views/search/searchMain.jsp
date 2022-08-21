@@ -22,7 +22,7 @@
                 <h1 style="margin-left: 60px;"><b>검색</b></h1>
             </div>
             <br><br><br>
-            <input type="searchbox" name="q" value="${param.q}" style="width: 90%; height: 50px; border-radius: 10px; border: 1px solid gray; margin-left: 5%;" placeholder="  검색어를 입력하세요.">
+            <input type="text" name="keyword" value="" style="width: 90%; height: 50px; border-radius: 10px; border: 1px solid gray; margin-left: 5%;" placeholder="  검색어를 입력하세요.">
             <br><br>
     
     
