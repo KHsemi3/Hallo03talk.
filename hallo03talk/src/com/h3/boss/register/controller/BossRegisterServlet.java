@@ -19,11 +19,18 @@ public class BossRegisterServlet extends HttpServlet{
 		//데이터 받기
 		//과세구분
 		//사업자등록번호(숫자)
+		req.setCharacterEncoding("UTF-8");
+		String busNum = req.getParameter("busNum");
 		//업태?
+		String busStatus = req.getParameter("busStatus");
 		//상호명
+		String busName = req.getParameter("busName");
 		//대표자명
+		String busBoss = req.getParameter("busBoss");
 		//생년월일
+		String busBirth = req.getParameter("busBirth");
 		//주소
+		String busAddress = req.getParameter("busAddress");
 
 		
 	}
