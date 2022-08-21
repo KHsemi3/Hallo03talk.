@@ -12,9 +12,10 @@ public class ReportCommentVo {
 	private String process;
 	private String type;
 	private String replyNo;
+	private String reportUserId;
 	
 	
-	public ReportCommentVo(int no, String guilty, String content, String process, String type, String replyNo) {
+	public ReportCommentVo(int no, String guilty, String content, String process, String type, String replyNo, String reportUserId) {
 		super();
 		this.no = no;
 		this.guilty = guilty;
@@ -22,6 +23,7 @@ public class ReportCommentVo {
 		this.process = process;
 		this.type = type;
 		this.replyNo = replyNo;
+		this.reportUserId = reportUserId;
 	}
 
 
@@ -85,11 +87,25 @@ public class ReportCommentVo {
 	}
 
 
+	public String getReportUserId() {
+		return reportUserId;
+	}
+
+
+	public void setReportUserId(String reportUserId) {
+		this.reportUserId = reportUserId;
+	}
+
+
 	@Override
 	public String toString() {
 		return "ReportCommentVo [no=" + no + ", guilty=" + guilty + ", content=" + content + ", process=" + process
-				+ ", type=" + type + ", replyNo=" + replyNo + "]";
+				+ ", type=" + type + ", replyNo=" + replyNo + ", reportUserId=" + reportUserId + "]";
 	}
+	
+	
+
+	
 	
 	
 	

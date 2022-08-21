@@ -12,9 +12,13 @@ public class ReportBoardVo {
 	private String process;
 	private String type;
 	private String boardNo;
+	private String reportUserId;
 	
 	
-	public ReportBoardVo(int no, String guilty, String content, String process, String type, String boardNo) {
+	
+
+	public ReportBoardVo(int no, String guilty, String content, String process, String type, String boardNo,
+			String reportUserId) {
 		super();
 		this.no = no;
 		this.guilty = guilty;
@@ -22,6 +26,7 @@ public class ReportBoardVo {
 		this.process = process;
 		this.type = type;
 		this.boardNo = boardNo;
+		this.reportUserId = reportUserId;
 	}
 
 
@@ -85,11 +90,23 @@ public class ReportBoardVo {
 	}
 
 
+	public String getReportUserId() {
+		return reportUserId;
+	}
+
+
+	public void setReportUserId(String reportUserId) {
+		this.reportUserId = reportUserId;
+	}
+
+
 	@Override
 	public String toString() {
 		return "ReportBoardVo [no=" + no + ", guilty=" + guilty + ", content=" + content + ", process=" + process
-				+ ", type=" + type + ", boardNo=" + boardNo + "]";
+				+ ", type=" + type + ", boardNo=" + boardNo + ", reportUserId=" + reportUserId + "]";
 	}
+
+
 	
 	
 	
