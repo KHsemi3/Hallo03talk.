@@ -32,11 +32,15 @@ public class PlaceAddController extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		
-		String name = (String)req.getParameter("placeName");
-		String content = (String)req.getParameter("placeContent");
-		String address = (String)req.getParameter("placeAddr");
+		String name = req.getParameter("placeName");
+		String content = req.getParameter("placeContent");
+		String address = req.getParameter("placeAddr");
 		BossVo bv = (BossVo)req.getSession().getAttribute("BossLoginMember");
-		String categoryNo = (String)req.getParameter("category_no");
+		String categoryNo = req.getParameter("category_no");
+		
+		if(req.getParameter("placeName") == null || req.getParameter("placeContent") == null || req.getParameter("placeAddr") == null || req.getSession().getAttribute("BossLoginMember") == null || req.getParameter("category_no") == null) {
+			resp.sendRedirect("/hallo03talk/place/list?categoryNo=0&cityNo=0&insideNo=0");
+		}
 		
 		PlaceVo placeVo = new PlaceVo();
 		placeVo.setName(name);
@@ -93,11 +97,13 @@ public class PlaceAddController extends HttpServlet{
 		
 		if(result == 1) {
 			//성공
+			resp.sendRedirect("/hallo03talk/place/list?categoryNo=0&cityNo=0&insideNo=0");
 		} else {
 			//실패
 			for(int i = 0; i < delPhotos.size(); i++ ) {
 					new File(realPath + File.separator + delPhotos.get(i)).delete();
 			}
+			resp.sendRedirect("/hallo03talk/place/list?categoryNo=0&cityNo=0&insideNo=0");
 		}
 		
 	}

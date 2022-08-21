@@ -80,4 +80,27 @@ public class PlaceReviewReplyDao {
 		return prrvList;
 	}
 
+	public int replyDel(Connection conn, String replyNo) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String sql = "UPDATE PLACE_REVIEW_REPLY SET STATUS='N' WHERE NO=?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, replyNo);
+			
+			result = pstmt.executeUpdate();
+			
+			return result;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 }

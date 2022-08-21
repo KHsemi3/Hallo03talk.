@@ -72,7 +72,7 @@ public class PlaceReviewDao {
 		ResultSet rs = null;
 		List<PlaceReviewVo> prvList = new ArrayList<PlaceReviewVo>();
 		
-		String sql = "SELECT NO,TITLE,CONTENT, STAR, PLACE_NO, TRAVELER_NO, ENROLL_DATE FROM PLACE_REVIEW WHERE STATUS='Y' AND PLACE_NO=?";
+		String sql = "SELECT PR.NO NO,PR.TITLE TITLE,PR.CONTENT CONTENT, PR.STAR STAR, PR.PLACE_NO PLACE_NO, PR.TRAVELER_NO TRAVELER_NO, PR.ENROLL_DATE ENROLL_DATE, RR.NO REVIEW_NO, RR.STATUS STATUS FROM PLACE_REVIEW PR LEFT OUTER JOIN PLACE_REVIEW_REPLY RR ON PR.NO = RR.REVIEW_NO WHERE PR.STATUS='Y' AND PLACE_NO=?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -89,7 +89,7 @@ public class PlaceReviewDao {
 				prv.setPlaceNo(rs.getString("PLACE_NO"));
 				prv.setTravelerNo(rs.getString("TRAVELER_NO"));
 				prv.setEnrollDate(rs.getString("ENROLL_DATE"));
-				
+				prv.setCheckReview(rs.getString("STATUS"));
 				prvList.add(prv);
 			}
 			

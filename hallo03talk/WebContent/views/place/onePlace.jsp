@@ -69,7 +69,7 @@
 							<svg style="color: rgb(253, 195, 86); cursor: pointer;"
 								xmlns="http://www.w3.org/2000/svg" width="32" height="34"
 								fill="currentColor" class="bi bi-heart-fill zzimBtn"
-								viewBox="0 0 16 16" onclick="delZzim(${p.no})">
+								viewBox="0 0 16 16" onclick="delZzim(${placeVo.no})">
 	                           									 <path fill-rule="evenodd"
 									d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
 									fill="#fdc356"></path>
@@ -79,7 +79,7 @@
 							<svg style="color: #f3da35; cursor: pointer;"
 								xmlns="http://www.w3.org/2000/svg" width="32" height="32"
 								fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16"
-								onclick="addZzim(${p.no})">
+								onclick="addZzim(${placeVo.no})">
 	                            					<path
 									d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"
 									fill="#f3da35"></path>
@@ -123,7 +123,7 @@
 				<!-- =============================================================================== -->
 				<c:if test="${!empty travelerLoginMember }">
 					<div class="text-end">
-						<button class="btn btn-warning my-3" id="reviewFormBtn">후기
+						<button class="btn btn-warning my-3" id="reviewFormBtn" onclick="reviewFormBtn();">후기
 							등록</button>
 					</div>
 					<!-- 후기 등록 -->
@@ -156,7 +156,7 @@
 						</div>
 						<div class="d-flex col justify-content-end align-items-center">
 							<button class="btn btn-primary">작성</button>
-							<button type="button" class="btn btn-danger">취소</button>
+							<button type="button" class="btn btn-danger" onclick="cancelReview();">취소</button>
 						</div>
 					</div>
 				</form>
@@ -185,12 +185,14 @@
 								</span>
 							</div>
 							<!-- 사장님만 보임 -->
-							<c:if test="${ BossLoginMember.no eq bossVoForShow.no }">
-								<div class="d-flex col justify-content-end align-items-center">${ r.travelerNo }</div>
-								<div class="d-flex col justify-content-end align-items-center">
-									<button class="btn btn-primary px-1" id="writeReview">
-										답글 등록</button>
-								</div>
+							<c:if test="${ r.checkReview=='N' || empty r.checkReview }">
+								<c:if test="${ BossLoginMember.no eq bossVoForShow.no }">
+									<div class="d-flex col justify-content-end align-items-center">${ r.travelerNo }</div>
+									<div class="d-flex col justify-content-end align-items-center">
+										<button class="btn btn-primary px-1" id="reviewForm" onclick="writeBtn();">
+											답글 등록</button>
+									</div>
+								</c:if>
 							</c:if>
 							<c:if test="${ BossLoginMember.no ne bossVoForShow.no }">
 								<div
@@ -201,6 +203,7 @@
 							<form action="/hallo03talk/review/reply" method="post"
 								class="hideForm" id="commentForm">
 								<input type="hidden" value="${ r.no }" name="reviewNo" />
+								<input type="hidden" value="${ placeVo.no }" name="placeNo" />
 								<div class="row border border-2">
 									<div
 										class="d-flex col-2 justify-content-center align-items-center"></div>
@@ -213,7 +216,7 @@
 									<div
 										class="d-flex col-2 justify-content-end align-items-center">
 										<button class="btn btn-primary">작성</button>
-										<button type="button" class="btn btn-danger">취소</button>
+										<button type="button" class="btn btn-danger" onclick="cancelBtn();">취소</button>
 									</div>
 								</div>
 							</form>
@@ -235,7 +238,7 @@
 											<label class="col">${ bossVoForShow.id }</label>
 											<div
 												class="d-flex col justify-content-end align-items-center">
-												<button class="btn btn-danger px-1" id="delReview">답글
+												<button class="btn btn-danger px-1" id="delReview" onclick="delBtn(${rr.no});">답글
 													삭제</button>
 											</div>
 										</c:if>
@@ -432,4 +435,5 @@
 <script src="/hallo03talk/resources/js/reviewForm.js"></script>
 <script src="/hallo03talk/resources/js/updateReview.js"></script>
 <script src="/hallo03talk/resources/js/star.js"></script>
+<script src="/hallo03talk/resources/js/updateReview.js"></script>
 </html>

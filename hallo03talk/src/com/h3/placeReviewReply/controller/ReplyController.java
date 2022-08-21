@@ -20,8 +20,9 @@ public class ReplyController extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		
 		BossVo bv = (BossVo) req.getSession().getAttribute("BossLoginMember");
-		String reviewNo = (String) req.getParameter("reviewNo");
-		String content = (String) req.getParameter("replyContent");
+		String reviewNo = req.getParameter("reviewNo");
+		String content = req.getParameter("replyContent");
+		String placeNo = req.getParameter("placeNo");
 		
 		PlaceReviewReplyVo prrv = new PlaceReviewReplyVo();
 		prrv.setBossNo(Integer.toString(bv.getNo()));
@@ -29,6 +30,12 @@ public class ReplyController extends HttpServlet {
 		prrv.setContent(content);
 		
 		int result = new PlaceReviewReplyService().addReply(prrv);
+		
+		if (result == 1) {
+			resp.sendRedirect("/hallo03talk/place/one?placeNo="+placeNo);
+		} else {
+			
+		}
 		
 	}
 }
