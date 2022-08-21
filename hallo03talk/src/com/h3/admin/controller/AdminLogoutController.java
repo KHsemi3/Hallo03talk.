@@ -12,7 +12,7 @@ public class AdminLogoutController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.getSession().invalidate();
-		req.getSession().setAttribute("alertMsg", "로그아웃 성공!");
+		req.getSession().setAttribute("alertMsg", "관리자 로그아웃 성공!");
 		resp.sendRedirect("/hallo03talk/views/member/admin/adminPage.jsp");
 	}
 

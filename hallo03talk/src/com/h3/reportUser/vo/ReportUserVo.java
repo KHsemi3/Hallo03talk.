@@ -14,17 +14,20 @@ public class ReportUserVo {
 	private String content;
 	private String process;
 	private String reportedTravelerNo;
+	private String reportUserId;
 	
 	
-	public ReportUserVo(int no, String guilty, String content, String process, String reportedTravelerNo) {
+	public ReportUserVo(int no, String guilty, String content, String process, String reportedTravelerNo, String reportUserId) {
 		super();
 		this.no = no;
 		this.guilty = guilty;
 		this.content = content;
 		this.process = process;
 		this.reportedTravelerNo = reportedTravelerNo;
+		this.reportUserId = reportUserId;
 	}
 
+	
 
 	public int getNo() {
 		return no;
@@ -74,13 +77,29 @@ public class ReportUserVo {
 	public void setReportedTravelerNo(String reportedTravelerNo) {
 		this.reportedTravelerNo = reportedTravelerNo;
 	}
+	
+	
+
+	public String getReportUserId() {
+		return reportUserId;
+	}
+
+
+
+	public void setReportUserId(String reportUserId) {
+		this.reportUserId = reportUserId;
+	}
+
 
 
 	@Override
 	public String toString() {
 		return "ReportUserVo [no=" + no + ", guilty=" + guilty + ", content=" + content + ", process=" + process
-				+ ", reportedTravelerNo=" + reportedTravelerNo + "]";
+				+ ", reportedTravelerNo=" + reportedTravelerNo + ", reportUserId=" + reportUserId + "]";
 	}
+
+
+
 	
 	
 	
