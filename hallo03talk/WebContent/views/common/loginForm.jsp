@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+ <%
+ String idFind = (String)session.getAttribute("idFind");
+
+ %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -213,12 +218,13 @@
    
            <div class="modal-footer">
              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-             <button type="submit" class="btn btn-primary" ">찾기</button>
+             <button type="submit" class="btn btn-primary">찾기</button>
            </div>
          </div>
        </div>
      </div>
     </form>
+    
    
 	<!-- --모달창_일반회원_비밀번호 찾기----------------- -->
         
@@ -237,21 +243,20 @@
            <div class="modal-body">
              <!-- ----- -->
              <div id="pwdFormOuter">
-               <form action="" method="post">
+   				<form action="/hallo03talk/traveler/pwdFind" method="post"> 
    
                  <!-- ----- -->
                  <div class="form-floating mb-3">
-                   <input type="text" name="" class="form-control" id="floatingInput" placeholder="name@example.com">
+                   <input type="text" name="travelerJoinId" class="form-control" id="floatingInput" placeholder="name@example.com">
                    <label for="floatingInput">아이디</label>
                  </div>
                  
                  <div class="form-floating">
-                   <input type="tel" name="" class="form-control" id="floatingPassword" placeholder="Password">
+                   <input type="tel" name="travelerJoinPhone" class="form-control" id="floatingPassword" placeholder="Password">
                    <label for="floatingPassword">전화번호</label>
                  </div>
                  <!-- -- -->
    
-               </form>
              </div>
            <!-- ----- -->
    
@@ -264,6 +269,8 @@
          </div>
        </div>
      </div>
+    </form>
+     
   <!-- -------------------------------------------------------------------------------------------------------------------------------------------------------- -->
    
        <!--모달창_사장님_아이디 찾기 -->
@@ -283,7 +290,7 @@
            <div class="modal-body">
              <!-- ----- -->
              <div id="pwdFormOuter">
-               <form action="" method="post">
+   				<form action="/hallo03talk/boss/idFind" method="post"> 
                  <div class="form-floating mb-3">
                    <input type="tel" name="bossJoinPhone" class="form-control" id="floatingInput" placeholder="name@example.com">
                    <label for="floatingInput">가게 전화번호</label>
@@ -293,7 +300,6 @@
                    <label for="floatingPassword">이메일</label>
                  </div>
    
-               </form>
              </div>
            <!-- ----- -->
    
@@ -306,6 +312,7 @@
          </div>
        </div>
      </div>
+    </form>
    
     <!-- --모달창_사장님_비밀번호 찾기----------------- -->
         
@@ -324,7 +331,7 @@
            <div class="modal-body">
              <!-- ----- -->
              <div id="pwdFormOuter">
-               <form action="" method="post">
+   				<form action="/hallo03talk/boss/pwdFind" method="post"> 
    
                  <!-- ----- -->
                  <div class="form-floating mb-3">
@@ -338,7 +345,7 @@
                  </div>
                  <!-- -- -->
    
-               </form>
+             
              </div>
            <!-- ----- -->
    
@@ -352,7 +359,7 @@
        </div>
      </div>
      
-
+  </form>
 
 
 </body>

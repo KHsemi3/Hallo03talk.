@@ -13,7 +13,7 @@ import com.h3.boss.vo.BossMyPageVo;
 import com.h3.boss.vo.BossVo;
 import com.h3.community.vo.CommReplyVo;
 import com.h3.placeReview.vo.PlaceReviewVo;
-import com.h3.traveler.vo.TravelerMyPageVo;
+import com.h3.traveler.vo.MpgPostVo;
 
 public class BossDao {
 
@@ -384,6 +384,142 @@ public class BossDao {
 		return list;
 	
 	}//selectReplyList
+
+
+
+	/*
+	 * boss - 아이디 찾기
+	 */
+	public String idFind(Connection conn, String bossJoinPhone, String bossJoinEmail) {
+	
+	
+	
+		PreparedStatement pstmt = null;
+		String idFind = null;
+		ResultSet rs = null;
+
+	    String sql ="SELECT ID FROM BOSS WHERE PHONE = ? AND EMAIL = ? AND STATUS ='Y'";
+	    try {
+	    	
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, bossJoinPhone);
+			pstmt.setString(2, bossJoinEmail);
+			
+			System.out.println("====================");
+			System.out.println("입력받은 번호 : " + bossJoinPhone);
+			System.out.println("입력받은 이메일 : " + bossJoinEmail);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				System.out.println("rs 통과 ");
+				
+				idFind = rs.getString("ID");
+				System.out.println(idFind);
+				
+				
+			}
+			
+	    }catch(Exception e) {
+	    	e.printStackTrace();
+	    	
+	    }finally {
+	    	close(pstmt);
+			close(rs);
+
+	    }
+	    
+	    System.out.println("dao ::: " + idFind);
+	    
+	    return idFind;
+	
+	
+	
+	}//idFind
+
+
+
+	
+	/*
+	 * boss - 비밀번호 찾기
+	 */
+	public String pwdFind(Connection conn, String bossJoinId, String bossJoinPhone) {
+
+		PreparedStatement pstmt = null;
+		String pwdFind = null;
+		ResultSet rs = null;
+
+	    String sql ="SELECT PWD FROM BOSS WHERE ID = ? AND PHONE = ? AND STATUS ='Y'";
+	    try {
+	    	
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, bossJoinId);
+			pstmt.setString(2, bossJoinPhone);
+			
+			System.out.println("====================");
+			System.out.println("입력받은 아이디 : " + bossJoinId);
+			System.out.println("입력받은 전화번호 : " + bossJoinPhone);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				System.out.println("rs 통과 ");
+				
+				pwdFind = rs.getString("PWD");
+				System.out.println(pwdFind);
+				
+				
+			}
+			
+	    }catch(Exception e) {
+	    	e.printStackTrace();
+	    	
+	    }finally {
+	    	close(pstmt);
+			close(rs);
+
+	    }
+	    
+	    System.out.println("dao ::: " + pwdFind);
+	    
+	    return pwdFind;
+	
+	}//pwdFind
+
+
+
+	/*
+	 * boss - 아이디 중복 체크
+	 */
+	public int idCheck(Connection conn, String bossId) {
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int idCheck = 0;
+		
+		String sql = "SELECT * FROM BOSS WHERE ID= ? ";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, bossId);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				idCheck = 1;      // 이미 존재하는 경우, 생성 불가
+			}else {
+				idCheck = 0;	 // 존재하지 않는 경우, 생성 가능
+			}
+
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return idCheck;
+	
+	}
 
 	
 }//class

@@ -8,20 +8,11 @@ import static com.h3.common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import javax.servlet.http.HttpSession;
-
 import com.h3.community.vo.CommReplyVo;
 import com.h3.traveler.repository.TravelerDao;
-import com.h3.traveler.vo.TravelerMyPageVo;
-import com.h3.traveler.vo.TravelerVo;
-import static com.h3.common.JDBCTemplate.commit;
-import static com.h3.common.JDBCTemplate.getConnection;
-import static com.h3.common.JDBCTemplate.rollback;
-
-import java.sql.Connection;
-import java.util.ArrayList;
-
-import com.h3.traveler.repository.TravelerDao;
+import com.h3.traveler.vo.MpgPostVo;
+import com.h3.traveler.vo.MpgReservationVo;
+import com.h3.traveler.vo.MpgZzimVo;
 import com.h3.traveler.vo.TravelerVo;
 
 public class TravelerService {
@@ -250,11 +241,11 @@ public class TravelerService {
 	/*
 	 * traveler - 내가 쓴 글 조회
 	 */
-	public ArrayList<TravelerMyPageVo> selectList(int no) {
+	public ArrayList<MpgPostVo> selectList(int no) {
 
 	
 		Connection conn = null;
-		ArrayList<TravelerMyPageVo> voList = null;
+		ArrayList<MpgPostVo> voList = null;
 		
 		try {
 			
@@ -364,17 +355,17 @@ public class TravelerService {
 	/*
 	 * traveler - 아이디 찾기
 	 */
-	public TravelerVo idFind(TravelerVo vo) {
+	public String idFind(String travelerJoinPhone, String travelerJoinEmail) {
 
 		Connection conn = null;
-		TravelerVo idFind = null;
+		String idFind = null;
 		
 		try {
 			
 			conn = getConnection();
 			
 			// dao 호출
-			idFind = new TravelerDao().idFind(conn, vo);
+			idFind = dao.idFind(conn, travelerJoinPhone, travelerJoinEmail);
 			
 			
 			
@@ -390,6 +381,167 @@ public class TravelerService {
 		
 	
 	}//idFind
+
+
+	
+	/*
+	 * traveler - 찜 목록 조회
+	 */
+	public ArrayList<MpgZzimVo> selectZzimList(int no) {
+
+		Connection conn = null;
+		ArrayList<MpgZzimVo> voList = null;
+		
+		try {
+			
+			conn = getConnection();
+			
+			// dao 호출
+			voList = dao.selectZzimList(conn, no);
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		
+		// 실행결과 리턴
+		return voList;
+	
+	}//selectZzimList
+
+
+	
+	/*
+	 * traveler - 비밀번호 찾기
+	 */
+	public String pwdFind(String travelerJoinId, String travelerJoinPhone) {
+	
+	
+		Connection conn = null;
+		String pwdFind = null;
+		
+		try {
+			
+			conn = getConnection();
+			
+			// dao 호출
+			pwdFind = dao.pwdFind(conn, travelerJoinId, travelerJoinPhone);
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			rollback(conn);
+		}finally {
+			close(conn);
+		}
+
+		System.out.println("service ::: " + pwdFind);
+		return pwdFind;
+		
+	
+	
+	}//pwdFind
+
+
+	/*
+	 * traveler - 닉네임 중복 체크
+	 */
+	public int nickCheck(String userNick) {
+		
+		int nickCheck = 0;
+		
+		Connection conn = null;
+		try {
+			
+			conn = getConnection();
+			
+			nickCheck = dao.nickCheck(conn, userNick);
+
+			if(nickCheck == 1) {
+				System.out.println("이미 존재하는 닉네임 입니다.");
+			}else {
+				System.out.println("사용 가능한 닉네임 입니다.");
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		
+		return nickCheck;
+		
+	}//nickCheck
+
+
+	
+	/*
+	 * traveler - 예약 내역 조회
+	 */
+	public ArrayList<MpgReservationVo> selectRsvList(int no) {
+	
+	
+		Connection conn = null;
+		ArrayList<MpgReservationVo> voList = null;
+		
+		try {
+			
+			conn = getConnection();
+			
+			// dao 호출
+			voList = dao.selectRsvList(conn, no);
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		
+		// 실행결과 리턴
+		return voList;
+	
+	
+	
+	}//selectRsvList
+
+
+	
+
+	/*
+	 * traveler - 예약내역 상세조회 화면 보여주기
+	 */
+	public MpgReservationVo rsvDetail(int no, String num) {
+
+		Connection conn = null;
+		MpgReservationVo rvo = null;
+		
+		try {
+			
+			conn = getConnection();
+			
+			// dao 호출
+			rvo = dao.rsvDetail(conn, no, num);
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		
+		// 실행결과 리턴
+		return rvo;
+	
+	
+	}//rsvDetail
+
+
+
+
+	
 
 
 

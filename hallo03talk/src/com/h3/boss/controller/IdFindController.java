@@ -1,4 +1,4 @@
-package com.h3.traveler.controller;
+package com.h3.boss.controller;
 
 import java.io.IOException;
 
@@ -8,36 +8,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.h3.traveler.service.TravelerService;
-import com.h3.traveler.vo.TravelerVo;
+import com.h3.boss.service.BossService;
 
-@WebServlet(urlPatterns = "/traveler/idFind")
+@WebServlet(urlPatterns = "/boss/idFind")
 public class IdFindController extends HttpServlet{
 
+	
 	/*
-	 * traveler - 아이디 찾기
+	 * boss - 아이디 찾기
 	 */
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		// 인코딩
-		req.setCharacterEncoding("UTF-8"); 
+		String bossJoinPhone = req.getParameter("bossJoinPhone");
+		String bossJoinEmail = req.getParameter("bossJoinEmail");
 
-		String travelerJoinPhone = req.getParameter("travelerJoinPhone");
-		String travelerJoinEmail = req.getParameter("travelerJoinEmail");
- 
-	     
-	     
-		// 데이터 뭉치기 
-//		TravelerVo vo = new TravelerVo();
-//		vo.setPhone(travelerJoinPhone);
-//		vo.setEmail(travelerJoinEmail);
-
-	
-		// 서비스 호출
-		//TravelerVo idFind = new TravelerService().idFind(vo);
-		String idFind = new TravelerService().idFind(travelerJoinPhone, travelerJoinEmail);
-
+		String idFind = new BossService().idFind(bossJoinPhone, bossJoinEmail);
 
 		if(idFind != null) {
 			// 아이디 찾기 성공
@@ -50,13 +36,9 @@ public class IdFindController extends HttpServlet{
 			req.getRequestDispatcher("/views/common/IdFind.jsp").forward(req, resp);
 
 		}
-
 	
 	
-	}
-	
-	
-	
+	}//doPost
 	
 	
 }//class
