@@ -18,6 +18,6 @@ $(function(){
 		//글 번호 가져오기
 		const num = $(this).children().eq(0).text();
 		//해당 번호 이용해서 요청 보내기
-		location.href='/hallo03talk/place/detail?num=' + num;
+		location.href='/hallo03talk/place/searchDetail?num=' + num;
 	});
 })

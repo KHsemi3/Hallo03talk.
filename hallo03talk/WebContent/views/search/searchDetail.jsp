@@ -7,11 +7,12 @@
     pageEncoding="UTF-8"%>
 
 <%
-
 	ArrayList<PlaceVo> pvoList = (ArrayList<PlaceVo>)request.getAttribute("pvoList");
 	ArrayList<CommVo> cvoList = (ArrayList<CommVo>)request.getAttribute("cvoList");
 	ArrayList<PlaceReviewVo> rvoList = (ArrayList<PlaceReviewVo>)request.getAttribute("rvoList");
 	System.out.println(pvoList);
+	System.out.println(cvoList);
+	System.out.println(rvoList);
 %>
 
 

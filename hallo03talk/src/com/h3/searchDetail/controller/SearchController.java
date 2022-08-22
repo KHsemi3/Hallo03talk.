@@ -23,11 +23,23 @@ public class SearchController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+
+		System.out.println("==============================");
+		
 		//호출
 		ArrayList<PlaceVo> pvoList = new SearchService().pselectList();
 		ArrayList<PlaceReviewVo> rvoList = new SearchService().rselectList();
 		ArrayList<CommVo> cvoList = new SearchService().cselectList();
 		
+		
+		String placeKeyword =req.getParameter("placeKeyword");
+		String cate1 = req.getParameter("cate1");
+		String cate2 = req.getParameter("cate2");
+		String cate3 = req.getParameter("cate3");
+		
+		PlaceVo pvo = new PlaceVo();
+		CommVo cvo = new CommVo();
+		PlaceReviewVo rvo = new PlaceReviewVo();
 		
 		//결과에 따라 화면 만들기
 		req.setAttribute("pvoList", pvoList);
@@ -39,25 +51,14 @@ public class SearchController extends HttpServlet{
 		req.setAttribute("cvoList", cvoList);
 		req.getRequestDispatcher("/views/search/searchDetail.jsp").forward(req, resp);
 		
+		req.setCharacterEncoding("UTF-8");
+		
+
+		
 		
 	}
 	
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		req.setCharacterEncoding("UTF-8");
-		
-		String placeKeyword =req.getParameter("placeKeyword");
-		String cate1 = req.getParameter("cate1");
-		String cate2 = req.getParameter("cate2");
-		String cate3 = req.getParameter("cate3");
-		
-		PlaceVo pvo = new PlaceVo();
-		CommVo cvo = new CommVo();
-		PlaceReviewVo rvo = new PlaceReviewVo();
-		
 
-	}
 	
 }
 

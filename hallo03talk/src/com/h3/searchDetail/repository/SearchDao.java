@@ -18,7 +18,7 @@ public class SearchDao {
 	//장소 검색
 	public ArrayList<PlaceVo> pselectList(Connection conn){
 		
-		String sql = "SELECT A.NO , A.NAME , A.CONTENT , A.ADDRESS , B.NAME FROM PLACE A LEFT OUTER JOIN PLACE_PHOTO B ON A.NO = B.PLACE_NO WHERE B.PHOTO_PROFILE = 'Y' AND A.TITLE LIKE '%?%' OR A.CONTENT LIKE '%?%'";
+		String sql = "SELECT A.NO , A.NAME , A.CONTENT , A.ADDRESS , B.NAME FROM PLACE A LEFT OUTER JOIN PLACE_PHOTO B ON A.NO = B.PLACE_NO WHERE B.PHOTO_PROFILE = 'Y' AND A.NAME LIKE '%?%' OR A.CONTENT LIKE '%?%'";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -56,6 +56,7 @@ public class SearchDao {
 		return plist;
 		
 	}//plist
+	
 	
 	
 	//후기 검색
