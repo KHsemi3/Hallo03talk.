@@ -3,10 +3,12 @@ package com.h3.with.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import static com.h3.common.JDBCTemplate.*;
 
+import com.h3.common.JDBCTemplate;
 import com.h3.with.vo.PageVo;
 import com.h3.with.vo.WithVo;
 
@@ -151,6 +153,47 @@ public class WithDao {
 
 		// 실행결과 리턴
 		return count;
+	}
+
+	public int edit(Connection conn, WithVo vo) throws Exception {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = "UPDATE with_ SET TITLE = ?, CONTENT = ?, TAG = ?, ENROLL_DATE = sysdate, START_DATE = ?, END_DATE = ?, INSTA = ?, TRAVELER_NO = ?, PLACE = ? WHERE NO = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getTitle());
+			pstmt.setString(2, vo.getContent());
+			String tag = String.join(",", vo.getTag());
+			pstmt.setString(3, tag);
+			pstmt.setDate(4, vo.getStart_date());
+			pstmt.setDate(5, vo.getEnd_date());
+			pstmt.setString(6, vo.getInsta());
+			
+			pstmt.setString(7, vo.getTraveler_no());
+			pstmt.setString(8, vo.getPlace());
+			pstmt.setString(9, vo.getNo());
+			
+			result = pstmt.executeUpdate();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int delete(Connection conn, String no) throws Exception {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = "DELETE FROM WITH_ WHERE NO = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, no);
+			
+			result = pstmt.executeUpdate();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
 	}
 
 }

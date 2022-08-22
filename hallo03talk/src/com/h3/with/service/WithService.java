@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import static com.h3.common.JDBCTemplate.*;
 import com.h3.with.dao.WithDao;
+import com.h3.with.dao.WithPostDao;
 import com.h3.with.vo.PageVo;
 import com.h3.with.vo.WithVo;
 
@@ -65,6 +66,48 @@ public class WithService {
 			e.printStackTrace();
 		}finally {
 			close(conn);
+		}
+		
+		return result;
+	}
+
+	public int edit(WithVo vo) {
+		int result = 0;
+		Connection conn = null;
+		
+		try {
+			conn = getConnection();
+			
+			result = new WithDao().edit(conn, vo);
+			if(result == 1) {
+				commit(conn);
+			}else {
+				rollback(conn);
+			}
+		} catch (Exception e) {
+			rollback(conn);
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
+	public int delete(String no) {
+		int result = 0;
+		Connection conn = null;
+		
+		try {
+			conn = getConnection();
+			
+			result = new WithDao().delete(conn, no);
+			if(result == 1) {
+				commit(conn);
+			}else {
+				rollback(conn);
+			}
+		} catch (Exception e) {
+			rollback(conn);
+			e.printStackTrace();
 		}
 		
 		return result;
