@@ -13,18 +13,22 @@ import com.h3.admin.service.AdminReportService;
 public class ReportUserDeleteController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String num =req.getParameter("num");
+		String[] num =req.getParameterValues("num");
 		
-		int result =new AdminReportService().deleteUser(Integer.parseInt(num));
-			System.out.println(result);
-		if(result == 1 ) {
-			resp.sendRedirect("/admin/reportUser");
-			return;
-		}else {
-			req.setAttribute("errorMsg", "공지사항 삭제 실패");
-			req.getRequestDispatcher("/views/error/errorPage.jsp").forward(req, resp);
-			return;
-		}
+		int[] dNum = new int [num.length];
+		for(int i = 0; i< num.length; i ++)
+			dNum[i] = Integer.parseInt(num[i]);
+		
+			
+			int result = new AdminReportService().deleteUser(dNum);
+				
+			
+		
+			
+			req.getRequestDispatcher("/admin/reportUser").forward(req, resp);
+			
+			
+		
 		
 	}
 

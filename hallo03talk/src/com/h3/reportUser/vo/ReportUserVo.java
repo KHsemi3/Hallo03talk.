@@ -9,15 +9,17 @@ public class ReportUserVo {
 	}
 	
 	
-	private int no;
+	private String no;
 	private String guilty;
 	private String content;
 	private String process;
 	private String reportedTravelerNo;
 	private String reportUserId;
+	private Timestamp enrollDate;
 	
 	
-	public ReportUserVo(int no, String guilty, String content, String process, String reportedTravelerNo, String reportUserId) {
+	public ReportUserVo(String no, String guilty, String content, String process, String reportedTravelerNo,
+			String reportUserId, Timestamp enrollDate) {
 		super();
 		this.no = no;
 		this.guilty = guilty;
@@ -25,16 +27,16 @@ public class ReportUserVo {
 		this.process = process;
 		this.reportedTravelerNo = reportedTravelerNo;
 		this.reportUserId = reportUserId;
+		this.enrollDate = enrollDate;
 	}
 
-	
 
-	public int getNo() {
+	public String getNo() {
 		return no;
 	}
 
 
-	public void setNo(int no) {
+	public void setNo(String no) {
 		this.no = no;
 	}
 
@@ -77,13 +79,11 @@ public class ReportUserVo {
 	public void setReportedTravelerNo(String reportedTravelerNo) {
 		this.reportedTravelerNo = reportedTravelerNo;
 	}
-	
-	
+
 
 	public String getReportUserId() {
 		return reportUserId;
 	}
-
 
 
 	public void setReportUserId(String reportUserId) {
@@ -91,13 +91,29 @@ public class ReportUserVo {
 	}
 
 
+	public Timestamp getEnrollDate() {
+		return enrollDate;
+	}
+
+
+	public void setEnrollDate(Timestamp enrollDate) {
+		this.enrollDate = enrollDate;
+	}
+
 
 	@Override
 	public String toString() {
 		return "ReportUserVo [no=" + no + ", guilty=" + guilty + ", content=" + content + ", process=" + process
-				+ ", reportedTravelerNo=" + reportedTravelerNo + ", reportUserId=" + reportUserId + "]";
+				+ ", reportedTravelerNo=" + reportedTravelerNo + ", reportUserId=" + reportUserId + ", enrollDate="
+				+ enrollDate + "]";
 	}
-
+	
+	
+	
+	
+	
+	
+	
 
 
 	

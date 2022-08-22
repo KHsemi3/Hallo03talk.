@@ -1,5 +1,10 @@
+<%@page import="com.h3.reportUser.vo.ReportUserVo"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%
+    ArrayList<ReportUserVo> voList = (ArrayList<ReportUserVo>)request.getAttribute("voList");
+    %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +20,7 @@
         font-style: normal;
       }
     .right-nav {
-      width: 80%;
+      width: 1270px;
       height:100%;
       box-sizing: border-box;
       padding:15px;
@@ -24,16 +29,20 @@
     }
 
     .board {
-      width:100%;
+     
       height:100%;
     }
 
     .report-board-table {
-      width:100%;
+     
     }
 
     .report-board-table th {
       text-align: center!important;
+      width: 310px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     thead {
@@ -121,7 +130,7 @@ opacity:0.5;
 
 					
 		<ul>
-	<li id="reportImg"><img src="../../../resources/img/report.png" alt="" />신고관리</li>
+	<li id="reportImg"><img src="<%=request.getContextPath()%>/resources/img/report.png" alt="" /> 신고 유저관리</li>
 </ul>			
 <hr />
 <div class="right-nav">
@@ -144,12 +153,23 @@ opacity:0.5;
         <th>데이터3</th>
         <th>데이터4</th>
       </tr>
-      <tr>
-       <th><input class="check"type="checkbox" name="check"  />데이터1</th>
-        <th>데이터2</th>
-        <th>데이터3</th>
-        <th>데이터4</th>
-      </tr>
+      
+       <form action="/multipleDel" method="post" id=multidel>
+        <%
+		for(int i = 0; i<voList.size(); i++){
+		%>
+		<tr>
+			<th><input class="check"type="checkbox" name="num" value="<%=voList.get(i).getNo()%>"  /><%=voList.get(i).getNo()%></th>
+			
+			<th><%=voList.get(i).getReportUserId()%></th>
+			<th><%=voList.get(i).getGuilty()%></th>
+			<th><%=voList.get(i).getContent()%><th>
+			
+			
+		</tr>
+	
+		<%} %>
+      
       <tr>
         <th><input class="check"type="checkbox" name="check"  />데이터1</th>
         <th>데이터2</th>
@@ -220,11 +240,12 @@ opacity:0.5;
               <a href="">10</a>
                <a href="">&gt;</a>
                <div class="btn-area">
-                <span> 신고목록 삭제</span>
+                <span onclick="location.href='/hallo03talk/admin/reportUserDelete?num=1'"> 신고목록 삭제</span>
                 <span> 페널티 부여</span>
                </div>
               
      </div>
+     </form>
    <br />
     <br />
     <hr />

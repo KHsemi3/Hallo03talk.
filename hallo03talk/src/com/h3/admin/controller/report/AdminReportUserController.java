@@ -22,7 +22,7 @@ public class AdminReportUserController extends HttpServlet {
 				//데이터 뭉치기 
 				
 				//서비스 호출
-				ArrayList<ReportUserVo> voList  =	new AdminReportService().selectList();
+				ArrayList<ReportUserVo> voList  =	new AdminReportService().selectListUser();
 				
 				//결과에 따라 화면 선택
 				
@@ -33,6 +33,6 @@ public class AdminReportUserController extends HttpServlet {
 				
 			
 		
-		resp.sendRedirect("/hallo03talk/views/member/admin/reportUserAdmin.jsp");
+		//resp.sendRedirect("/hallo03talk/views/member/admin/reportUserAdmin.jsp");
 	}
 }
