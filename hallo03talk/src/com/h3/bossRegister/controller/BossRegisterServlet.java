@@ -1,6 +1,10 @@
 package com.h3.bossRegister.controller;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,20 +25,17 @@ public class BossRegisterServlet extends HttpServlet{
 			
 			//사업자등록번호(숫자)
 			req.setCharacterEncoding("UTF-8");
-			String num = req.getParameter("busNum");
+			String busNum = req.getParameter("busNum");
 			//업태?
-			String status = req.getParameter("busStatus");
+			String busStatus = req.getParameter("busStatus");
 			//상호명
-			String name = req.getParameter("busName");
+			String busName = req.getParameter("busName");
 			//대표자명
-			String bossName = req.getParameter("busBoss");
+			String busBoss = req.getParameter("busBoss");
 			//생년월일S
-			String birth = req.getParameter("busBirth");
+			String busBirth = req.getParameter("busBirth");
 			//주소
-			String address = req.getParameter("busAddress");
-			
-			//데이터 확인
-			boolean isSuccess = true;
+			String busAddress = req.getParameter("busAddress");
 			
 			//DB 가져오기
 			String driver = "oracle.jdbc.driver.OracleDriver";
@@ -45,8 +46,36 @@ public class BossRegisterServlet extends HttpServlet{
 			
 			Connection conn = DriverManager.getConnection(url,id,pwd);
 			
-			String sql = SELECT NO, NUM, STATUS, NAME, BOSSNAME, BIRTH, ADDRESS FROM REGISTER WHERE NUM= ? AND BIRTH= ? ;
+			String sql = "SELECT NO, NUM, STATUS, NAME, BOSSNAME, BIRTH, ADDRESS FROM REGISTER WHERE NUM= ? AND BIRTH= ?" ;
 			
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1,busNum);
+			pstmt.setString(2,busBirth);
+			
+			ResultSet rs= pstmt.executeQuery(); 
+			
+			if(rs.next()) {
+				
+				int no = rs.getInt("NO");
+				String num = rs.getString("NUM");
+				String status = rs.getString("STATUS");
+				String name = rs.getString("NAME");
+				String bossName = rs.getString("BOSSNAME");
+				String birth = rs.getString("BIRTH");
+				String address = rs.getString("ADDRESS");
+				
+				//System.out.println(no);
+				//System.out.println(num);
+				//System.out.println(status);
+				//System.out.println(name);
+				//System.out.println(bossName);
+				//System.out.println(birth);
+				//System.out.println(address);
+			}
+			
+			rs.next();
+		
 			
 			//결과 보여주기
 			req.getRequestDispatcher("views/member/boss/registerOk.jsp").forward(req, resp);

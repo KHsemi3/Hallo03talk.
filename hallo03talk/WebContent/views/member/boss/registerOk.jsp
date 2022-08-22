@@ -7,6 +7,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h3>인증 성공! 이제 장소 페이지를 이용하실 수 있어요!</h3>
+	<script>
+    // 팝업창 닫기
+    $(document).ready(function() {
+      $('#btn_submit').ajaxForm(function() {
+        alert("인증되었습니다!");
+        self.close();
+      });
+   });
+ </script> 
 </body>
 </html>

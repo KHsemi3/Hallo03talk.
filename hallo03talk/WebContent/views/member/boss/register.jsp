@@ -20,7 +20,7 @@
         		<h4>어떤 가게를 운영중이신가요?</h4>
         			<form action="/hallo03talk/bossRegister" method="post">
             			<label>사업자등록번호</label>
-            			<input type="text" name="busNum" placeholder="사업자등록번호를 입력해 주세요">
+            			<input type="text" name="busNum" placeholder="사업자등록번호(숫자 10자리)를 입력해 주세요">
             			<label>업태</label>
             			<input type="text" name="busStatus" placeholder="한글로만 입력하세요">
             			<label>상호명</label>
@@ -32,7 +32,9 @@
            				<label>주소</label>
             			<input type="text" name="busAddress" placeholder="주소를 검색하세요">
             			<input type="button" value="주소검색"><br>
-            			<input type="submit" value="확인">
+            			<div class="btn_confirm">
+       					<button type="submit" id="btn_submit" accesskey="s" class="btn_submit btn" >작성완료</button>
+   						</div>
         			 </form>
     			</div>
 			</div>				
