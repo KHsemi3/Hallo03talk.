@@ -29,20 +29,21 @@ public class GetReportController extends HttpServlet{
 		// 서비스 호출
 		ArrayList<ReportUserVo> voList = new TravelerService().selectGetReportList(loginTraveler.getNo());
 	
+		req.setAttribute("voList", voList);
 
 		System.out.println("@@@voList@@: " + voList);
 		
 		
 		
-		if(voList != null) {
-			
-			req.setAttribute("voList", voList);
-
-			req.getRequestDispatcher("/views/member/traveler/travelerGetReportView.jsp").forward(req, resp);
-
-		}else {
-			System.out.println("실패 ! voList가 null 입니다.");
-		}
+//		if(voList != null) {
+//			
+//			req.setAttribute("voList", voList);
+//
+//			req.getRequestDispatcher("/views/member/traveler/travelerGetReportView.jsp").forward(req, resp);
+//
+//		}else {
+//			System.out.println("실패 ! voList가 null 입니다.");
+//		}
 		
 		
 		
