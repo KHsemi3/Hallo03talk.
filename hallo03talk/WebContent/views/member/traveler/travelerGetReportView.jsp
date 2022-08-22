@@ -1,5 +1,14 @@
+<%@page import="com.h3.reportUser.vo.ReportUserVo"%>
+<%@page import="java.util.ArrayList"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+  <%
+         ArrayList<ReportUserVo> voList = (ArrayList<ReportUserVo>)request.getAttribute("voList");
+  %>
+  
+  
 <!DOCTYPE html>
 <html>
 <head>
@@ -106,21 +115,26 @@
                   <tr>
                     <th scope="col" style="width: 5%;"></th>
                     <th scope="col" style="width: 5%;">#</th>
-                    <th scope="col" style="width: 80%;">신고 항목</th>
-                    <th scope="col" class="text-center" style="width: 10%;">날짜</th>
+                    <th scope="col" style="width: 20%;">혐의</th>
+                    <th scope="col"  class="text-center" style="width: 50%;">내용</th>
+                  <th scope="col" class="text-center" style="width: 20%;">날짜</th>
                   </tr>
                 </thead>
 
 <!-- ---------------------------------------------------------------------------------------- -->
                 <tbody>
-                    <tr data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        <th scope="row">
-                          <input type="checkbox">
-                        </th>
-                        <th scope="row">1</th>
-                        <td >욕설</td>
-                        <td class="text-center">22.05.05</td>
-                    </tr>
+                    <%for(int i=0; i < voList.size(); i++){ %> 
+                   
+	                    <tr>
+	                        <th scope="row">
+	                          <input type="checkbox">
+	                        </th>
+	                        <th scope="row"><%=voList.get(i).getNo() %></th>
+	                        <td ><%=voList.get(i).getGuilty() %></td>
+	                        <td><%=voList.get(i).getContent() %></td>
+	                        <td class="text-center"><%=voList.get(i).getEnrollDate() %></td>
+	                    </tr>
+                   <%}%>
                 </tbody>
 <!-- -------------------------------------------------------------- -->
               </table>
@@ -131,36 +145,6 @@
         
     </main>
     
-    <!-- --------행 클릭하면 해당 내용 보이기------------------------------ -->
-   
-    
-	<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Launch demo modal
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-		
-	
-	<!-- ------------------------------------------------------------------ -->
-	
 	
     <footer></footer> 
 	

@@ -28,12 +28,20 @@ public class IdFindController extends HttpServlet{
 		if(idFind != null) {
 			// 아이디 찾기 성공
 			req.getSession().setAttribute("idFind", idFind);
-			req.getRequestDispatcher("/views/common/IdFind.jsp").forward(req, resp);
+
+			req.getSession().setAttribute("alertMsg", idFind);   
+			
+			req.getSession().setAttribute("alertMsg", "당신의 아이디는 " + idFind + " 입니다.");   
+
+			req.getRequestDispatcher("/views/common/loginForm.jsp").forward(req, resp);
+			
 		}else {
+			
 			System.out.println("실패...idFind 가 null입니다");
 			
-			req.getSession().setAttribute("idFind", idFind);
-			req.getRequestDispatcher("/views/common/IdFind.jsp").forward(req, resp);
+			req.getSession().setAttribute("alertMsg", "일치하는 아이디가 없습니다.");   
+
+			req.getRequestDispatcher("/views/common/loginForm.jsp").forward(req, resp);
 
 		}
 	
