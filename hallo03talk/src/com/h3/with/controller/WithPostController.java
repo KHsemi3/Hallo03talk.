@@ -51,8 +51,10 @@ public class WithPostController extends HttpServlet{
 		int result = new WithPostService().post(vo);
 		
 		if(result == 1) {
+			req.getSession().setAttribute("alertMsg", "글이 등록되었습니다.");
 			resp.sendRedirect(req.getContextPath() + "/with/list");
 		}else {
+			req.getSession().setAttribute("alertMsg", "등록 실패");
 			resp.sendRedirect(req.getContextPath() + "/with/list");
 		}
 	}

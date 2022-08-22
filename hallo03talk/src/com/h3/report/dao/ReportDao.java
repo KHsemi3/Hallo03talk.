@@ -56,21 +56,16 @@ public class ReportDao {
 		
 		try {
 			
-			String sql = "INSERT INTO REPORT_CONTENT (NO, GUILTY, CONTENT, PROCESS, TYPE, BOARD_NO) VALUES ( SEQ_REPORT_CONTENT_NO.NEXTVAL, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO REPORT_CONTENT (NO, GUILTY, CONTENT, PROCESS, TYPE, BOARD_NO) VALUES ( SEQ_REPORT_CONTENT_NO.NEXTVAL, ?, ?, DEFAULT, ?, ?)";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, bvo.getGuilty());
 			pstmt.setString(2, bvo.getContent());
-			pstmt.setString(3, bvo.getProcess());
-			pstmt.setString(4, bvo.getType());
-			pstmt.setString(5, bvo.getBoardNo());
+			pstmt.setString(3, bvo.getType());
+			pstmt.setString(4, bvo.getBoardNo());
 			
 			result = pstmt.executeUpdate();
 			
-			
-		} catch (Exception e) { 
-			
-			throw e;
 			
 		}finally {
 			

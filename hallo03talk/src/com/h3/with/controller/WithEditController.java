@@ -21,6 +21,7 @@ public class WithEditController extends HttpServlet{
 		String no = req.getParameter("no");
 		WithVo vo = new WithService().getOne(no);
 		
+		
 		req.setAttribute("editVo",vo);
 		req.getRequestDispatcher("/with/post").forward(req, resp);
 	}
@@ -56,8 +57,10 @@ public class WithEditController extends HttpServlet{
 		int result = new WithService().edit(vo);
 		
 		if(result == 1) {
+			req.getSession().setAttribute("alertMsg", "수정되었습니다.");
 			resp.sendRedirect(req.getContextPath() + "/with/list");
 		}else {
+			req.getSession().setAttribute("alertMsg", "수정 실패.");
 			resp.sendRedirect(req.getContextPath() + "/with/list");
 		}
 	}

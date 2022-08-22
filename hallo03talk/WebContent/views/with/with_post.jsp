@@ -1,8 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%@ include file="/views/common/header.jsp"%>\
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="/views/common/header.jsp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -95,7 +94,7 @@
 						<label for="exampleFormControlTextarea1"
 							class="form-label mt-3"><h4>내용</h4></label>
 						<!-- summernote -->
-						<textarea class="summernote" name="content" id="exampleFormControlTextarea1" value="${editVo.content}"></textarea>
+						<textarea class="summernote" name="content" id="exampleFormControlTextarea1"></textarea>
 
 
 						<!-- 태그 -->
@@ -255,7 +254,12 @@
 				tag.value = string;
 			})
 			//=========================================
-	
+			
+			const content = '${editVo.content}';
+			if(!(content == null || content =='')){
+				$('.summernote').summernote('reset');
+				$('.summernote').summernote('pasteHTML', content);
+			}
 		});
 	</script>
 </body>

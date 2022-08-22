@@ -28,6 +28,7 @@ public class WithDetailController extends HttpServlet{
 			req.setAttribute("vo", vo);
 			req.getRequestDispatcher("/views/with/with_detail.jsp").forward(req, resp);
 		}else {
+			req.getSession().setAttribute("alertMsg", "조회 실패");
 			resp.sendRedirect("/hallo03talk/with/list");
 		}
 	}

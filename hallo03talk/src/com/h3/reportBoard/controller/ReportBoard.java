@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.h3.report.service.ReportService;
 import com.h3.reportBoard.vo.ReportBoardVo;
 
-@WebServlet (urlPatterns = "/reportBoard")
+@WebServlet (urlPatterns = "/report/reportContent")
 public class ReportBoard extends HttpServlet{
 	
 	@Override
@@ -26,21 +26,17 @@ public class ReportBoard extends HttpServlet{
 		
 		req.setCharacterEncoding("UTF-8");
 		
-		String no = req.getParameter("no");
 		String guilty = req.getParameter("guilty");
 		String content = req.getParameter("content");
-		String process = req.getParameter("process");
 		String type = req.getParameter("type");
 		String boardNo = req.getParameter("boardNo");
 		
+		ReportBoardVo vo = new ReportBoardVo();
 		
-		//신고 타입 없을때에 방어
-		String bguilty = "";
-		if(guilty != null) {
-			bguilty = String.join(",", guilty);
-		}
-		
-		ReportBoardVo vo = new ReportBoardVo();  
+		vo.setGuilty(guilty);
+		vo.setContent(content);
+		vo.setType(type);
+		vo.setBoardNo(boardNo);
 		
 		//객체 이용해서 신고 진행
 		int result = new ReportService().bjoin(vo);
@@ -53,6 +49,7 @@ public class ReportBoard extends HttpServlet{
 			resp.sendRedirect("/hallo03talk");
 		}else {
 			//신고 실패 //메인 페이지로 옮기기
+			System.out.println("SDFSDFSD");
 			resp.sendRedirect("/hallo03talk/index.jsp");
 		}
 
