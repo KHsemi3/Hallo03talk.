@@ -45,7 +45,7 @@ public class ReservationDao {
 		int result = 0;
 		ReservationVo rv = new ReservationVo();
 		
-		String sql = "SELECT NO, START_DATE,END_DATE,HUMAN,PLACE_NO,TRAVELER_NO FROM RESERVATION WHERE STATUS='Y' AND CANCEL='N' AND PLACE_NO=? AND TRAVELER_NO=?";
+		String sql = "SELECT NO, START_DATE,END_DATE,HUMAN,PLACE_NO,TRAVELER_NO, CANCEL FROM RESERVATION WHERE STATUS='Y' AND CANCEL='N' AND PLACE_NO=? AND TRAVELER_NO=?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -72,6 +72,31 @@ public class ReservationDao {
 		}
 		
 		return rv;
+	}
+
+	public int cancelReservation(Connection conn, String placeNo, int travelerNo) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String sql = "UPDATE RESERVATION SET CANCEL='N' WHERE PLACE_NO=? AND TRAVELER_NO=?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, placeNo);
+			pstmt.setInt(2, travelerNo);
+			
+			result = pstmt.executeUpdate();
+			
+			return result;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 }

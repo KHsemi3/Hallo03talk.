@@ -62,4 +62,30 @@ public class ReservationService {
 		return rv;
 	}
 
+	public int cancelReservation(String placeNo, int travelerNo) {
+		
+		Connection conn = null;
+		int result = 0;
+		
+		try {
+			conn = getConnection();
+			result = dao.cancelReservation(conn, placeNo, travelerNo);
+			
+			if(result == 1) {
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+			
+			return result;
+		} catch (Exception e) {
+			rollback(conn);
+			e.printStackTrace();
+		} finally {
+			close(conn);
+		}
+		
+		return result;
+	}
+
 }

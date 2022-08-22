@@ -31,6 +31,7 @@ public class ReservationController extends HttpServlet{
 		rv.setHuman(human);
 		rv.setPlaceNo(placeNo);
 		
+		
 		int result = new ReservationService().addReservation(rv);
 		
 		resp.setCharacterEncoding("UTF-8");
