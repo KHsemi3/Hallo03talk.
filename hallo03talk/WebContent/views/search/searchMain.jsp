@@ -30,7 +30,7 @@
                 <!--장소-->
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 
-                    <form action="hallo03talk/search/searchDetail" method="dopost" id="pform">
+                    <form action="hallo03talk/searchPlace/searchDetail" method="get" id="pform">
 
                         <br><br>
                         <div class="text" style=" width: 50%;float: left;">
@@ -139,7 +139,7 @@
                                         alert("검색어를 입력해주세요");
                                         return;
                                     }
-                                    $("#pform").attr("action", "searchDetail.jsp"); // attribute setting
+                                    $("#pform").attr("action", "/hallo03talk/searchPlace/searchDetail"); // attribute setting
                                     $("#pform").submit();
                                 });
                             });
@@ -149,7 +149,7 @@
 
                     </form>
 
-                    <button href="/views/search/searchDetail.jsp" id="send" type="submit" onclick="getPlaceCate" value="검색" class="btn btn-warning" style="float:right; margin-right: 60px; margin-top: 50px;">검색</button>
+                    <button id="send" type="submit" onclick="getPlaceCate" value="검색" class="btn btn-warning" style="float:right; margin-right: 60px; margin-top: 50px;">검색</button>
 
 
                 </div>
@@ -157,7 +157,7 @@
                 <!--동행-->
                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                     
-                   <form action="hallo03talk/search/searchWidthDetail" method="dopost" id="wform">
+                   <form action="hallo03talk/search/searchWidthDetail" method="get" id="wform">
 
                     <br><br>
                     <div class="text" style=" width: 50%;float: left;">
@@ -279,7 +279,7 @@
                                         alert("오는날을 입력해주세요");
                                         return;
                                     } 
-                                    $("#wform").attr("action", "searchWidthDetail.jsp"); // attribute setting
+                                    $("#wform").attr("action", "/hallo03talk/searchWidth/searchWidthDetail"); // attribute setting
                                     $("#wform").submit();
                                 });
                             });
@@ -291,7 +291,7 @@
 
                    </form> 
 
-                   <button href="/views/search/searchWidthDetail.jsp" type="submit" id="wsend" onclick="getWidthCate" value="검색" class="btn btn-warning" style="float:right; margin-right: 60px; margin-top: 50px;">검색</button>
+                   <button type="submit" id="wsend" onclick="getWidthCate" value="검색" class="btn btn-warning" style="float:right; margin-right: 60px; margin-top: 50px;">검색</button>
 
                 </div>
 

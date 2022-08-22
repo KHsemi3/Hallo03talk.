@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.h3.searchDetail.service.SearchWidthService;
 import com.h3.with.vo.WithVo;
 
-@WebServlet (urlPatterns = "/searchPlace/searchWidthDetail")
+@WebServlet (urlPatterns = "/searchWidth/searchWidthDetail")
 public class SearchWidthController extends HttpServlet{
 	
 	@Override
