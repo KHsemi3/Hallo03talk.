@@ -2,7 +2,10 @@
     pageEncoding="UTF-8"%>
     
  <%
- String idFind = (String)session.getAttribute("idFind");
+	 String idFind = (String)session.getAttribute("idFind");
+	 
+	 String alertMsg = (String)session.getAttribute("alertMsg");
+	 session.removeAttribute("alertMsg");
 
  %>
 <!DOCTYPE html>
@@ -218,14 +221,17 @@
    
            <div class="modal-footer">
              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-             <button type="submit" class="btn btn-primary">찾기</button>
+             <button type="submit" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#exampleModal">찾기</button>
            </div>
          </div>
        </div>
      </div>
     </form>
     
-   
+    
+
+  
+  
 	<!-- --모달창_일반회원_비밀번호 찾기----------------- -->
         
       <!-- Modal -->
@@ -360,7 +366,15 @@
      </div>
      
   </form>
-
+  
+  
+	<script>
+		<%if(alertMsg!=null){%>
+			alert('<%=alertMsg%>');
+		<%}%>
+		
+	</script>
+	
 
 </body>
 </html>

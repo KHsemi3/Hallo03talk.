@@ -92,7 +92,7 @@
                                   신고
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                  <li><a class="dropdown-item" href="">신고 받은 내역</a></li>
+                                  <li><a class="dropdown-item" href="/hallo03talk/traveler/getReport">신고 받은 내역</a></li>
                                 </ul>
                               </li>
                             </ul>
@@ -115,8 +115,8 @@
                 <tr>
                   <th scope="col" style="width: 5%;"></th>
                   <th scope="col" style="width: 5%;">#</th>
-                    <th scope="col" class="text-center" style="width: 20%;">게시판</th>
-                  <th scope="col" class="text-center" style="width: 50%;">제목</th>
+                    <th scope="col" style="width: 20%;">게시판</th>
+                  <th scope="col"  style="width: 50%;">제목</th>
                   <th scope="col" class="text-center" style="width: 20%;">작성일</th>
                 </tr>
               </thead>
@@ -146,7 +146,7 @@
        <!-- --------행 클릭하면 해당 내용 보이기------------------------------ -->
    
 <script>
-		$(function(){
+/* 		$(function(){
 			$('#writeTable>tbody>tr').click(function(){
 				//행 클릭 되었을 때, 동작할 내용
 				//글 번호 가져오기
@@ -155,10 +155,12 @@
 				//해당 번호 이용해서 요청 보내기
 				//alert(num);				
 				location.href='/hallo03talk/traveler/travelerPostDetail?num=' + num;
+				
+				//location.href='/hallo03talk/with/detail?no=1';
 
 				
 			});
-		})
+		}) */
 	</script>
 	
 	
@@ -221,7 +223,7 @@
 		
 		
 	})
-});
+/* }); */
 </script>
 
 </body>

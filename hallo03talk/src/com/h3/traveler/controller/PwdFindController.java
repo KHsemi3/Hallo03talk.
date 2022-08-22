@@ -32,12 +32,18 @@ public class PwdFindController extends HttpServlet{
 		if(pwdFind != null) {
 			// 비밀번호 찾기 성공
 			req.getSession().setAttribute("pwdFind", pwdFind);
-			req.getRequestDispatcher("/views/common/pwdFind.jsp").forward(req, resp);
+			
+			req.getSession().setAttribute("alertMsg", pwdFind);   
+
+			req.getSession().setAttribute("alertMsg", "당신의 비밀번호는 " + pwdFind + " 입니다.");   
+
+			req.getRequestDispatcher("/views/common/loginForm.jsp").forward(req, resp);
 		}else {
 			System.out.println("실패...pwdFind 가 null입니다");
 			
-			req.getSession().setAttribute("pwdFind", pwdFind);
-			req.getRequestDispatcher("/views/common/pwdFind.jsp").forward(req, resp);
+			req.getSession().setAttribute("alertMsg", "일치하는 비밀번호가 없습니다.");   
+
+			req.getRequestDispatcher("/views/common/loginForm.jsp").forward(req, resp);
 
 		}
 		

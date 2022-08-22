@@ -445,7 +445,7 @@ input.full:focus, textarea.full:focus {
                   <div class="id__wrapper">
                     <div class="deco"></div>
                     <label class="your-face" id="image-form" for="image-input">
-                      <input type="file" id="image-input"/>
+                      <input type="file" name="f" id="image-input"/>
                       <div class="image-persuader">Upload Image Here</div><img id="imager" src="#" alt="Your Image Here"/>
                     </label>
                     <div class="Id">

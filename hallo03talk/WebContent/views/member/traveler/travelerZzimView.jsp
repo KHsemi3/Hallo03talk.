@@ -127,8 +127,7 @@
                       <h5 class="card-title"><%=voList.get(i).getName() %></h5>
                       <h6 class="card-subtitle mb-2 text-muted"><%=voList.get(i).getBoard() %></h6>  
                       <p class="card-text text-truncate"><%=voList.get(i).getContent() %></p>
-                      <a href="#" class="card-link">Card link</a>
-                      <a href="#" class="card-link">Another link</a>
+                      <a href="#" class="card-link">click here</a>
                  </div>
               </div>
                	<%}%>        

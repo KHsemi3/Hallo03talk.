@@ -7,12 +7,15 @@ import static com.h3.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.UUID;
 
 import com.h3.community.vo.CommReplyVo;
+import com.h3.reportUser.vo.ReportUserVo;
 import com.h3.traveler.repository.TravelerDao;
 import com.h3.traveler.vo.MpgPostVo;
 import com.h3.traveler.vo.MpgReservationVo;
 import com.h3.traveler.vo.MpgZzimVo;
+import com.h3.traveler.vo.TravelerAttachmentVo;
 import com.h3.traveler.vo.TravelerVo;
 
 public class TravelerService {
@@ -539,13 +542,38 @@ public class TravelerService {
 	}//rsvDetail
 
 
-
-
 	
+	/*
+	 * traveler - 신고 받은 내역 조회
+	 */
+	public ArrayList<ReportUserVo> selectGetReportList(int no) {
 
-
-
+		Connection conn = null;
+		ArrayList<ReportUserVo> voList = null;
+		
+		try {
+			
+			conn = getConnection();
+			
+			// dao 호출
+			voList = dao.selectGetReportList(conn, no);
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		
+		// 실행결과 리턴
+		return voList;
 	
+	
+	
+	}
+
+
+
 	
 	
 

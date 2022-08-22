@@ -10,9 +10,11 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import com.h3.community.vo.CommReplyVo;
+import com.h3.reportUser.vo.ReportUserVo;
 import com.h3.traveler.vo.MpgPostVo;
 import com.h3.traveler.vo.MpgReservationVo;
 import com.h3.traveler.vo.MpgZzimVo;
+import com.h3.traveler.vo.TravelerAttachmentVo;
 import com.h3.traveler.vo.TravelerVo;
 
 public class TravelerDao {
@@ -724,6 +726,7 @@ public class TravelerDao {
 					rvo.setStartDate(startDate);
 					rvo.setEndDate(endDate);
 					rvo.setAddress(address);
+					
 
 				}
 				
@@ -739,6 +742,76 @@ public class TravelerDao {
 		}//rsvDetail
 
 		
+		
+
+		/*
+		 * traveler - 신고 받은 내역 조회
+		 */
+		public ArrayList<ReportUserVo> selectGetReportList(Connection conn, int userNo) {
+
+		
+			String sql = "SELECT R.NO, R.GUILTY, R.CONTENT, R.PROCESS, R.REPORTED_TRAVELER_NO, TO_CHAR(R.ENROLL_DATE, 'YY/MM/DD HH:MI') AS ENROLL_DATE, T.ID FROM REPORT_USER R JOIN TRAVELER T ON R.REPORTED_TRAVELER_NO = T.NO WHERE T.STATUS = 'Y' AND REPORTED_TRAVELER_NO = ? ORDER BY NO DESC";
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;		
+			ArrayList<ReportUserVo> list = new ArrayList<ReportUserVo>();
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, userNo);
+
+				System.out.println(userNo);
+				
+				
+				rs = pstmt.executeQuery();
+
+				while(rs.next()) {
+					System.out.println("@@@@@@@---rs통과---@@@@@@@@@");
+					
+					String no = rs.getString("NO");
+					String guilty =	rs.getString("GUILTY");
+					String content = rs.getString("CONTENT");
+					String process = rs.getString("PROCESS");
+					Timestamp enrollDate =	rs.getTimestamp("ENROLL_DATE");
+					String reportedTravelerNo =	rs.getString("REPORTED_TRAVELER_NO");
+
+					String reportUserId = rs.getString("ID");
+					
+					ReportUserVo vo = new ReportUserVo();
+					vo.setNo(no);
+					vo.setGuilty(guilty);
+					vo.setContent(content);
+					vo.setProcess(process);
+					vo.setEnrollDate(enrollDate);
+					vo.setReportedTravelerNo(reportedTravelerNo);
+					vo.setReportUserId(reportUserId);
+					
+					System.out.println(no);
+					System.out.println(guilty);
+					System.out.println(content);
+					System.out.println(process);
+					System.out.println(reportedTravelerNo);
+					System.out.println(reportUserId);
+
+
+					list.add(vo);
+				}
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+				close(rs);
+			}
+			
+			return list;
+			
+			
+		
+		}//selectGetReportList
+
+		
+	
 	
 
 }// class
