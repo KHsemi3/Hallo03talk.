@@ -146,13 +146,7 @@ opacity:0.5;
       </tr>
       </thead>
       <tbody>
-      <tr>
-      
-        <th><input class="check"type="checkbox" name="check"  />데이터1</th>
-        <th>데이터2</th>
-        <th>데이터3</th>
-        <th>데이터4</th>
-      </tr>
+     
       
        
         <%
@@ -170,60 +164,7 @@ opacity:0.5;
 	
 		<%} %>
       
-      <tr>
-        <th><input class="check"type="checkbox" name="check"  />데이터1</th>
-        <th>데이터2</th>
-        <th>데이터3</th>
-        <th>데이터4</th>
-      </tr>
-      <tr>
-        <th><input class="check"type="checkbox" name="check"  />데이터1</th>
-        <th>데이터2</th>
-        <th>데이터3</th>
-        <th>데이터4</th>
-      </tr>
-      <tr>
-        <th><input class="check"type="checkbox" name="check"  />데이터1</th>
-        <th>데이터2</th>
-        <th>데이터3</th>
-        <th>데이터4</th>
-      </tr>
-      <tr>
-        <th><input class="check"type="checkbox" name="check"  />데이터1</th>
-        <th>데이터2</th>
-        <th>데이터3</th>
-        <th>데이터4</th>
-      </tr>
-      <tr>
-        <th><input class="check"type="checkbox" name="check"  />데이터1</th>
-        <th>데이터2</th>
-        <th>데이터3</th>
-        <th>데이터4</th>
-      </tr>
-      <tr>
-        <th><input class="check"type="checkbox" name="check"  />데이터1</th>
-        <th>데이터2</th>
-        <th>데이터3</th>
-        <th>데이터4</th>
-      </tr>
-      <tr>
-       <th><input class="check"type="checkbox" name="check"  />데이터1</th>
-        <th>데이터2</th>
-        <th>데이터3</th>
-        <th>데이터4</th>
-      </tr>
-      <tr>
-       <th><input class="check"type="checkbox" name="check"  />데이터1</th>
-        <th>데이터2</th>
-        <th>데이터3</th>
-        <th>데이터4</th>
-      </tr>
-      <tr>
-       <th><input class="check"type="checkbox" name="check"  />데이터1</th>
-        <th>데이터2</th>
-        <th>데이터3</th>
-        <th>데이터1</th>
-      </tr>
+      
       </tbody>
     </table>
     <div id="page">
@@ -240,11 +181,14 @@ opacity:0.5;
               <a href="">10</a>
                <a href="">&gt;</a>
                <div class="btn-area">
-                <span onclick="location.href='/hallo03talk/admin/reportUserDelete'"> 신고목록 삭제</span>
+                 <span onclick="location.href='/hallo03talk/admin/reportUserDelete'">
+                신고목록 삭제</span>
+                
                 <span> 페널티 부여</span>
                </div>
               
      </div>
+    
    <br />
     <br />
     <hr />

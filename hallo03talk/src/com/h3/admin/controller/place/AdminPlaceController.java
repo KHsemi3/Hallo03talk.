@@ -1,4 +1,4 @@
-package com.h3.admin.controller.report;
+package com.h3.admin.controller.place;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,23 +9,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.h3.admin.service.AdminReportService;
-import com.h3.reportBoard.vo.ReportBoardVo;
-import com.h3.reportComment.vo.ReportCommentVo;
-@WebServlet(urlPatterns = "/admin/reportContent")
-public class AdminReportContentController extends HttpServlet {
+import com.h3.admin.service.AdminPlaceService;
+import com.h3.place.vo.PlaceVo;
+@WebServlet(urlPatterns = "/admin/placeAdmin")
+public class AdminPlaceController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		ArrayList<ReportBoardVo> voList  =new AdminReportService().selectListBoard();
+		ArrayList<PlaceVo> voList  =	new AdminPlaceService().selectListPlace();
 		
 		//결과에 따라 화면 선택
 		
 		
 		
 		req.setAttribute("voList", voList);
-		req.getRequestDispatcher("/views/member/admin/reportContentAdmin.jsp").forward(req, resp);
+		req.getRequestDispatcher("/views/member/admin/placeAdmin.jsp").forward(req, resp);
 		
 	}
 
