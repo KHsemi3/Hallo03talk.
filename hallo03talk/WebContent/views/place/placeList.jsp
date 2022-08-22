@@ -167,7 +167,11 @@
 					 place : x
 				},
 				success : function (item) {
-					history.go(0);
+					if (item == 1) {
+						history.go(0);
+					} else {
+						alert('에러')
+					}
 				},
 				error : function () {
 					alert('찜하기 실패');
@@ -178,7 +182,6 @@
 	<c:if test="${!empty travelerLoginMember}">
 		<script>
 		function addZzim(x) {
-			
 			$.ajax({
 				url : "/hallo03talk/zzim/add",
 				method : "POST",
@@ -186,7 +189,11 @@
 					 place : x
 				},
 				success : function (item) {
-					history.go(0);
+					if (item == 1) {
+						history.go(0);
+					} else {
+						alert('에러')
+					}
 				},
 				error : function () {
 					alert('찜하기 실패');

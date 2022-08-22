@@ -49,7 +49,7 @@ String emdNo = request.getParameter("emdNo");
 			<div
 				class="d-flex w-100 border border-2 justify-content-center align-items-center mt-3"
 				style="height: 500px">
-				<input type="file" name="slideImgs" multiple class="w-100 h-100" />
+				<input type="file" name="slideImgs" multiple class="w-100 h-100 form-control" required />
 			</div>
 
 			<div class="place-info py-3">
@@ -57,23 +57,23 @@ String emdNo = request.getParameter("emdNo");
 					<!-- 장소사진 -->
 					<div
 						class="d-flex col-3 justify-content-center align-items-center border border-2">
-						<input type="file" name="placeImg" />
+						<input type="file" name="placeImg" class="form-control" required/>
 					</div>
 					<div class="col text-center py-5">
-						<select name="category_no">
+						<select name="category_no" class="form-control text-center my-3">
 							<option value="1">카페</option>
 							<option value="2" selected>숙소</option>
 							<option value="3">식당</option>
 						</select>
 						<!-- 장소명 -->
-						<input type="text" placeholder="장소명" class="h2" name="placeName" />
+						<input type="text" placeholder="장소명" class="h2 form-control" name="placeName" required/>
 						<!-- 장소설명 -->
 						<p class="py-2 px-5">
-							<textarea name="placeContent" class="h5" cols="50" rows="7"
-								placeholder="장소 설명"></textarea>
+							<textarea name="placeContent" class="h5 form-control" cols="50" rows="7"
+								placeholder="장소 설명" required></textarea>
 						</p>
 						<p class="py-2 px-5 row">
-							<input type="text" name="placeAddr" class="col text-center"
+							<input type="text" name="placeAddr" id="placeAddr" class="col text-center form-control"
 								readonly placeholder="주소" required/>
 						</p>
 						<button type="button" class="btn btn-primary col"
@@ -88,7 +88,7 @@ String emdNo = request.getParameter("emdNo");
 				</div>
 			</div>
 			<div class="text-center">
-				<button class="btn btn-warning my-3">장소 등록</button>
+				<button type="button" class="btn btn-warning my-3" onclick="checkPlaceAdd()">장소 등록</button>
 			</div>
 			<input type="hidden" value="${ BossLoginMember.no }" name="bossNo">
 		</form>
@@ -98,30 +98,30 @@ String emdNo = request.getParameter("emdNo");
 	<c:if test="${ empty BossLoginMember }">
 		<script>
 			alert('사장님만 등록가능합니다');
-			location.href = "/hallo03talk/place/list";
+			location.href = "/hallo03talk/place/list?categoryNo=0&cityNo=0&insideNo=0";
 		</script>
 	</c:if>
+
 </body>
-<script src="/hallo03talk/resources/js/jusoPopUp.js"></script>
 <script>
-	$(document).ready(function () {
-		let $juso = $('[name="jusoAddr"]');
-	$('[name="jusoAddr"]').on('input',function () {
-		console.log($(this).val());
-	})
-
-	(function ($) {
-		let origin = $.fn.val;
-		$.fn.val = function(value) {
-			let res = origin.apply(this, arguments);
-
-			if (this.is('input:text') && arguments.length >= 1) {
-				this.trigger('input');
-			}
-
-			return res;
+	function checkPlaceAdd() {
+		const placeAddr = document.querySelector('#placeAddr').value.replace(/ /g,"");
+		if (placeAddr == "") {
+			alert('주소를 추가해주세요');
+		} else if(!document.querySelector('[name="placeName"]').value) {
+			alert('장소명을 추가해주세요');
+		} else if(!document.querySelector('[name="placeContent"]').value) {
+			alert('부가 설명을 추가해주세요');
+		}   else if(!document.querySelector('[name="slideImgs"]').value) {
+			alert('사진을 추가해주세요');
+		} else if(!document.querySelector('[name="placeImg"]').value) {
+			alert('사진을 추가해주세요');
+		} else if(placeAddr.includes('제주')) {
+			document.querySelector('main #container').submit();
+		} else {
+			alert('제주도만 등록가능합니다.');
 		}
-	})(jQuery);
-	})
+	}
 </script>
+<script src="/hallo03talk/resources/js/jusoPopUp.js"></script>
 </html>

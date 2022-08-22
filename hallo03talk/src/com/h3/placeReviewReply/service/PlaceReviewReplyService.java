@@ -67,4 +67,32 @@ public class PlaceReviewReplyService {
 		return prrvList;
 	}
 
+	public int replyDel(String replyNo) {
+		
+		Connection conn = null;
+		int result = 0;
+		
+		try {
+			conn = getConnection();
+			
+			result = dao.replyDel(conn,replyNo);
+			
+			if(result == 1) {
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+			
+			return result;
+		} catch (Exception e) {
+			rollback(conn);
+			e.printStackTrace();
+		} finally {
+			close(conn);
+		}
+		
+		return result;
+		
+	}
+
 }

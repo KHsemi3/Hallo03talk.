@@ -23,10 +23,10 @@ public class ZzimAddController extends HttpServlet {
 			resp.getWriter().print(2);
 		} else {
 			TravelerVo tv = (TravelerVo) req.getSession().getAttribute("travelerLoginMember");
-			String no = (String) req.getParameter("place");
+			String no =  req.getParameter("place");
 			PlaceVo pv = new PlaceVo();
 			pv.setNo(no);
-
+			
 			int result = new ZzimService().zzimAdd(tv, pv);
 			resp.getWriter().print(result);
 		}

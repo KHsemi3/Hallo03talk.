@@ -28,5 +28,10 @@ function jusoCallBack(
   lnbrSlno,
   emdNo
 ) {
-  document.querySelector("[name='placeAddr']").value = roadFullAddr;
+  if (!roadFullAddr.includes('제주')) {
+    alert('제주도만 등록 가능합니다');
+    document.querySelector("[name='placeAddr']").value = "";
+  } else {
+    document.querySelector("[name='placeAddr']").value = roadFullAddr;
+  }
 }

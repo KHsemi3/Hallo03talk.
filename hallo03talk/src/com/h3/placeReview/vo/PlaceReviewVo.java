@@ -3,12 +3,10 @@ package com.h3.placeReview.vo;
 public class PlaceReviewVo {
 
 	public PlaceReviewVo() {
-		super();
 	}
 
 	public PlaceReviewVo(String no, String title, String content, int star, String status, String placeNo,
-			String travelerNo, String enrollDate) {
-		super();
+			String travelerNo, String enrollDate, String checkReview) {
 		this.no = no;
 		this.title = title;
 		this.content = content;
@@ -17,6 +15,7 @@ public class PlaceReviewVo {
 		this.placeNo = placeNo;
 		this.travelerNo = travelerNo;
 		this.enrollDate = enrollDate;
+		this.checkReview = checkReview;
 	}
 
 	private String no;
@@ -27,6 +26,7 @@ public class PlaceReviewVo {
 	private String placeNo;
 	private String travelerNo;
 	private String enrollDate;
+	private String checkReview;
 
 	public String getNo() {
 		return no;
@@ -92,10 +92,19 @@ public class PlaceReviewVo {
 		this.enrollDate = enrollDate;
 	}
 
+	public String getCheckReview() {
+		return checkReview;
+	}
+
+	public void setCheckReview(String checkReview) {
+		this.checkReview = checkReview;
+	}
+
 	@Override
 	public String toString() {
 		return "PlaceReviewVo [no=" + no + ", title=" + title + ", content=" + content + ", star=" + star + ", status="
-				+ status + ", placeNo=" + placeNo + ", travelerNo=" + travelerNo + ", enrollDate=" + enrollDate + "]";
+				+ status + ", placeNo=" + placeNo + ", travelerNo=" + travelerNo + ", enrollDate=" + enrollDate
+				+ ", checkReview=" + checkReview + "]";
 	}
 
 }
