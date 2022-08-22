@@ -49,7 +49,7 @@ String emdNo = request.getParameter("emdNo");
 			<div
 				class="d-flex w-100 border border-2 justify-content-center align-items-center mt-3"
 				style="height: 500px">
-				<input type="file" name="slideImgs" multiple class="w-100 h-100" required />
+				<input type="file" name="slideImgs" multiple class="w-100 h-100 form-control" required />
 			</div>
 
 			<div class="place-info py-3">
@@ -57,23 +57,23 @@ String emdNo = request.getParameter("emdNo");
 					<!-- 장소사진 -->
 					<div
 						class="d-flex col-3 justify-content-center align-items-center border border-2">
-						<input type="file" name="placeImg" required/>
+						<input type="file" name="placeImg" class="form-control" required/>
 					</div>
 					<div class="col text-center py-5">
-						<select name="category_no">
+						<select name="category_no" class="form-control text-center my-3">
 							<option value="1">카페</option>
 							<option value="2" selected>숙소</option>
 							<option value="3">식당</option>
 						</select>
 						<!-- 장소명 -->
-						<input type="text" placeholder="장소명" class="h2" name="placeName" required/>
+						<input type="text" placeholder="장소명" class="h2 form-control" name="placeName" required/>
 						<!-- 장소설명 -->
 						<p class="py-2 px-5">
-							<textarea name="placeContent" class="h5" cols="50" rows="7"
+							<textarea name="placeContent" class="h5 form-control" cols="50" rows="7"
 								placeholder="장소 설명" required></textarea>
 						</p>
 						<p class="py-2 px-5 row">
-							<input type="text" name="placeAddr" id="placeAddr" class="col text-center"
+							<input type="text" name="placeAddr" id="placeAddr" class="col text-center form-control"
 								readonly placeholder="주소" required/>
 						</p>
 						<button type="button" class="btn btn-primary col"

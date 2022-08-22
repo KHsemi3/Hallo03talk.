@@ -108,10 +108,32 @@
 						<label for="place-title" class="h1">${ placeVo.name }</label>
 						<!-- 장소설명 -->
 						<p class="h4 py-2 px-5">${ placeVo.content }</p>
+						<c:if test="${!empty travelerLoginMember && resCheck == 0 }">
 						<button class="btn btn-primary" data-bs-toggle="modal"
 							data-bs-target="#reservation">예약하기</button>
-						<button class="btn btn-danger" data-bs-toggle="modal"
-							data-bs-target="#inquiry">문의하기</button>
+						</c:if>
+						<c:if test="${!empty travelerLoginMember && resCheck == 1 }">
+							<button class="btn btn-danger" onclick="checkReservation(${placeVo.no});">예약취소</button>
+							<button type="hidden" class="btn" data-bs-toggle="modal" data-bs-target="#cancelModal" id="cancleModal"></button>
+							<script>
+								function checkReservation(placeNo) {
+									$.ajax({
+										method : "POST",
+										url: "/hallo03talk/reservation/getReservation",
+										data: {
+											"placeNo" : placeNo
+										},
+										success: function (response) {
+											const resVo = JSON.parse(response);
+											showReservation(resVo);
+											$('#cancleModal').trigger("click");;
+										}
+									});
+								}
+								
+								
+							</script>
+						</c:if>
 					</div>
 					<div
 						class="d-flex flex-column col-2 justify-content-center align-items-center">
@@ -259,6 +281,7 @@
 	<footer></footer>
 	<!-- 모달 -->
 	<!-- 예약하기 모달 -->
+	<c:if test="${!empty travelerLoginMember }">
 	<div class="modal" id="reservation">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -270,78 +293,69 @@
 
 				<!-- Modal body -->
 				<div class="modal-body">
-					<form action="" method="" class="row">
+					<div class="row">
 						<div class="row">
 							<div class="col text-center">날짜선택</div>
 						</div>
 						<div class="row">
 							<div class="col text-center">
-								<input type="date" class="col" /> <label for="" class="col">~</label>
-								<input type="date" class="col" />
+								<input type="date" class="col form-control" id="startDate" required/> 
+								<label for="" class="col">~</label>
+								<input type="date" class="col form-control" id="endDate" required/>
 							</div>
 						</div>
 						<div class="row my-1">
 							<div class="col text-center">이름</div>
 						</div>
 						<div class="row my-1">
-							<input type="text" class="col text-center ms-4" />
+							<input type="text" class="col text-center ms-4 form-control" value="${travelerLoginMember.name}" readonly/>
 						</div>
 						<div class="row my-1">
 							<div class="col text-center">전화번호</div>
 						</div>
 						<div class="row my-1">
-							<input type="text" class="col text-center ms-4" />
+							<input type="text" class="col text-center ms-4 form-control" value="${travelerLoginMember.phone}" readonly/>
 						</div>
 						<div class="row my-1">
-							<div class="col text-center">추가사항</div>
+							<div class="col text-center">인원수</div>
 						</div>
 						<div class="row my-1">
-							<textarea class="col text-center ms-4" rows="15"></textarea>
+							<div class="col"></div>
+							<input type="number" class="col form-control" min="1"  id="human" required>
+							<div class="col"></div>
 						</div>
-						<div class="row my-1">
-							<button class="col btn btn-primary ms-4">확인</button>
-							<button class="col btn btn-danger ms-4">취소</button>
+						<div class="row my-1 mt-3">
+							<button type="button" class="col btn btn-primary ms-4" onclick="addReservation(${placeVo.no})">확인</button>
+							<button type="button" data-bs-dismiss="modal"class="col btn btn-danger ms-4">취소</button>
 						</div>
-					</form>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- 문의하기 모달 -->
-	<div class="modal" id="inquiry">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<!-- Modal Header -->
-				<div class="modal-header">
-					<h4 class="modal-title">문의하기</h4>
-					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-				</div>
-
-				<!-- Modal body -->
-				<div class="modal-body">
-					<form action="" method="post"
-						class="d-flex row justify-content-center">
-						<!-- 문의 내용 -->
-						<div class="row text-center">
-							<div class="col h4">문의내용</div>
-						</div>
-						<div class="d-flex row justify-content-center">
-							<textarea placeholder="문의내용" rows="20" required
-								class="col my-3 text-center"></textarea>
-						</div>
-						<div class="row">
-							<div class="col">
-								<button type="button" class="btn btn-primary my-1 w-100">입력</button>
-							</div>
-							<div class="col">
-								<button type="button" class="btn btn-danger my-1 w-100">취소</button>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
+	<script>
+		function addReservation(placeNo){
+		$.ajax({
+			method: "POST",
+			url: "/hallo03talk/reservation/add",
+			data: {
+				startDate : document.querySelector('#startDate').value,
+				endDate : document.querySelector('#endDate').value,
+				human : document.querySelector('#human').value,
+				"placeNo" : placeNo
+			},
+			success: function (response) {
+				if (response == 1) {
+					alert('예약 완료');
+					history.go(0);
+				} else {
+					alert('예약 실패');
+				}
+			}
+		});
+	}
+	</script>
+</c:if>
 	<!-- 신고하기 모달 -->
 	<div class="modal" id="reportMain">
 		<div class="modal-dialog modal-lg">
@@ -429,11 +443,70 @@
 			history.go(0);
 		}
 	</script>
+<!-- 예약 취소 모달 -->
+<div class="modal" id="cancelModal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<h4 class="modal-title">예약취소하기</h4>
+				<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+			</div>
+
+			<!-- Modal body -->
+			<div class="modal-body">
+				<div class="row">
+					<div class="row">
+						<div class="col text-center">날짜선택</div>
+					</div>
+					<div class="row">
+						<div class="col text-center">
+							<input type="text" class="col form-control" id="cancelStartDate" readonly/> 
+							<label for="" class="col">~</label>
+							<input type="text" class="col form-control" id="cancelEndDate" readonly/>
+						</div>
+					</div>
+					<div class="row my-1">
+						<div class="col text-center">이름</div>
+					</div>
+					<div class="row my-1">
+						<input type="text" class="col text-center ms-4 form-control" value="${travelerLoginMember.name}" readonly/>
+					</div>
+					<div class="row my-1">
+						<div class="col text-center">전화번호</div>
+					</div>
+					<div class="row my-1">
+						<input type="text" class="col text-center ms-4 form-control" value="${travelerLoginMember.phone}" readonly/>
+					</div>
+					<div class="row my-1">
+						<div class="col text-center">인원수</div>
+					</div>
+					<div class="row my-1">
+						<div class="col"></div>
+						<input type="text" class="col form-control" id="cancelHuman" readonly>
+						<div class="col"></div>
+					</div>
+					<div class="row my-1 mt-3">
+						<button type="button" class="col btn btn-primary ms-4" onclick="cancelReservation(${placeVo.no})">확인</button>
+						<button type="button" data-bs-dismiss="modal"class="col btn btn-danger ms-4">취소</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	function showReservation(resVo) {
+									document.querySelector('#cancelStartDate').value = new Date(resVo.startDate);
+									document.querySelector('#cancelEndDate').value = new Date(resVo.endDate);
+									document.querySelector('#cancelHuman').value = resVo.human;
+								}
+</script>
+
 </body>
 <script src="/hallo03talk/resources/js/report.js"></script>
 <script src="/hallo03talk/resources/js/onePhoto.js"></script>
 <script src="/hallo03talk/resources/js/reviewForm.js"></script>
 <script src="/hallo03talk/resources/js/updateReview.js"></script>
 <script src="/hallo03talk/resources/js/star.js"></script>
-<script src="/hallo03talk/resources/js/updateReview.js"></script>
 </html>

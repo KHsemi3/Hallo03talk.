@@ -20,8 +20,9 @@ import com.h3.placeReview.vo.PlaceReviewVo;
 import com.h3.placeReviewPhoto.vo.PlaceReviewPhotoVo;
 import com.h3.placeReviewReply.service.PlaceReviewReplyService;
 import com.h3.placeReviewReply.vo.PlaceReviewReplyVo;
+import com.h3.reservation.service.ReservationService;
+import com.h3.traveler.vo.TravelerVo;
 import com.h3.zzim.service.ZzimService;
-import com.h3.zzim.vo.ZzimVo;
 
 @WebServlet("/place/one")
 public class PlaceOneController extends HttpServlet {
@@ -30,7 +31,8 @@ public class PlaceOneController extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 
 		String placeNo = (String) req.getParameter("placeNo");
-
+		int reservationCheck = 0;
+		
 		PlaceVo pv = new PlaceService().placeOne(placeNo);
 		int result = new PlaceService().getCnt(placeNo);
 //		장소 사진 전부
@@ -45,6 +47,17 @@ public class PlaceOneController extends HttpServlet {
 		List<PlaceReviewReplyVo> prrvList = new PlaceReviewReplyService().getReview(prvList);
 //		찜 개수
 		int zzimCnt = new ZzimService().getCnt(placeNo);
+//		예약 여부
+		if(req.getSession().getAttribute("travelerLoginMember") != null) {
+			TravelerVo tv = (TravelerVo) req.getSession().getAttribute("travelerLoginMember");
+			int resCheck = 0;
+			
+			if(new ReservationService().checkReservation(placeNo, tv.getNo()) != null) {
+				resCheck = 1;
+			}
+			
+			req.setAttribute("resCheck", resCheck);
+		}
 		
 		req.setAttribute("placeVo", pv);
 		req.setAttribute("photoList", photoList);
