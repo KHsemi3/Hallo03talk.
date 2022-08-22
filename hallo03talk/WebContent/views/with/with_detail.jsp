@@ -1,6 +1,7 @@
 <%@page import="com.h3.with.vo.WithVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%WithVo vo = (WithVo) request.getAttribute("vo"); %>
 <!DOCTYPE html>
 <html>
@@ -107,7 +108,7 @@ a {
 					<hr>
 
 					<div class="w-100 d-flex justify-content-between">
-						<div class="text-black-50">
+						<div class="text-black-50 flex-grow-1">
 							<div>
 								작성일 : ${vo.enroll_date}
 								<!--날짜넣기-->
@@ -126,8 +127,13 @@ a {
 							</div>
 
 						</div>
-						<a href="">신고하기</a>
+						<a href="">신고</a>
 						<!--신고하기-->
+						<c:if test="${sessionScope.travelerLoginMember.nick eq vo.traveler_no}">
+							<a href="/hallo03talk/with/edit?no=${vo.no}" class="ms-2">수정</a>
+							<a href="/hallo03talk/with/delete?no=${vo.no}" class="ms-2">삭제</a>
+							<a href="" class="ms-2 btn btn-success align-self-center">마감</a>
+						</c:if>
 					</div>
 				</div>
 			</div>
