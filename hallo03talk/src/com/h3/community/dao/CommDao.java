@@ -3,6 +3,7 @@ package com.h3.community.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import static com.h3.common.JDBCTemplate.*;
@@ -145,6 +146,45 @@ public class CommDao {
 		}
 
 		return count;
+	}
+
+
+	public int post(Connection conn, CommVo vo) throws Exception {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = "INSERT INTO COMMUNITY VALUES(SEQ_COMMUNITY_NO.NEXTVAL, ?,?,SYSDATE, SYSDATE,DEFAULT, ?, DEFAULT, ?)";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getTitle());
+			pstmt.setString(2, vo.getContent());
+			pstmt.setString(3, vo.getWriter());
+			pstmt.setInt(4, getCategoryNumber(conn, vo.getCategory()));
+			
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int getCategoryNumber(Connection conn, String categoryName) throws Exception {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM COMMUNITY_CATEGORY WHERE NAME = ?";
+		
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, categoryName);
+		
+		rs = pstmt.executeQuery();
+		if(rs.next()) {
+			result = rs.getInt("NO");
+		}else {
+			result = 0;
+		}
+		return result;
 	}
 
 }

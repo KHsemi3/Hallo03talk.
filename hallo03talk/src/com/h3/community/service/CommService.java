@@ -30,7 +30,7 @@ public class CommService {
 		return result;
 	}
 
-public int getCount(String view) {
+	public int getCount(String view) {
 		
 		Connection conn = null;
 		int result = 0;
@@ -46,6 +46,27 @@ public int getCount(String view) {
 			close(conn);
 		}
 		
+		return result;
+	}
+
+	public int post(CommVo vo) {
+		Connection conn = null;
+		int result = 0;
+		
+		try {
+			conn = getConnection();
+			result = new CommDao().post(conn,vo);
+			if(result == 1) {
+				commit(conn);
+			}else {
+				rollback(conn);
+			}
+		} catch (Exception e) {
+			rollback(conn);
+			e.printStackTrace();
+		} finally {
+			close(conn);
+		}
 		return result;
 	}
 
