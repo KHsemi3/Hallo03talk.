@@ -18,23 +18,21 @@
               <div class="registerBox">
         		<h1>Register</h1>
         		<h4>어떤 가게를 운영중이신가요?</h4>
-        			<form>
-            			<label>과세구분</label>
-            			<input type="text" placeholder="">
+        			<form action="/hallo03talk/bossRegister" method="post">
             			<label>사업자등록번호</label>
-            			<input type="text" placeholder="사업자등록번호를 입력해 주세요">
+            			<input type="text" name="busNum" placeholder="사업자등록번호를 입력해 주세요">
             			<label>업태</label>
-            			<input type="text" placeholder="한글로만 입력하세요">
+            			<input type="text" name="busStatus" placeholder="한글로만 입력하세요">
             			<label>상호명</label>
-            			<input type="text" placeholder="상호명을 입력해 주세요">
+            			<input type="text" name="busName" placeholder="상호명을 입력해 주세요">
             			<label>대표자명</label>
-            			<input type="text" placeholder="대표자명을 입력해 주세요">
+            			<input type="text" name="busBoss" placeholder="대표자명을 입력해 주세요">
             			<label>생년월일</label>
-            			<input type="text" placeholder="숫자 6자리를 입력해 주세요">
+            			<input type="text" name="busBirth" placeholder="숫자 6자리를 입력해 주세요">
            				<label>주소</label>
-            			<input type="text" placeholder="주소를 검색하세요">
+            			<input type="text" name="busAddress" placeholder="주소를 검색하세요">
             			<input type="button" value="주소검색"><br>
-            			<input type="button" value="확인">
+            			<input type="submit" value="확인">
         			 </form>
     			</div>
 			</div>				
