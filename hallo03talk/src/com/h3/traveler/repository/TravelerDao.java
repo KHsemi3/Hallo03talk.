@@ -642,7 +642,7 @@ public class TravelerDao {
 		 */
 		public ArrayList<MpgReservationVo> selectRsvList(Connection conn, int userNo) {
 
-			String sql = "SELECT R.NO, R.TRAVELER_NO, R.PLACE_NO, P.NAME, TO_CHAR(R.START_DATE, 'YY/MM/DD') AS START_DATE FROM RESERVATION R JOIN PLACE P ON R.PLACE_NO = P.NO WHERE TRAVELER_NO=?";
+			String sql = "SELECT R.NO, R.TRAVELER_NO, R.PLACE_NO, P.NAME, TO_CHAR(R.START_DATE, 'YY/MM/DD') AS START_DATE FROM RESERVATION R JOIN PLACE P ON R.PLACE_NO = P.NO WHERE TRAVELER_NO=? AND CANCEL = 'N'";
 			
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;		
@@ -750,7 +750,7 @@ public class TravelerDao {
 		public ArrayList<ReportUserVo> selectGetReportList(Connection conn, int userNo) {
 
 		
-			String sql = "SELECT R.NO, R.GUILTY, R.CONTENT, R.PROCESS, R.REPORTED_TRAVELER_NO, TO_CHAR(R.ENROLL_DATE, 'YY/MM/DD HH:MI') AS ENROLL_DATE, T.ID FROM REPORT_USER R JOIN TRAVELER T ON R.REPORTED_TRAVELER_NO = T.NO WHERE T.STATUS = 'Y' AND REPORTED_TRAVELER_NO = ? ORDER BY NO DESC";
+			String sql = "SELECT R.NO, R.GUILTY, R.CONTENT, R.PROCESS, R.REPORTED_TRAVELER_NO, TO_CHAR(R.ENROLL_DATE, 'YY/MM/DD HH:MI') AS ENROLL_DATE, T.ID AS REPORT_USER_ID FROM REPORT_USER R JOIN TRAVELER T ON R.REPORTED_TRAVELER_NO = T.NO WHERE T.STATUS = 'Y' AND REPORTED_TRAVELER_NO = ? ORDER BY NO DESC";
 			
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;		
@@ -772,10 +772,10 @@ public class TravelerDao {
 					String guilty =	rs.getString("GUILTY");
 					String content = rs.getString("CONTENT");
 					String process = rs.getString("PROCESS");
-					Timestamp enrollDate =	rs.getTimestamp("ENROLL_DATE");
 					String reportedTravelerNo =	rs.getString("REPORTED_TRAVELER_NO");
+					Timestamp enrollDate =	rs.getTimestamp("ENROLL_DATE");
+					String reportUserId =	rs.getString("REPORT_USER_ID");
 
-					String reportUserId = rs.getString("ID");
 					
 					ReportUserVo vo = new ReportUserVo();
 					vo.setNo(no);

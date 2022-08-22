@@ -472,12 +472,12 @@ input.full:focus, textarea.full:focus {
                       <label>Gender</label>
                       <div class="checkbox__wrapper">
                         <div class="checkbox">
-                          <input id="design" type="checkbox" name="travelerJoinGender" value="female"/>
-                          <label class="label-check" for="design">female</label>
+                          <input id="design" type="radio" name="travelerJoinGender" value="woman"/>
+                          <label class="label-check" for="design">woman</label>
                         </div>
                         <div class="checkbox">
-                          <input id="front-end" type="checkbox" name="travelerJoinGender" value="male"/>
-                          <label class="label-check" for="front-end">male</label>
+                          <input id="front-end" type="radio" name="travelerJoinGender" value="man"/>
+                          <label class="label-check" for="front-end">man</label>
                         </div>   
                       </div>
                     </div>
@@ -504,7 +504,7 @@ input.full:focus, textarea.full:focus {
 					$('input:radio[name=travelerJoinGender]').each(function(){
 						
 
-				        var result = travelerJoinGender.checked(this.value);
+				        var result = travelerJoinGender.indexOf(this.value);
 				        
 				        console.log(result);
 				        
@@ -645,9 +645,25 @@ input.full:focus, textarea.full:focus {
 		 
 		 <!------------------------------------------------------------------------------------>  
        
-       <!-- 회원탈퇴 체크 -->
+       <!-- 회원탈퇴 체크 --> <!-- 얘 왜 안되냐..... -->
    
+		<script>
+		
+			function quit(){
+				
+				isSame = $('input[name=travelerJoinPwd]').val() == $('input[name=travelerJoinPwd2]').val()
+				
+				if(isSame == true){
+					return true;
+				}else{
+					alert("비밀번호가 서로 일치하지 않습니다.")
+					return false;
+				}
+				
+				
+			}
 	
+		</script>
 		
 		<!-- ----------------------------------------------------- -->
 		
