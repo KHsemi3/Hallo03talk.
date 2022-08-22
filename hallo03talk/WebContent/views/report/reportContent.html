@@ -28,7 +28,7 @@
       </div>
 
       <!-- Modal body -->
-      <form action="경로" method="post">
+      <form action="/report/reportContent" method="post" id ="confrom">
       <div class="modal-body">
         <h5>신고하려고 하는 항목 : <b>게시물</b></h5>
 
@@ -61,9 +61,22 @@
 
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button  id="reportBtn" type="submit" class="btn btn-danger" data-bs-dismiss="modal"  data-bs-target="#reportThank" style="margin: 0 auto;">확인</button>
+        <button  id="reportBtn" type="submit" id = "rcontentsend" class="btn btn-danger" data-bs-dismiss="modal"  data-bs-target="#reportThank" style="margin: 0 auto;">확인</button>
       </div>
     </form>
+    
+        <script type="text/javascript">
+
+        $(document).ready(function(){ 
+            $("#rcommentsend").click(function(){
+                
+                $("#confrom").attr("action", ""); // attribute setting
+                $("#confrom").submit();
+            });
+        });
+    
+    </script>
+    
     </div>
   </div>
 </div>

@@ -85,15 +85,15 @@ rel="stylesheet"
 
             <h1 style="margin-left: 60px; font-family: somi; font-size: 60px; font-weight: lighter;"><b>후기</b></h1>
             <br>
-            <%for(int i = 0 ; i < pvoList.size(); i++){%>
+            <%for(int i = 0 ; i < rvoList.size(); i++){%>
             <div class="row">
                 <div class="col-md-4">
                     <div class="card" onclick="" style="width: 18rem; float: none; margin:0 auto;">
                         <img src="/hallo03talk/resources/img/search_1.jpg" class="card-img-top" alt="">
                         <div class="card-body">
-                          <h5 class="card-title"><%= cvoList.get(i).getTitle() %></h5>
-                          <h6 class="card-subtitle mb-2 text-muted"><%= cvoList.get(i).getWriter() %></h6>
-                          <p class="card-text"><%= cvoList.get(i).getContent() %></p>
+                          <h5 class="card-title"><%= rvoList.get(i).getTitle() %></h5>
+                          <h6 class="card-subtitle mb-2 text-muted"><%= rvoList.get(i).getEnrollDate() %></h6>
+                          <p class="card-text"><%= rvoList.get(i).getContent() %></p>
                         </div>
                     </div>
                 </div>
@@ -110,7 +110,7 @@ rel="stylesheet"
 
             <h1 style="margin-left: 60px; font-family: somi; font-size: 60px; font-weight: lighter;"><b>커뮤니티</b></h1>
             <br>
-            <%for(int i = 0 ; i < pvoList.size(); i++){%>
+            <%for(int i = 0 ; i < cvoList.size(); i++){%>
             <div class="row">
                 <div class="col-md-4">
                     <div class="card" onclick="" style="width: 18rem; float: none; margin:0 auto;">
