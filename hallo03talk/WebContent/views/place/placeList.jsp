@@ -19,7 +19,7 @@
 	<c:if test="${!empty placeAlert}">
 		<script>
 			alert('비정상적인 접근');
-			location.href = "http://127.0.0.1:8765/hallo03talk/place/list?categoryNo=0&cityNo=0&insideNo=0";
+			location.href = "/hallo03talk/place/list?categoryNo=0&cityNo=0&insideNo=0";
 		</script>
 	</c:if>
 	<main>

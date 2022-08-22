@@ -59,10 +59,6 @@
 
 			<div class="row">
 				<c:if test="${ BossLoginMember == null }">
-					<div class="col text-start">
-						<button class="btn btn-danger mt-3 mb-0" data-bs-toggle="modal"
-							data-bs-target="#reportMain">장소 신고</button>
-					</div>
 					<div class="col text-center mt-3 mb-0">
 						<c:if test="${ placeVo.zzim eq travelerLoginMember.no }">
 							<!-- 찜 하기 -->
@@ -114,7 +110,7 @@
 						</c:if>
 						<c:if test="${!empty travelerLoginMember && resCheck == 1 }">
 							<button class="btn btn-danger" onclick="checkReservation(${placeVo.no});">예약취소</button>
-							<button type="hidden" class="btn" data-bs-toggle="modal" data-bs-target="#cancelModal" id="cancleModal"></button>
+							<button type="hidden" class="btn d-none" data-bs-toggle="modal" data-bs-target="#cancelModal" id="cancleModal"></button>
 							<script>
 								function checkReservation(placeNo) {
 									$.ajax({
@@ -126,7 +122,7 @@
 										success: function (response) {
 											const resVo = JSON.parse(response);
 											showReservation(resVo);
-											$('#cancleModal').trigger("click");;
+											$('#cancleModal').trigger("click");
 										}
 									});
 								}
@@ -497,10 +493,28 @@
 </div>
 <script>
 	function showReservation(resVo) {
-									document.querySelector('#cancelStartDate').value = new Date(resVo.startDate);
-									document.querySelector('#cancelEndDate').value = new Date(resVo.endDate);
-									document.querySelector('#cancelHuman').value = resVo.human;
-								}
+		document.querySelector('#cancelStartDate').value = new Date(resVo.startDate).toISOString().split("T")[0];
+		document.querySelector('#cancelEndDate').value = new Date(resVo.endDate).toISOString().split("T")[0];
+		document.querySelector('#cancelHuman').value = resVo.human;
+	}
+
+	function cancelReservation(placeNo) {
+		$.ajax({
+			method:"POST",
+			url: "/hallo03talk/reservation/cancel",
+			data: {
+				"placeNo" : placeNo
+			},
+			success: function (response) {
+				if (response == 1) {
+					alert('취소 성공');
+					history.go(0);
+				} else {
+					alert('취소 실패');
+				}
+			}
+		});
+	}
 </script>
 
 </body>

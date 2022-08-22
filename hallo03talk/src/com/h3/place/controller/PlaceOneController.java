@@ -52,7 +52,7 @@ public class PlaceOneController extends HttpServlet {
 			TravelerVo tv = (TravelerVo) req.getSession().getAttribute("travelerLoginMember");
 			int resCheck = 0;
 			
-			if(new ReservationService().checkReservation(placeNo, tv.getNo()) != null) {
+			if(new ReservationService().checkReservation(placeNo, tv.getNo()).getNo() != null) {
 				resCheck = 1;
 			}
 			

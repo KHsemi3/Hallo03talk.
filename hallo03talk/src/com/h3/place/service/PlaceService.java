@@ -170,8 +170,9 @@ public class PlaceService {
 			conn = getConnection();
 			
 			result = dao.placeDel(conn,placeNo);
+			result += dao.placePhotodel(conn, placeNo);
 			
-			if (result == 1) {
+			if (result == 2) {
 				commit(conn);
 			} else {
 				rollback(conn);

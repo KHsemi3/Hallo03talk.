@@ -21,11 +21,6 @@ public class PlaceDelController extends HttpServlet {
 		
 		int result = new PlaceService().placeDel(placeNo);
 		
-		if (result == 1) {
-			
-		} else {
-			
-		}
-		
+		resp.getWriter().write(result);
 	}
 }

@@ -7,7 +7,6 @@ public class PlaceVo {
 
 	public PlaceVo(String no, String name, String content, String address, String bossNo, String categoryNo,
 			String status, String enrollDate, int cnt, int zzim, String photoName) {
-		super();
 		this.no = no;
 		this.name = name;
 		this.content = content;
@@ -120,6 +119,7 @@ public class PlaceVo {
 	public void setPhotoName(String photoName) {
 		this.photoName = photoName;
 	}
+
 
 	@Override
 	public String toString() {

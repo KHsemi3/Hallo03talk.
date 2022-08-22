@@ -425,37 +425,34 @@ public class PlaceDao {
 		PreparedStatement pstmt = null;
 		List<PlaceVo> voList = new ArrayList<PlaceVo>();
 		ResultSet rs = null;
-
 		String sql = "";
 		int tno = 0;
 		try {
 			if (!insideName.equals("모두")) {
 				if (insideName.equals("시내")) {
 					if (cityName.equals("제주시")) {
-						sql = "SELECT P.NO NO,P.NAME NAME,P.CONTENT CONTENT,P.ADDRESS ADDRESS,P.BOSS_NO BOSS_NO,P.CATEGORY_NO CATEGORY_NO,P.ENROLL_DATE ENROLL_DATE,P.CNT CNT, Z.TRAVELER_NO TRAVELER_NO, PP.NAME PHOTONAME FROM PLACE P LEFT OUTER JOIN ZZIM Z ON P.NO = Z.PLACE_NO JOIN PLACE_PHOTO PP ON P.NO = PP.PLACE_NO WHERE P.STATUS='Y' AND PP.PHOTO_PROFILE='Y' AND P.ADDRESS LIKE '%'||?||'%' OR P.ADDRESS LIKE '%'||?||'%' OR P.ADDRESS LIKE '%'||?||'%' OR P.ADDRESS LIKE '%'||?||'%' OR P.ADDRESS LIKE '%'||?||'%' OR P.ADDRESS LIKE '%'||?||'%' ORDER BY P.NO DESC";
+						sql = "SELECT P.NO NO,P.NAME NAME,P.CONTENT CONTENT,P.ADDRESS ADDRESS,P.BOSS_NO BOSS_NO,P.CATEGORY_NO CATEGORY_NO,P.ENROLL_DATE ENROLL_DATE,P.CNT CNT, Z.TRAVELER_NO TRAVELER_NO, PP.NAME PHOTONAME FROM PLACE P LEFT OUTER JOIN ZZIM Z ON P.NO = Z.PLACE_NO JOIN PLACE_PHOTO PP ON P.NO = PP.PLACE_NO WHERE P.STATUS='Y' AND PP.PHOTO_PROFILE='Y' AND (CASE WHEN P.ADDRESS LIKE '%'||?||'%' THEN 1 WHEN P.ADDRESS LIKE '%'||?||'%' THEN 1 WHEN P.ADDRESS LIKE '%'||?||'%' THEN 1 WHEN P.ADDRESS LIKE '%'||?||'%' THEN 1 WHEN P.ADDRESS LIKE '%'||?||'%' THEN 1 ELSE 0 END) = 1 ORDER BY P.NO DESC";
 						pstmt = conn.prepareStatement(sql);
-						pstmt.setString(1, cityName);
-						pstmt.setString(2, "일도");
-						pstmt.setString(3, "이도");
-						pstmt.setString(4, "삼도");
-						pstmt.setString(5, "용담1동");
-						pstmt.setString(6, "건입동");
+						pstmt.setString(1, "일도");
+						pstmt.setString(2, "이도");
+						pstmt.setString(3, "삼도");
+						pstmt.setString(4, "용담1동");
+						pstmt.setString(5, "건입동");
 					} else {
-						sql = "SELECT P.NO NO,P.NAME NAME,P.CONTENT CONTENT,P.ADDRESS ADDRESS,P.BOSS_NO BOSS_NO,P.CATEGORY_NO CATEGORY_NO,P.ENROLL_DATE ENROLL_DATE,P.CNT CNT, Z.TRAVELER_NO TRAVELER_NO, PP.NAME PHOTONAME FROM PLACE P LEFT OUTER JOIN ZZIM Z ON P.NO = Z.PLACE_NO JOIN PLACE_PHOTO PP ON P.NO = PP.PLACE_NO WHERE P.STATUS='Y' AND PP.PHOTO_PROFILE='Y' AND P.ADDRESS LIKE '%'||?||'%' OR P.ADDRESS LIKE '%'||?||'%' OR P.ADDRESS LIKE '%'||?||'%' OR P.ADDRESS LIKE '%'||?||'%' OR P.ADDRESS LIKE '%'||?||'%' OR P.ADDRESS LIKE '%'||?||'%' OR P.ADDRESS LIKE '%'||?||'%' OR P.ADDRESS LIKE '%'||?||'%' OR P.ADDRESS LIKE '%'||?||'%' OR P.ADDRESS LIKE '%'||?||'%' OR P.ADDRESS LIKE '%'||?||'%' OR P.ADDRESS LIKE '%'||?||'%' OR P.ADDRESS LIKE '%'||?||'%' ORDER BY P.NO DESC";
+						sql = "SELECT P.NO NO,P.NAME NAME,P.CONTENT CONTENT,P.ADDRESS ADDRESS,P.BOSS_NO BOSS_NO,P.CATEGORY_NO CATEGORY_NO,P.ENROLL_DATE ENROLL_DATE,P.CNT CNT, Z.TRAVELER_NO TRAVELER_NO, PP.NAME PHOTONAME FROM PLACE P LEFT OUTER JOIN ZZIM Z ON P.NO = Z.PLACE_NO JOIN PLACE_PHOTO PP ON P.NO = PP.PLACE_NO WHERE P.STATUS='Y' AND PP.PHOTO_PROFILE='Y' AND (CASE WHEN P.ADDRESS LIKE '%'||?||'%' THEN 1 WHEN P.ADDRESS LIKE '%'||?||'%' THEN 1 WHEN P.ADDRESS LIKE '%'||?||'%' THEN 1 WHEN P.ADDRESS LIKE '%'||?||'%' THEN 1 WHEN P.ADDRESS LIKE '%'||?||'%' THEN 1 WHEN P.ADDRESS LIKE '%'||?||'%' THEN 1 WHEN P.ADDRESS LIKE '%'||?||'%' THEN 1 WHEN P.ADDRESS LIKE '%'||?||'%' THEN 1 WHEN P.ADDRESS LIKE '%'||?||'%' THEN 1 WHEN P.ADDRESS LIKE '%'||?||'%' THEN 1 WHEN P.ADDRESS LIKE '%'||?||'%' THEN 1 WHEN P.ADDRESS LIKE '%'||?||'%' THEN 1 ELSE 0 END) = 1 ORDER BY P.NO DESC";
 						pstmt = conn.prepareStatement(sql);
-						pstmt.setString(1, cityName);
-						pstmt.setString(2, "에래동");
-						pstmt.setString(3, "중문동");
-						pstmt.setString(4, "대천동");
-						pstmt.setString(5, "대륜동");
-						pstmt.setString(6, "서흥동");
-						pstmt.setString(7, "동흥동");
-						pstmt.setString(8, "영천동");
-						pstmt.setString(9, "효돈동");
-						pstmt.setString(10, "송산동");
-						pstmt.setString(11, "중앙동");
-						pstmt.setString(12, "정방동");
-						pstmt.setString(13, "천지동");
+						pstmt.setString(1, "에래동");
+						pstmt.setString(2, "중문동");
+						pstmt.setString(3, "대천동");
+						pstmt.setString(4, "대륜동");
+						pstmt.setString(5, "서흥동");
+						pstmt.setString(6, "동흥동");
+						pstmt.setString(7, "영천동");
+						pstmt.setString(8, "효돈동");
+						pstmt.setString(9, "송산동");
+						pstmt.setString(10, "중앙동");
+						pstmt.setString(11, "정방동");
+						pstmt.setString(12, "천지동");
 					}
 				} else {
 					sql = "SELECT P.NO NO,P.NAME NAME,P.CONTENT CONTENT,P.ADDRESS ADDRESS,P.BOSS_NO BOSS_NO,P.CATEGORY_NO CATEGORY_NO,P.ENROLL_DATE ENROLL_DATE,P.CNT CNT, Z.TRAVELER_NO TRAVELER_NO, PP.NAME PHOTONAME FROM PLACE P LEFT OUTER JOIN ZZIM Z ON P.NO = Z.PLACE_NO JOIN PLACE_PHOTO PP ON P.NO = PP.PLACE_NO WHERE P.STATUS='Y' AND PP.PHOTO_PROFILE='Y' AND P.ADDRESS LIKE '%'||?||'%' AND P.ADDRESS LIKE '%'||?||'%' ORDER BY P.NO DESC";
@@ -486,6 +483,7 @@ public class PlaceDao {
 				} else {
 					pv.setZzim(rs.getInt("TRAVELER_NO"));
 				}
+				
 				voList.add(pv);
 			}
 
@@ -593,6 +591,30 @@ public class PlaceDao {
 
 		return voList;
 
+	}
+
+	public int placePhotodel(Connection conn, String placeNo) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String sql = "UPDATE PLACE_PHOTO SET STATUS='N' WHERE PLACE_NO=?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, placeNo);
+			
+			result = pstmt.executeUpdate();
+			
+			return result;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
 	}
 
 }
