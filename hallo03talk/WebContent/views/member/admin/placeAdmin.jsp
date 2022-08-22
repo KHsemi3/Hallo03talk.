@@ -1,5 +1,12 @@
+<%@page import="com.h3.place.vo.PlaceVo"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <% 
+    ArrayList<PlaceVo> voList = (ArrayList<PlaceVo>)request.getAttribute("voList");
+    
+    %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -183,143 +190,38 @@ opacity:0.5;
 
 					
 		<ul>
-	<li id="reportImg"><img src="../../../resources/img/house.png" alt="" />숙소관리</li>
+	<li id="reportImg"><img src="<%=request.getContextPath()%>/resources/img/report.png" alt="" />숙소관리</li>
 </ul>			
 <hr />
 <div class="right-nav">
   <div class="board">
     <div class="acc-board-table">
-      <div class="acc-data">
-        <div class="acc-image-area">
-        <input type="checkbox" />
-          <img class="acc-img" src="../../../resources/img/house_2.png"/>
-        </div>
-        <div class="acc-info">
-          <div class="acc-title">애월하미</div>
-          <div class="acc-sub-data">
-            <div class="acc-col"><img src="../../../resources/img/star.png" alt="" />4</div>
-            <div class="acc-col"><img src="../../../resources/img/good.png">222</div>
-          </div>
-        </div>
-      </div>
+     
+     
+      <%
+		for(int i = 0; i<voList.size(); i++){
+			voList.get(i).getName();
+		%>
+		
       <div class="acc-data">
         <div class="acc-image-area">
         <input type="checkbox" />
          <img class="acc-img" src="../../../resources/img/house_2.png"/>
         </div>
         <div class="acc-info">
-          <div class="acc-title">플레이스 인 제주</div>
+          <div class="acc-title"><%=voList.get(i).getName()%></div>
           <div class="acc-sub-data">
-            <div class="acc-col"><img src="../../../resources/img/star.png" alt="" />3</div>
+            <div class="acc-col"><img src="../../../resources/img/star.png" alt="" /><%=voList.get(i).getAddress()%></div>
             <div class="acc-col"><img src="../../../resources/img/good.png">44</div>
           </div>
         </div>
       </div>
-      <div class="acc-data">
-        <div class="acc-image-area">
-        <input type="checkbox" />
-         <img class="acc-img" src="../../../resources/img/house_2.png"/>
-        </div>
-        <div class="acc-info">
-        
-          <div class="acc-title">함덕 해수욕장</div>
-          <div class="acc-sub-data">
-           <div class="acc-col"><img src="../../../resources/img/star.png" alt="" />5</div>
-            <div class="acc-col"><img src="../../../resources/img/good.png">300</div>
-          </div>
-        </div>
-      </div>
-      <div class="acc-data">
-        <div class="acc-image-area">
-        <input type="checkbox" />
-         <img class="acc-img" src="../../../resources/img/house_2.png"/>
-        </div>
-        <div class="acc-info">
-          <div class="acc-title">딱새우김밥</div>
-          <div class="acc-sub-data">
-           <div class="acc-col"><img src="../../../resources/img/star.png" alt="" />5</div>
-            <div class="acc-col"><img src="../../../resources/img/good.png">400</div>
-          </div>
-        </div>
-      </div>
-      <div class="acc-data">
-        <div class="acc-image-area">
-        <input type="checkbox" />
-          <img class="acc-img" src="../../../resources/img/house_2.png"/>
-        </div>
-        <div class="acc-info">
-          <div class="acc-title">훈남횟집</div>
-          <div class="acc-sub-data">
-           <div class="acc-col"><img src="../../../resources/img/star.png" alt="" />3</div>
-            <div class="acc-col"><img src="../../../resources/img/good.png">4433</div>
-          </div>
-        </div>
-      </div>
-      <div class="acc-data">
-        <div class="acc-image-area">
-        <input type="checkbox" />
-         <img class="acc-img" src="../../../resources/img/house_2.png"/>
-        </div>
-        <div class="acc-info">
-          <div class="acc-title">톳라면 분식</div>
-          <div class="acc-sub-data">
-           <div class="acc-col"><img src="../../../resources/img/star.png" alt="" />5</div>
-            <div class="acc-col"><img src="../../../resources/img/good.png">332</div>
-          </div>
-        </div>
-      </div>
-      <div class="acc-data">
-        <div class="acc-image-area">
-        <input type="checkbox" />
-          <img class="acc-img" src="../../../resources/img/coffee.png"/>
-        </div>
-        <div class="acc-info">
-          <div class="acc-title">섭지코지 카페</div>
-          <div class="acc-sub-data">
-            <div class="acc-col"><img src="../../../resources/img/star.png" alt="" />333</div>
-            <div class="acc-col"><img src="../../../resources/img/good.png">22</div>
-          </div>
-        </div>
-      </div>
-      <div class="acc-data">
-        <div class="acc-image-area">
-        <input type="checkbox" />
-         <img class="acc-img" src="../../../resources/img/house_2.png"/>
-        </div>
-        <div class="acc-info">
-          <div class="acc-title">카카오 본사</div>
-          <div class="acc-sub-data">
-           <div class="acc-col"><img src="../../../resources/img/star.png" alt="" />22</div>
-            <div class="acc-col"><img src="../../../resources/img/good.png">333</div>
-          </div>
-        </div>
-      </div>
-      <div class="acc-data">
-        <div class="acc-image-area">
-        <input type="checkbox" />
-         <img class="acc-img" src="../../../resources/img/house_2.png"/>
-        </div>
-        <div class="acc-info">
-          <div class="acc-title">kh 정보교육원</div>
-          <div class="acc-sub-data">
-           <div class="acc-col"><img src="../../../resources/img/star.png" alt="" />-5</div>
-            <div class="acc-col"><img src="../../../resources/img/good.png">-332</div>
-          </div>
-        </div>
-      </div>
-      <div class="acc-data">
-        <div class="acc-image-area">
-        <input type="checkbox" />
-         <img class="acc-img" src="../../../resources/img/house_2.png"/>
-        </div>
-        <div class="acc-info">
-          <div class="acc-title">우도 돈까스</div>
-          <div class="acc-sub-data">
-           <div class="acc-col"><img src="../../../resources/img/star.png" alt="" />5</div>
-            <div class="acc-col"><img src="../../../resources/img/good.png">122</div>
-          </div>
-        </div>
-      </div>
+     <%} %>
+     
+     
+     
+     
+     
     </div>
     
   </div>
