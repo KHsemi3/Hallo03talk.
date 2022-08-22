@@ -5,6 +5,9 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
+String alertMsg = (String)session.getAttribute("alertMsg");
+session.removeAttribute("alertMsg");
+
 ArrayList<WithVo> voList = (ArrayList<WithVo>) request.getAttribute("voList");
 
 PageVo pv = (PageVo)request.getAttribute("pageVo");
@@ -109,7 +112,6 @@ int maxPage = pv.getMaxPage();
 					if(content.indexOf("<img src=\"") != -1){
 						int lindex = content.indexOf("\"",findex);
 						imgPath = content.substring(findex,lindex);
-						System.out.println(imgPath);
 					}
 				%>	
 					<div id="content-items" class="d-flex" onclick="location.href = '<%= request.getContextPath()%>/with/detail?no=<%=vo.getNo()%>'">
@@ -177,20 +179,22 @@ int maxPage = pv.getMaxPage();
 					
 					<%if(currentPage != maxPage){ %>
 						<li class="page-item">
-							<a class="page-link" href="<%=request.getContextPath()%>/with/list?p=<%=currentPage+1%>&s=${sort}" aria-label="Next"> 
+							<a class="page-link" href="<%=request.getContextPath()%>/with/list?p=<%=currentPage+1%>&s=${sort}" aria-label="Next">
 								<span aria-hidden="true">&raquo;</span>
 							</a>
 						</li>
 					<%} %>
 				</ul>
 			</nav>
-
-			
 		</div>
 	</main>
-
+	
 
 	<footer></footer>
-
+	<script type="text/javascript">
+		<% if(alertMsg !=null){%>
+			alert('<%=alertMsg %>');
+		<%}%>
+	</script>
 </body>
 </html>

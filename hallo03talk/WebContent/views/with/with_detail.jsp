@@ -127,20 +127,96 @@ a {
 							</div>
 
 						</div>
-						<a href="">신고</a>
+						
 						<!--신고하기-->
 						<c:if test="${sessionScope.travelerLoginMember.nick eq vo.traveler_no}">
-							<a href="/hallo03talk/with/edit?no=${vo.no}" class="ms-2">수정</a>
-							<a href="/hallo03talk/with/delete?no=${vo.no}" class="ms-2">삭제</a>
-							<a href="" class="ms-2 btn btn-success align-self-center">마감</a>
+							<a href="/hallo03talk/with/edit?no=${vo.no}" class="me-2 align-self-center">수정</a>
+							<a href="/hallo03talk/with/delete?no=${vo.no}" class="me-2 align-self-center">삭제</a>
+							<c:if test="${vo.status eq 'N'}">
+								<a class="ms-2 btn btn-success align-self-center disable align-self-center">마감</a>
+							</c:if>
+							<c:if test="${vo.status eq 'Y'}">							
+								<a href="/hallo03talk/with/close?no=${vo.no}" class="me-2 btn btn-success align-self-center ">마감</a>
+							</c:if>
 						</c:if>
+						<button type="button" class="btn btn-danger align-self-center"
+							data-bs-toggle="modal" data-bs-target="#reportMain">
+							신고하기</button>
 					</div>
 				</div>
 			</div>
 
 		</div>
 	</main>
+	<!-- The Modal -->
+	<div class="modal" id="reportMain">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
 
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h3 class="modal-title" style="">신고하기</h3>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+				</div>
+
+				<!-- Modal body -->
+				<form action="/hallo03talk/report/reportContent" method="post" id="confrom">
+					<div class="modal-body">
+						<h5>
+							신고하려고 하는 항목 : <b>게시물</b>
+						</h5>
+
+						<br>
+						<h5>1.신고하려는 항목에 대한 이유를 선택해주세요.</h5>
+						<h6 style="margin-bottom: 10px;">항목은 한가지만 선택할 수 있습니다.</h6>
+						<div style="margin-left: 20px;">
+							<input type="checkbox" value="name" id="name" onclick="example_4();" name="guilty">
+							<label for="name"><b>부적절한 이름, 제목</b></label> <br> 불쾌감을 주거나,부적절한 이름 또는 제목 사용 <br>
+							
+							<input type="checkbox" value="curse"id="curse" onclick="example_5();"  name="guilty">
+							<label for="curse"><b>욕설</b></label><br> 상대방에게 공격적인 언어 사용 <br>
+							
+							<input type="checkbox" value="disgust" id="disgust" onclick="example_6();" name="guilty">
+							<label for="disgust"><b>혐오 발언</b> </label> <br> 각종 비하 또는 차별 발언 <br>
+							
+							<input type="checkbox" value="ad" id="ad" onclick="example_7();" name="guilty">
+							<label for="ad"><b>광고성 계정, 게시물</b> </label> <br> 과도한 광고성 게시물, 댓글 작성. 또는 그 계정 <br>
+							<br>
+						</div>
+
+
+						<h5>2.신고하려는 자세한 이유를 적어주세요.</h5>
+						<textarea name="content" id="" cols="98" rows="5"
+							placeholder="내용을 입력해 주세요." style="margin-right: 30px;"></textarea>
+					</div>
+
+					<!-- Modal footer -->
+					<div class="modal-footer">
+						<button id="reportBtn" type="submit" id="rcontentsend"
+							class="btn btn-danger" data-bs-dismiss="modal"
+							data-bs-target="#reportThank" style="margin: 0 auto;">확인</button>
+					</div>
+					<input type="hidden" value="with" name="type">
+					<input type="hidden" value="${vo.no}" name="boardNo">
+				</form>
+
+				<script type="text/javascript">
+
+        $(document).ready(function(){ 
+            $("#rcommentsend").click(function(){
+                
+                $("#confrom").attr("action", ""); // attribute setting
+                $("#confrom").submit();
+            });
+        });
+    
+    </script>
+
+			</div>
+		</div>
+	</div>
+
+	<script src="/hallo03talk/resources/js/report.js"></script>
 
 	<footer></footer>
 </body>

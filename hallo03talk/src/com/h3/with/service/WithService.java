@@ -113,4 +113,26 @@ public class WithService {
 		return result;
 	}
 
+	public int close_(String no) {
+		int result = 0;
+		
+		Connection conn = null;
+		
+		try {
+			conn = getConnection();
+			
+			result = new WithDao().close_(conn, no);
+			if(result == 1) {
+				commit(conn);
+			}else {
+				rollback(conn);
+			}
+		} catch (Exception e) {
+			rollback(conn);
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
 }

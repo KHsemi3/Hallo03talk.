@@ -35,7 +35,7 @@ public class ReportService {
 				rollback(conn);
 			}
 		} catch (Exception e) {
-			
+			e.printStackTrace();
 		}finally {
 			close(conn);
 		}
@@ -61,7 +61,7 @@ public class ReportService {
 				rollback(conn);
 			}
 		} catch (Exception e) {
-			
+			e.printStackTrace();
 		}finally {
 			close(conn);
 		}
@@ -89,7 +89,7 @@ public class ReportService {
 				rollback(conn);
 			}
 		} catch (Exception e) {
-			
+			e.printStackTrace();
 		}finally {
 			close(conn);
 		}

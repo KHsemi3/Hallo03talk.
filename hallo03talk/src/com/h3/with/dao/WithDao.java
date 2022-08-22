@@ -196,4 +196,21 @@ public class WithDao {
 		return result;
 	}
 
+	public int close_(Connection conn, String no) throws Exception {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		String sql = "UPDATE WITH_ SET STATUS = 'N' WHERE NO = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, no);
+			
+			result = pstmt.executeUpdate();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
 }
