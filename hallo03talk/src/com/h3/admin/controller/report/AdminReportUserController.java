@@ -27,7 +27,7 @@ public class AdminReportUserController extends HttpServlet {
 				//결과에 따라 화면 선택
 				String [] nums = req.getParameterValues("num");
 				
-				req.setAttribute("nums", nums);
+				
 				
 				
 				req.setAttribute("voList", voList);

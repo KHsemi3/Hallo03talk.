@@ -36,31 +36,7 @@ public class AdminReportService {
 		return voList;
 	}
 
-	public int deleteUser(int[] dNum) {
-		Connection conn = null;
-		int result = 0;
-		
-		
-		try {
-			conn = getConnection();
-			
-			//DAO 호출
-			result =new AdminReportUserDao().deleteUser(conn,dNum);
-			if(result == 1) {
-				JDBCTemplate.commit(conn);
-			}else {
-				JDBCTemplate.rollback(conn);
-			}
-			
-		}catch(Exception e) {
-			e.printStackTrace();
-			JDBCTemplate.rollback(conn);
-			
-		}finally {
-			close(conn);
-		}
-		return result;
-	}
+	
 
 	public ArrayList<ReportCommentVo> selectListComment() {
 		Connection conn = null;
@@ -104,6 +80,87 @@ public class AdminReportService {
 			
 		}
 		return voList;
+	}
+	
+	
+	public int deleteUser(int[] dNum) {
+		Connection conn = null;
+		int result = 0;
+		
+		
+		try {
+			conn = getConnection();
+			
+			//DAO 호출
+			result =new AdminReportUserDao().deleteUser(conn,dNum);
+			if(result == dNum.length) {
+				JDBCTemplate.commit(conn);
+			}else {
+				JDBCTemplate.rollback(conn);
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			JDBCTemplate.rollback(conn);
+			
+		}finally {
+			close(conn);
+		}
+		return result;
+	}
+
+	public int deleteContent(int[] dNum) {
+		Connection conn = null;
+		int result = 0;
+		
+		
+		try {
+			conn = getConnection();
+			
+			//DAO 호출
+			result =new AdminReportUserDao().deleteContent(conn,dNum);
+			if(result == dNum.length) {
+				JDBCTemplate.commit(conn);
+			}else {
+				JDBCTemplate.rollback(conn);
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			JDBCTemplate.rollback(conn);
+			
+		}finally {
+			close(conn);
+		}
+		return result;
+	}
+
+
+
+	public int deleteReply(int[] dNum) {
+		Connection conn = null;
+		int result = 0;
+		
+		
+		try {
+			conn = getConnection();
+			
+			//DAO 호출
+			result =new AdminReportUserDao().deleteReply(conn,dNum);
+			if(result == dNum.length) {
+				JDBCTemplate.commit(conn);
+			}else {
+				JDBCTemplate.rollback(conn);
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			JDBCTemplate.rollback(conn);
+			
+		}finally {
+			close(conn);
+		}
+		return result;
 	}
 
 }

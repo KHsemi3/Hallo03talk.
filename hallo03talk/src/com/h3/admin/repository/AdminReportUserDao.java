@@ -15,7 +15,7 @@ import com.h3.reportUser.vo.ReportUserVo;
 public class AdminReportUserDao {
 
 	public ArrayList<ReportUserVo> selectListUser(Connection conn) {
-		String sql="SELECT R.NO, R.GUILTY, R.CONTENT, R.PROCESS, R.REPORTED_TRAVELER_NO,T.ID AS REPORT_USER_ID FROM REPORT_USER R JOIN TRAVELER T ON R.REPORTED_TRAVELER_NO = T.NO WHERE T.STATUS = 'Y' AND R.PROCESS='N' ORDER BY NO DESC";
+		String sql="SELECT R.NO, R.GUILTY, R.CONTENT, R.PROCESS, R.REPORTED_TRAVELER_NO,R.ENROLL_DATE,T.ID AS REPORT_USER_ID FROM REPORT_USER R JOIN TRAVELER T ON R.REPORTED_TRAVELER_NO = T.NO WHERE R.PROCESS='N' ORDER BY NO DESC";
 		PreparedStatement pstmt = null;
 		ResultSet rs =null;
 		ArrayList<ReportUserVo> list = new ArrayList<ReportUserVo>();
@@ -31,7 +31,7 @@ public class AdminReportUserDao {
 				String process =	rs.getString("PROCESS");
 				String reportedTravelerNo =	rs.getString("REPORTED_TRAVELER_NO");
 				String reportUserId =	rs.getString("REPORT_USER_ID");
-//				Timestamp	enrollDate = rs.getTimestamp("ENROLL_DATE");
+				Timestamp	enrollDate = rs.getTimestamp("ENROLL_DATE");
 				
 				ReportUserVo vo = new ReportUserVo();
 				vo.setNo(no);
@@ -40,7 +40,7 @@ public class AdminReportUserDao {
 				vo.setProcess(process);
 				vo.setReportedTravelerNo(reportedTravelerNo);
 				vo.setReportUserId(reportUserId);
-//				vo.setEnrollDate(enrollDate);
+				vo.setEnrollDate(enrollDate);
 				
 				
 				list.add(vo);
@@ -63,7 +63,7 @@ public class AdminReportUserDao {
 	}
 	
 	public ArrayList<ReportCommentVo> selectListComment(Connection conn) {
-		String sql="SELECT R.NO, R.GUILTY, R.CONTENT, R.PROCESS, R.REPORTED_TRAVELER_NO,T.ID AS REPORT_USER_ID FROM REPORT_USER R JOIN TRAVELER T ON R.REPORTED_TRAVELER_NO = T.NO WHERE T.STATUS = 'Y' AND R.PROCESS='N' ORDER BY NO DESC";
+		String sql="SELECT NO, GUILTY, CONTENT, PROCESS, TYPE, REPLY_NO, ENROLL_DATE FROM REPORT_REPLY WHERE PROCESS='N' ORDER BY NO DESC";
 		PreparedStatement pstmt = null;
 		ResultSet rs =null;
 		ArrayList<ReportCommentVo> list = new ArrayList<ReportCommentVo>();
@@ -78,7 +78,7 @@ public class AdminReportUserDao {
 				String content =	rs.getString("CONTENT");
 				String process =	rs.getString("PROCESS");
 				String type =	rs.getString("TYPE");
-				String reportUserId =	rs.getString("REPORT_USER_ID");
+				String replyNo  =	rs.getString("REPLY_NO");
 				Timestamp	enrollDate = rs.getTimestamp("ENROLL_DATE");
 				
 				ReportCommentVo vo = new ReportCommentVo();
@@ -87,7 +87,7 @@ public class AdminReportUserDao {
 				vo.setContent(content);
 				vo.setProcess(process);
 				vo.setType(type);
-				vo.setReportUserId(reportUserId);
+				vo.setReplyNo(replyNo);
 				vo.setEnrollDate(enrollDate);
 				
 				
@@ -112,33 +112,10 @@ public class AdminReportUserDao {
 	
 	
 
-	public int deleteUser(Connection conn, int[] dNum) {
-String sql = "UPDATE REPORT_USER SET PROCESS = 'Y' WHERE NO= ?";
-	   
-		
-		PreparedStatement pstmt = null;
-		int result = 0;
-		
-		try {
-			
-			pstmt = conn.prepareStatement(sql);
-			for(int i=0; i<dNum.length; i ++) {
-				pstmt.setInt(1, dNum[i]);
-			}
-			
-			result = pstmt.executeUpdate();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			JDBCTemplate.close(pstmt);
-		}
-		return result;
 
-	}
 
 	public ArrayList<ReportBoardVo> selectListBoard(Connection conn) {
-		String sql="SELECT NO, GUILTY, CONTENT, PROCESS, TYPE, BOARD_NO FROM REPORT_CONTENT ORDER BY NO DESC";
+		String sql="SELECT NO, GUILTY, CONTENT, PROCESS, TYPE, BOARD_NO FROM REPORT_CONTENT WHERE PROCESS='N' ORDER BY NO DESC";
 		PreparedStatement pstmt = null;
 		ResultSet rs =null;
 		ArrayList<ReportBoardVo> list = new ArrayList<ReportBoardVo>();
@@ -153,7 +130,7 @@ String sql = "UPDATE REPORT_USER SET PROCESS = 'Y' WHERE NO= ?";
 				String content =	rs.getString("CONTENT");
 				String process =	rs.getString("PROCESS");
 				String type =	rs.getString("TYPE");
-				String reportUserId =	rs.getString("BOARD_NO");
+				String boardNo =	rs.getString("BOARD_NO");
 				Timestamp	enrollDate = rs.getTimestamp("ENROLL_DATE");
 				
 				ReportBoardVo vo = new ReportBoardVo();
@@ -162,7 +139,7 @@ String sql = "UPDATE REPORT_USER SET PROCESS = 'Y' WHERE NO= ?";
 				vo.setContent(content);
 				vo.setProcess(process);
 				vo.setType(type);
-				vo.setReportUserId(reportUserId);
+				vo.setBoardNo(boardNo);
 				vo.setEnrollDate(enrollDate);
 				
 				
@@ -180,6 +157,85 @@ String sql = "UPDATE REPORT_USER SET PROCESS = 'Y' WHERE NO= ?";
 			
 			return list;
 		}
+	
+	
+	public int deleteUser(Connection conn, int[] dNum) {
+		String sql = "UPDATE REPORT_USER SET PROCESS = 'Y' WHERE NO= ?";
+			   
+				
+				PreparedStatement pstmt = null;
+				int result = 0;
+				
+				try {
+					
+					pstmt = conn.prepareStatement(sql);
+					for(int i=0; i<dNum.length; i ++) {
+						pstmt.setInt(1, dNum[i]);
+						result += pstmt.executeUpdate();
+					}
+					
+					
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}finally {
+					JDBCTemplate.close(pstmt);
+				}
+				return result;
+
+			}
+	
+
+	public int deleteContent(Connection conn, int[] dNum) {
+		String sql = "UPDATE REPORT_CONTENT SET PROCESS = 'Y' WHERE NO= ?";
+		   
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			for(int i=0; i<dNum.length; i ++) {
+				pstmt.setInt(1, dNum[i]);
+				result += pstmt.executeUpdate();
+			}
+			
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+
+	}
+
+	public int deleteReply(Connection conn, int[] dNum) {
+String sql = "UPDATE REPORT_REPLY SET PROCESS = 'Y' WHERE NO= ?";
+		   
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			for(int i=0; i<dNum.length; i ++) {
+				pstmt.setInt(1, dNum[i]);
+				result += pstmt.executeUpdate();
+			}
+			
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
 		
 	}
 	

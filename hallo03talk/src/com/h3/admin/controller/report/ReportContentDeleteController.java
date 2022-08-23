@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.h3.admin.service.AdminReportService;
-@WebServlet(urlPatterns = "/admin/reportUserDelete")
-public class ReportUserDeleteController extends HttpServlet {
+@WebServlet(urlPatterns = "/admin/reportContentDelete")
+public class ReportContentDeleteController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String[] num =req.getParameterValues("num");
@@ -24,18 +24,17 @@ public class ReportUserDeleteController extends HttpServlet {
 		
 		
 		}
-			int result = new AdminReportService().deleteUser(dNum);
+			int result = new AdminReportService().deleteContent(dNum);
 		
 			
 				
 			
 		
 			
-			req.getRequestDispatcher("/admin/reportUser").forward(req, resp);
+			req.getRequestDispatcher("/admin/reportContent").forward(req, resp);
 			
 			
 		
 		
 	}
-
 }
