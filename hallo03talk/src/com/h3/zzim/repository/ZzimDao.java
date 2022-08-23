@@ -21,7 +21,7 @@ public class ZzimDao {
 		PreparedStatement pstmt = null;
 		int result = 0;
 
-		String sql = "INSERT INTO ZZIM (TRAVELER_NO, PLACE_NO) VALUES(?,?)";
+		String sql = "INSERT INTO ZZIM (NO, TRAVELER_NO, PLACE_NO) VALUES(SEQ_ZZIM_NO.NEXTVAL,?,?)";
 
 		try {
 			pstmt = conn.prepareStatement(sql);

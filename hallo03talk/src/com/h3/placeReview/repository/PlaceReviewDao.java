@@ -72,7 +72,7 @@ public class PlaceReviewDao {
 		ResultSet rs = null;
 		List<PlaceReviewVo> prvList = new ArrayList<PlaceReviewVo>();
 		
-		String sql = "SELECT PR.NO NO,PR.TITLE TITLE,PR.CONTENT CONTENT, PR.STAR STAR, PR.PLACE_NO PLACE_NO, PR.TRAVELER_NO TRAVELER_NO, PR.ENROLL_DATE ENROLL_DATE, RR.NO REVIEW_NO, RR.STATUS STATUS FROM PLACE_REVIEW PR LEFT OUTER JOIN PLACE_REVIEW_REPLY RR ON PR.NO = RR.REVIEW_NO WHERE PR.STATUS='Y' AND PLACE_NO=?";
+		String sql = "SELECT PR.NO NO,PR.TITLE TITLE,PR.CONTENT CONTENT, PR.STAR STAR, PR.PLACE_NO PLACE_NO, PR.TRAVELER_NO TRAVELER_NO, PR.ENROLL_DATE ENROLL_DATE, RR.NO REVIEW_NO, RR.STATUS STATUS, T.NICK NICK FROM PLACE_REVIEW PR LEFT OUTER JOIN PLACE_REVIEW_REPLY RR ON PR.NO = RR.REVIEW_NO JOIN TRAVELER T ON PR.TRAVELER_NO = T.NO WHERE PR.STATUS='Y' AND PLACE_NO=?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -87,7 +87,7 @@ public class PlaceReviewDao {
 				prv.setContent(rs.getString("CONTENT"));
 				prv.setStar(rs.getInt("STAR"));
 				prv.setPlaceNo(rs.getString("PLACE_NO"));
-				prv.setTravelerNo(rs.getString("TRAVELER_NO"));
+				prv.setTravelerNo(rs.getString("NICK"));
 				prv.setEnrollDate(rs.getString("ENROLL_DATE"));
 				prv.setCheckReview(rs.getString("STATUS"));
 				prvList.add(prv);
@@ -145,6 +145,53 @@ public class PlaceReviewDao {
 	
 		
 		return prpvList;
+	}
+
+	public int delReview(Connection conn, String placeNo) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String sql = "UPDATE PLACE_REVIEW SET STATUS='N' WHERE PLACE_NO=?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, placeNo);
+			
+			result = pstmt.executeUpdate();
+			
+			return result;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int delOneReview(Connection conn, PlaceReviewVo prv) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String sql = "UPDATE PLACE_REVIEW SET STATUS='N' WHERE NO=?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, prv.getNo());
+			
+			result = pstmt.executeUpdate();
+			
+			return result;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 }

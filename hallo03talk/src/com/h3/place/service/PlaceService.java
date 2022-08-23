@@ -1,11 +1,13 @@
 package com.h3.place.service;
 
-import static com.h3.common.JDBCTemplate.*;
+import static com.h3.common.JDBCTemplate.close;
+import static com.h3.common.JDBCTemplate.commit;
+import static com.h3.common.JDBCTemplate.getConnection;
+import static com.h3.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import com.h3.place.repository.PlaceDao;
 import com.h3.place.vo.PlaceVo;
@@ -170,9 +172,8 @@ public class PlaceService {
 			conn = getConnection();
 			
 			result = dao.placeDel(conn,placeNo);
-			result += dao.placePhotodel(conn, placeNo);
-			
-			if (result == 2) {
+			dao.placePhotodel(conn, placeNo);
+			if (result == 1) {
 				commit(conn);
 			} else {
 				rollback(conn);
@@ -252,6 +253,27 @@ public class PlaceService {
 		}
 
 		return voList;
+	}
+
+	public int getStars(String placeNo) {
+		
+		Connection conn = null;
+		int result = 0;
+		
+		try {
+			conn =getConnection();
+			
+			result= dao.getStars(conn,placeNo);
+			
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		
+		
+		return result;
 	}
 
 
