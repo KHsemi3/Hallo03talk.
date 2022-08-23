@@ -45,7 +45,8 @@
           </ul>
 
           <div class="col-md-3 text-end">
-            <button
+            <button onclick="location.href='/hallo03talk/search/searchPlace'"
+            
               class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 btn btn-warning"
               role="search"
             >
@@ -78,6 +79,7 @@
 
        <button
               class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 btn btn-warning"
+              onclick="location.href='/hallo03talk/search/searchPlace'"
               role="search"
             >
               검색
@@ -123,6 +125,7 @@
         </ul>
 
        <button
+       onclick="location.href='/hallo03talk/search/searchPlace'"
               class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 btn btn-warning"
               role="search"
             >

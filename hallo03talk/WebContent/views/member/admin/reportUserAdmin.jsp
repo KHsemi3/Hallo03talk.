@@ -4,8 +4,8 @@
     pageEncoding="UTF-8"%>
     <%
     ArrayList<ReportUserVo> voList = (ArrayList<ReportUserVo>)request.getAttribute("voList");
-    String nums =request.getParameter("num");
-    System.out.println(nums);
+   
+   
     %>
 <!DOCTYPE html>
 <html>
@@ -33,9 +33,13 @@
     .board {
      
       height:100%;
+      border-radius:20%;
     }
 
     .report-board-table {
+    border : 5px dashed orange;
+    
+    border-radius: 20%;
      
     }
 
@@ -60,7 +64,13 @@
       border-bottom: 3px solid white;
       height:35px;
       color:white;
+      cursor:pointer;
     }
+    
+    tbody > tr:hover{
+    opacity:0.6;
+    }
+    
     li{
     list-style:none;
     }
@@ -115,6 +125,11 @@
 padding: 10px;
 
 }
+
+.btn-area span:hover{
+opacity:0.6;
+}
+
 thead tr:nth:child(2):hover{
 opacity:0.5;
 }
@@ -159,7 +174,7 @@ opacity:0.5;
 			
 			<th><%=voList.get(i).getReportUserId()%></th>
 			<th><%=voList.get(i).getGuilty()%></th>
-			<th><%=voList.get(i).getContent()%><th>
+			<th><%=voList.get(i).getEnrollDate()%><th>
 			
 			
 		</tr>
@@ -183,7 +198,7 @@ opacity:0.5;
               <a href="">10</a>
                <a href="">&gt;</a>
                <div class="btn-area">
-                 <span onclick="location.href='/hallo03talk/admin/reportUserDelete?num='">
+                 <span onclick="f01();">
                 신고목록 삭제</span>
                 
                 <span> 페널티 부여</span>
@@ -206,5 +221,42 @@ opacity:0.5;
 
 	<footer></footer>
 
+<script>
+	function f01(){
+		
+	
+		
+		if(confirm("삭제 하시겟습니까?")){
+		alert("삭제 완료");
+		
+		const elemArr = $('input[name=num]');
+		const numArr = [];
+		
+		for(let i = 0; i < elemArr.length; ++i){
+			 if( elemArr[i].checked == true ) {
+				 numArr.push(elemArr[i].value);
+	            }
+	
+		//	numArr.push(elemArr[i].value);
+		}
+		
+		console.log(numArr);
+		
+		let str = '';
+		
+		for(let i = 0; i < numArr.length; ++i){
+			str += 'num=' + numArr[i];
+			str += '&';	
+			
+		
+		}
+		
+		
+		location.href='/hallo03talk/admin/reportUserDelete?' + str;
+		}else{
+			alert("취소 하셨습니다");
+		}
+	}
+</script>
 </body>
 </html>

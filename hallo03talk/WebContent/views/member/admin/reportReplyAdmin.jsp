@@ -1,9 +1,12 @@
+<%@page import="com.h3.reportComment.vo.ReportCommentVo"%>
 <%@page import="com.h3.reportUser.vo.ReportUserVo"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%
-    ArrayList<ReportUserVo> voList = (ArrayList<ReportUserVo>)request.getAttribute("voList");
+    ArrayList<ReportCommentVo> voList = (ArrayList<ReportCommentVo>)request.getAttribute("voList");
+   
+   
     %>
 <!DOCTYPE html>
 <html>
@@ -31,9 +34,13 @@
     .board {
      
       height:100%;
+      border-radius:20%;
     }
 
     .report-board-table {
+    border : 5px dashed orange;
+    
+    border-radius: 20%;
      
     }
 
@@ -58,7 +65,13 @@
       border-bottom: 3px solid white;
       height:35px;
       color:white;
+      cursor:pointer;
     }
+    
+    tbody > tr:hover{
+    opacity:0.6;
+    }
+    
     li{
     list-style:none;
     }
@@ -113,6 +126,11 @@
 padding: 10px;
 
 }
+
+.btn-area span:hover{
+opacity:0.6;
+}
+
 thead tr:nth:child(2):hover{
 opacity:0.5;
 }
@@ -146,84 +164,25 @@ opacity:0.5;
       </tr>
       </thead>
       <tbody>
-      <tr>
+     
       
-        <th><input class="check"type="checkbox" name="check"  />데이터1</th>
-        <th>데이터2</th>
-        <th>데이터3</th>
-        <th>데이터4</th>
-      </tr>
-      
-       <form action="/multipleDel" method="post" id=multidel>
+       
         <%
 		for(int i = 0; i<voList.size(); i++){
 		%>
 		<tr>
 			<th><input class="check"type="checkbox" name="num" value="<%=voList.get(i).getNo()%>"  /><%=voList.get(i).getNo()%></th>
 			
-			<th><%=voList.get(i).getReportUserId()%></th>
 			<th><%=voList.get(i).getGuilty()%></th>
-			<th><%=voList.get(i).getContent()%><th>
+			<th><%=voList.get(i).getContent()%></th>
+			<th><%=voList.get(i).getEnrollDate()%><th>
 			
 			
 		</tr>
 	
 		<%} %>
       
-      <tr>
-        <th><input class="check"type="checkbox" name="check"  />데이터1</th>
-        <th>데이터2</th>
-        <th>데이터3</th>
-        <th>데이터4</th>
-      </tr>
-      <tr>
-        <th><input class="check"type="checkbox" name="check"  />데이터1</th>
-        <th>데이터2</th>
-        <th>데이터3</th>
-        <th>데이터4</th>
-      </tr>
-      <tr>
-        <th><input class="check"type="checkbox" name="check"  />데이터1</th>
-        <th>데이터2</th>
-        <th>데이터3</th>
-        <th>데이터4</th>
-      </tr>
-      <tr>
-        <th><input class="check"type="checkbox" name="check"  />데이터1</th>
-        <th>데이터2</th>
-        <th>데이터3</th>
-        <th>데이터4</th>
-      </tr>
-      <tr>
-        <th><input class="check"type="checkbox" name="check"  />데이터1</th>
-        <th>데이터2</th>
-        <th>데이터3</th>
-        <th>데이터4</th>
-      </tr>
-      <tr>
-        <th><input class="check"type="checkbox" name="check"  />데이터1</th>
-        <th>데이터2</th>
-        <th>데이터3</th>
-        <th>데이터4</th>
-      </tr>
-      <tr>
-       <th><input class="check"type="checkbox" name="check"  />데이터1</th>
-        <th>데이터2</th>
-        <th>데이터3</th>
-        <th>데이터4</th>
-      </tr>
-      <tr>
-       <th><input class="check"type="checkbox" name="check"  />데이터1</th>
-        <th>데이터2</th>
-        <th>데이터3</th>
-        <th>데이터4</th>
-      </tr>
-      <tr>
-       <th><input class="check"type="checkbox" name="check"  />데이터1</th>
-        <th>데이터2</th>
-        <th>데이터3</th>
-        <th>데이터1</th>
-      </tr>
+      
       </tbody>
     </table>
     <div id="page">
@@ -240,12 +199,14 @@ opacity:0.5;
               <a href="">10</a>
                <a href="">&gt;</a>
                <div class="btn-area">
-                <span onclick="location.href='/hallo03talk/admin/reportUserDelete?num=1'"> 신고목록 삭제</span>
-                <span> 페널티 부여</span>
+                 <span onclick="f01();">
+                신고목록 삭제</span>
+                
+               
                </div>
               
      </div>
-     </form>
+    
    <br />
     <br />
     <hr />
@@ -261,5 +222,42 @@ opacity:0.5;
 
 	<footer></footer>
 
+<script>
+	function f01(){
+		
+	
+		
+		if(confirm("삭제 하시겟습니까?")){
+		alert("삭제 완료");
+		
+		const elemArr = $('input[name=num]');
+		const numArr = [];
+		
+		for(let i = 0; i < elemArr.length; ++i){
+			 if( elemArr[i].checked == true ) {
+				 numArr.push(elemArr[i].value);
+	            }
+	
+		//	numArr.push(elemArr[i].value);
+		}
+		
+		console.log(numArr);
+		
+		let str = '';
+		
+		for(let i = 0; i < numArr.length; ++i){
+			str += 'num=' + numArr[i];
+			str += '&';	
+			
+		
+		}
+		
+		
+		location.href='/hallo03talk/admin/reportReplyDelete?' + str;
+		}else{
+			alert("취소 하셨습니다");
+		}
+	}
+</script>
 </body>
 </html>
