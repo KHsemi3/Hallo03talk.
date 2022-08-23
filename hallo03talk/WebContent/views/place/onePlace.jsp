@@ -87,7 +87,9 @@
 				<!-- 사장님만 보임 -->
 				<c:if test="${ BossLoginMember != null }">
 					<div class="col text-end">
-						<button class="btn btn-warning mt-3 mb-0" onclick="location.href='/hallo03talk/place/update?placeNo=${placeVo.no}'">장소 수정</button>
+						<button class="btn btn-warning mt-3 mb-0"
+							onclick="location.href='/hallo03talk/place/update?placeNo=${placeVo.no}'">장소
+							수정</button>
 					</div>
 				</c:if>
 			</div>
@@ -105,12 +107,14 @@
 						<!-- 장소설명 -->
 						<p class="h4 py-2 px-5">${ placeVo.content }</p>
 						<c:if test="${!empty travelerLoginMember && resCheck == 0 }">
-						<button class="btn btn-primary" data-bs-toggle="modal"
-							data-bs-target="#reservation">예약하기</button>
+							<button class="btn btn-primary" data-bs-toggle="modal"
+								data-bs-target="#reservation">예약하기</button>
 						</c:if>
 						<c:if test="${!empty travelerLoginMember && resCheck == 1 }">
-							<button class="btn btn-danger" onclick="checkReservation(${placeVo.no});">예약취소</button>
-							<button type="hidden" class="btn d-none" data-bs-toggle="modal" data-bs-target="#cancelModal" id="cancleModal"></button>
+							<button class="btn btn-danger"
+								onclick="checkReservation(${placeVo.no});">예약취소</button>
+							<button type="hidden" class="btn d-none" data-bs-toggle="modal"
+								data-bs-target="#cancelModal" id="cancleModal"></button>
 							<script>
 								function checkReservation(placeNo) {
 									$.ajax({
@@ -141,8 +145,8 @@
 				<!-- =============================================================================== -->
 				<c:if test="${!empty travelerLoginMember }">
 					<div class="text-end">
-						<button class="btn btn-warning my-3" id="reviewFormBtn" onclick="reviewFormBtn();">후기
-							등록</button>
+						<button class="btn btn-warning my-3" id="reviewFormBtn"
+							onclick="reviewFormBtn();">후기 등록</button>
 					</div>
 					<!-- 후기 등록 -->
 				</c:if>
@@ -174,7 +178,8 @@
 						</div>
 						<div class="d-flex col justify-content-end align-items-center">
 							<button class="btn btn-primary">작성</button>
-							<button type="button" class="btn btn-danger" onclick="cancelReview();">취소</button>
+							<button type="button" class="btn btn-danger"
+								onclick="cancelReview();">취소</button>
 						</div>
 					</div>
 				</form>
@@ -207,8 +212,8 @@
 								<c:if test="${ BossLoginMember.no eq bossVoForShow.no }">
 									<div class="d-flex col justify-content-end align-items-center">${ r.travelerNo }</div>
 									<div class="d-flex col justify-content-end align-items-center">
-										<button class="btn btn-primary px-1" id="reviewForm" onclick="writeBtn();">
-											답글 등록</button>
+										<button class="btn btn-primary px-1" id="reviewForm"
+											onclick="writeBtn();">답글 등록</button>
 									</div>
 								</c:if>
 							</c:if>
@@ -220,8 +225,8 @@
 							<!-- 답글 등록 폼 -->
 							<form action="/hallo03talk/review/reply" method="post"
 								class="hideForm" id="commentForm">
-								<input type="hidden" value="${ r.no }" name="reviewNo" />
-								<input type="hidden" value="${ placeVo.no }" name="placeNo" />
+								<input type="hidden" value="${ r.no }" name="reviewNo" /> <input
+									type="hidden" value="${ placeVo.no }" name="placeNo" />
 								<div class="row border border-2">
 									<div
 										class="d-flex col-2 justify-content-center align-items-center"></div>
@@ -234,7 +239,8 @@
 									<div
 										class="d-flex col-2 justify-content-end align-items-center">
 										<button class="btn btn-primary">작성</button>
-										<button type="button" class="btn btn-danger" onclick="cancelBtn();">취소</button>
+										<button type="button" class="btn btn-danger"
+											onclick="cancelBtn();">취소</button>
 									</div>
 								</div>
 							</form>
@@ -256,8 +262,8 @@
 											<label class="col">${ bossVoForShow.id }</label>
 											<div
 												class="d-flex col justify-content-end align-items-center">
-												<button class="btn btn-danger px-1" id="delReview" onclick="delBtn(${rr.no});">답글
-													삭제</button>
+												<button class="btn btn-danger px-1" id="delReview"
+													onclick="delBtn(${rr.no});">답글 삭제</button>
 											</div>
 										</c:if>
 										<c:if test="${ BossLoginMember.no ne bossVoForShow.no  }">
@@ -278,58 +284,87 @@
 	<!-- 모달 -->
 	<!-- 예약하기 모달 -->
 	<c:if test="${!empty travelerLoginMember }">
-	<div class="modal" id="reservation">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<!-- Modal Header -->
-				<div class="modal-header">
-					<h4 class="modal-title">예약하기</h4>
-					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-				</div>
+		<div class="modal" id="reservation">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<!-- Modal Header -->
+					<div class="modal-header">
+						<h4 class="modal-title">예약하기</h4>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+					</div>
 
-				<!-- Modal body -->
-				<div class="modal-body">
-					<div class="row">
+					<!-- Modal body -->
+					<div class="modal-body">
 						<div class="row">
-							<div class="col text-center">날짜선택</div>
-						</div>
-						<div class="row">
-							<div class="col text-center">
-								<input type="date" class="col form-control" id="startDate" required/> 
-								<label for="" class="col">~</label>
-								<input type="date" class="col form-control" id="endDate" required/>
+							<div class="row">
+								<div class="col text-center">날짜선택</div>
 							</div>
-						</div>
-						<div class="row my-1">
-							<div class="col text-center">이름</div>
-						</div>
-						<div class="row my-1">
-							<input type="text" class="col text-center ms-4 form-control" value="${travelerLoginMember.name}" readonly/>
-						</div>
-						<div class="row my-1">
-							<div class="col text-center">전화번호</div>
-						</div>
-						<div class="row my-1">
-							<input type="text" class="col text-center ms-4 form-control" value="${travelerLoginMember.phone}" readonly/>
-						</div>
-						<div class="row my-1">
-							<div class="col text-center">인원수</div>
-						</div>
-						<div class="row my-1">
-							<div class="col"></div>
-							<input type="number" class="col form-control" min="1"  id="human" required>
-							<div class="col"></div>
-						</div>
-						<div class="row my-1 mt-3">
-							<button type="button" class="col btn btn-primary ms-4" onclick="addReservation(${placeVo.no})">확인</button>
-							<button type="button" data-bs-dismiss="modal"class="col btn btn-danger ms-4">취소</button>
+							<div class="row">
+								<div class="col text-center">
+									<input type="date" class="col form-control" id="startDate"
+										required /> <label for="" class="col">~</label> <input
+										type="date" class="col form-control" id="endDate" required />
+								</div>
+							</div>
+							<div class="row my-1">
+								<div class="col text-center">이름</div>
+							</div>
+							<div class="row my-1">
+								<input type="text" class="col text-center ms-4 form-control"
+									value="${travelerLoginMember.name}" readonly />
+							</div>
+							<div class="row my-1">
+								<div class="col text-center">전화번호</div>
+							</div>
+							<div class="row my-1">
+								<input type="text" class="col text-center ms-4 form-control"
+									value="${travelerLoginMember.phone}" readonly />
+							</div>
+							<div class="row my-1">
+								<div class="col text-center">인원수</div>
+							</div>
+							<div class="row my-1">
+								<div class="col"></div>
+								<input type="number" class="col form-control" min="1" id="human"
+									required>
+								<div class="col"></div>
+							</div>
+							<div class="row my-1 mt-3">
+								<button type="button" class="col btn btn-primary ms-4"
+									onclick="addReservation(${placeVo.no})">확인</button>
+								<button type="button" data-bs-dismiss="modal"
+									class="col btn btn-danger ms-4">취소</button>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<script>
+		<script>
+		document.querySelector('#startDate').addEventListener('change',() => {
+			const start = document.querySelector('#startDate').value;
+			const ydm = start.split('-');
+			const resDate = parseInt(ydm[1]+ydm[2]);
+			const today = parseInt((new Date().getMonth()+1).toString() + new Date().getDate().toString());
+			if (resDate <= today) {
+				alert('올바르게 입력해주세요');
+				document.querySelector('#startDate').value="";
+			}
+		});
+
+		document.querySelector('#endDate').addEventListener('change',() => {
+			const end = document.querySelector('#endDate').value;
+			const ydm = end.split('-');
+			const resDate = parseInt(ydm[1]+ydm[2]);
+			const startDates = document.querySelector('#startDate').value.split('-');
+			const startDate = parseInt(startDates[1]+startDates[2]);
+			if (resDate <= startDate) {
+				alert('올바르게 입력해주세요');
+				document.querySelector('#endDate').value="";
+			}
+		});
+	</script>
+		<script>
 		function addReservation(placeNo){
 		$.ajax({
 			method: "POST",
@@ -351,50 +386,7 @@
 		});
 	}
 	</script>
-</c:if>
-	<!-- 신고하기 모달 -->
-	<div class="modal" id="reportMain">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content">
-				<!-- Modal Header -->
-				<div class="modal-header">
-					<h3 class="modal-title">신고하기</h3>
-					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-				</div>
-
-				<!-- Modal body -->
-				<div class="modal-body">
-					<h5>1.신고하려고 하는 항목을 선택해주세요.</h5>
-					<input type="checkbox" value="" id="page" onclick="example_1();" />
-					<label for="page">게시물</label> <br /> <input type="checkbox"
-						value="" id="user" onclick="example_2();" /> <label for="user">사용자</label>
-					<br /> <input type="checkbox" value="" id="comment"
-						onclick="example_3();" /> <label for="comment">댓글</label> <br />
-					<br />
-					<h5>2.신고하려는 항목에 대한 이유를 선택해주세요.</h5>
-					<h6>항목은 한가지만 선택할 수 있습니다.</h6>
-					<input type="checkbox" value="" id="name" onclick="example_4();" />
-					<label for="name"><b>부적절한 이름, 제목</b></label> <br /> 불쾌감을 주거나, 부적절한
-					이름 또는 제목 사용 <br /> <input type="checkbox" value="" id="curse"
-						onclick="example_5();" /> <label for="curse"><b>욕설</b></label> <br />
-					상대방에게 공격적인 언어 사용 <br /> <input type="checkbox" value=""
-						id="disgust" onclick="example_6();" /> <label for="disgust"><b>혐오
-							발언</b> </label> <br /> 각종 비하 또는 차별 발언 <br /> <input type="checkbox"
-						value="" id="ad" onclick="example_7();" /> <label for="ad"><b>광고성
-							계정, 게시물</b> </label> <br /> 과도한 광고성 게시물, 댓글 작성. 또는 그 계정 <br /> <br />
-					<h5>3.신고하려는 자세한 이유를 적어주세요.</h5>
-					<textarea name="" id="" cols="100" rows="5"
-						placeholder="내용을 입력해 주세요."></textarea>
-				</div>
-
-				<!-- Modal footer -->
-				<div class="modal-footer">
-					<button type="button" class="btn btn-danger"
-						data-bs-dismiss="modal" style="margin: 0 auto">신고하기</button>
-				</div>
-			</div>
-		</div>
-	</div>
+	</c:if>
 	<script>
 		function delZzim(x) {
 			$.ajax({
@@ -412,7 +404,7 @@
 			});
 		}
 	</script>
-		<script>
+	<script>
 		function addZzim(x) {
 			
 			$.ajax({
@@ -439,59 +431,65 @@
 			history.go(0);
 		}
 	</script>
-<!-- 예약 취소 모달 -->
-<div class="modal" id="cancelModal">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<!-- Modal Header -->
-			<div class="modal-header">
-				<h4 class="modal-title">예약취소하기</h4>
-				<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-			</div>
+	<!-- 예약 취소 모달 -->
+	<div class="modal" id="cancelModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title">예약취소하기</h4>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+				</div>
 
-			<!-- Modal body -->
-			<div class="modal-body">
-				<div class="row">
+				<!-- Modal body -->
+				<div class="modal-body">
 					<div class="row">
-						<div class="col text-center">날짜선택</div>
-					</div>
-					<div class="row">
-						<div class="col text-center">
-							<input type="text" class="col form-control" id="cancelStartDate" readonly/> 
-							<label for="" class="col">~</label>
-							<input type="text" class="col form-control" id="cancelEndDate" readonly/>
+						<div class="row">
+							<div class="col text-center">날짜선택</div>
 						</div>
-					</div>
-					<div class="row my-1">
-						<div class="col text-center">이름</div>
-					</div>
-					<div class="row my-1">
-						<input type="text" class="col text-center ms-4 form-control" value="${travelerLoginMember.name}" readonly/>
-					</div>
-					<div class="row my-1">
-						<div class="col text-center">전화번호</div>
-					</div>
-					<div class="row my-1">
-						<input type="text" class="col text-center ms-4 form-control" value="${travelerLoginMember.phone}" readonly/>
-					</div>
-					<div class="row my-1">
-						<div class="col text-center">인원수</div>
-					</div>
-					<div class="row my-1">
-						<div class="col"></div>
-						<input type="text" class="col form-control" id="cancelHuman" readonly>
-						<div class="col"></div>
-					</div>
-					<div class="row my-1 mt-3">
-						<button type="button" class="col btn btn-primary ms-4" onclick="cancelReservation(${placeVo.no})">확인</button>
-						<button type="button" data-bs-dismiss="modal"class="col btn btn-danger ms-4">취소</button>
+						<div class="row">
+							<div class="col text-center">
+								<input type="text" class="col form-control" id="cancelStartDate"
+									readonly /> <label for="" class="col">~</label> <input
+									type="text" class="col form-control" id="cancelEndDate"
+									readonly />
+							</div>
+						</div>
+						<div class="row my-1">
+							<div class="col text-center">이름</div>
+						</div>
+						<div class="row my-1">
+							<input type="text" class="col text-center ms-4 form-control"
+								value="${travelerLoginMember.name}" readonly />
+						</div>
+						<div class="row my-1">
+							<div class="col text-center">전화번호</div>
+						</div>
+						<div class="row my-1">
+							<input type="text" class="col text-center ms-4 form-control"
+								value="${travelerLoginMember.phone}" readonly />
+						</div>
+						<div class="row my-1">
+							<div class="col text-center">인원수</div>
+						</div>
+						<div class="row my-1">
+							<div class="col"></div>
+							<input type="text" class="col form-control" id="cancelHuman"
+								readonly>
+							<div class="col"></div>
+						</div>
+						<div class="row my-1 mt-3">
+							<button type="button" class="col btn btn-primary ms-4"
+								onclick="cancelReservation(${placeVo.no})">확인</button>
+							<button type="button" data-bs-dismiss="modal"
+								class="col btn btn-danger ms-4">취소</button>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
-<script>
+	<script>
 	function showReservation(resVo) {
 		document.querySelector('#cancelStartDate').value = new Date(resVo.startDate).toISOString().split("T")[0];
 		document.querySelector('#cancelEndDate').value = new Date(resVo.endDate).toISOString().split("T")[0];
