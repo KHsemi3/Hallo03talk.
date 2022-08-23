@@ -2,7 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%
+String alertMsg = (String)session.getAttribute("alertMsg");
+session.removeAttribute("alertMsg");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,6 +56,9 @@
 				<h6 class="chi">맛집 추천글, 장소 추천등 여행자들의 소통</h6>
 				<c:if test="${not empty travelerLoginMember}">
 					<button class="btn btn-outline-warning chi" onclick="location.href='${contextPath}/comm/post'">글쓰기</button>
+				</c:if>
+				<c:if test="${not empty loginAdmin}">
+					<button class="btn btn-outline-warning chi" onclick="location.href='${contextPath}/comm/notice/post'">공지사항 작성</button>
 				</c:if>
 			</div>
 			<hr>
@@ -192,6 +198,11 @@
 
 
 	<footer></footer>
-
+<script type="text/javascript">
+		<%if (alertMsg != null) {%>
+			alert('<%=alertMsg%>');
+		<%}%>
+		
+	</script>
 </body>
 </html>
