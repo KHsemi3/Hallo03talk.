@@ -321,11 +321,11 @@
       <nav>
         <ul class="menu1">
          <%if(loginAdmin == null){%>
-          <li><a href="" class="btn">공지사항</a></li>
+          <li><a class="btn" onclick="location.href='/hallo03talk/comm/list?view=notice'">공지사항</a></li>
           <li><a  href="" id="testBtn" class="btn" >로그인</a></li>
            <%} else {%>
-   		
-    	<li><a href="" class="btn">공지사항</a></li>
+   	
+    	<li><a class="btn" onclick="location.href='/hallo03talk/comm/list?view=notice'">공지사항</a></li>
     	<li class="btn"  onclick="location.href='/hallo03talk/admin/placeAdmin'">숙소관리</li>
     	<li><a  class="btn"  onclick="location.href='/hallo03talk/admin/reportUser'">신고관리</a></li>
           <li><a  href="/hallo03talk/admin/logout"  class="btn" >로그아웃</a></li>

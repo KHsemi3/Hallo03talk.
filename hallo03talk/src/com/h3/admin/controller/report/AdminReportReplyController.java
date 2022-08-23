@@ -23,7 +23,7 @@ public class AdminReportReplyController extends HttpServlet {
 		
 		
 		req.setAttribute("voList", voList);
-		req.getRequestDispatcher("/views/member/admin/reportUserAdmin.jsp").forward(req, resp);
+		req.getRequestDispatcher("/views/member/admin/reportReplyAdmin.jsp").forward(req, resp);
 		
 	}
 

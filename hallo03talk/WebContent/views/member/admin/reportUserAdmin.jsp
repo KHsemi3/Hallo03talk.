@@ -4,6 +4,8 @@
     pageEncoding="UTF-8"%>
     <%
     ArrayList<ReportUserVo> voList = (ArrayList<ReportUserVo>)request.getAttribute("voList");
+    String nums =request.getParameter("num");
+    System.out.println(nums);
     %>
 <!DOCTYPE html>
 <html>
@@ -181,7 +183,7 @@ opacity:0.5;
               <a href="">10</a>
                <a href="">&gt;</a>
                <div class="btn-area">
-                 <span onclick="location.href='/hallo03talk/admin/reportUserDelete'">
+                 <span onclick="location.href='/hallo03talk/admin/reportUserDelete?num='">
                 신고목록 삭제</span>
                 
                 <span> 페널티 부여</span>

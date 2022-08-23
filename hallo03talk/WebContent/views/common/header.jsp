@@ -39,7 +39,7 @@
             class="nav col-12 col-lg-auto ms-lg-auto mb-2 justify-content-center mb-md-0"
           >
             <li><a onclick="location.href='/hallo03talk/with/list'" class="nav-link px-2 link-dark">동행</a></li>
-            <li><a onclick="location.href='/hallo03talk/place/list'" href="#" class="nav-link px-2 link-dark">장소</a></li>
+            <li><a onclick="location.href='/hallo03talk/place/list?categoryNo=0&cityNo=0&insideNo=0'" href="#" class="nav-link px-2 link-dark">장소</a></li>
             <li><a href="#" class="nav-link px-2 link-dark">후기</a></li>
             <li><a onclick="location.href='/hallo03talk/comm/list'" class="nav-link px-2 link-dark">커뮤니티</a></li>
           </ul>
@@ -63,7 +63,7 @@
     <header class="p-3 mb-3 border-bottom">
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-        <a href="#" onclick="location.href='/hallo03talk'" class="nav-link px-2 link-secondary hallo"
+        <a href="#" onclick="location.href='/hallo03talk/views/member/admin/adminPage.jsp'" class="nav-link px-2 link-secondary hallo"
             >할로영삼talk</a
           >
           <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
@@ -71,7 +71,7 @@
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
          <li><a href="#" onclick="location.href='/hallo03talk/with/list'" class="nav-link px-2 link-dark">동행</a></li>
-            <li><a onclick="location.href='/hallo03talk/place/list'" href="#" class="nav-link px-2 link-dark">장소</a></li>
+            <li><a onclick="location.href='/hallo03talk/place/list?categoryNo=0&cityNo=0&insideNo=0'" href="#" class="nav-link px-2 link-dark">장소</a></li>
             <li><a href="#" class="nav-link px-2 link-dark">후기</a></li>
             <li><a href="#" onclick="location.href='/hallo03talk/comm/list'" class="nav-link px-2 link-dark">커뮤니티</a></li>
         </ul>
@@ -91,8 +91,10 @@
             <img src="<%=request.getContextPath()%>/resources/img/god.png" alt="mdo" width="32" height="32" class="rounded-circle">
           </a>
           <ul class="dropdown-menu text-small">
-            <li><a class="dropdown-item" href="#">숙소관리</a></li>
-            <li><a class="dropdown-item" href="#">신고관리</a></li>
+            <li><a onclick="location.href='/hallo03talk/admin/placeAdmin'"class="dropdown-item" href="#">숙소관리</a></li>
+            <li><a onclick="location.href='/hallo03talk/admin/reportUser'"class="dropdown-item" href="#">유저신고관리</a></li>
+            <li><a onclick="location.href='/hallo03talk/admin/reportContent'"class="dropdown-item" href="#">게시글 신고관리</a></li>
+            <li><a onclick="location.href='/hallo03talk/admin/reportReply'"class="dropdown-item" href="#">댓글 신고관리</a></li>
             
             <li><hr class="dropdown-divider"></li>
             <li><a onclick="location.href='/hallo03talk/admin/logout'" class="dropdown-item" href="#">로그아웃</a></li>
@@ -115,7 +117,7 @@
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
          <li><a href="#" onclick="location.href='/hallo03talk/with/list'" class="nav-link px-2 link-dark">동행</a></li>
-            <li><a onclick="location.href='/hallo03talk/place/list'" href="#" class="nav-link px-2 link-dark">장소</a></li>
+            <li><a onclick="location.href='/hallo03talk/place/list?categoryNo=0&cityNo=0&insideNo=0'" href="#" class="nav-link px-2 link-dark">장소</a></li>
             <li><a href="#" class="nav-link px-2 link-dark">후기</a></li>
             <li><a href="#" onclick="location.href='/hallo03talk/comm/list'" class="nav-link px-2 link-dark">커뮤니티</a></li>
         </ul>
