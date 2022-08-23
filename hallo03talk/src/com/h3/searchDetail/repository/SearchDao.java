@@ -42,6 +42,7 @@ public class SearchDao {
 				pvo.setAddress(address);
 				
 				plist.add(pvo);
+				
 
 				
 			}
@@ -62,7 +63,7 @@ public class SearchDao {
 	//후기 검색
 	public ArrayList<PlaceReviewVo> rselectList(Connection conn){
 		
-		String sql = "SELECT A.NO, A.TITLE, A.CONTENT, B.NAME FROM PLACE_REVIEW A LEFT OUTER JOIN PLACE_REVIEW_PHOTO B ON A.NO = B.REVIEW_NO WHERE B.STATUS = 'Y' AND A.TITLE LIKE '%?%' OR A.CONTENT LIKE '%?%'";
+		String sql = "SELECT A.NO, A.TITLE, A.CONTENT, B.NAME FROM PLACE_REVIEW A LEFT OUTER JOIN PLACE_REVIEW_PHOTO B ON A.NO = B.REVIEW_NO WHERE A.TITLE LIKE '%?%' OR A.CONTENT LIKE '%?%'";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -75,16 +76,16 @@ public class SearchDao {
 			
 			while(rs.next()) {
 				String no = rs.getString("NO");
-				String name = rs.getString("NAME");
+				String title = rs.getString("TITLE");
 				String content = rs.getString("CONTENT");
-				String address = rs.getString("ADDRESS");
 				
 				PlaceReviewVo rvo = new PlaceReviewVo();
 				rvo.setNo(no);
-				rvo.setTitle(sql);
+				rvo.setTitle(title);
 				rvo.setContent(content);
 				
 				rlist.add(rvo);
+				
 				
 			}
 	
@@ -103,7 +104,7 @@ public class SearchDao {
 	//커뮤니티 검색
 	public ArrayList<CommVo> cselectList(Connection conn){
 		
-		String sql = "SELECT A.NO, A.TITLE, A.CONTENT, A.WRITER, B.NAME FROM COMMUNITY A LEFT OUTER JOIN COMMUNITY_PHOTO B ON A.NO = B.COMMUNITY_NO WHERE B.STATUS = 'Y' AND A.TITLE LIKE '%?%' OR A.CONTENT LIKE '%?%'";
+		String sql = "SELECT A.NO, A.TITLE, A.CONTENT, A.WRITER, B.NAME FROM COMMUNITY A LEFT OUTER JOIN COMMUNITY_PHOTO B ON A.NO = B.COMMUNITY_NO WHERE A.TITLE LIKE '%?%' OR A.CONTENT LIKE '%?%'";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -127,6 +128,7 @@ public class SearchDao {
 				cvo.setWriter(writer);
 				
 				clist.add(cvo);
+				
 				
 			}
 			

@@ -23,6 +23,7 @@ public class SearchController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		req.setCharacterEncoding("UTF-8");
 
 		System.out.println("==============================");
 		
@@ -37,9 +38,18 @@ public class SearchController extends HttpServlet{
 		String cate2 = req.getParameter("cate2");
 		String cate3 = req.getParameter("cate3");
 		
-		PlaceVo pvo = new PlaceVo();
-		CommVo cvo = new CommVo();
-		PlaceReviewVo rvo = new PlaceReviewVo();
+//		PlaceVo pvo = new PlaceVo();
+//		CommVo cvo = new CommVo();
+//		PlaceReviewVo rvo = new PlaceReviewVo();
+		
+		System.out.println(pvoList);
+		System.out.println(rvoList);
+		System.out.println(cvoList);
+		System.out.println(placeKeyword);
+		System.out.println(cate1);
+		System.out.println(cate2);
+		System.out.println(cate3);
+		System.out.println("==============================");
 		
 		//결과에 따라 화면 만들기
 		req.setAttribute("pvoList", pvoList);
@@ -51,7 +61,7 @@ public class SearchController extends HttpServlet{
 		req.setAttribute("cvoList", cvoList);
 		req.getRequestDispatcher("/views/search/searchDetail.jsp").forward(req, resp);
 		
-		req.setCharacterEncoding("UTF-8");
+		
 		
 
 		

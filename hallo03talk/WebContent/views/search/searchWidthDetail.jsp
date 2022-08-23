@@ -12,7 +12,7 @@ int currentPage = pv.getCurrentPage();
 int startPage = pv.getStartPage();
 int endPage = pv.getEndPage();
 int maxPage = pv.getMaxPage();
-System.out.println(pv);
+System.out.println(wvoList);
 %>
 
 <!DOCTYPE html>
