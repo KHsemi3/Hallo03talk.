@@ -445,8 +445,10 @@ input.full:focus, textarea.full:focus {
                   <div class="id__wrapper">
                     <div class="deco"></div>
                     <label class="your-face" id="image-form" for="image-input">
-                      <input type="file" name="f" id="image-input"/>
-                      <div class="image-persuader">Upload Image Here</div><img id="imager" src="#" alt="Your Image Here"/>
+                      <input class="file" type="file" name="f" id="image-input" />
+                      <button type="button" onclick="upload()">upload</button>
+                      <div class="image-persuader">Upload Image Here</div>
+                      <img id="imager" src="#" alt="Your Image Here"/>
                     </label>
                     <div class="Id">
                       <label>Id</label>
@@ -578,9 +580,82 @@ input.full:focus, textarea.full:focus {
 		<!-- 신규 비밀번호 체크 -->
 		<script>
 		
+		function upload(){
+			
+			var formdata = new FormData(document.getElementById("image-input"));
+			
+			$.ajax({
+				 type:"post",
+				 enctype: "multipart/form-data",
+				 url : "/traveler/ajax",
+				 data : formdata,
+				 processData: false,
+				 contentType: false,
+				 timeout: 600000,
+				 success: function(e){
+					 console.log(e)
+				 },
+			 	 error : function(e){
+					 console.log(e)
+				 }	 
+			 })
+		}
+		
+		 /*  function setThumbnail(event) {
+		        var reader = new FileReader();
+	
+		        reader.onload = function(event) {
+		          var img = document.createElement("img");
+		          img.setAttribute("src", event.target.result);
+		          document.querySelector("div#image-persuader").appendChild(img);
+		        };
+
+		        reader.readAsDataURL(event.target.files[0]);
+		      } */
+		
+		 $(document).ready(function() {
+		        $("#image-input").on("change", handleImgFileSelect);
+		    });/
+		
+		 function handleImgFileSelect(e){
+			 var file = e.target.files[0];
+			// console.log(file)
+			 
+			 var formdata = new FormData(document.getElementById("imageUploadForm"));
+			var formdata2 =  new FormData();
+			
+			formdata2.append("file", file);
+			 
+			 //console.log(formdata)
+			 console.log(formdata2)
+			 
+			 $.ajax({
+				 type:"post",
+				 enctype: "multipart/form-data",
+				 url : "/traveler/ajax",
+				 data : formdata,
+				 processData: false,
+				 contentType: false,
+				 timeout: 600000,
+				 success: function(e){
+					 console.log(e)
+				 },
+			 	 error : function(e){
+					 console.log(e)
+				 }	 
+			 })
+			 
+			/*  var reader = new FileReader();
+			 reader.onload = function(e){
+				 $("#image-persuader").attr("src", e.target.result)
+			 } */
+			 
+			 
+		 }
+		 
 			function checkPwd(){
 				
-				isSame = $('input[name=travelerJoinPwdNew]').val() == $('input[name=travelerJoinPwdNew2]').val()
+				var isSame = $('input[name=travelerJoinPwdNew]').val() == $('input[name=travelerJoinPwdNew2]').val()
 				
 				if(isSame == true){
 					return true;
@@ -651,7 +726,7 @@ input.full:focus, textarea.full:focus {
 		
 			function quit(){
 				
-				isSame = $('input[name=travelerJoinPwd]').val() == $('input[name=travelerJoinPwd2]').val()
+				var isSame = $('input[name=travelerJoinPwd]').val() == $('input[name=travelerJoinPwd2]').val()
 				
 				if(isSame == true){
 					return true;

@@ -76,7 +76,6 @@
             margin: 35px auto;
             padding: 10px;
             position: relative;
-            box-shadow: 0 0 600px 9px #fcae8f;
 			border-radius: 6px;
 			background-color: rgb(233, 187, 100);
             top: 60px;

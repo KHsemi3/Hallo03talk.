@@ -572,6 +572,31 @@ public class TravelerService {
 	
 	}
 
+	
+	
+	/*
+	 * traveler - 내가 쓴 댓글 삭제
+	 */
+	public void deleteReply(int no, int replyNo) {
+		
+		Connection conn = null;
+		try {
+			
+			conn = getConnection();
+			
+			dao.deleteReply(conn, no, replyNo);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		
+	}
+
+
+	
+
 
 
 	

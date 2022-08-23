@@ -17,27 +17,35 @@ import com.h3.traveler.vo.MpgPostVo;
 import com.h3.traveler.vo.TravelerVo;
 
 @WebServlet(urlPatterns = "/travelerMpgPost/delete")
-public class MpgPostDeleteController extends HttpServlet{
+public class MpgPostDeleteController extends HttpServlet {
 
-	
 	/*
 	 * traveler - 내가 쓴 글 삭제
 	 */
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		TravelerVo loginTraveler = (TravelerVo)req.getSession().getAttribute("travelerLoginMember");
-		
-		String boardKr = (String)req.getParameter("board");
-		
-		String board = boardKr.equals("커뮤니티") ? "community" : (boardKr.equals("장소 리뷰") ? "place_review" : "_with");
-		
-		String no = (String)req.getParameter("no");
-	
+		TravelerVo loginTraveler = (TravelerVo) req.getSession().getAttribute("travelerLoginMember");
+
+		// request에 담긴 값 확인
+		Enumeration params = req.getParameterNames();
+		System.out.println("----------------------------");
+		while (params.hasMoreElements()) {
+			String name = (String) params.nextElement();
+			System.out.println(name + " : " + req.getParameter(name));
+		}
+		System.out.println("----------------------------");
+
+		// jsp에 표시한 값은 한글이므로 변수 boardKr로 받음
+		String boardKr = (String) req.getParameter("board");
+
+		// 쿼리문에서 쓰이기 때문에 실제 테이블명으로 바꿔서 할당
+		String board = boardKr.equals("커뮤니티") ? "community" : (boardKr.equals("장소 리뷰") ? "place_review" : "with_");
+
+		String no = (String) req.getParameter("no");
+
 		new TravelerService().deletePost(no, board);
-	
+
 	}
-	
-	
-	 
-}//class
+
+}// class

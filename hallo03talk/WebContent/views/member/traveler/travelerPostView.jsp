@@ -125,6 +125,8 @@
                <%for(int i=0; i < voList.size(); i++){ %> 
 	                <tr>
 		                  <th scope="row">
+		                  <!-- 인풋 엘리먼트의 밸류 프로퍼티에 어떤 게시물인지 밸류 값 주기 -->
+		                  <!-- 모든 게시물이 한 곳에 표시되므로 게시물 번호뿐만 아니라 게시판 이름 그리고 ', ' 문자와 함께 조합하여 줌 -->
 		                    <input type="checkbox" name="ckNo" value="<%= voList.get(i).getBoard().concat(",").concat(voList.get(i).getNo()) %>">
 		                  </th>
 		                 	<th scope="row"><%=voList.get(i).getNo() %></th>                   
@@ -172,55 +174,100 @@
 
 <script>
 
-/* $(document).ready(function() {
-	
+	// 전체 삭제 체크박스
 	$(".deleteButtonAll").click(function(e) {
+		// 인풋 체크박스 name이 chNo인 엘리먼트 각각 꺼내오기
 		$('input:checkbox[name="ckNo"]').each(function() {
-
-			this.checked = true;
-
-			});
-	}) */
+			// 엘리먼트의 checked 프로퍼티값 할당
+			// ex) checked가 true라면 !true 즉 false값 할당됨
+			this.checked = !this.checked;
+		});	
+	}) 
 	
+	// 삭제 체크 박스 
 	$(".deleteButton").click(function(e) {
-
+		// 다중 선택할수도 있으므로 array 생성
+		var arr = []
+		
+		// 인풋 체크박스 name이 chNo인 엘리먼트 각각 꺼내오기
 		$('input:checkbox[name=ckNo]').each(function (index) {
-
+			// 체크된 엘리먼트 
 			if($(this).is(":checked")==true){
-		    	//console.log($(this).val());
-		    	var query = $(this).val()
-		    	var data = query.split(",")
+		    	console.log($(this).val());
 		    	
+		    	// query에 엘리먼트의 밸류 할당("게시판이름, 게시판번호")
+		    	var query = $(this).val()
+		    	// data array에 게시판이름, 게시판 번호를 할당
+		    	var data = query.split(",") 
+		    	
+		    	// data에 key:value 형식으로 게시물 정보 할당
 		    	data = {
 		    		"board" : data[0],
 		    		"no" : data[1]
 		    	} 
 		    	
-		    	//console.log(data)
+		    	// array에 담기
+		   		arr.push(data)
 		    	
-		    	var ans = confirm("선택하신 글을 삭제하시겠습니까?");
-	        if(!ans) return false;
+			}
+		    	console.log(arr)
+		 })
+		 
+		 // 만약 선택한 게시물이 있다면 + 컨펌창을 한번만 띄우기 위해 for문 밖에서 함
+		 if(arr.length> 0){
+			 var ans = confirm("선택하신 글을 삭제하시겠습니까?");
+		        
+			 	if(ans){
+			 		// 삭제 완료 alert창을 한번만 띄우기 위한 flag 
+		        	var flag = false;
+					
+			 		// 선택한 게시물s 만큼 loop
+			 		for(i=0; i< arr.length; i++){ 
+						 var value = arr[i] // 게시물 정보 하나
+						 console.log(value)
+						 
+						 var url = "${pageContext.request.contextPath}/travelerMpgPost/delete"
+						 
+					     $.ajax({
+					       url  : url,
+					       type : "post",
+					       data : value ,
+					       success : function(data) {
+					    	 	// flag 값을 성공실패 여부에 따라 값을 할당해주려고 했으나 할당 안됨
+					        	// flag = true;
+					            alert("글이 삭제 되었습니다.");
+					            location.reload();
+					       }, error : function(data) {
+					       		// flag = false;
+					          	alert("글이 삭제되지 않았습니다.");
+					       }
+					        });  
+						}
+						
+			 		// 성공 실패 여부에 따라 분기처리하려했으나 에이젝스 내부에서 값 할당이 안되므로 주석처리
+						/* if(flag){
+						  alert("글이 삭제 되었습니다.");
+			              location.reload();
+						}else{
+							alert("글이 삭제되지 않았습니다.");
+						} */
+		        	
+		        }else {
+		        	return false;
+		        } 
+		 }
+			 
+			 
+		
+		    
+		
 	        
-	        var url = "${pageContext.request.contextPath}/travelerMpgPost/delete"
-	        
-	         $.ajax({
-	            url  : url,
-	            type : "post",
-	            data : data ,
-	            success : function(data) {
-	                  alert("글이 삭제 되었습니다.");
-	                  location.reload();
-	            },
-	            error : function(data) {
-	                alert("글이 삭제되지 않았습니다.");
-	            }
-	        }); 
+	      
 		    	
 		    		
-		    }
+		   
 		
-		})
-		
+				
 		
 	})
 /* }); */

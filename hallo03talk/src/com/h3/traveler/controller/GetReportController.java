@@ -18,23 +18,23 @@ public class GetReportController extends HttpServlet{
 
 	
 	/*
-	 * traveler - 신고 받은 내역 조회
+	 * traveler - 신고 받은 내역 조회 -- 이건 지워야 할듯
 	 */
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 	
-		TravelerVo loginTraveler = (TravelerVo)req.getSession().getAttribute("travelerLoginMember");
-
-		// 서비스 호출
-		ArrayList<ReportUserVo> voList = new TravelerService().selectGetReportList(loginTraveler.getNo());
-	
-		req.setAttribute("voList", voList);
-
-		System.out.println("@@@voList@@: " + voList);
-		
-		
-		
+//		TravelerVo loginTraveler = (TravelerVo)req.getSession().getAttribute("travelerLoginMember");
+//
+//		// 서비스 호출
+//		ArrayList<ReportUserVo> voList = new TravelerService().selectGetReportList(loginTraveler.getNo());
+//	
+//		req.setAttribute("voList", voList);
+//
+//		System.out.println("@@@voList@@: " + voList);
+//		
+//		
+//		
 //		if(voList != null) {
 //			
 //			req.setAttribute("voList", voList);
