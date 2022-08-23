@@ -59,7 +59,11 @@
 
 			<div class="row">
 				<c:if test="${ BossLoginMember == null }">
-					<div class="col text-center mt-3 mb-0">
+					<div class="col"></div>
+					<div class="col"><span class="stars"> ★★★★★ <span
+						style="width: ${ stars * 10 }%;">★★★★★</span>
+					</span></div>
+					<div class="col text-end mt-3 mb-0">
 						<c:if test="${ placeVo.zzim eq travelerLoginMember.no }">
 							<!-- 찜 하기 -->
 							<svg style="color: rgb(253, 195, 86); cursor: pointer;"
@@ -83,9 +87,11 @@
 						</c:if>
 						<label for="zzim">${ zzimCnt }</label>
 					</div>
+					<div class="col"></div>
+					
 				</c:if>
 				<!-- 사장님만 보임 -->
-				<c:if test="${ BossLoginMember != null }">
+				<c:if test="${ BossLoginMember.no eq placeVo.bossNo }">
 					<div class="col text-end">
 						<button class="btn btn-warning mt-3 mb-0"
 							onclick="location.href='/hallo03talk/place/update?placeNo=${placeVo.no}'">장소
@@ -143,7 +149,7 @@
 					</div>
 				</div>
 				<!-- =============================================================================== -->
-				<c:if test="${!empty travelerLoginMember }">
+				<c:if test="${!empty travelerLoginMember}">
 					<div class="text-end">
 						<button class="btn btn-warning my-3" id="reviewFormBtn"
 							onclick="reviewFormBtn();">후기 등록</button>
@@ -207,6 +213,35 @@
 									style="width: ${ r.star * 10 }%;">★★★★★</span>
 								</span>
 							</div>
+							<c:if test="${r.travelerNo eq travelerLoginMember.no}">
+								<div class="d-flex col justify-content-end align-items-center">
+									<button class="btn btn-primary px-1" id="reviewForm"
+										onclick="reviewDel(${travelerLoginMember.no},${r.no});">리뷰
+										삭제</button>
+								</div>
+								<script>
+									function reviewDel(tNo,rNo) {
+										if(confirm('정말 삭제하시겠습니까?')) {
+											$.ajax({
+												method : "POST",
+												url: "/hallo03talk/review/delOne",
+												data: {
+													"tNo" : tNo,
+													"rNo" : rNo
+												},
+												success: function (response) {
+													if(response == 1) {
+														alert('삭제 성공')
+														history.go(0);
+													} else {
+														alert('삭제 실패');
+													}
+												}
+											});
+										}
+									}
+								</script>
+							</c:if>
 							<!-- 사장님만 보임 -->
 							<c:if test="${ r.checkReview=='N' || empty r.checkReview }">
 								<c:if test="${ BossLoginMember.no eq bossVoForShow.no }">

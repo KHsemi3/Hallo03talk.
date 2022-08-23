@@ -166,7 +166,7 @@ public class PlaceDao {
 		ResultSet rs = null;
 		PlaceVo pv = new PlaceVo();
 
-		String sql = "SELECT P.NO NO,P.NAME NAME,P.CONTENT CONTENT,P.ADDRESS ADDRESS,P.BOSS_NO BOSS_NO,P.CATEGORY_NO CATEGORY_NO,P.ENROLL_DATE ENROLL_DATE,P.CNT CNT, Z.TRAVELER_NO TRAVELER_NO FROM PLACE P LEFT OUTER JOIN ZZIM Z ON P.NO = Z.PLACE_NO WHERE P.STATUS='Y' AND NO=?";
+		String sql = "SELECT P.NO NO,P.NAME NAME,P.CONTENT CONTENT,P.ADDRESS ADDRESS,P.BOSS_NO BOSS_NO,P.CATEGORY_NO CATEGORY_NO,P.ENROLL_DATE ENROLL_DATE,P.CNT CNT, Z.TRAVELER_NO TRAVELER_NO FROM PLACE P LEFT OUTER JOIN ZZIM Z ON P.NO = Z.PLACE_NO WHERE P.STATUS='Y' AND P.NO=?";
 		int tno = 0;
 
 		try {
@@ -614,6 +614,35 @@ public class PlaceDao {
 		}
 		
 		
+		return result;
+	}
+
+	public int getStars(Connection conn, String placeNo) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		ResultSet rs = null;
+		
+		String sql = "SELECT SUM(STAR)/COUNT(NO) STARS FROM PLACE_REVIEW WHERE PLACE_NO=? AND STATUS='Y'";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, placeNo);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt("STARS");
+			}
+			
+			return result;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+			
 		return result;
 	}
 

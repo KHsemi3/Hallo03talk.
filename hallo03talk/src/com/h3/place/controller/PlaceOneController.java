@@ -31,7 +31,6 @@ public class PlaceOneController extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 
 		String placeNo = (String) req.getParameter("placeNo");
-		int reservationCheck = 0;
 		
 		PlaceVo pv = new PlaceService().placeOne(placeNo);
 		int result = new PlaceService().getCnt(placeNo);
@@ -58,6 +57,8 @@ public class PlaceOneController extends HttpServlet {
 			
 			req.setAttribute("resCheck", resCheck);
 		}
+//		평균 별점
+		int stars = new PlaceService().getStars(placeNo);
 		
 		req.setAttribute("placeVo", pv);
 		req.setAttribute("photoList", photoList);
@@ -66,12 +67,14 @@ public class PlaceOneController extends HttpServlet {
 		req.setAttribute("reviewPhotoList", prpvList);
 		req.setAttribute("reviewReplyList", prrvList);
 		req.setAttribute("zzimCnt", zzimCnt);
+		req.setAttribute("stars", stars);
 		
 		if (result==1 && pv != null && photoList != null) {
 			// 성공
 			req.getRequestDispatcher("/views/place/onePlace.jsp").forward(req, resp);
 		} else {
 			// 실패
+			resp.sendRedirect("/hallo03talk/place/list?categoryNo=0&cityNo=0&insideNo=0");
 		}
 
 	}

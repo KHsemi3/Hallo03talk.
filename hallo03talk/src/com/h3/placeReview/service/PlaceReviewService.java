@@ -1,10 +1,13 @@
 package com.h3.placeReview.service;
 
+import static com.h3.common.JDBCTemplate.close;
+import static com.h3.common.JDBCTemplate.commit;
+import static com.h3.common.JDBCTemplate.getConnection;
+import static com.h3.common.JDBCTemplate.rollback;
+
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.h3.common.JDBCTemplate.*;
 
 import com.h3.placeReview.repository.PlaceReviewDao;
 import com.h3.placeReview.vo.PlaceReviewVo;
@@ -85,6 +88,60 @@ public class PlaceReviewService {
 		}
 		
 		return prpvList;
+	}
+
+	public int delReview(String placeNo) {
+		
+		Connection conn = null;
+		int result = 0;
+		
+		try {
+			conn = getConnection();
+			result =dao.delReview(conn,placeNo);
+			
+			if (result == 1) {
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+			
+			return result;
+		} catch (Exception e) {
+			rollback(conn);
+			e.printStackTrace();
+		} finally {
+			close(conn);
+		}
+		
+		
+		return result;
+	}
+
+	public int delOneReview(PlaceReviewVo prv) {
+		
+		Connection conn = null;
+		int result = 0;
+		
+		try {
+			conn = getConnection();
+			
+			result = dao.delOneReview(conn, prv);
+			
+			if (result == 1) {
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+			
+			return result;
+		} catch (Exception e) {
+			rollback(conn);
+			e.printStackTrace();
+		} finally {
+			close(conn);
+		}
+		
+		return result;
 	}
 
 }

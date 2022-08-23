@@ -116,6 +116,7 @@ String emdNo = request.getParameter("emdNo");
 			<input type="hidden" value="${ placeVo.no }" name="placeNo" />
 			<div class="text-center">
 				<button class="btn btn-warning my-3" >장소 수정</button>
+				<button type="button" class="btn btn-danger" onclick="placeDel(${placeVo.no});">장소 삭제</button>
 			</div>
 		</form>
 	</main>
@@ -123,10 +124,29 @@ String emdNo = request.getParameter("emdNo");
 
 	<c:if test="${ BossLoginMember.no ne placeVo.bossNo }">
 		<script>
-			alert('사장님만 등록가능합니다');
-			location.href = "/hallo03talk/place/list";
+			alert('해당 가게의 사장님만 수정가능합니다');
+			location.href = "/hallo03talk/place/list?categoryNo=0&cityNo=0&insideNo=0";
 		</script>
 	</c:if>
+
+	<script>
+		function placeDel(placeNo) {
+			if (confirm('정말로 삭제하시겠습니까?')) {
+				$.ajax({
+					method : "POST",
+					url: "/hallo03talk/place/del",
+					data: {
+						"placeNo" : placeNo
+					},
+					success: function (response) {
+							alert('삭제 완료');
+							location.href='/hallo03talk/place/list?categoryNo=0&cityNo=0&insideNo=0'
+					}
+				});
+			} else {
+			}
+		}
+	</script>
 </body>
 <script src="/hallo03talk/resources/js/jusoPopUp.js"></script>
 </html>
