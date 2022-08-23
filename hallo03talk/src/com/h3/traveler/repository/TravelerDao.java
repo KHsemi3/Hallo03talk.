@@ -370,13 +370,7 @@ public class TravelerDao {
 	public void deletePost(Connection conn, String no, String board) {
 		// SQL 준비
 		String sql = "delete from " + board+ " where no = ?";
-//		if(board.equals("커뮤니티")) {
-//			sql += " community";
-//		} else if (board.equals("장소 리뷰")) {
-//			sql += "delete from place_review where "
-//		}
-
-		
+//		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
@@ -386,22 +380,7 @@ public class TravelerDao {
 			
 			// SQL 실행
 			rs = pstmt.executeQuery();
-
-//			while (rs.next()) {
-//				String no = rs.getString("NO");
-//				String content = rs.getString("CONTENT");
-//				String enrollDate = rs.getString("ENROLL_DATE");
-//
-//				// String travelerNo = rs.getString("TRAVELER_NO");
-//
-//				CommunityReplyVo vo = new CommunityReplyVo();
-//				vo.setNo(no);
-//				vo.setContent(content);
-//				vo.setEnrollDate(enrollDate);
-//				// vo.setTravelerNo(travelerNo);
-//
-//				list.add(vo);
-//			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -750,7 +729,7 @@ public class TravelerDao {
 		public ArrayList<ReportUserVo> selectGetReportList(Connection conn, int userNo) {
 
 		
-			String sql = "SELECT R.NO, R.GUILTY, R.CONTENT, R.PROCESS, R.REPORTED_TRAVELER_NO, TO_CHAR(R.ENROLL_DATE, 'YY/MM/DD HH:MI') AS ENROLL_DATE, T.ID AS REPORT_USER_ID FROM REPORT_USER R JOIN TRAVELER T ON R.REPORTED_TRAVELER_NO = T.NO WHERE T.STATUS = 'Y' AND REPORTED_TRAVELER_NO = ? ORDER BY NO DESC";
+			String sql = "SELECT R.NO, R.GUILTY, R.CONTENT, R.PROCESS, R.REPORTED_TRAVELER_NO, R.ENROLL_DATE, T.ID AS REPORT_USER_ID FROM REPORT_USER R JOIN TRAVELER T ON R.REPORTED_TRAVELER_NO = T.NO WHERE T.STATUS = 'Y' AND REPORTED_TRAVELER_NO = ? ORDER BY NO DESC";
 			
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;		
@@ -760,7 +739,7 @@ public class TravelerDao {
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, userNo);
 
-				System.out.println(userNo);
+				System.out.println("userNo::: " + userNo);
 				
 				
 				rs = pstmt.executeQuery();
@@ -776,7 +755,6 @@ public class TravelerDao {
 					Timestamp enrollDate =	rs.getTimestamp("ENROLL_DATE");
 					String reportUserId =	rs.getString("REPORT_USER_ID");
 
-					
 					ReportUserVo vo = new ReportUserVo();
 					vo.setNo(no);
 					vo.setGuilty(guilty);
@@ -795,6 +773,8 @@ public class TravelerDao {
 
 
 					list.add(vo);
+					System.out.println("vo::: " + vo);
+
 				}
 				
 			}catch(Exception e) {
@@ -811,6 +791,41 @@ public class TravelerDao {
 		}//selectGetReportList
 
 		
+		
+		/*
+		 * traveler - 내가 쓴 댓글 삭제
+		 */
+		public void deleteReply(Connection conn, int userNo, int replyNo) {
+			
+			// SQL 준비
+			String sql = "delete from reply where NO = ?";
+
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, replyNo);
+				
+				// SQL 실행
+				rs = pstmt.executeQuery();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+				close(rs);
+			}
+			
+			
+			
+			
+		}//deleteReply
+
+		
+		
+
 	
 	
 
