@@ -111,7 +111,7 @@
               <!-- -------삭제 버튼-------------- -->
      
               <div class="deleteCheck">
-                <button class="deleteButton">전체 선택</button>
+                <button class="deleteButtonAll">전체 선택</button>
                 <button class="deleteButton" style="margin-left: 10px;">삭제</button> 
               </div>
               
@@ -120,7 +120,7 @@
              
                <div class="card" style="width: 18rem;">
                   <div class="card-header">
-                         <input type="checkbox" style="margin-right: 10px;">선택
+                         <input type="checkbox" name="ckNo" value="<%= voList.get(i).getNo()%>" style="margin-right: 10px;">선택
                      </div>
                      
                  <div class="card-body">
@@ -138,5 +138,64 @@
     </main>
     <footer></footer> 
 
+<!-- ------선택 삭제------------------------------------------------------- -->
+	
+	<script>
+	
+	$(".deleteButtonAll").click(function(e) {
+		$('input:checkbox[name="ckNo"]').each(function() {
+			this.checked = true;
+
+	})
+	});
+	
+	
+	$(".deleteButton").click(function(e) {
+
+		$('input:checkbox[name=ckNo]').each(function (index) {
+
+			var checkBoxArr = []; 
+			var data;
+		    
+			if($(this).is(":checked")==true){
+		    	checkBoxArr.push($(this).val());     // 체크된 것만 값을 뽑아서 배열에 push
+				 
+				data = $(this).val();
+		    	
+		    	console.log(data)
+		    	
+		    	var ans = confirm("선택하신 댓글을 삭제하시겠습니까?");
+	        if(!ans) return false;
+	        
+	        var url = "${pageContext.request.contextPath}/travelerMpgZzim/delete"
+	        
+	          $.ajax({
+	            url  : url,
+	            type : "post",
+	            data : {
+	            	data
+	            } ,
+	            success : function(data) {
+	                  alert("댓글이 삭제 되었습니다.");
+	                  location.reload();
+	            },
+	            error : function(data) {
+	                alert("댓글이 삭제되지 않았습니다.");
+	            }
+	        });  
+		    	
+		    		
+		    }
+		
+		})
+		
+		
+	})
+		
+	
+	</script>
+	
+	<!-- ------선택 삭제-------------------------------------------------------- -->
+	
 </body>
 </html>

@@ -1,4 +1,4 @@
-package com.h3.traveler.controller;
+package com.h3.boss.controller;
 
 import java.io.IOException;
 import java.util.Enumeration;
@@ -9,20 +9,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.h3.traveler.service.TravelerService;
-import com.h3.traveler.vo.TravelerVo;
+import com.h3.boss.service.BossService;
+import com.h3.boss.vo.BossVo;
+@WebServlet(urlPatterns = "/bossMpgReply/delete")
 
-@WebServlet(urlPatterns = "/travelerMpgReply/delete")
 public class MpgReplyDeleteController extends HttpServlet{
 
+	
 	/*
-	 * traveler - 내가 쓴 댓글 삭제
+	 * boss - 내가 쓴 답글 삭제
 	 */
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	
+		BossVo BossLoginMember = (BossVo)req.getSession().getAttribute("BossLoginMember");
 
-		TravelerVo loginTraveler = (TravelerVo)req.getSession().getAttribute("travelerLoginMember");
-
+	
 		// request에 담긴 값 확인
 		Enumeration params = req.getParameterNames();
 		
@@ -43,10 +45,10 @@ public class MpgReplyDeleteController extends HttpServlet{
 		
 		 
 		 // 서비스 호출
-		new TravelerService().deleteReply(loginTraveler.getNo(), data);
+		new BossService().deleteReply(BossLoginMember.getNo(), data);
 	
 	
 	}//doPost
 	
 	
-}
+}//class

@@ -1,7 +1,6 @@
-package com.h3.traveler.controller;
+package com.h3.boss.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Enumeration;
 
 import javax.servlet.ServletException;
@@ -10,22 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.tomcat.util.json.JSONParser;
+import com.h3.boss.service.BossService;
+import com.h3.boss.vo.BossVo;
 
-import com.h3.traveler.service.TravelerService;
-import com.h3.traveler.vo.MpgPostVo;
-import com.h3.traveler.vo.TravelerVo;
-
-@WebServlet(urlPatterns = "/travelerMpgPost/delete")
+@WebServlet(urlPatterns = "/bossMpgPost/delete")
 public class MpgPostDeleteController extends HttpServlet {
 
 	/*
-	 * traveler - 내가 쓴 글 삭제
+	 * boss - 내가 쓴 글 삭제
 	 */
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		TravelerVo loginTraveler = (TravelerVo) req.getSession().getAttribute("travelerLoginMember");
+	
+		BossVo loginBoss = (BossVo)req.getSession().getAttribute("BossLoginMember");
 
 		// request에 담긴 값 확인
 		Enumeration params = req.getParameterNames();
@@ -44,13 +41,14 @@ public class MpgPostDeleteController extends HttpServlet {
 		String boardKr = (String) req.getParameter("board");
 
 		// 쿼리문에서 쓰이기 때문에 실제 테이블명으로 바꿔서 할당
-		String board = boardKr.equals("커뮤니티") ? "community" : (boardKr.equals("장소 리뷰") ? "place_review" : "with_");
+		String board = boardKr.equals("이벤트 등록") ? "party" : "place";
 
 		String no = (String) req.getParameter("no");
 
 		// 서비스 호출
-		new TravelerService().deletePost(no, board);
+		new BossService().deletePost(no, board);
 
-	}
-
-}// class
+	
+	}//doPost
+	
+}//class
