@@ -25,7 +25,9 @@ public class AdminReportUserController extends HttpServlet {
 				ArrayList<ReportUserVo> voList  =	new AdminReportService().selectListUser();
 				
 				//결과에 따라 화면 선택
+				String [] nums = req.getParameterValues("num");
 				
+				req.setAttribute("nums", nums);
 				
 				
 				req.setAttribute("voList", voList);

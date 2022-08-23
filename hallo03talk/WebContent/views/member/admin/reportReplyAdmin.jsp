@@ -130,7 +130,7 @@ opacity:0.5;
 
 					
 		<ul>
-	<li id="reportImg"><img src="<%=request.getContextPath()%>/resources/img/report.png" alt="" /> 신고 유저관리</li>
+	<li id="reportImg"><img src="<%=request.getContextPath()%>/resources/img/report.png" alt="" /> 신고 댓글관리</li>
 </ul>			
 <hr />
 <div class="right-nav">

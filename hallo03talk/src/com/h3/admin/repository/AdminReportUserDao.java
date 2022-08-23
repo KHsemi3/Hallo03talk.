@@ -138,7 +138,7 @@ String sql = "UPDATE REPORT_USER SET PROCESS = 'Y' WHERE NO= ?";
 	}
 
 	public ArrayList<ReportBoardVo> selectListBoard(Connection conn) {
-		String sql="SELECT R.NO, R.GUILTY, R.CONTENT, R.PROCESS, R.REPORTED_TRAVELER_NO,T.ID AS REPORT_USER_ID FROM REPORT_USER R JOIN TRAVELER T ON R.REPORTED_TRAVELER_NO = T.NO WHERE T.STATUS = 'Y' AND R.PROCESS='N' ORDER BY NO DESC";
+		String sql="SELECT NO, GUILTY, CONTENT, PROCESS, TYPE, BOARD_NO FROM REPORT_CONTENT ORDER BY NO DESC";
 		PreparedStatement pstmt = null;
 		ResultSet rs =null;
 		ArrayList<ReportBoardVo> list = new ArrayList<ReportBoardVo>();
@@ -153,7 +153,7 @@ String sql = "UPDATE REPORT_USER SET PROCESS = 'Y' WHERE NO= ?";
 				String content =	rs.getString("CONTENT");
 				String process =	rs.getString("PROCESS");
 				String type =	rs.getString("TYPE");
-				String reportUserId =	rs.getString("REPORT_USER_ID");
+				String reportUserId =	rs.getString("BOARD_NO");
 				Timestamp	enrollDate = rs.getTimestamp("ENROLL_DATE");
 				
 				ReportBoardVo vo = new ReportBoardVo();
