@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>가게 등록</title>
+<title>인증하기</title>
  <link rel="stylesheet" href="/hallo03talk/views/party/partyCss/all.css">
  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -21,7 +21,7 @@
         		<h4>어떤 가게를 운영중이신가요?</h4>
         			<form action="/hallo03talk/bossRegister" method="post">
             			<label>사업자등록번호</label>
-            			<input type="text" name="busNum" placeholder="사업자등록번호(숫자 10자리)를 입력해 주세요">
+            			<input type="text" name="busNum" placeholder="사업자등록번호를 입력해 주세요">
             			<label>업태</label>
             			<input type="text" name="busStatus" placeholder="한글로만 입력하세요">
             			<label>상호명</label>
@@ -33,12 +33,10 @@
            				<label>주소</label>
             			<input type="text" name="busAddress" placeholder="주소를 검색하세요">
             			<input type="button" value="주소검색"><br>
-       					<button type="submit" onclick="Swal.fire('인증되었습니다. <br> 장소 등록이 가능합니다.');" >작성완료</button>
+       					<button type="submit" onclick="Swal.fire('인증되었습니다. <br> 다시 로그인해주세요.');" >작성완료</button>
    						</div>
         			 </form>
     			</div>
-			</div>				
-		
 	</main>
 
 
