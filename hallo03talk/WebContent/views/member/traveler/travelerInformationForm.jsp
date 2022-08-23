@@ -577,8 +577,9 @@ input.full:focus, textarea.full:focus {
 
  <!------------------------------------------------------------------------------------>  
 		
-		<!-- 신규 비밀번호 체크 -->
 		<script>
+		
+		<!-- 사진 수정/등록 -->
 		
 		function upload(){
 			
@@ -653,6 +654,8 @@ input.full:focus, textarea.full:focus {
 			 
 		 }
 		 
+			<!-- 신규 비밀번호 체크 -->
+
 			function checkPwd(){
 				
 				var isSame = $('input[name=travelerJoinPwdNew]').val() == $('input[name=travelerJoinPwdNew2]').val()

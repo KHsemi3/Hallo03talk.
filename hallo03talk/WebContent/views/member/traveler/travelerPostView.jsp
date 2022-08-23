@@ -176,20 +176,17 @@
 
 	// 전체 삭제 체크박스
 	$(".deleteButtonAll").click(function(e) {
-		// 인풋 체크박스 name이 chNo인 엘리먼트 각각 꺼내오기
 		$('input:checkbox[name="ckNo"]').each(function() {
-			// 엘리먼트의 checked 프로퍼티값 할당
-			// ex) checked가 true라면 !true 즉 false값 할당됨
 			this.checked = !this.checked;
 		});	
 	}) 
+	
 	
 	// 삭제 체크 박스 
 	$(".deleteButton").click(function(e) {
 		// 다중 선택할수도 있으므로 array 생성
 		var arr = []
 		
-		// 인풋 체크박스 name이 chNo인 엘리먼트 각각 꺼내오기
 		$('input:checkbox[name=ckNo]').each(function (index) {
 			// 체크된 엘리먼트 
 			if($(this).is(":checked")==true){
@@ -218,10 +215,8 @@
 			 var ans = confirm("선택하신 글을 삭제하시겠습니까?");
 		        
 			 	if(ans){
-			 		// 삭제 완료 alert창을 한번만 띄우기 위한 flag 
 		        	var flag = false;
 					
-			 		// 선택한 게시물s 만큼 loop
 			 		for(i=0; i< arr.length; i++){ 
 						 var value = arr[i] // 게시물 정보 하나
 						 console.log(value)
@@ -233,24 +228,14 @@
 					       type : "post",
 					       data : value ,
 					       success : function(data) {
-					    	 	// flag 값을 성공실패 여부에 따라 값을 할당해주려고 했으나 할당 안됨
-					        	// flag = true;
 					            alert("글이 삭제 되었습니다.");
 					            location.reload();
 					       }, error : function(data) {
-					       		// flag = false;
 					          	alert("글이 삭제되지 않았습니다.");
 					       }
 					        });  
 						}
 						
-			 		// 성공 실패 여부에 따라 분기처리하려했으나 에이젝스 내부에서 값 할당이 안되므로 주석처리
-						/* if(flag){
-						  alert("글이 삭제 되었습니다.");
-			              location.reload();
-						}else{
-							alert("글이 삭제되지 않았습니다.");
-						} */
 		        	
 		        }else {
 		        	return false;

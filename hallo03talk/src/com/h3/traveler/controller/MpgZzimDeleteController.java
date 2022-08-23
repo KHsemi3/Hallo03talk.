@@ -12,15 +12,17 @@ import javax.servlet.http.HttpServletResponse;
 import com.h3.traveler.service.TravelerService;
 import com.h3.traveler.vo.TravelerVo;
 
-@WebServlet(urlPatterns = "/travelerMpgReply/delete")
-public class MpgReplyDeleteController extends HttpServlet{
+@WebServlet(urlPatterns = "/travelerMpgZzim/delete")
+public class MpgZzimDeleteController extends HttpServlet{
 
+	
 	/*
-	 * traveler - 내가 쓴 댓글 삭제
+	 * traveler - 찜 목록 삭제
 	 */
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+	
 		TravelerVo loginTraveler = (TravelerVo)req.getSession().getAttribute("travelerLoginMember");
 
 		// request에 담긴 값 확인
@@ -43,10 +45,11 @@ public class MpgReplyDeleteController extends HttpServlet{
 		
 		 
 		 // 서비스 호출
-		new TravelerService().deleteReply(loginTraveler.getNo(), data);
+		new TravelerService().deleteZzim(loginTraveler.getNo(), data);
+	
 	
 	
 	}//doPost
 	
 	
-}
+}//class

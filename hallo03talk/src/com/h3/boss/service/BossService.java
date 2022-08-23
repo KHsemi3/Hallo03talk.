@@ -385,5 +385,50 @@ public class BossService {
 	
 	}//idCheck
 
+
+	
+	/*
+	 * boss - 내가 쓴 답글 삭제
+	 */
+	public void deleteReply(int no, int replyNo) {
+
+		Connection conn = null;
+		try {
+			
+			conn = getConnection();
+			
+			dao.deleteReply(conn, no, replyNo);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		
+		
+	}//deleteReply
+
+
+	/*
+	 * boss - 내가 쓴 글 삭제
+	 */
+	public void deletePost(String no, String board) {
+		
+		Connection conn = null;
+		try {
+			
+			conn = getConnection();
+			
+			dao.deletePost(conn, no, board);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		
+		
+	}//deletePost
+
 	
 }//class

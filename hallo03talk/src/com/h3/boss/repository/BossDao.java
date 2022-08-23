@@ -521,5 +521,65 @@ public class BossDao {
 	
 	}
 
+
+
+	/*
+	 * boss - 내가 쓴 답글 삭제
+	 */
+	public void deleteReply(Connection conn, int userNo, int replyNo) {
+		
+		
+		// SQL 준비
+					String sql = "delete from PLACE_REVIEW_REPLY where NO = ?";
+
+					
+					PreparedStatement pstmt = null;
+					ResultSet rs = null;
+					
+					try {
+						pstmt = conn.prepareStatement(sql);
+						pstmt.setInt(1, replyNo);
+						
+						// SQL 실행
+						rs = pstmt.executeQuery();
+						
+					} catch (Exception e) {
+						e.printStackTrace();
+					} finally {
+						close(pstmt);
+						close(rs);
+					}
+		
+	}//deleteReply
+
+
+
+	/*
+	 * boss - 내가 쓴 글 삭제
+	 */
+	public void deletePost(Connection conn, String no, String board) {
+		
+		String sql = "delete from " + board+ " where no = ?";
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, no);
+			
+			// SQL 실행
+			rs = pstmt.executeQuery();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		
+	}//deletePost
+
 	
 }//class

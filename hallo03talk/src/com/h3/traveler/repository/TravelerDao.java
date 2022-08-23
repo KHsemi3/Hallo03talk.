@@ -370,7 +370,7 @@ public class TravelerDao {
 	public void deletePost(Connection conn, String no, String board) {
 		// SQL 준비
 		String sql = "delete from " + board+ " where no = ?";
-//		
+
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
@@ -387,7 +387,7 @@ public class TravelerDao {
 			close(pstmt);
 			close(rs);
 		}
-	}
+	}//deletePost
 
 	
 	
@@ -489,7 +489,7 @@ public class TravelerDao {
 		public ArrayList<MpgZzimVo> selectZzimList(Connection conn, int userNo) {
 
 			
-			String sql = "SELECT Z.TRAVELER_NO, Z.PLACE_NO, P.NAME, P.CONTENT, '장소 게시판' AS BOARD FROM ZZIM Z JOIN PLACE P ON Z.PLACE_NO = P.NO WHERE TRAVELER_NO = ?";
+			String sql = "SELECT  Z.NO, Z.TRAVELER_NO, Z.PLACE_NO, P.NAME, P.CONTENT, '장소 게시판' AS BOARD FROM ZZIM Z JOIN PLACE P ON Z.PLACE_NO = P.NO WHERE TRAVELER_NO = ?";
 		
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;		
@@ -503,7 +503,8 @@ public class TravelerDao {
 				rs = pstmt.executeQuery();
 
 				while(rs.next()) {
-					
+
+					String no = rs.getString("no");
 					String travelerNo = rs.getString("TRAVELER_NO");  	 // 회원
 					String placeNo = rs.getString("PLACE_NO");   			 // 장소번호
 					String name = rs.getString("NAME");    	 	 // 장소명
@@ -511,6 +512,7 @@ public class TravelerDao {
 					String board = rs.getString("board");    	 // 게시판 타입
 					
 					MpgZzimVo vo = new MpgZzimVo();
+					vo.setNo(no);
 					vo.setTravelerNo(travelerNo);
 					vo.setPlaceNo(placeNo);
 					vo.setName(name);
@@ -825,9 +827,96 @@ public class TravelerDao {
 
 		
 		
+		
+		/*
+		 * traveler - 예약 내역 삭제
+		 */
+		public void deleteRsv(Connection conn, int no, int rsvNo) {
 
-	
-	
+			// SQL 준비
+			String sql = "delete from RESERVATION where NO = ?";
+
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, rsvNo);
+				
+				// SQL 실행
+				rs = pstmt.executeQuery();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+				close(rs);
+			}
+		
+		
+		
+		}//deleteRsv
+
+		
+		
+		/*
+		 * traveler - 찜 목록 삭제
+		 */
+		public void deleteZzim(Connection conn, int no, int zzimNo) {
+
+			String sql = "delete from ZZIM where NO = ?";
+
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, zzimNo);
+				
+				// SQL 실행
+				rs = pstmt.executeQuery();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+				close(rs);
+			}
+			
+			
+		}//deleteZzim
+
+		
+		
+		/*
+		 * traveler - 신고 받은 내역 삭제
+		 */
+		public void deleteReport(Connection conn, int no, int reportNo) {
+			
+			String sql = "delete from REPORT_USER where NO = ?";
+
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, reportNo);
+				
+				// SQL 실행
+				rs = pstmt.executeQuery();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+				close(rs);
+			}
+			
+			
+		}//deleteReport
+
+		
 
 }// class
 

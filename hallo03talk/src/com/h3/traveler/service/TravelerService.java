@@ -592,7 +592,73 @@ public class TravelerService {
 			close(conn);
 		}
 		
-	}
+	}//deleteReply
+
+
+	
+	/*
+	 * traveler - 예약 내역 삭제
+	 */
+	public void deleteRsv(int no, int rsvNo) {
+		
+		Connection conn = null;
+		try {
+			
+			conn = getConnection();
+			
+			dao.deleteRsv(conn, no, rsvNo);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		
+		
+	}//deleteRsv
+
+
+	/*
+	 * traveler - 찜 목록 삭제
+	 */
+	public void deleteZzim(int no, int zzimNo) {
+
+		Connection conn = null;
+		try {
+			
+			conn = getConnection();
+			
+			dao.deleteZzim(conn, no, zzimNo);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		
+		
+	}//deleteZzim
+
+
+	/*
+	 * traveler - 신고 받은 내역 삭제
+	 */
+	public void deleteReport(int no, int reportNo) {
+		
+		Connection conn = null;
+		try {
+			
+			conn = getConnection();
+			
+			dao.deleteReport(conn, no, reportNo);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		
+	}//deleteReport
 
 
 	
