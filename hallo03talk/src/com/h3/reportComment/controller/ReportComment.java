@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.h3.report.service.ReportService;
 import com.h3.reportComment.vo.ReportCommentVo;
 
-@WebServlet (urlPatterns = "/reportComment")
+@WebServlet (urlPatterns = "/report/reportComment")
 public class ReportComment extends HttpServlet{
 	
 	@Override
@@ -29,7 +29,6 @@ public class ReportComment extends HttpServlet{
 		String no = req.getParameter("no");
 		String guilty = req.getParameter("guilty");
 		String content = req.getParameter("content");
-		String process = req.getParameter("process");
 		String type = req.getParameter("type");
 		String replyNo = req.getParameter("replyNo");
 		
@@ -53,6 +52,7 @@ public class ReportComment extends HttpServlet{
 			resp.sendRedirect("/hallo03talk");
 		}else {
 			//신고 실패 //이전 페이지로 옮기기
+			req.getSession().setAttribute("alertMsg", "신고 실패..!");
 			resp.sendRedirect("/hallo03talk/index.jsp");
 		}
  

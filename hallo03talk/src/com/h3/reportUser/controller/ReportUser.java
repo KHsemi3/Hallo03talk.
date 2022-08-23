@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.h3.report.service.ReportService;
 import com.h3.reportUser.vo.ReportUserVo;
 
-@WebServlet (urlPatterns = "/reportUser")
+@WebServlet (urlPatterns = "/report/reportUser")
 public class ReportUser extends HttpServlet{
 	
 	@Override
@@ -26,10 +26,9 @@ public class ReportUser extends HttpServlet{
 		
 		req.setCharacterEncoding("UTF-8");
 		
-		String no = req.getParameter("no");
 		String guilty = req.getParameter("guilty");
 		String content = req.getParameter("content");
-		String process = req.getParameter("process");
+		String type = req.getParameter("type");
 		String reportedTravelerNo = req.getParameter("reportedTravelerNo");
 		
 		
@@ -52,6 +51,7 @@ public class ReportUser extends HttpServlet{
 			resp.sendRedirect("/hallo03talk");
 		}else {
 			//신고 실패 //이전 페이지로 옮기기
+			req.getSession().setAttribute("alertMsg", "신고 실패..!");
 			resp.sendRedirect("/hallo03talk/index.jsp");
 		}
 

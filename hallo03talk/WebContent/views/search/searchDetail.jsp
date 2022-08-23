@@ -45,7 +45,6 @@ rel="stylesheet"
                 <h1 style="margin-left: 60px;"><b>검색</b></h1>
             </div>
             <div style=" width: 45%; float: right; margin-top: 20px; margin-right: 60px;">
-                <h5 style="text-align: right; margin-right: 5px;">총 <b style="color: orange;">n</b>개의 검색 결과</h5>
             </div>
 
             <br><br><br>
@@ -93,7 +92,7 @@ rel="stylesheet"
                         <img src="/hallo03talk/resources/img/search_1.jpg" class="card-img-top" alt="">
                         <div class="card-body">
                           <h5 class="card-title"><%= rvoList.get(i).getTitle() %></h5>
-                          <h6 class="card-subtitle mb-2 text-muted"><%= rvoList.get(i).getEnrollDate() %></h6>
+                          <h6 class="card-subtitle mb-2 text-muted"><%= rvoList.get(i).getNo() %></h6>
                           <p class="card-text"><%= rvoList.get(i).getContent() %></p>
                         </div>
                     </div>

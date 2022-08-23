@@ -23,13 +23,12 @@ public class ReportDao {
 		
 		try {
 			
-			String sql = "INSERT INTO REPORT_USER (NO, GUILTY, CONTENT, PROCESS, REPORTED_TRAVELER_NO) VALUES ( SEQ_REPORT_USER_NO.NEXTVAL, ?, ?, ?, ?) ";
+			String sql = "INSERT INTO REPORT_USER (NO, GUILTY, CONTENT, PROCESS, REPORTED_TRAVELER_NO) VALUES ( SEQ_REPORT_USER_NO.NEXTVAL, ?, ?, DEFAULT, ?) ";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, uvo.getGuilty());
 			pstmt.setString(2, uvo.getContent());
-			pstmt.setString(3, uvo.getProcess());
-			pstmt.setString(4, uvo.getReportedTravelerNo());
+			pstmt.setString(3, uvo.getReportedTravelerNo());
 			
 			result = pstmt.executeUpdate();
 			
@@ -87,14 +86,13 @@ public class ReportDao {
 		
 		try {
 			
-			String sql = "INSERT INTO REPORT_REPLY (NO, GUILTY, CONTENT, PROCESS, TYPE, REPLY_NO) VALUES ( SEQ_REPORT_REPLY_NO.NEXTVAL, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO REPORT_REPLY (NO, GUILTY, CONTENT, PROCESS, TYPE, REPLY_NO) VALUES ( SEQ_REPORT_REPLY_NO.NEXTVAL, ?, ?, DEFAULT, ?, ?)";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, cvo.getGuilty());
 			pstmt.setString(2, cvo.getContent());
-			pstmt.setString(3, cvo.getProcess());
-			pstmt.setString(4, cvo.getType());
-			pstmt.setString(5, cvo.getReplyNo());
+			pstmt.setString(3, cvo.getType());
+			pstmt.setString(4, cvo.getReplyNo());
 			
 			result = pstmt.executeUpdate();
 			

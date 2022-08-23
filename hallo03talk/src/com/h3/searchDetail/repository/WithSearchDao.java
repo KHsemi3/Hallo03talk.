@@ -13,28 +13,19 @@ import com.h3.with.vo.WithVo;
 public class WithSearchDao {
 	
 	//동행 검색
-	public ArrayList<WithVo> wselectList(Connection conn, PageVo pageVo, String sort){
+	public ArrayList<WithVo> wselectList(Connection conn){
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<WithVo> wlist = new ArrayList<WithVo>();
 		String sql = "";
 		
-		if("a".equals(sort)) {
-			sql = "SELECT U.* FROM( SELECT ROWNUM AS RNUM, S.* FROM( SELECT W.NO, W.TITLE, W.CONTENT, W.TAG, W.ENROLL_DATE, W.STATUS, W.START_DATE, W.END_DATE, W.INSTA, T.NICK AS TRAVELER_NO, W.CNT, W.PLACE FROM WITH_ W JOIN traveler T ON W.TRAVELER_NO = T.NO WHERE W.STATUS = 'Y' ORDER BY ENROLL_DATE DESC ) S ) U WHERE U.RNUM BETWEEN ? AND ? AND W.TITLE LIKE '%?%' OR W.CONTENT LIKE '%?%'";
-		}else if("v".equals(sort)) {
-			sql = "SELECT U.* FROM( SELECT ROWNUM AS RNUM, S.* FROM( SELECT W.NO, W.TITLE, W.CONTENT, W.TAG, W.ENROLL_DATE, W.STATUS, W.START_DATE, W.END_DATE, W.INSTA, T.NICK AS TRAVELER_NO, W.CNT, W.PLACE FROM WITH_ W JOIN traveler T ON W.TRAVELER_NO = T.NO ORDER BY CNT DESC ) S ) U WHERE U.RNUM BETWEEN ? AND ? AND W.TITLE LIKE '%?%' OR W.CONTENT LIKE '%?%'";
-		}else {
-			sql = "SELECT U.* FROM( SELECT ROWNUM AS RNUM, S.* FROM( SELECT W.NO, W.TITLE, W.CONTENT, W.TAG, W.ENROLL_DATE, W.STATUS, W.START_DATE, W.END_DATE, W.INSTA, T.NICK AS TRAVELER_NO, W.CNT, W.PLACE FROM WITH_ W JOIN traveler T ON W.TRAVELER_NO = T.NO ORDER BY ENROLL_DATE DESC ) S ) U WHERE U.RNUM BETWEEN ? AND ? AND W.TITLE LIKE '%?%' OR W.CONTENT LIKE '%?%'";			
-		}
 		
 
 		try {
 			
 			pstmt = conn.prepareStatement(sql);
 			
-			int start = (pageVo.getCurrentPage()-1)*pageVo.getBoardLimit() + 1;
-			int end = start + pageVo.getBoardLimit() - 1;
 			
 			pstmt.setInt(1, start);
 			pstmt.setInt(2, end);

@@ -49,7 +49,7 @@ public class ReportBoard extends HttpServlet{
 			resp.sendRedirect("/hallo03talk");
 		}else {
 			//신고 실패 //메인 페이지로 옮기기
-			System.out.println("SDFSDFSD");
+			req.getSession().setAttribute("alertMsg", "신고 실패..!");
 			resp.sendRedirect("/hallo03talk/index.jsp");
 		}
 
