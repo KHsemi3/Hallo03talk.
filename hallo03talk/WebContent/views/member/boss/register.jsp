@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>가게 등록</title>
  <link rel="stylesheet" href="/hallo03talk/views/party/partyCss/all.css">
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -32,8 +33,7 @@
            				<label>주소</label>
             			<input type="text" name="busAddress" placeholder="주소를 검색하세요">
             			<input type="button" value="주소검색"><br>
-            			<div class="btn_confirm">
-       					<button type="submit" id="btn_submit" accesskey="s" class="btn_submit btn" >작성완료</button>
+       					<button type="submit" onclick="Swal.fire('인증되었습니다. <br> 장소 등록이 가능합니다.');" >작성완료</button>
    						</div>
         			 </form>
     			</div>

@@ -32,7 +32,7 @@ public class BossRegisterServlet extends HttpServlet{
 			String busName = req.getParameter("busName");
 			//대표자명
 			String busBoss = req.getParameter("busBoss");
-			//생년월일S
+			//생년월일
 			String busBirth = req.getParameter("busBirth");
 			//주소
 			String busAddress = req.getParameter("busAddress");
@@ -65,17 +65,7 @@ public class BossRegisterServlet extends HttpServlet{
 				String birth = rs.getString("BIRTH");
 				String address = rs.getString("ADDRESS");
 				
-				//System.out.println(no);
-				//System.out.println(num);
-				//System.out.println(status);
-				//System.out.println(name);
-				//System.out.println(bossName);
-				//System.out.println(birth);
-				//System.out.println(address);
 			}
-			
-			rs.next();
-		
 			
 			//결과 보여주기
 			req.getRequestDispatcher("views/member/boss/registerOk.jsp").forward(req, resp);
