@@ -16,9 +16,12 @@ import com.h3.with.vo.WithVo;
 public class SearchDao {
 	
 	//장소 검색
-	public ArrayList<PlaceVo> pselectList(Connection conn){
+	public ArrayList<PlaceVo> pselectList(Connection conn, String placeKeyword, String cate1, String cate2, String cate3){
 		
-		String sql = "SELECT A.NO , A.NAME , A.CONTENT , A.ADDRESS , B.NAME FROM PLACE A LEFT OUTER JOIN PLACE_PHOTO B ON A.NO = B.PLACE_NO WHERE B.PHOTO_PROFILE = 'Y' AND A.NAME LIKE '%?%' OR A.CONTENT LIKE '%?%'";
+		String sql = "SELECT A.NO , A.NAME , A.CONTENT , A.ADDRESS , B.NAME FROM PLACE A LEFT OUTER JOIN PLACE_PHOTO B ON A.NO = B.PLACE_NO WHERE B.PHOTO_PROFILE = 'Y' AND A.NAME LIKE '%' || '?' ||'%' OR A.CONTENT LIKE '%' || '?' ||'%'";
+		String sql2 = "SELECT A.NO , A.NAME , A.CONTENT , A.ADDRESS , B.NAME FROM PLACE A LEFT OUTER JOIN PLACE_PHOTO B ON A.NO = B.PLACE_NO WHERE B.PHOTO_PROFILE = 'Y' AND A.NAME LIKE '%' || '?' ||'%' OR A.CONTENT LIKE '%' || '?' ||'%'";
+		String sql3 = "SELECT A.NO , A.NAME , A.CONTENT , A.ADDRESS , B.NAME FROM PLACE A LEFT OUTER JOIN PLACE_PHOTO B ON A.NO = B.PLACE_NO WHERE B.PHOTO_PROFILE = 'Y' AND A.NAME LIKE '%' || '?' ||'%' OR A.CONTENT LIKE '%' || '?' ||'%'";
+		String sql4 = "SELECT A.NO , A.NAME , A.CONTENT , A.ADDRESS , B.NAME FROM PLACE A LEFT OUTER JOIN PLACE_PHOTO B ON A.NO = B.PLACE_NO WHERE B.PHOTO_PROFILE = 'Y' AND A.NAME LIKE '%' || '?' ||'%' OR A.CONTENT LIKE '%' || '?' ||'%'";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -26,7 +29,23 @@ public class SearchDao {
 		
 		try {
 			
+			//main.jsp에서 받아온 cate1, cate2, cate3 값은 어떻게 처리...??
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, placeKeyword);
+			pstmt.setString(2, placeKeyword);
+			
+			pstmt = conn.prepareStatement(sql2);
+			pstmt.setString(1, cate1);
+			pstmt.setString(2, cate1);
+			
+			pstmt = conn.prepareStatement(sql3);
+			pstmt.setString(1, cate2);
+			pstmt.setString(2, cate2);
+			
+			pstmt = conn.prepareStatement(sql4);
+			pstmt.setString(1, cate3);
+			pstmt.setString(2, cate3);
+			
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -102,7 +121,7 @@ public class SearchDao {
 	
 	
 	//커뮤니티 검색
-	public ArrayList<CommVo> cselectList(Connection conn){
+	public ArrayList<CommVo> cselectList(Connection conn, String placeKeyword, String cate1, String cate2, String cate3){
 		
 		String sql = "SELECT A.NO, A.TITLE, A.CONTENT, A.WRITER, B.NAME FROM COMMUNITY A LEFT OUTER JOIN COMMUNITY_PHOTO B ON A.NO = B.COMMUNITY_NO WHERE A.TITLE LIKE '%?%' OR A.CONTENT LIKE '%?%'";
 		
