@@ -3,6 +3,11 @@
 <%@ include file="/views/common/header.jsp"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath" value = "<%=request.getContextPath() %>"></c:set>
+
+<%
+String alertMsg = (String)session.getAttribute("alertMsg");
+session.removeAttribute("alertMsg");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,24 +66,25 @@
 						<div class="flex-grow-1">
 							<h5>
 								<c:choose>
-									<c:when test="${view == 'all' || empty view }">전체보기</c:when>
-									<c:when test="${view == 'notice' }">공지사항</c:when>
-									<c:when test="${view == 'qna' }">질문답변</c:when>
-									<c:when test="${view == 'free' }">자유게시판</c:when>
+									<c:when test="${vo.category == 'notice' }">공지사항</c:when>
+									<c:when test="${vo.category == 'qna' }">질문답변</c:when>
+									<c:when test="${vo.category == 'free' }">자유게시판</c:when>
 								</c:choose>
 							</h5>
 <!-- 제목 추가 -->
-							<h1>제목제목제목제목</h1>
+							<h3>${vo.title}</h1>
 						</div>	
 							
 						<div class="align-self-baseline text-muted">
-							<div>조회수 : 0</div>
-							<div>등록일 : 22-08-21</div>
+							<a href="/hallo03talk/comm/list" class="btn btn-outline-warning btn-sm"	style="margin-left: 150px">목록으로</a>
+							<div>조회수 : ${vo.cnt}</div>
+							<div>등록일 : ${vo.enroll_date}</div>
+							<div>작성자 : ${vo.writer}</div>
 						</div>
 					</div>
 					<hr>
 <!-- 내용 추가 -->
-					<div>내용내용내용내용내용내용내용내용내용내용내용내용</div>
+					<div>${vo.content}</div>
 					<hr style="margin-top: 6rem">
 <!-- 뎃글 폼태그 -->
 					<form action="" method="post">
@@ -92,23 +98,33 @@
 						</div>
 					</form>
 <!-- 등록된 댓글 뿌리기 -->
-					<div class="border mt-2 p-2 d-flex" >
-						<div class="me-3 p-auto w-25" >작성자</div>
-
-						<div>
-	<!-- 등록된 댓글 내용 -->
-							내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-	<!-- 등록된 뎃글 날자 -->
-							<span style="font-size: 0.8rem"> - 22-08-22 21:12</span>
-	<!-- 등록된 뎃글 삭제 버튼 -->
-							<a href="" style="font-size: 0.8rem; text-decoration: none;">[삭제]</a>
+					<c:forEach var="rvo" items="${replyList}">
+						<div class="border mt-2 p-2 d-flex" >
+							<div class="me-3 p-auto w-25" >${rvo.travelerNo }</div>
+	
+							<div>
+		<!-- 등록된 댓글 내용 -->
+								${rvo.content}
+		<!-- 등록된 뎃글 날자 -->
+								<span style="font-size: 0.8rem"> - ${rvo.enrollDate}</span>
+		<!-- 등록된 뎃글 삭제 버튼 -->
+								<c:if test="${travelerLoginMember.nick eq rvo.travelerNo}">
+									<a href="/hallo03talk/comm/reply/delete?comm=${vo.no}&reply=${rvo.no}" style="font-size: 0.8rem; text-decoration: none;">[삭제]</a>
+								</c:if>
+							</div>
 						</div>
-					</div>
+					</c:forEach>
+					
 				</div>
 			</div>
 		</div>
 	</main>
-
+	<script type="text/javascript">
+		<%if (alertMsg != null) {%>
+			alert('<%=alertMsg%>');
+	<%}%>
+		
+	</script>
 
 	<footer></footer>
 
