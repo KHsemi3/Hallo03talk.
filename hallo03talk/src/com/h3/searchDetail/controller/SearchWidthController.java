@@ -20,6 +20,8 @@ public class SearchWidthController extends HttpServlet{
 		
 		ArrayList<WithVo> wvoList = new SearchWidthService().wselectList();
 		
+		System.out.println(wvoList);
+		
 		//결과에 따라 화면 만들기
 		req.setAttribute("wvoList", wvoList);
 		req.getRequestDispatcher("/views/search/searchWidthDetail.jsp").forward(req, resp);

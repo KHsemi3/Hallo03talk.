@@ -15,6 +15,10 @@ public class SearchService {
 	private final PlaceVo pvo = new PlaceVo();
 	private final CommVo cvo = new CommVo();
 	private final PlaceReviewVo rvo = new PlaceReviewVo();
+	private String placeKeyword;
+	private String cate1;
+	private String cate2;
+	private String cate3;
 	
 	//장소
 	public ArrayList<PlaceVo> pselectList(){
@@ -25,7 +29,7 @@ public class SearchService {
 		try {
 			conn = getConnection();
 			
-			pvoList = new SearchDao().pselectList(conn);
+			pvoList = new SearchDao().pselectList(conn, placeKeyword, cate1, cate2, cate3);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -45,7 +49,7 @@ public class SearchService {
 		try {
 			conn = getConnection();
 			
-			cvoList = new SearchDao().cselectList(conn);
+			cvoList = new SearchDao().cselectList(conn, placeKeyword, cate1, cate2, cate3);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -55,6 +59,7 @@ public class SearchService {
 		
 		return cvoList;
 	}
+
 	
 	//후기
 	public ArrayList<PlaceReviewVo> rselectList(){

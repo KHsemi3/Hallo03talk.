@@ -145,6 +145,9 @@
                             });
 
                         </script>
+                        
+		                    <input type="hidden" value="place" name="type">
+							<input type="hidden" value="${vo.no}" name="boardNo">
 
 
                     </form>
@@ -157,7 +160,7 @@
                 <!--동행-->
                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                     
-                   <form action="hallo03talk/search/searchWidthDetail" method="get" id="wform">
+                   <form action="hallo03talk/searchWidth/searchWidthDetail" method="get" id="wform">
 
                     <br><br>
                     <div class="text" style=" width: 50%;float: left;">
@@ -288,6 +291,8 @@
 
 
                     </div>
+                    
+
 
                    </form> 
 
@@ -301,8 +306,6 @@
 
     
         </body>
-    
-    
 
             </div>
     </main>

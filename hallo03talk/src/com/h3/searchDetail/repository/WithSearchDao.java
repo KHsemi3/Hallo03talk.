@@ -13,40 +13,26 @@ import com.h3.with.vo.WithVo;
 public class WithSearchDao {
 	
 	//동행 검색
-	public ArrayList<WithVo> wselectList(Connection conn){
+	public ArrayList<WithVo> wselectList(Connection conn, WithVo vo, String widthKeyword){
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<WithVo> wlist = new ArrayList<WithVo>();
-		String sql = "";
-		
-		
+		String sql = "SELECT (A.NO, A.TITLE, A.CONTENT, A.START_DATE, A.END_DATE,  B.NO) FROM TABLE WITH_ A LEFT OUTER JOIN WITH_PHOTO  B ON A.NO = B.NO WHERE A.TITLE LIKE '%' || '?' ||'%' OR A.CONTENT LIKE '%' || '?' ||'%' AND A.START_DATE LIKE '?' AND A.END_DATE LIKE '?'";
 
 		try {
 			
 			pstmt = conn.prepareStatement(sql);
 			
+			pstmt.setString(1, widthKeyword);
+			pstmt.setDate(2, vo.getStart_date());
+			pstmt.setDate(3, vo.getEnd_date());
 			
-			pstmt.setInt(1, start);
-			pstmt.setInt(2, end);
-			
+
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 				WithVo wvo = new WithVo();
-				wvo.setNo(rs.getString("NO"));
-				wvo.setTitle(rs.getString("TITLE"));
-				wvo.setContent(rs.getString("CONTENT"));
-				wvo.setTag(rs.getString("TAG").split(","));
-				wvo.setEnroll_date(rs.getTimestamp("ENROLL_DATE"));
-				wvo.setStatus(rs.getString("STATUS"));
-				wvo.setStart_date(rs.getDate("START_DATE"));
-				wvo.setEnd_date(rs.getDate("END_DATE"));
-				wvo.setInsta(rs.getString("INSTA"));
-				wvo.setTraveler_no(rs.getString("TRAVELER_NO"));
-				wvo.setCnt(rs.getString("CNT"));
-				wvo.setPlace(rs.getString("PLACE"));
-
 
 				wlist.add(wvo);
 				

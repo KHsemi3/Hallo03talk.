@@ -13,6 +13,7 @@ import com.h3.with.vo.WithVo;
 public class SearchWidthService {
 	
 	private final WithVo wvo = new WithVo();
+	private String widthKeyword;
 	
 	//장소
 		public ArrayList<WithVo> wselectList(){
@@ -23,7 +24,7 @@ public class SearchWidthService {
 			try {
 				conn = getConnection();
 				
-				wvoList = new WithSearchDao().wselectList(conn, null, null);
+				wvoList = new WithSearchDao().wselectList(conn, wvo, widthKeyword);
 				
 			} catch (Exception e) {
 				e.printStackTrace();
