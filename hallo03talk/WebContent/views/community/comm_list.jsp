@@ -51,7 +51,9 @@
 			<div id="container-header">
 				<h1 class="chi">커뮤니티</h1>
 				<h6 class="chi">맛집 추천글, 장소 추천등 여행자들의 소통</h6>
-				<button class="btn btn-outline-warning chi" onclick="location.href='#'">글쓰기</button>
+				<c:if test="${not empty travelerLoginMember}">
+					<button class="btn btn-outline-warning chi" onclick="location.href='${contextPath}/comm/post'">글쓰기</button>
+				</c:if>
 			</div>
 			<hr>
 			<div class="d-flex flex-grow-1">
@@ -111,7 +113,7 @@
 												<c:set var="view_t" value="[자유게시판] "></c:set>
 											</c:when>
 										</c:choose>
-										<tr class="table-warning" onclick="location.href='#'" style="cursor:pointer;" ><!-- 상세보기 요청 추가 -->
+										<tr class="table-warning" onclick="location.href='${contextPath}/comm/detail?no=${vo.no}'" style="cursor:pointer;"><!-- 상세보기 요청 추가 -->
 											<th scope="row" class="align-middle">${vo.no} </th>
 											<td class="overflow-hidden text-truncate align-middle"><span style="font-size:small;">${view_t}</span>${vo.title}</td>
 											<td class="align-middle">${vo.writer}</td>
@@ -135,7 +137,7 @@
 												<c:set var="view_t" value="[자유게시판] "></c:set>
 											</c:when>
 										</c:choose>
-										<tr onclick="location.href='#'" style="cursor:pointer;" ><!-- 상세보기 요청 추가 -->
+										<tr style="cursor:pointer;"  onclick="location.href='${contextPath}/comm/detail?no=${vo.no}'"><!-- 상세보기 요청 추가 -->
 											<th scope="row" class="align-middle">${vo.no} </th>
 											<td class="overflow-hidden text-truncate align-middle"><span style="font-size:small;">${view_t}</span>${vo.title}</td>
 											<td class="align-middle">${vo.writer}</td>

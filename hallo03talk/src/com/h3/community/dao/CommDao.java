@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import static com.h3.common.JDBCTemplate.*;
+
+import com.h3.community.vo.CommReplyVo;
 import com.h3.community.vo.CommVo;
 import com.h3.with.vo.PageVo;
 
@@ -175,14 +177,82 @@ public class CommDao {
 		ResultSet rs = null;
 		String sql = "SELECT * FROM COMMUNITY_CATEGORY WHERE NAME = ?";
 		
-		pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, categoryName);
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, categoryName);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt("NO");
+			}else {
+				result = 0;
+			}
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+	public CommVo getOne(Connection conn, String no) throws Exception {
+		CommVo result = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT C.NO, C.TITLE, C.CONTENT, c.enroll_date, c.modify_date, C.CNT, T.NICK AS WRITER, C.STATUS, CC.NAME AS CATEGORY FROM COMMUNITY C JOIN TRAVELER T ON C.WRITER = T.NO JOIN COMMUNITY_CATEGORY CC ON C.CATEGORY_NO = CC.NO WHERE C.NO = ?";
 		
-		rs = pstmt.executeQuery();
-		if(rs.next()) {
-			result = rs.getInt("NO");
-		}else {
-			result = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, no);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = new CommVo();
+				result.setNo(rs.getString("NO"));
+				result.setTitle(rs.getString("TITLE"));
+				result.setContent(rs.getString("CONTENT"));
+				result.setEnroll_date(rs.getTimestamp("ENROLL_DATE"));
+				result.setModify_date(rs.getTimestamp("MODIFY_DATE"));
+				result.setCnt(rs.getInt("CNT"));
+				result.setWriter(rs.getString("WRITER"));
+				result.setStatus(rs.getString("STATUS"));
+				result.setCategory(rs.getString("CATEGORY"));
+			}
+		}finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return result;
+	}
+
+
+	public ArrayList<CommReplyVo> getReplyList(Connection conn, String no) throws Exception {
+		ArrayList<CommReplyVo> result = new ArrayList<CommReplyVo>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT R.NO, R.CONTENT, T.NICK AS WRITER, R.COMMUNITY_NO, R.ENROLL_DATE FROM REPLY R JOIN TRAVELER T ON R.TRAVELER_NO = T.NO WHERE COMMUNITY_NO = ? ORDER BY R.ENROLL_DATE DESC";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, no);
+			
+			rs = pstmt.executeQuery();
+			
+			
+			while(rs.next()) {
+				CommReplyVo rvo = new CommReplyVo();
+				rvo.setNo(rs.getString("NO"));
+				rvo.setContent(rs.getString("CONTENT"));
+				rvo.setTravelerNo(rs.getString("WRITER"));
+				rvo.setCommunityNo(rs.getString("COMMUNITY_NO"));
+				rvo.setEnrollDate(rs.getString("ENROLL_DATE"));
+				
+				result.add(rvo);
+			}
+			
+		}finally {
+			close(pstmt);
+			close(rs);
 		}
 		return result;
 	}

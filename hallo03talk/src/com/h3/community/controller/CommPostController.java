@@ -14,6 +14,10 @@ import com.h3.community.vo.CommVo;
 @WebServlet(urlPatterns = "/comm/post")
 public class CommPostController extends HttpServlet{
 	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.getRequestDispatcher("/views/community/comm_post.jsp").forward(req, resp);
+	}
+	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		CommVo vo = new CommVo();
 		vo.setCategory(req.getParameter("category"));
