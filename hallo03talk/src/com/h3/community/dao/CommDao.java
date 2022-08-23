@@ -257,4 +257,65 @@ public class CommDao {
 		return result;
 	}
 
+
+	public int edit(Connection conn, CommVo vo) throws Exception {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = "UPDATE COMMUNITY SET TITLE = ? , CONTENT = ?, ENROLL_DATE = SYSDATE, CATEGORY_NO = ? WHERE NO = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getTitle());
+			pstmt.setString(2, vo.getContent());
+			pstmt.setInt(3, getCategoryNumber(conn, vo.getCategory()));
+			pstmt.setString(4, vo.getNo());
+			
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+	public void increaseCnt(String no) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "UPDATE COMMUNITY SET CNT = CNT+1 WHERE NO = ?";
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, no);
+			
+			int result = pstmt.executeUpdate();
+			if(result != 1) {
+				System.out.println("CommDao.increaseCnt:::조회수 늘리기 실패");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+			close(pstmt);
+		}
+	}
+
+
+	public int delete(Connection conn, String no) throws SQLException {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = "UPDATE COMMUNITY SET STATUS = 'N' WHERE NO = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, no);
+			
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 }

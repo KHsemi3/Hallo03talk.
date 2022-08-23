@@ -26,20 +26,20 @@ public class ReportComment extends HttpServlet{
 		
 		req.setCharacterEncoding("UTF-8");
 		
-		String no = req.getParameter("no");
+		String commNo = req.getParameter("commNo");
+		
 		String guilty = req.getParameter("guilty");
 		String content = req.getParameter("content");
 		String type = req.getParameter("type");
 		String replyNo = req.getParameter("replyNo");
+		System.out.println(replyNo);
 		
-		
-		//신고 타입 없을때에 방어
-		String cguilty = "";
-		if(guilty != null) {
-			cguilty = String.join(",", guilty);
-		}
-		
-		ReportCommentVo vo = new ReportCommentVo();  
+		ReportCommentVo vo = new ReportCommentVo();
+
+		vo.setGuilty(guilty);
+		vo.setContent(content);
+		vo.setType(type);
+		vo.setReplyNo(replyNo);
 		
 		//객체 이용해서 신고 진행
 		int result = new ReportService().cjoin(vo);
@@ -49,11 +49,11 @@ public class ReportComment extends HttpServlet{
 			//신고 성공
 			// + 메세지 담기 //alert 창으로 
 			req.getSession().setAttribute("alertMsg", "신고가 완료되었습니다!");
-			resp.sendRedirect("/hallo03talk");
+			resp.sendRedirect("/hallo03talk/comm/detail?no="+commNo);
 		}else {
 			//신고 실패 //이전 페이지로 옮기기
 			req.getSession().setAttribute("alertMsg", "신고 실패..!");
-			resp.sendRedirect("/hallo03talk/index.jsp");
+			resp.sendRedirect("/hallo03talk/comm/detail?no="+commNo);
 		}
  
 	}

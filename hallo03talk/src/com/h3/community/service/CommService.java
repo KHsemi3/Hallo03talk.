@@ -102,4 +102,46 @@ public class CommService {
 		return result;
 	}
 
+	public int edit(CommVo vo) {
+		Connection conn = null;
+		int result = 0;
+
+		try {
+			conn = getConnection();
+			result = new CommDao().edit(conn, vo);
+			if (result == 1) {
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+		} catch (Exception e) {
+			rollback(conn);
+			e.printStackTrace();
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
+	public int delete(String no) {
+		Connection conn = null;
+		int result = 0;
+
+		try {
+			conn = getConnection();
+			result = new CommDao().delete(conn, no);
+			if (result == 1) {
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+		} catch (Exception e) {
+			rollback(conn);
+			e.printStackTrace();
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
 }
