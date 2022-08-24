@@ -116,6 +116,7 @@
               </div>
               
               <!-- -----찜 리스트------------------------------------------------------ -->
+              <div class="d-flex flex-wrap">
                <%for(int i=0; i < voList.size(); i++){ %>  
              
                <div class="card" style="width: 18rem;">
@@ -129,7 +130,8 @@
                       <p class="card-text text-truncate"><%=voList.get(i).getContent() %></p>
                  </div>
               </div>
-               	<%}%>        
+               	<%}%>    
+              	</div>    
             <!-- ---------------------------------------------------------- -->                      
             
 
