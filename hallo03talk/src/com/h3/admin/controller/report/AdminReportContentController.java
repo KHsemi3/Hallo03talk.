@@ -29,7 +29,7 @@ public class AdminReportContentController extends HttpServlet {
 		int endPage;		//페이징바의 끝
 		
 		//listCount 값 구하기
-		listCount = new AdminReportService().getCount();//DB에 가서, board 테이블의 총 게시글 갯수
+		listCount = new AdminReportService().getCountBoard();//DB에 가서, board 테이블의 총 게시글 갯수
 		currentPage = Integer.parseInt(req.getParameter("p"));
 		
 		pageLimit = 10;
@@ -86,7 +86,7 @@ public class AdminReportContentController extends HttpServlet {
 		
 		
 		
-		ArrayList<ReportBoardVo> voList  =new AdminReportService().selectListBoard();
+		ArrayList<ReportBoardVo> voList  =new AdminReportService().selectListBoard(pageVo);
 		
 		//결과에 따라 화면 선택
 		

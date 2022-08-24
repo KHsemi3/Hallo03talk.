@@ -6,13 +6,14 @@ import static com.h3.common.JDBCTemplate.getConnection;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.h3.admin.AdminPageVo;
 import com.h3.admin.repository.AdminPlaceDao;
 import com.h3.common.JDBCTemplate;
 import com.h3.place.vo.PlaceVo;
 
 public class AdminPlaceService {
 
-	public ArrayList<PlaceVo> selectListPlace() {
+	public ArrayList<PlaceVo> selectListPlace(AdminPageVo pageVo) {
 		Connection conn = null;
 		ArrayList<PlaceVo> voList = null;
 		try {
@@ -21,7 +22,7 @@ public class AdminPlaceService {
 			
 			
 			//DAO 호출
-			voList = new AdminPlaceDao().selectListPlace(conn);
+			voList = new AdminPlaceDao().selectListPlace(conn, pageVo);
 			
 			//실행결과 리턴
 			

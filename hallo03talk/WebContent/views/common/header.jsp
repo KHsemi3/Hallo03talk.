@@ -96,7 +96,7 @@ session.removeAttribute("registerOk");
             <img src="<%=request.getContextPath()%>/resources/img/god.png" alt="mdo" width="32" height="32" class="rounded-circle">
           </a>
           <ul class="dropdown-menu text-small">
-            <li><a onclick="location.href='/hallo03talk/admin/placeAdmin'"class="dropdown-item" href="#">숙소관리</a></li>
+            <li><a onclick="location.href='/hallo03talk/admin/placeAdmin?p=1'"class="dropdown-item" href="#">숙소관리</a></li>
             <li><a onclick="location.href='/hallo03talk/admin/reportUser?p=1'"class="dropdown-item" href="#">유저신고관리</a></li>
             <li><a onclick="location.href='/hallo03talk/admin/reportContent?p=1'"class="dropdown-item"g href="#">게시글 신고관리</a></li>
             <li><a onclick="location.href='/hallo03talk/admin/reportReply?p=1'"class="dropdown-item" href="#">댓글 신고관리</a></li>

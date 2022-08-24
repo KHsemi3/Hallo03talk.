@@ -16,12 +16,16 @@ import com.h3.reportUser.vo.ReportUserVo;
 public class AdminReportUserDao {
 
 	public ArrayList<ReportUserVo> selectListUser(Connection conn, AdminPageVo pageVo) {
-		String sql="SELECT R.NO, R.GUILTY, R.CONTENT, R.PROCESS, R.REPORTED_TRAVELER_NO,R.ENROLL_DATE,T.ID AS REPORT_USER_ID FROM REPORT_USER R JOIN TRAVELER T ON R.REPORTED_TRAVELER_NO = T.NO WHERE R.PROCESS='N' ORDER BY NO DESC";
+		String sql="SELECT * FROM (SELECT ROWNUM AS RNUM,T.* FROM (SELECT R.NO, R.GUILTY, R.CONTENT, R.PROCESS, R.REPORTED_TRAVELER_NO,R.ENROLL_DATE,T.ID AS REPORT_USER_ID FROM REPORT_USER R JOIN TRAVELER T ON R.REPORTED_TRAVELER_NO = T.NO WHERE R.PROCESS='N' ORDER BY NO DESC ) T )WHERE RNUM BETWEEN ? AND ?";
 		PreparedStatement pstmt = null;
 		ResultSet rs =null;
 		ArrayList<ReportUserVo> list = new ArrayList<ReportUserVo>();
 		try {
 			pstmt=conn.prepareStatement(sql);
+			int start = (pageVo.getCurrentPage()-1)* pageVo.getBoardLimit() +1;
+			int end = start+pageVo.getBoardLimit() -1;
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
 			
 			rs =pstmt.executeQuery();
 			
@@ -63,14 +67,17 @@ public class AdminReportUserDao {
 		return list;
 	}
 	
-	public ArrayList<ReportCommentVo> selectListComment(Connection conn) {
-		String sql="SELECT NO, GUILTY, CONTENT, PROCESS, TYPE, REPLY_NO, ENROLL_DATE FROM REPORT_REPLY WHERE PROCESS='N' ORDER BY NO DESC";
+	public ArrayList<ReportCommentVo> selectListComment(Connection conn, AdminPageVo pageVo) {
+		String sql="SELECT * FROM (SELECT ROWNUM AS RNUM,T.* FROM (SELECT NO, GUILTY, CONTENT, PROCESS, TYPE, REPLY_NO, ENROLL_DATE FROM REPORT_REPLY WHERE PROCESS='N' ORDER BY NO DESC ) T )WHERE RNUM BETWEEN ? AND ?";
 		PreparedStatement pstmt = null;
 		ResultSet rs =null;
 		ArrayList<ReportCommentVo> list = new ArrayList<ReportCommentVo>();
 		try {
 			pstmt=conn.prepareStatement(sql);
-			
+			int start = (pageVo.getCurrentPage()-1)* pageVo.getBoardLimit() +1;
+			int end = start+pageVo.getBoardLimit() -1;
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
 			rs =pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -115,13 +122,17 @@ public class AdminReportUserDao {
 
 
 
-	public ArrayList<ReportBoardVo> selectListBoard(Connection conn) {
-		String sql="SELECT NO, GUILTY, CONTENT, PROCESS, TYPE, BOARD_NO,ENROLL_DATE FROM REPORT_CONTENT WHERE PROCESS='N' ORDER BY NO DESC";
+	public ArrayList<ReportBoardVo> selectListBoard(Connection conn, AdminPageVo pageVo) {
+		String sql="SELECT * FROM (SELECT ROWNUM AS RNUM,T.* FROM (SELECT NO, GUILTY, CONTENT, PROCESS, TYPE, BOARD_NO,ENROLL_DATE FROM REPORT_CONTENT WHERE PROCESS='N' ORDER BY NO DESC ) T )WHERE RNUM BETWEEN ? AND ?";
 		PreparedStatement pstmt = null;
 		ResultSet rs =null;
 		ArrayList<ReportBoardVo> list = new ArrayList<ReportBoardVo>();
 		try {
 			pstmt=conn.prepareStatement(sql);
+			int start = (pageVo.getCurrentPage()-1)* pageVo.getBoardLimit() +1;
+			int end = start+pageVo.getBoardLimit() -1;
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
 			
 			rs =pstmt.executeQuery();
 			
@@ -453,6 +464,109 @@ String sql = "UPDATE COMMUNITY SET STATUS = 'N' WHERE CATEGORY_NO =(SELECT TYPE 
 				//실행결과 리턴
 				return count;
 				
+	}
+
+	public static int getCountBoard(Connection conn) {
+		// TODO Auto-generated method stub
+		//Connection 준비
+		
+		//SQL 준비
+		String sql = "SELECT COUNT(NO) AS COUNT FROM REPORT_CONTENT WHERE PROCESS = 'N'";
+		PreparedStatement pstmt  =null;
+		ResultSet rs = null;
+		int count = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			//SQL 을 객체에 담기 및 SQL 완성
+			
+			//SQL 실행 및 결과 저장
+			rs = pstmt.executeQuery();
+			//실행결과 - > 자바 데이터
+			if(rs.next()) {
+				count = rs.getInt("COUNT");
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rs);
+			
+		}
+		
+	
+		
+
+		//실행결과 리턴
+		return count;
+	}
+
+	public static int getCountReply(Connection conn) {
+
+		//SQL 준비
+		String sql = "SELECT COUNT(NO) AS COUNT FROM REPORT_REPLY";
+		PreparedStatement pstmt  =null;
+		ResultSet rs = null;
+		int count = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			//SQL 을 객체에 담기 및 SQL 완성
+			
+			//SQL 실행 및 결과 저장
+			rs = pstmt.executeQuery();
+			//실행결과 - > 자바 데이터
+			if(rs.next()) {
+				count = rs.getInt("COUNT");
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rs);
+			
+		}
+		
+	
+		
+
+		//실행결과 리턴
+		return count;
+	}
+
+	public static int getCountPlace(Connection conn) {
+		//SQL 준비
+				String sql = "SELECT COUNT(NO) AS COUNT FROM PLACE";
+				PreparedStatement pstmt  =null;
+				ResultSet rs = null;
+				int count = 0;
+				
+				try {
+					pstmt = conn.prepareStatement(sql);
+					//SQL 을 객체에 담기 및 SQL 완성
+					
+					//SQL 실행 및 결과 저장
+					rs = pstmt.executeQuery();
+					//실행결과 - > 자바 데이터
+					if(rs.next()) {
+						count = rs.getInt("COUNT");
+					}
+					
+				}catch(Exception e) {
+					e.printStackTrace();
+				}finally {
+					JDBCTemplate.close(pstmt);
+					JDBCTemplate.close(rs);
+					
+				}
+				
+			
+				
+
+				//실행결과 리턴
+				return count;
 	}
 		
 	}
