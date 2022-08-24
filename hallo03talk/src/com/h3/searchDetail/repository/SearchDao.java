@@ -36,7 +36,12 @@ public class SearchDao {
 			pstmt.setString(1, placeKeyword);
 			pstmt.setString(2, placeKeyword);
 			pstmt.setString(3, cate3); 
-			pstmt.setString(4, cate1); 
+			pstmt.setString(4, cate1);
+			
+			System.out.println(placeKeyword);
+			System.out.println(cate3);
+			System.out.println(cate1);
+
 			
 			rs = pstmt.executeQuery();
 			

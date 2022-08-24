@@ -63,7 +63,7 @@
                                 <br>
     
                                 <td><select id="selectBox" class="form-control" name="cate2" style="width: 340px;">
-                                        <option value="0">선택</option>
+                                     <option value="0">선택</option>
                                         <option value="제주">제주</option>
                                         <option value="서귀포">서귀포</option>
                                 </select></td>
@@ -77,7 +77,7 @@
                                     <br>
         
                                     <td><select id="selectBox" class="form-control" name="cate3" style="width: 340px;">
-                                            <option value="0">선택</option>
+                                       		<option value="0">선택</option>
                                             <option value="0">---------제주---------</option>
                                             <option value="시내">시내</option>
                                             <option value="애월">애월</option>
@@ -203,7 +203,7 @@
                                 <br>
 
                                 <td><select id="selectBox" class="form-control" name="cate4" style="width: 540px;">
-                                        <option value="0">선택</option>
+                                      	<option value="0">선택</option> 
                                         <option value="제주">제주</option>
                                         <option value="서귀포">서귀포</option>
                                 </select></td>
@@ -269,8 +269,8 @@
                             console.log($("select[id=selectBox] option:selected").text()); //text값 가져오기
                             });
                             
-                            $(document).ready(function(){
-                                $("#wsend").click(function(){
+//                       $(document).ready(function(){
+/*                                $("#wsend").click(function(){
                                     
                                     if($(".withSearch").val() == ''){
                                         alert("검색어를 입력해주세요");
@@ -279,16 +279,14 @@
                                     $("#wform").attr("action", "/hallo03talk/searchWidth/searchWidthDetail"); // attribute setting
                                     $("#wform").submit();
                                 });
-                            });
+                            });*/
 
                     </script>
 
 
                     </div>
-                    
 
                    <button type="submit" id="wsend"  value="검색" class="btn btn-warning" style="float:right; margin-right: 60px; margin-top: 50px;">검색</button>
-
                    </form> 
 
 
