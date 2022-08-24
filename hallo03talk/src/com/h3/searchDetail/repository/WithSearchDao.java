@@ -13,23 +13,34 @@ import com.h3.with.vo.WithVo;
 public class WithSearchDao {
 	
 	//동행 검색
-	public ArrayList<WithVo> wselectList(Connection conn, WithVo vo, String widthKeyword){
+	public ArrayList<WithVo> wselectList(Connection conn, WithVo vo, String widthKeyword, String cate4, String cate5){
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<WithVo> wlist = new ArrayList<WithVo>();
-		String sql = "SELECT (A.NO, A.TITLE, A.CONTENT, A.START_DATE, A.END_DATE,  B.NO) FROM TABLE WITH_ A LEFT OUTER JOIN WITH_PHOTO  B ON A.NO = B.NO WHERE A.TITLE LIKE '%' || '?' ||'%' OR A.CONTENT LIKE '%' || '?' ||'%' AND A.START_DATE LIKE '?' AND A.END_DATE LIKE '?'";
+		String sql = "SELECT (A.NO, A.TITLE, A.CONTENT, A.START_DATE, A.END_DATE,  B.NO) FROM TABLE WITH_ A LEFT OUTER JOIN WITH_PHOTO  B ON A.NO = B.NO WHERE A.TITLE LIKE '%' || ? ||'%' OR A.CONTENT LIKE '%' || ? ||'%' AND A.START_DATE LIKE '?' AND A.END_DATE LIKE '?'";
+		String sql2 = "SELECT (A.NO, A.TITLE, A.CONTENT, A.START_DATE, A.END_DATE,  B.NO) FROM TABLE WITH_ A LEFT OUTER JOIN WITH_PHOTO  B ON A.NO = B.NO WHERE A.TITLE LIKE '%' || ? ||'%' OR A.CONTENT LIKE '%' || ? ||'%' AND A.START_DATE LIKE '?' AND A.END_DATE LIKE '?'";
+		String sql3 = "SELECT (A.NO, A.TITLE, A.CONTENT, A.START_DATE, A.END_DATE,  B.NO) FROM TABLE WITH_ A LEFT OUTER JOIN WITH_PHOTO  B ON A.NO = B.NO WHERE A.TITLE LIKE '%' || ? ||'%' OR A.CONTENT LIKE '%' || ? ||'%' AND A.START_DATE LIKE '?' AND A.END_DATE LIKE '?'";
 
 		try {
 			
 			pstmt = conn.prepareStatement(sql);
-			
 			pstmt.setString(1, widthKeyword);
 			pstmt.setDate(2, vo.getStart_date());
 			pstmt.setDate(3, vo.getEnd_date());
 			
+			pstmt = conn.prepareStatement(sql2);
+			pstmt.setString(1, cate4);
+			pstmt.setDate(2, vo.getStart_date());
+			pstmt.setDate(3, vo.getEnd_date());
+			
+			pstmt = conn.prepareStatement(sql2);
+			pstmt.setString(1, cate5);
+			pstmt.setDate(2, vo.getStart_date());
+			pstmt.setDate(3, vo.getEnd_date());
+			
 
-			rs = pstmt.executeQuery();
+//			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 				WithVo wvo = new WithVo();

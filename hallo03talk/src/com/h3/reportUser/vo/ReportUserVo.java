@@ -107,7 +107,9 @@ public class ReportUserVo {
 				+ ", reportedTravelerNo=" + reportedTravelerNo + ", reportUserId=" + reportUserId + ", enrollDate="
 				+ enrollDate + "]";
 	}
-	
+
+
+
 	
 	
 	

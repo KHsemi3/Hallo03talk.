@@ -14,6 +14,8 @@ public class SearchWidthService {
 	
 	private final WithVo wvo = new WithVo();
 	private String widthKeyword;
+	private String cate4;
+	private String cate5;
 	
 	//장소
 		public ArrayList<WithVo> wselectList(){
@@ -24,7 +26,7 @@ public class SearchWidthService {
 			try {
 				conn = getConnection();
 				
-				wvoList = new WithSearchDao().wselectList(conn, wvo, widthKeyword);
+				wvoList = new WithSearchDao().wselectList(conn, wvo, widthKeyword, cate4, cate5);
 				
 			} catch (Exception e) {
 				e.printStackTrace();

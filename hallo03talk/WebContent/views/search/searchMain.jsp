@@ -30,7 +30,7 @@
                 <!--장소-->
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 
-                    <form action="hallo03talk/searchPlace/searchDetail" method="get" id="pform">
+                    <form action="/hallo03talk/searchPlace/searchDetail" method="get" id="pform">
 
                         <br><br>
                         <div class="text" style=" width: 50%;float: left;">
@@ -49,9 +49,9 @@
 
                             <td><select id="selectBox" class="form-control" name="cate1" style="width: 340px;">
                                     <option value="0">선택</option>
-                                    <option value="hotel">숙소</option>
-                                    <option value="foods">맛집</option>
-                                    <option value="cafe">카페</option>
+                                    <option value="숙소">숙소</option>
+                                    <option value="맛집">맛집</option>
+                                    <option value="카페">카페</option>
                             </select></td>
 
                             </div >
@@ -64,8 +64,8 @@
     
                                 <td><select id="selectBox" class="form-control" name="cate2" style="width: 340px;">
                                         <option value="0">선택</option>
-                                        <option value="jeju">제주</option>
-                                        <option value="seogwipo">서귀포</option>
+                                        <option value="제주">제주</option>
+                                        <option value="서귀포">서귀포</option>
                                 </select></td>
     
                                 </div >
@@ -79,19 +79,19 @@
                                     <td><select id="selectBox" class="form-control" name="cate3" style="width: 340px;">
                                             <option value="0">선택</option>
                                             <option value="0">---------제주---------</option>
-                                            <option value="sinae">시내</option>
-                                            <option value="aewol">애월</option>
-                                            <option value="hanrim">한림</option>
-                                            <option value="hangyeong">한경</option>
-                                            <option value="jocheon">조천</option>
-                                            <option value="gujwa">구좌</option>
+                                            <option value="시내">시내</option>
+                                            <option value="애월">애월</option>
+                                            <option value="한림">한림</option>
+                                            <option value="한경">한경</option>
+                                            <option value="조천">조천</option>
+                                            <option value="구좌">구좌</option>
                                             <option value="0">---------서귀포---------</option>
-                                            <option value="sinae">시내</option>
-                                            <option value="namwon">남원</option>
-                                            <option value="andeok">안덕</option>
-                                            <option value="daejung">대정</option>
-                                            <option value="pyosheon">표선</option>
-                                            <option value="sungsan">성산</option>
+                                            <option value="시내">시내</option>
+                                            <option value="남원">남원</option>
+                                            <option value="안덕">안덕</option>
+                                            <option value="대정">대정</option>
+                                            <option value="표선">표선</option>
+                                            <option value="성산">성산</option>
                                     </select></td>
         
                                     </div >
@@ -160,7 +160,7 @@
                 <!--동행-->
                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                     
-                   <form action="hallo03talk/searchWidth/searchWidthDetail" method="get" id="wform">
+                   <form action="/hallo03talk/searchWidth/searchWidthDetail" method="get" id="wform">
 
                     <br><br>
                     <div class="text" style=" width: 50%;float: left;">
@@ -202,10 +202,10 @@
 
                                 <br>
 
-                                <td><select id="selectBox" class="form-control" name="searchField" style="width: 540px;">
+                                <td><select id="selectBox" class="form-control" name="cate4" style="width: 540px;">
                                         <option value="0">선택</option>
-                                        <option value="jeju">제주</option>
-                                        <option value="seogwipo">서귀포</option>
+                                        <option value="제주">제주</option>
+                                        <option value="서귀포">서귀포</option>
                                 </select></td>
 
                                 </div >
@@ -216,22 +216,22 @@
         
                                     <br>
         
-                                    <td><select id="selectBox" class="form-control" name="searchField" style="width: 540px;">
+                                    <td><select id="selectBox" class="form-control" name="cate5" style="width: 540px;">
                                             <option value="0">선택</option>
                                             <option value="0">---------제주---------</option>
-                                            <option value="sinae">시내</option>
-                                            <option value="aewol">애월</option>
-                                            <option value="hanrim">한림</option>
-                                            <option value="hangyeong">한경</option>
-                                            <option value="jocheon">조천</option>
-                                            <option value="gujwa">구좌</option>
+                                            <option value="시내">시내</option>
+                                            <option value="애월">애월</option>
+                                            <option value="한림">한림</option>
+                                            <option value="한경">한경</option>
+                                            <option value="조천">조천</option>
+                                            <option value="구좌">구좌</option>
                                             <option value="0">---------서귀포---------</option>
-                                            <option value="sinae">시내</option>
-                                            <option value="namwon">남원</option>
-                                            <option value="andeok">안덕</option>
-                                            <option value="daejung">대정</option>
-                                            <option value="pyosheon">표선</option>
-                                            <option value="sungsan">성산</option>
+                                            <option value="시내">시내</option>
+                                            <option value="남원">남원</option>
+                                            <option value="안덕">안덕</option>
+                                            <option value="대정">대정</option>
+                                            <option value="표선">표선</option>
+                                            <option value="성산">성산</option>
                                     </select></td>
         
                                     </div >

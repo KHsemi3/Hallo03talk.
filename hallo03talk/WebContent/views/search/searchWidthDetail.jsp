@@ -6,12 +6,6 @@
 <%
 ArrayList<WithVo> wvoList = (ArrayList<WithVo>) request.getAttribute("wvoList");
 
-PageVo pv = (PageVo)request.getAttribute("pageVo");
-
-int currentPage = pv.getCurrentPage();
-int startPage = pv.getStartPage();
-int endPage = pv.getEndPage();
-int maxPage = pv.getMaxPage();
 System.out.println(wvoList);
 %>
 
@@ -22,52 +16,7 @@ System.out.println(wvoList);
 <title>Insert title here</title>
 
 <style>
-#container {
-	padding: 3rem;
-}
 
-#container-header {
-	display: flex;
-	align-items: baseline;
-	justify-content: space-between;
-}
-
-.chi:nth-child(1) {
-	flex-grow: 1;
-}
-
-.chi:nth-child(2) {
-	flex-grow: 50;
-}
-
-.chi:nth-child(3) {
-	flex-grow: 0;
-}
-
-#align-dropdown {
-	display: flex;
-	justify-content: flex-end;
-}
-
-/* 여기서부터 아이템들 */
-#content-items {
-	margin: 1rem;
-	width: 100%;
-	height: 120px;
-}
-
-#content-items:hover {
-	background-color: bisque;
-	cursor: pointer;;
-}
-
-#content-items * {
-	margin: 10px;
-}
-
-#content-items-title {
-	width: 40%;
-}
 </style>
 
 </head>
@@ -79,10 +28,57 @@ System.out.println(wvoList);
 		<div id="container" class="container-xxl">
 
 			<div id="container-header">
-				<h1 class="chi">동행</h1>
-				<h6 class="chi">쉽고 빠르게 같이 동행할 여행친구 찾기</h6>
+				<h1 class="chi" style = "margin-left: 5%; margin-top : 30px">동행</h1>
+				<h6 class="chi"style = "margin-left: 5%;">쉽고 빠르게 같이 동행할 여행친구 찾기</h6>
+				    <br>
+                    <input type="text" name="placeKeyword" class="placeSearch" value="" style="width: 90%; height: 50px; border-radius: 10px; border: 1px solid gray; margin-left: 5%;" placeholder="  검색어를 입력하세요.">
+                    <br>
 			</div>
-			<hr>
+			<hr style = "width: 90%; margin-left: 5%;">
+			
+			<div id="accordion" style="width: 90%; margin-left: 5%;">
+			<%for(int i = 0 ; i < wvoList.size(); i++){%>
+			  <div class="card">
+			    <div class="card-header">
+			      <a class="btn" data-bs-toggle="collapse" href="#collapseOne">
+			        <b><%= wvoList.get(i).getTitle() %></b> <h5><%= wvoList.get(i).getStart_date()%> ~ <%= wvoList.get(i).getEnd_date()%></h5>
+			      </a>
+			    </div>
+			    <div id="collapseOne" class="collapse show" data-bs-parent="#accordion">
+			      <div class="card-body">
+			        <%= wvoList.get(i).getContent() %>
+			      </div>
+			    </div>
+			  </div>
+			  <%} %>
+			
+			  <div class="card">
+			    <div class="card-header">
+			      <a class="collapsed btn" data-bs-toggle="collapse" href="#collapseTwo">
+			        제목이랑 날짜
+			      </a>
+			    </div>
+			    <div id="collapseTwo" class="collapse" data-bs-parent="#accordion">
+			      <div class="card-body">
+			        내용 텍스트만
+			      </div>
+			    </div>
+			  </div>
+			
+			  <div class="card">
+			    <div class="card-header">
+			      <a class="collapsed btn" data-bs-toggle="collapse" href="#collapseThree">
+			        제목이랑 날짜
+			      </a>
+			    </div>
+			    <div id="collapseThree" class="collapse" data-bs-parent="#accordion">
+			      <div class="card-body">
+			        내용 텍스트만
+			      </div>
+			    </div>
+			  </div>
+			
+			</div>
 
 	</main>
 
