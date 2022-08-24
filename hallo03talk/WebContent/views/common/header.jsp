@@ -10,6 +10,11 @@
 	AdminVo loginAdmin2 = (AdminVo)session.getAttribute("loginAdmin");
 	
 %>
+<% String regAlert = (String)session.getAttribute("registerOk");
+//알람창은 한번만!
+session.removeAttribute("registerOk"); 
+%>
+<%String regAlert1 = (String)session.getAttribute("registerFail"); %>
  <!DOCTYPE html>
 <html>
   <head>
@@ -40,7 +45,6 @@
           >
             <li><a onclick="location.href='/hallo03talk/with/list'" class="nav-link px-2 link-dark">동행</a></li>
             <li><a onclick="location.href='/hallo03talk/place/list?categoryNo=0&cityNo=0&insideNo=0'" href="#" class="nav-link px-2 link-dark">장소</a></li>
-            <li><a href="#" class="nav-link px-2 link-dark">후기</a></li>
             <li><a onclick="location.href='/hallo03talk/comm/list'" class="nav-link px-2 link-dark">커뮤니티</a></li>
           </ul>
 
@@ -73,7 +77,6 @@
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
          <li><a href="#" onclick="location.href='/hallo03talk/with/list'" class="nav-link px-2 link-dark">동행</a></li>
             <li><a onclick="location.href='/hallo03talk/place/list?categoryNo=0&cityNo=0&insideNo=0'" href="#" class="nav-link px-2 link-dark">장소</a></li>
-            <li><a href="#" class="nav-link px-2 link-dark">후기</a></li>
             <li><a href="#" onclick="location.href='/hallo03talk/comm/list'" class="nav-link px-2 link-dark">커뮤니티</a></li>
         </ul>
 
@@ -95,7 +98,7 @@
           <ul class="dropdown-menu text-small">
             <li><a onclick="location.href='/hallo03talk/admin/placeAdmin'"class="dropdown-item" href="#">숙소관리</a></li>
             <li><a onclick="location.href='/hallo03talk/admin/reportUser'"class="dropdown-item" href="#">유저신고관리</a></li>
-            <li><a onclick="location.href='/hallo03talk/admin/reportContent'"class="dropdown-item" href="#">게시글 신고관리</a></li>
+            <li><a onclick="location.href='/hallo03talk/admin/reportContent'"class="dropdown-item"g href="#">게시글 신고관리</a></li>
             <li><a onclick="location.href='/hallo03talk/admin/reportReply'"class="dropdown-item" href="#">댓글 신고관리</a></li>
             
             <li><hr class="dropdown-divider"></li>
@@ -120,7 +123,6 @@
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
          <li><a href="#" onclick="location.href='/hallo03talk/with/list'" class="nav-link px-2 link-dark">동행</a></li>
             <li><a onclick="location.href='/hallo03talk/place/list?categoryNo=0&cityNo=0&insideNo=0'" href="#" class="nav-link px-2 link-dark">장소</a></li>
-            <li><a href="#" class="nav-link px-2 link-dark">후기</a></li>
             <li><a href="#" onclick="location.href='/hallo03talk/comm/list'" class="nav-link px-2 link-dark">커뮤니티</a></li>
         </ul>
 

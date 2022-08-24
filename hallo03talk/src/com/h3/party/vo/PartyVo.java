@@ -6,95 +6,122 @@ public class PartyVo {
 	
 	public PartyVo() {
 		
-	}
+	      }
 	
-	public PartyVo(int no, String title, String content, int cnt, Timestamp enroll_date, String status,
-			int party_category, int boss_no, Timestamp modify_date) {
+	
+	
+	public PartyVo(int no, String title, String content, int cnt, Timestamp enrollDate, String status, int bossNo) {
 		super();
 		this.no = no;
 		this.title = title;
 		this.content = content;
 		this.cnt = cnt;
-		this.enrollDate = enroll_date;
+		this.enrollDate = enrollDate;
 		this.status = status;
-		this.partyCategory = party_category;
-		this.boss_no = boss_no;
-		this.modifyDate = modify_date;
+		this.bossNo = bossNo;
 	}
-	
-	private int no;
+
+
+
+	private int no;	
 	private String title;
-	private String content;
-	private int cnt;
-	private Timestamp enrollDate;
-	private String status;
-	private int partyCategory;
-	private int boss_no;
-	private Timestamp modifyDate;
-	
-	
+	private String content;	   
+	private int cnt;	
+	private Timestamp enrollDate;	
+	private String status;	
+	private int bossNo;
 	public int getNo() {
 		return no;
 	}
+
+
+
 	public void setNo(int no) {
 		this.no = no;
 	}
+
+
+
 	public String getTitle() {
 		return title;
 	}
+
+
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
+
+
+
 	public String getContent() {
 		return content;
 	}
+
+
+
 	public void setContent(String content) {
 		this.content = content;
 	}
+
+
+
 	public int getCnt() {
 		return cnt;
 	}
+
+
+
 	public void setCnt(int cnt) {
 		this.cnt = cnt;
 	}
-	public Timestamp getEnroll_date() {
+
+
+
+	public Timestamp getEnrollDate() {
 		return enrollDate;
 	}
-	public void setEnroll_date(Timestamp enroll_date) {
-		this.enrollDate = enroll_date;
+
+
+
+	public void setEnrollDate(Timestamp enrollDate) {
+		this.enrollDate = enrollDate;
 	}
+
+
+
 	public String getStatus() {
 		return status;
 	}
+
+
+
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public int getParty_category() {
-		return partyCategory;
+
+
+
+	public int getBossNo() {
+		return bossNo;
 	}
-	public void setParty_category(int party_category) {
-		this.partyCategory = party_category;
+
+
+
+	public void setBossNo(int bossNo) {
+		this.bossNo = bossNo;
 	}
-	public int getBoss_no() {
-		return boss_no;
-	}
-	public void setBoss_no(int boss_no) {
-		this.boss_no = boss_no;
-	}
-	public Timestamp getModify_date() {
-		return modifyDate;
-	}
-	public void setModify_date(Timestamp modify_date) {
-		this.modifyDate = modify_date;
-	}
-	
-	
+
+
+
 	@Override
 	public String toString() {
-		return "PartyVo [no=" + no + ", title=" + title + ", content=" + content + ", cnt=" + cnt + ", enroll_date="
-				+ enrollDate + ", status=" + status + ", party_category=" + partyCategory + ", boss_no=" + boss_no
-				+ ", modify_date=" + modifyDate + "]";
-	}
+		return "PartyVo [no=" + no + ", title=" + title + ", content=" + content + ", cnt=" + cnt + ", enrollDate="
+				+ enrollDate + ", status=" + status + ", bossNo=" + bossNo + "]";
+	}	
 	
+	
+	
+
 		
 }

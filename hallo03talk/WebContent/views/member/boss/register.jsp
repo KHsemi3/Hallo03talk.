@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<% String regAlert = (String)session.getAttribute("registerOk");
-//알람창은 한번만!
-session.removeAttribute("registerOk"); 
-%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,10 +37,6 @@ session.removeAttribute("registerOk");
        					<button type="submit" >작성완료</button>
    						</div>
         			 </form>
-        			 <script>
-        			 <%if(regAlert !=null){%>
-        			 alert('<%=regAlert%>');
-        			 <%}%></script>
     			</div>
 	</main>
 

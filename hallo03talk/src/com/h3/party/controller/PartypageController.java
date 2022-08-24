@@ -7,23 +7,35 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.h3.boss.service.BossService;
-import com.h3.boss.vo.BossVo;
 import com.h3.party.service.PartyPageService;
 
+public class PartypageController {
+	
 
-@WebServlet(urlPatterns="/party/list")
+@WebServlet(urlPatterns="/party/page")
 public class PartyListController extends HttpServlet {
 	
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		//페이징
+		int listCount;
+		int currentPage;
+		int pageLimit;
+		int boardLimit;
+		int maxPage;
+		int startPage;
+		int endPage;
+		
+		listCount = new PartyPageService().getCount();
+		
+		//테스트
+		System.out.println(listCount);
+		
 		//이벤트 게시판 목록
 		req.getRequestDispatcher("/views/party/list.jsp").forward(req,resp);
-	
-
 	}
 }
+}	
