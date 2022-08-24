@@ -11,6 +11,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+  	<link rel="icon" href="<%=request.getContextPath()%>resources/img/main_favi.png" />
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />

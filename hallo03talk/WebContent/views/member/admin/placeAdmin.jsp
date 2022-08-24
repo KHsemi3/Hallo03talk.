@@ -190,7 +190,7 @@ opacity:0.5;
 
 					
 		<ul>
-	<li id="reportImg"><img src="<%=request.getContextPath()%>/resources/img/report.png" alt="" />숙소관리</li>
+	<li id="reportImg"><img src="<%=request.getContextPath()%>/resources/img/house.png" alt="" />숙소관리</li>
 </ul>			
 <hr />
 <div class="right-nav">
@@ -205,7 +205,7 @@ opacity:0.5;
 		
       <div class="acc-data">
         <div class="acc-image-area">
-        <input type="checkbox" />
+        <input type="checkbox" name="num" value="<%=voList.get(i).getNo()%>" /><%=voList.get(i).getNo()%>
          <img class="acc-img" src="../../../resources/img/house_2.png"/>
         </div>
         <div class="acc-info">
@@ -240,7 +240,7 @@ opacity:0.5;
               <a href="">10</a>
                <a href="">&gt;</a>
                <div class="btn-area">
-                <span> 숙소 삭제</span>
+                <span onclick="f01();"> 숙소 삭제</span>
                 
                </div>
               
@@ -252,6 +252,42 @@ opacity:0.5;
 
 
 	<footer></footer>
-
+<script>
+	function f01(){
+		
+	
+		
+		if(confirm("삭제 하시겟습니까?")){
+		alert("삭제 완료");
+		
+		const elemArr = $('input[name=num]');
+		const numArr = [];
+		
+		for(let i = 0; i < elemArr.length; ++i){
+			 if( elemArr[i].checked == true ) {
+				 numArr.push(elemArr[i].value);
+	            }
+	
+		//	numArr.push(elemArr[i].value);
+		}
+		
+		console.log(numArr);
+		
+		let str = '';
+		
+		for(let i = 0; i < numArr.length; ++i){
+			str += 'num=' + numArr[i];
+			str += '&';	
+			
+		
+		}
+		
+		
+		location.href='/hallo03talk/admin/placeDelete?'+ str;
+		}else{
+			alert("취소 하셨습니다");
+		}
+	}
+	</script>
 </body>
 </html>
