@@ -48,4 +48,22 @@ public class CommReplyDao {
 		return result;
 	}
 
+	public int delete(Connection conn, String no) throws SQLException {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = "DELETE FROM REPLY WHERE NO = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, no);
+			
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 }

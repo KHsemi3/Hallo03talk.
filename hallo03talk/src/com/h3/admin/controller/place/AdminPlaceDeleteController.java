@@ -31,7 +31,7 @@ public class AdminPlaceDeleteController extends HttpServlet {
 			
 		
 			
-			req.getRequestDispatcher("/admin/placeAdmin").forward(req, resp);
+			req.getRequestDispatcher("/admin/placeAdmin?p=1").forward(req, resp);
 	}
 	
 		

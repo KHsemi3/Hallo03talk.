@@ -31,7 +31,7 @@ public class ReportReplyDeleteController extends HttpServlet {
 			
 		
 			
-			req.getRequestDispatcher("/admin/reportReply").forward(req, resp);
+			req.getRequestDispatcher("/admin/reportReply?p=1").forward(req, resp);
 			
 			
 		

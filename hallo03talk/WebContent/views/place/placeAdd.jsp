@@ -7,6 +7,7 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%
 BossVo bv = (BossVo)session.getAttribute("BossLoginMember");
+request.setAttribute("bv", bv);
 
 request.setCharacterEncoding("UTF-8"); //한글깨지면 주석제거
 //request.setCharacterEncoding("EUC-KR"); //해당시스템의 인코딩타입이 EUC-KR일경우에 String inputYn =
@@ -50,6 +51,10 @@ String emdNo = request.getParameter("emdNo");
 		<form id="container" class="container-xxl"
 			action="/hallo03talk/place/add" method="post"
 			enctype="multipart/form-data">
+			<input type="hidden" value="${BossLoginMember.no }" name="no">
+			<input type="hidden" value="${BossLoginMember.id }" name="id">
+			<input type="hidden" value="${BossLoginMember.pwd }" name="pwd">
+			
 			<!-- 슬라이드 -->
 			<div
 				class="d-flex w-100 border border-2 justify-content-center align-items-center mt-3"

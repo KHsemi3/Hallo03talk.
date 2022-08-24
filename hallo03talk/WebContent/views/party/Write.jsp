@@ -34,7 +34,7 @@
 							<div class="catag"></div>
 							<dl>
 								<dt>말머리</dt>
-								<select name="category">
+								<select name="category" class="form-control" >
 									<option value="1">지역축제</option>
 									<option value="2">가게홍보</option>	
 								</select>
@@ -43,18 +43,18 @@
 								<dl>
 									<dt>제목</dt>
 									<dd>
-										<input type="text" placeholder="제목 입력" name="title">
+										<input type="text" placeholder="제목 입력" name="title"  class="form-control" > 
 									</dd>
 								</dl>
 							</div>
 
 							<div class="cont">
-								<textarea placeholder="내용 입력" name="content"></textarea>
+								<textarea placeholder="내용 입력" name="content"  class="form-control" ></textarea>
 							</div>
 						</div>
 					</div>
-					<button type="submit" class="btn btn-dark">등록</button>
 					<div class="bt_wrap">
+					<button type="submit" class="btn btn-dark">등록</button>
 					<button type="button" class="btn btn-danger" onclick="location.href='/hallo03talk/party/list'">취소</button>
 					</div>
 				</form>

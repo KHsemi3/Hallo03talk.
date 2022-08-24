@@ -449,15 +449,7 @@ width
 
 								<li class="nav-item"><a class="nav-link"
 									href="/hallo03talk/travelerMpgZzim/list">찜 목록</a></li>
-								<li class="nav-item dropdown"><a
-									class="nav-link dropdown-toggle" href="#"
-									id="navbarDropdownMenuLink" role="button"
-									data-bs-toggle="dropdown" aria-expanded="false"> 신고 </a>
-									<ul class="dropdown-menu"
-										aria-labelledby="navbarDropdownMenuLink">
-										<li><a class="dropdown-item"
-											href="/hallo03talk/traveler/getReport">신고 받은 내역</a></li>
-									</ul></li>
+								
 							</ul>
 						</div>
 					</div>

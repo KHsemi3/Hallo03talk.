@@ -95,14 +95,7 @@
                                 <a class="nav-link" href="/hallo03talk/travelerMpgZzim/list">찜 목록</a>
                               </li>
                              
-                              <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                  신고
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                  <li><a class="dropdown-item" href="/hallo03talk/traveler/getReport">신고 받은 내역</a></li>
-                                </ul>
-                              </li>
+                              
                             </ul>
                       </div>
                 </div>
@@ -171,7 +164,7 @@
    
    $(".deleteButton").click(function(e) {
       
-      var ans = confirm("선택하신 댓글을 삭제하시겠습니까?");
+      var ans = confirm("선택하신 찜을 삭제하시겠습니까?");
        if(!ans) return false;
        
        var result = -1;
@@ -212,9 +205,9 @@
       
       window.setTimeout(function(){
          if($('#ajaxResult').val() > 0){
-              alert("댓글이 삭제 되었습니다.");
+              alert("찜이 삭제 되었습니다.");
           }else{
-                alert("댓글이 삭제되지 않았습니다.");   
+                alert("찜이 삭제되지 않았습니다.");   
           }
           location.reload();
       }, 500)

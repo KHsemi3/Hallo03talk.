@@ -182,11 +182,11 @@ opacity:0.5;
 		for(int i = 0; i<voList.size(); i++){
 		%>
 		<tr>
-			<th><input class="check"type="checkbox" name="num" value="<%=voList.get(i).getNo()%>"  /><%=voList.get(i).getNo()%></th>
+			<th><input class="check"type="checkbox" name="num" value="<%=voList.get(i).getNo()%>" /><%=voList.get(i).getNo()%></th>
 			
-			<th><%=voList.get(i).getGuilty()%></th>
-			<th><%=voList.get(i).getContent()%></th>
-			<th><%=voList.get(i).getEnrollDate()%><th>
+			<th onclick="location.href='/hallo03talk/admin/contentDetail?num=<%=voList.get(i).getNo()%>'"><%=voList.get(i).getGuilty()%></th>
+			<th onclick="location.href='/hallo03talk/admin/contentDetail?num=<%=voList.get(i).getNo()%>'"><%=voList.get(i).getContent()%></th>
+			<th onclick="location.href='/hallo03talk/admin/contentDetail?num=<%=voList.get(i).getNo()%>'"><%=voList.get(i).getEnrollDate()%><th>
 			
 			
 		</tr>
@@ -312,19 +312,7 @@ function f02(){
 		}
 	}
 
-$(function(){
-	$('tbody>tr').click(function(){
-		//행 클릭 되었을때 , 동작 할 내용
-		
-		//글 번호 가져오기
-		var num =$(this).children().eq(0).text();
-		console.log(num);
-		
-		//해당 번호 이용해서 요청 보내기
-		location.href='/hallo03talk/admin/contentDetail?num=' + num;
-		
-	})
-})
+
 
 	
 </script>

@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import com.h3.admin.AdminPageVo;
 import com.h3.admin.repository.AdminReportUserDao;
 import com.h3.common.JDBCTemplate;
+import com.h3.community.dao.CommDao;
+import com.h3.community.dao.CommReplyDao;
 import com.h3.reportBoard.vo.ReportBoardVo;
 import com.h3.reportComment.vo.ReportCommentVo;
 import com.h3.reportUser.vo.ReportUserVo;
@@ -174,13 +176,14 @@ public class AdminReportService {
 		try {
 			conn = getConnection();
 			
-			//DAO 호출
-			result =new AdminReportUserDao().deleteContentReal(conn,dNum);
-			if(result == dNum.length) {
-				JDBCTemplate.commit(conn);
-			}else {
-				JDBCTemplate.rollback(conn);
+			
+			for(int i:dNum ) {
+				ReportBoardVo vo = new AdminReportUserDao().selectBoard(conn, Integer.toString(i));
+				new CommDao().delete(conn, vo.getBoardNo());
 			}
+			
+			JDBCTemplate.commit(conn);
+			
 			
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -198,17 +201,16 @@ public class AdminReportService {
 		Connection conn = null;
 		int result = 0;
 		
-		
 		try {
 			conn = getConnection();
 			
-			//DAO 호출
-			result =new AdminReportUserDao().deleteReplyReal(conn,dNum);
-			if(result == dNum.length) {
-				JDBCTemplate.commit(conn);
-			}else {
-				JDBCTemplate.rollback(conn);
+			for(int i : dNum) {
+				ReportCommentVo vo = new AdminReportUserDao().selectReply(conn, Integer.toString(i));
+				int result1 = new CommReplyDao().delete(conn, vo.getReplyNo());
+				System.out.println(i);
 			}
+			
+				JDBCTemplate.commit(conn);
 			
 		}catch(Exception e) {
 			e.printStackTrace();

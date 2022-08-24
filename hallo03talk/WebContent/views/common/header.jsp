@@ -97,7 +97,6 @@ session.removeAttribute("registerOk");
           </a>
           <ul class="dropdown-menu text-small">
             <li><a onclick="location.href='/hallo03talk/admin/placeAdmin?p=1'"class="dropdown-item" href="#">숙소관리</a></li>
-            <li><a onclick="location.href='/hallo03talk/admin/reportUser?p=1'"class="dropdown-item" href="#">유저신고관리</a></li>
             <li><a onclick="location.href='/hallo03talk/admin/reportContent?p=1'"class="dropdown-item"g href="#">게시글 신고관리</a></li>
             <li><a onclick="location.href='/hallo03talk/admin/reportReply?p=1'"class="dropdown-item" href="#">댓글 신고관리</a></li>
             
@@ -142,8 +141,12 @@ session.removeAttribute("registerOk");
             <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
           </a>
           <ul class="dropdown-menu text-small">
-            <li><a class="dropdown-item" href="#">New project...</a></li>
-            <li><a class="dropdown-item" href="#">Settings</a></li>
+          <% if (loginTraveler2 != null) { %>
+            <li><a class="dropdown-item" onclick="location.href='/hallo03talk/traveler/myPage'">마이페이지</a></li>
+           <%} %>
+           <% if (loginBoss2 != null) { %>
+            <li><a class="dropdown-item" onclick="location.href='/hallo03talk/boss/myPage'">마이페이지</a></li>
+            <%} %>
             <li><a class="dropdown-item" href="#" ></a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a onclick="location.href='/hallo03talk/member/logout'" class="dropdown-item" href="#">로그아웃</a></li>

@@ -330,8 +330,8 @@
    	
     	<li><a class="btn" onclick="location.href='/hallo03talk/comm/list?view=notice'">공지사항</a></li>
     	<li><a  onclick="location.href='/hallo03talk/search/searchPlace'" class="btn" >검색</a></li>
-    	<li class="btn"  onclick="location.href='/hallo03talk/admin/placeAdmin'">숙소관리</li>
-    	<li><a  class="btn"  onclick="location.href='/hallo03talk/admin/reportUser?p=1'">신고관리</a></li>
+    	<li class="btn"  onclick="location.href='/hallo03talk/admin/placeAdmin?p=1'">숙소관리</li>
+    	<li><a  class="btn"  onclick="location.href='/hallo03talk/admin/reportContent?p=1'">신고관리</a></li>
           <li><a  href="/hallo03talk/admin/logout"  class="btn" >로그아웃</a></li>
           <li class=""><%=loginAdmin.getName() %> 님 환영합니다</li>
     	

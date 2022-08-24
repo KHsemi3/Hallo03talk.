@@ -26,6 +26,9 @@
 		<div id="container" class="container-xxl">
 			<h1 class="text-center py-lg-5" style="font-family: 'Somi'">장소</h1>
 			<!-- 장소 카테고리들 -->
+			<c:if test="${not empty BossLoginMember}">
+				<a class="btn btn-warning" href="/hallo03talk/place/add">장소추가</a>
+			</c:if>
 			<div id="place-finder" class="fw-bolder text-center mt-5 mx-5">
 				<div class="row border border-4" id="placeCategory">
 					<div class="row">
