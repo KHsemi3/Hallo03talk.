@@ -6,14 +6,18 @@ import static com.h3.common.JDBCTemplate.getConnection;
 import static com.h3.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import com.h3.boss.repository.BossDao;
+import com.h3.boss.vo.BossAttachmentVo;
 import com.h3.boss.vo.BossMyPageVo;
 import com.h3.boss.vo.BossVo;
 import com.h3.community.vo.CommReplyVo;
 import com.h3.placeReview.vo.PlaceReviewVo;
 import com.h3.traveler.repository.TravelerDao;
+import com.h3.traveler.vo.TravelerAttachmentVo;
 import com.h3.traveler.vo.TravelerVo;
 
 public class BossService {
@@ -429,6 +433,75 @@ public class BossService {
 		
 		
 	}//deletePost
+
+
+	// boss 사진 저장
+		public void uploadProfilePic(BossAttachmentVo bav) {
+			Connection conn = null;
+			try {
+				
+				conn = getConnection();
+				
+				dao.createBossAttachment(conn, bav);
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				close(conn);
+			}
+		} // uploadProfilePic
+		
+
+		/*
+		 * 원본 파일명을 중복되지 않을 이름으로 변경
+		 */
+		public String createChangeName(String originName) {
+			
+			// 원래 이름에서 확장자 가져오기
+			int dotIdx = originName.lastIndexOf('.');    		
+			String ext = originName.substring(dotIdx);			
+			
+			String fileName= originName.substring(0, dotIdx);
+			
+			
+		    // 현재 날짜 구하기        
+			LocalDate now = LocalDate.now();         
+			// 포맷 정의        
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyMMdd");         
+			// 포맷 적용        
+			String formatedNow = now.format(formatter);
+		
+			// 원본파일이름(확장자x) + 현재날짜(ex 220824) + 확장자
+			String changeName = fileName + "_" + formatedNow + ext;   
+			
+			return changeName;
+			
+		}
+
+		// boss 사진 가져오기
+		public BossAttachmentVo getAttachment(int no) {
+			
+			Connection conn = null;
+			
+			BossAttachmentVo bav = new BossAttachmentVo();
+			try {
+				
+				conn = getConnection();
+				
+				// dao 호출
+				bav = dao.getAttachment(conn, no);
+				
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				close(conn);
+			}
+			
+			// 실행결과 리턴
+			return bav;
+		
+		}
 
 	
 }//class

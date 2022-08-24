@@ -9,11 +9,13 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
+import com.h3.boss.vo.BossAttachmentVo;
 import com.h3.boss.vo.BossMyPageVo;
 import com.h3.boss.vo.BossVo;
 import com.h3.community.vo.CommReplyVo;
 import com.h3.placeReview.vo.PlaceReviewVo;
 import com.h3.traveler.vo.MpgPostVo;
+import com.h3.traveler.vo.TravelerAttachmentVo;
 
 public class BossDao {
 
@@ -349,7 +351,7 @@ public class BossDao {
 		ResultSet rs = null;
 		ArrayList<PlaceReviewVo> list = new ArrayList<PlaceReviewVo>();
 
-		String sql = "SELECT R.NO , R.CONTENT , TO_CHAR(R.ENROLL_DATE, 'YY/MM/DD HH:MI') AS ENROLL_DATE FROM PLACE_REVIEW_REPLY R JOIN BOSS B ON R.BOSS_NO = B.NO WHERE R.BOSS_NO = ? ORDER BY ENROLL_DATE DESC";
+		String sql = "SELECT PR.PLACE_NO AS NO, R.CONTENT , TO_CHAR(R.ENROLL_DATE, 'YY/MM/DD HH:MI') AS ENROLL_DATE FROM PLACE_REVIEW_REPLY R JOIN BOSS B ON R.BOSS_NO = B.NO JOIN PLACE_REVIEW PR ON PR.NO = R.REVIEW_NO WHERE R.BOSS_NO = ? ORDER BY ENROLL_DATE DESC";
 				
 		
 		try {
@@ -580,6 +582,83 @@ public class BossDao {
 		
 		
 	}//deletePost
+
+
+	// 사진 업로드 (BOSS_MYPAGE_PHOTO에 데이터 저장)
+			public void createBossAttachment(Connection conn, BossAttachmentVo bav) {
+				String sql = "insert into BOSS_MYPAGE_PHOTO "
+						+ " (NO, ORIGN_NAME, CHANGE_NAME, FILE_PATH, BOSS_NO) " 
+						+ " values (SEQ_BOSS_MYPAGE_PHOTO_NO.NEXTVAL, ?, ?, ?, ?)"
+						;
+
+				PreparedStatement pstmt = null;
+				ResultSet rs = null;
+				
+				try {
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setString(1, bav.getOriginName());
+					pstmt.setString(2, bav.getChangeName());
+					pstmt.setString(3, bav.getFilePath());
+					pstmt.setString(4, bav.getBossNo());
+					
+					// SQL 실행
+					rs = pstmt.executeQuery();
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					close(pstmt);
+					close(rs);
+				}
+			} // createTravelerAttachment
+
+			
+			// 사진 가져오기
+			public BossAttachmentVo getAttachment(Connection conn, int userNo) {
+				String sql = "select * from (select no, orign_name as originName, "
+						+ "change_name as changeName, file_path as filePath, "
+						+ "upload_date as uploadDate, status, boss_no as bossNo "
+						+ "from BOSS_MYPAGE_PHOTO where boss_no = ? "
+						+ "order by upload_date desc) where rownum = 1 ";
+				
+				PreparedStatement pstmt = null;
+				ResultSet rs = null;		
+				BossAttachmentVo bav = new BossAttachmentVo();
+				
+				try {
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setInt(1, userNo);
+
+					rs = pstmt.executeQuery();
+					
+					while(rs.next()) {
+						String no = rs.getString("no");  	 	 				 
+						String originName = rs.getString("originName");  	 	 
+						String changeName = rs.getString("changeName");   		
+						String filePath = rs.getString("filePath");    	 			 
+						String uploadDate = rs.getString("uploadDate");    	 	
+						String status = rs.getString("status");   		 
+						String bossNo = rs.getString("bossNo");   
+						
+						bav.setNo(no);
+						bav.setOriginName(originName);
+						bav.setChangeName(changeName);
+						bav.setFilePath(filePath);
+						bav.setStatus(status);
+						bav.setBossNo(bossNo);
+						bav.setUploaDate(uploadDate);
+
+					}
+					
+				}catch(Exception e) {
+					e.printStackTrace();
+				}finally {
+					close(pstmt);
+					close(rs);
+				}
+				
+				return bav;
+			}
 
 	
 }//class

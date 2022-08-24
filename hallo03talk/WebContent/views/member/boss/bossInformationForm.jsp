@@ -1,10 +1,14 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
+
+<%@page import="com.h3.boss.vo.BossAttachmentVo"%>
 <%@page import="com.h3.boss.vo.BossVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
    <%
    	 BossVo BossLoginMember = (BossVo)session.getAttribute("BossLoginMember");
-   	 
+   BossAttachmentVo bav = (BossAttachmentVo)session.getAttribute("bossAttachment");
+
    //-----------------------------------------------------------------------
    	String alertMsg = (String)session.getAttribute("alertMsg");
    	session.removeAttribute("alertMsg");   
@@ -418,18 +422,46 @@ input.full:focus, textarea.full:focus {
               <!-- ------내 정보-------------------------------------------------------- -->
                 
    			<form action="/hallo03talk/boss/myPage" method="post">      
-        		<input type="hidden" value="<%=BossLoginMember.getNo()%>" name="travelerNo">   
+        		<input type="hidden" value="<%=BossLoginMember.getNo()%>" name="bossNo">   
                   <div class="main-content printed">
                     <div class="id__wrapper">
                       <div class="deco"></div>
-                      <label class="your-face" id="image-form" for="image-input">
+
+                    <!-- ------------------------------------------------------------------------------ -->
+ <!-- 
+ 					  <label class="your-face" id="image-form" for="image-input">
                         <input type="file" id="image-input"/>
                         <div class="image-persuader">Upload Image Here</div><img id="imager" src="#" alt="Your Image Here"/>
-                      </label>
+                      </label> -->
+                    <!-- ------------------------------------------------------------------------------ -->
+							
+							<c:set var="bav" value="<%=bav %>" />
+							<c:choose> 
+								<c:when test="${empty bav.getChangeName()}">
+									<label class="your-face" id="image-form" for="image-input">
+									
+		    							<input class="file" type="file" name="f" id="image-input" /> <!-- onchange="setThumbnail(event)" -->
+		    							<div onclick="uploadToAjax();" class="image-persuader">Upload Image Here</div> 
+	    							</label>
+									<button style="z-index: 9999;" type="button" onclick="uploadToAjax();" id="upload">upload</button>
+	    							
+								</c:when>
+								<c:otherwise> 
+									<img src="<%=contextPath %>/resources/upload/boss_profile/<%=bav.getChangeName() %>" alt="image" width="200px" height="auto"/>
+									<input class="file" type="file" name="f" id="image-input"/> <!-- onchange="setThumbnail(event)" -->
+									<button onclick="uploadToAjax();" type="button" id="upload">upload</button>
+									
+								</c:otherwise>
+							</c:choose>  
+							
+							<!-- ------------------------------------------------------------------------------ -->
+                      
+                      
                       <div class="Id">
                         <label>Id</label>
                         <input class="full" type="text" name="bossJoinId" value="<%=BossLoginMember.getId() %>" required readonly></input>
                       </div>
+                      
                       
                       <div class="Phone">
                         <label>Tel</label>
@@ -506,8 +538,35 @@ input.full:focus, textarea.full:focus {
 
  <!------------------------------------------------------------------------------------>  
 		
-		<!-- 신규 비밀번호 체크 -->
-		<script>
+		
+			<script>
+	
+		 function uploadToAjax(e){
+			 alert("사진을 등록할까요?");
+			 
+			 var form = $('#image-input')
+			 var formdata = new FormData();
+			 formdata.append("file", form[0].files[0])
+			 
+			 $.ajax({
+				 type:"post",
+				 enctype: "multipart/form-data",
+				 url : "/hallo03talk/boss/ajax",
+				 data : formdata,
+				 processData: false,
+				 contentType: false,
+				 timeout: 600000,
+				 success: function(e){
+					 location.reload()
+				 },
+			 	 error : function(e){
+					alert(e.message)
+				 }	 
+			 })
+		 }
+		 
+			<!-- 신규 비밀번호 체크 -->
+		
 		
 			function checkPwd(){
 				

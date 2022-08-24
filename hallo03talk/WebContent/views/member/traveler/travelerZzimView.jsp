@@ -124,10 +124,9 @@
                      </div>
                      
                  <div class="card-body">
-                      <h5 class="card-title"><%=voList.get(i).getName() %></h5>
+                      <h5 onclick="goplace('<%=voList.get(i).getNo() %>'"class="card-title"><%=voList.get(i).getName() %></h5>
                       <h6 class="card-subtitle mb-2 text-muted"><%=voList.get(i).getBoard() %></h6>  
                       <p class="card-text text-truncate"><%=voList.get(i).getContent() %></p>
-                      <a href="#" class="card-link">click here</a>
                  </div>
               </div>
                	<%}%>        
@@ -136,6 +135,22 @@
 
         </div>
     </main>
+    
+     <!-- --------행 클릭하면 해당 내용 보이기------------------------------ -->
+   
+	<script>
+		function goplace(no){
+			
+			location.href = '/hallo03talk/place/one?no=' + no;
+
+			
+		}
+			 
+		</script>
+	
+	
+	<!-- ------------------------------------------------------------------ -->
+	
     <footer></footer> 
 
 <!-- ------선택 삭제------------------------------------------------------- -->
