@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.h3.traveler.service.TravelerService;
+import com.h3.traveler.vo.TravelerAttachmentVo;
 import com.h3.traveler.vo.TravelerVo;
 
 @WebServlet(urlPatterns = "/traveler/myPage")
@@ -22,9 +23,15 @@ public class MyPageController extends HttpServlet{
 
 
 		TravelerVo travelerLoginMember = (TravelerVo)req.getSession().getAttribute("travelerLoginMember");
-
+		
 		if(travelerLoginMember != null) {
 			req.getRequestDispatcher("/views/member/traveler/travelerInformationForm.jsp").forward(req, resp);
+			
+			// 유저 사진 불러오기 
+			TravelerAttachmentVo tav = new TravelerService().getAttachment(travelerLoginMember.getNo());
+			
+			req.getSession().setAttribute("travelerAttachment", tav);
+			
 		}else {
 			req.getSession().setAttribute("alertMsg", "로그인 후 접근 가능합니다.");
 			resp.sendRedirect(req.getContextPath());   

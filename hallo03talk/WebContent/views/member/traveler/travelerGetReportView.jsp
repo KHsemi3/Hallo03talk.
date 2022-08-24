@@ -104,8 +104,8 @@
               <!-- -------삭제 버튼-------------- -->
      
               <div class="deleteCheck">
-                <button class="deleteButtonAll">전체 선택</button>
-                <button class="deleteButton" style="margin-left: 10px;">삭제</button> 
+                <button class="deleteButtonAll btn btn-warning">전체 선택</button>
+                <button class="deleteButton btn btn-primary" style="margin-left: 10px;">삭제</button> 
               </div>
 
               <!-- ------신고 받은 내역-------------------------------------------------------- -->
@@ -148,9 +148,10 @@
    
     <footer></footer> 
     
-    <input id="ajaxResult" type="hidden" value='0'>
    
 <!-- ------선택 삭제------------------------------------------------------- -->
+
+    <input id="ajaxResult" type="hidden" value='0'>
    
    <script>
    
@@ -215,7 +216,7 @@
       
       
       
-   })
+   })//click
       
    
    </script>

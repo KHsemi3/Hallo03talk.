@@ -196,6 +196,7 @@
 	              
 	                    <div id="login" action="" class="input-group">
 	                        <div class="ggg">
+	                        
 								[예약 번호] : <%=rvo.getNo() %>
 								<br><br>
 								[예약 날짜] : <%=rvo.getStartDate() %>

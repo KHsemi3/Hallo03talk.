@@ -140,8 +140,8 @@
 	                <div class="login-page">
 	                    <div class="form">
                            <form action="/hallo03talk/traveler/login" method="post" class="login-form">
-	                                <input type="text"  name="travelerJoinId" class="input_id" placeholder="아이디" />
-	                                <input type="password" name="travelerJoinPwd" placeholder="비밀번호" />
+	                                <input type="text"  name="travelerJoinId" class="input_id" placeholder="아이디" value="user01" />
+	                                <input type="password" name="travelerJoinPwd" placeholder="비밀번호" value="1234"/>
 	                                <button>로그인</button>
 	        
 	                                <div class="footer">

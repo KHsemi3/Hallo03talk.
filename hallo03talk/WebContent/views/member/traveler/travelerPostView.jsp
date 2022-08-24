@@ -103,8 +103,8 @@
             <!-- -------삭제 버튼-------------- -->
      
             <div class="deleteCheck">
-              <button class="deleteButtonAll">전체 선택</button>
-              <button class="deleteButton" style="margin-left: 10px">삭제</button> 
+              <button class="deleteButtonAll btn btn-warning">전체 선택</button>
+              <button class="deleteButton btn btn-primary" style="margin-left: 10px">삭제</button> 
             </div>
 
             <!-- ------내가 쓴 글-------------------------------------------------------- -->
@@ -170,93 +170,93 @@
 	 
 <footer></footer> 
 
-<!-- -------------------------------------------------------- -->
+<!-- ------선택 삭제------------------------------------------------------- -->
 
-<script>
+ <input id="ajaxResult" type="hidden" value='0'>
+   
+   <script>
+   
+   $(".deleteButtonAll").click(function(e) {
+      $('input:checkbox[name="ckNo"]').each(function() {
+         this.checked = true;
 
-	// 전체 삭제 체크박스
-	$(".deleteButtonAll").click(function(e) {
-		$('input:checkbox[name="ckNo"]').each(function() {
-			this.checked = !this.checked;
-		});	
-	}) 
+      })
+   });
 	
 	
 	// 삭제 체크 박스 
 	$(".deleteButton").click(function(e) {
-		// 다중 선택할수도 있으므로 array 생성
-		var arr = []
+		
+		  var ans = confirm("선택하신 댓글을 삭제하시겠습니까?");
+	       if(!ans) return false;
+	       
+	       var result = -1;
+	       
+			var checkBoxArr = []; 
 		
 		$('input:checkbox[name=ckNo]').each(function (index) {
+	       
+         	//var data;
+         
 			// 체크된 엘리먼트 
 			if($(this).is(":checked")==true){
 		    	console.log($(this).val());
-		    	
+	             //checkBoxArr.push($(this).val());     // 체크된 것만 값을 뽑아서 배열에 push
+	            
+	            
 		    	// query에 엘리먼트의 밸류 할당("게시판이름, 게시판번호")
 		    	var query = $(this).val()
 		    	// data array에 게시판이름, 게시판 번호를 할당
 		    	var data = query.split(",") 
 		    	
-		    	// data에 key:value 형식으로 게시물 정보 할당
-		    	data = {
-		    		"board" : data[0],
-		    		"no" : data[1]
-		    	} 
-		    	
-		    	// array에 담기
-		   		arr.push(data)
-		    	
-			}
-		    	console.log(arr)
-		 })
+		    		data = {
+			    		"board" : data[0],
+			    		"no" : data[1]
+		    		} 
+	             
+		    	checkBoxArr.push(data)
+
+		    	for(i=0; i< checkBoxArr.length; i++){ 
+						 var value = checkBoxArr[i] 
+						 
+				 var url = "${pageContext.request.contextPath}/travelerMpgPost/delete"
+							 
+						     $.ajax({
+						       url  : url,
+						       type : "post",
+				               data : value,
+						       success : function(data) {
+						    	   console.log("ajax 성공");
+				            	   $('#ajaxResult').val(1);
+						       }, 
+						       error : function(data) {
+						          	//alert("글이 삭제되지 않았습니다.");
+						       }
+						        
+						 });  
+				 
+				}//for
+			}//if
+		 })//each
 		 
-		 // 만약 선택한 게시물이 있다면 + 컨펌창을 한번만 띄우기 위해 for문 밖에서 함
-		 if(arr.length> 0){
-			 var ans = confirm("선택하신 글을 삭제하시겠습니까?");
-		        
-			 	if(ans){
-		        	var flag = false;
-					
-			 		for(i=0; i< arr.length; i++){ 
-						 var value = arr[i] // 게시물 정보 하나
-						 console.log(value)
-						 
-						 var url = "${pageContext.request.contextPath}/travelerMpgPost/delete"
-						 
-					     $.ajax({
-					       url  : url,
-					       type : "post",
-					       data : value ,
-					       success : function(data) {
-					            alert("글이 삭제 되었습니다.");
-					            location.reload();
-					       }, error : function(data) {
-					          	alert("글이 삭제되지 않았습니다.");
-					       }
-					        });  
-						}
-						
-		        	
-		        }else {
-		        	return false;
-		        } 
-		 }
+	
+		 
 			 
-			 
-		
-		    
-		
-	        
+		 window.setTimeout(function(){
+	    	  if($('#ajaxResult').val() > 0){
+	              alert("댓글이 삭제 되었습니다.");
+	          }else{
+	          		alert("댓글이 삭제되지 않았습니다.");	
+	          }
+	          location.reload();
+	      }, 500)
 	      
-		    	
-		    		
-		   
-		
-				
-		
-	})
-/* }); */
-</script>
+	   })//click
+
+	</script>
+	
+   <!-- ------선택 삭제-------------------------------------------------------- -->
+
 
 </body>
 </html>

@@ -111,8 +111,8 @@
               <!-- -------삭제 버튼-------------- -->
      
               <div class="deleteCheck">
-                <button class="deleteButtonAll">전체 선택</button>
-                <button class="deleteButton" style="margin-left: 10px;">삭제</button> 
+                <button class="deleteButtonAll btn btn-warning">전체 선택</button>
+                <button class="deleteButton btn btn-primary" style="margin-left: 10px;">삭제</button> 
               </div>
               
               <!-- -----찜 리스트------------------------------------------------------ -->
@@ -139,63 +139,78 @@
     <footer></footer> 
 
 <!-- ------선택 삭제------------------------------------------------------- -->
-	
-	<script>
-	
-	$(".deleteButtonAll").click(function(e) {
-		$('input:checkbox[name="ckNo"]').each(function() {
-			this.checked = true;
 
-	})
-	});
-	
-	
-	$(".deleteButton").click(function(e) {
+    <input id="ajaxResult" type="hidden" value='0'>
+   
+   <script>
+   
+   $(".deleteButtonAll").click(function(e) {
+      $('input:checkbox[name="ckNo"]').each(function() {
+         this.checked = true;
 
-		$('input:checkbox[name=ckNo]').each(function (index) {
+      })
+   });
+   
+   
+   $(".deleteButton").click(function(e) {
+      
+      var ans = confirm("선택하신 댓글을 삭제하시겠습니까?");
+       if(!ans) return false;
+       
+       var result = -1;
+      
+      $('input:checkbox[name=ckNo]').each(function (index) {
 
-			var checkBoxArr = []; 
-			var data;
-		    
-			if($(this).is(":checked")==true){
-		    	checkBoxArr.push($(this).val());     // 체크된 것만 값을 뽑아서 배열에 push
-				 
-				data = $(this).val();
-		    	
-		    	console.log(data)
-		    	
-		    	var ans = confirm("선택하신 댓글을 삭제하시겠습니까?");
-	        if(!ans) return false;
-	        
-	        var url = "${pageContext.request.contextPath}/travelerMpgZzim/delete"
-	        
-	          $.ajax({
-	            url  : url,
-	            type : "post",
-	            data : {
-	            	data
-	            } ,
-	            success : function(data) {
-	                  alert("댓글이 삭제 되었습니다.");
-	                  location.reload();
-	            },
-	            error : function(data) {
-	                alert("댓글이 삭제되지 않았습니다.");
-	            }
-	        });  
-		    	
-		    		
-		    }
-		
-		})
-		
-		
-	})
-		
-	
-	</script>
-	
-	<!-- ------선택 삭제-------------------------------------------------------- -->
+         var checkBoxArr = []; 
+         var data;
+          
+         if($(this).is(":checked")==true){
+             checkBoxArr.push($(this).val());     // 체크된 것만 값을 뽑아서 배열에 push
+             
+            data = $(this).val();
+            console.log(data);
+           
+           var url = "${pageContext.request.contextPath}/travelerMpgZzim/delete"
+           
+             $.ajax({
+               url  : url,
+               type : "post",
+               data : {data} ,
+               success : function(data) {
+                  console.log("ajax 성공");
+                  $('#ajaxResult').val(1);
+                   //alert("댓글이 삭제 되었습니다.");
+                   //location.reload();
+               },
+               error : function(data) {
+                   //alert("댓글이 삭제되지 않았습니다.");
+               }
+           });  
+           
+          }//if
+      
+      })//each
+      
+      
+      
+      window.setTimeout(function(){
+         if($('#ajaxResult').val() > 0){
+              alert("댓글이 삭제 되었습니다.");
+          }else{
+                alert("댓글이 삭제되지 않았습니다.");   
+          }
+          location.reload();
+      }, 500)
+      
+      
+      
+      
+   })
+      
+   
+   </script>
+   
+   <!-- ------선택 삭제-------------------------------------------------------- -->
 	
 </body>
 </html>
