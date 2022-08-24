@@ -31,6 +31,113 @@ public class PartyService {
 			return list;
 		}
 
+
+
+		public int writeParty(PartyVo vo) {
+			
+			Connection conn = null;
+			
+			int result = 0;
+			
+			try {
+				conn = getConnection();
+				result = dao.writeParty(conn,vo);
+				
+				if(result==1) {
+					commit(conn);
+				} else {
+					rollback(conn);
+				}
+				
+				return result;
+			} catch (Exception e) {
+				rollback(conn);
+				e.printStackTrace();
+			} finally {
+				close(conn);
+			}
+			
+			return result;
+		}
+
+
+
+		public PartyVo detailParty(String num) {
+			
+			Connection conn = null;
+			PartyVo pv = new PartyVo();
+			
+			try {
+				conn =getConnection();
+				
+				dao.plusCnt(conn,num);
+				pv = dao.detailParty(conn,num);
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				close(conn);
+			}
+			
+			return pv;
+		}
+
+
+
+		public int editParty(PartyVo pv) {
+			
+			Connection conn = null;
+			int result = 0;
+			
+			try {
+				conn = getConnection();
+				
+				result = dao.editParty(conn,pv);
+				
+				if(result == 1) {
+					commit(conn);
+				} else {
+					rollback(conn);
+				}
+				
+			} catch (Exception e) {
+				rollback(conn);
+				e.printStackTrace();
+			} finally {
+				close(conn);
+			}
+			
+			return result;
+		}
+
+
+
+		public int delete(String num) {
+			
+			Connection conn = null;
+			int result = 0;
+			
+			try {
+				conn = getConnection();
+				
+				result = dao.delete(conn,num);
+				
+				if(result == 1) {
+					commit(conn);
+				} else {
+					rollback(conn);
+				}
+				
+			} catch (Exception e) {
+				rollback(conn);
+				e.printStackTrace();
+			} finally {
+				close(conn);
+			}
+			
+			return result;
+		}
+
 		
 	}
 

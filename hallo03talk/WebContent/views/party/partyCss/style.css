@@ -99,7 +99,7 @@ margin-bottom: 30;
 }
 
 .board_list .title {
-    width: 60%;
+    width: 40%;
     text-align: left;
 }
 
@@ -114,7 +114,7 @@ margin-bottom: 30;
 }
 
 .board_list .date {
-    width: 10%;
+    width: 20%;
     text-align: center;
 }
 

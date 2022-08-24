@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.h3.party.service.PartyService;
 
-@WebServlet(urlPatterns = "/notice/delete")
+@WebServlet(urlPatterns = "/party/del")
 public class PartyDeleteController extends HttpServlet {
 	
 	/*
@@ -25,13 +25,10 @@ public class PartyDeleteController extends HttpServlet {
 		
 		if(result == 1) {
 			//삭제 성공 //리스트로 보내기
-			String cp = req.getContextPath();
-			req.getSession().setAttribute("alertMsg", "이벤트 글 삭제 성공!");
-			resp.sendRedirect(cp + "/party/list");
+			resp.sendRedirect("/hallo03talk/party/list");
 		}else {
 			//삭제 실패 //에러페이지로 보내기
-			req.setAttribute("errorMsg", "이벤트 글 삭제 실패");
-			req.getRequestDispatcher("/views/party/errorPage.jsp").forward(req, resp);
+			resp.sendRedirect("/hallo03talk/party/list");
 		}
 		
 	}

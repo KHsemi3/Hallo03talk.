@@ -22,7 +22,6 @@ public class PartyListController extends HttpServlet {
 		
 		ArrayList<PartyVo> list = new PartyService().getlist();
 		req.setAttribute("PartyList", list);
-		
 		//이벤트 게시판 목록
 		req.getRequestDispatcher("/views/party/list.jsp").forward(req,resp);
 	

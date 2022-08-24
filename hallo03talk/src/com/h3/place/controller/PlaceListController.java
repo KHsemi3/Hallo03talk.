@@ -23,20 +23,20 @@ public class PlaceListController extends HttpServlet {
 	
 		////사장님만 로그인해서, 처음으로 장소 페이지 클릭했을 경우, 사장님 인증페이지로 이동. 인증했을 경우, 기존 장소페이지 이용 가능.
 		//세션에서 사장정보 가져오기
-		BossVo bossVo = (BossVo)req.getSession().getAttribute("BossLoginMember");
-		
-		//DB에 register 테이블에 boss_no 외래키로 연결
-		// select count(*) from register where boss_no = ?
-		if(bossVo != null) {
-			int result = new PlaceListService().selectPlaceByBossNo(bossVo.getNo());
-			
-			if(result > 0 ) {
-				//
-				req.getRequestDispatcher("views/place/placeList.jsp").forward(req, resp);
-			}
-		}else {
-		
-		req.getRequestDispatcher("views/member/boss/register.jsp").forward(req, resp);}
+//		BossVo bossVo = (BossVo)req.getSession().getAttribute("BossLoginMember");
+//		
+//		//DB에 register 테이블에 boss_no 외래키로 연결
+//		// select count(*) from register where boss_no = ?
+//		if(bossVo != null) {
+//			int result = new PlaceListService().selectPlaceByBossNo(bossVo.getNo());
+//			
+//			if(result > 0 ) {
+//				//
+//				req.getRequestDispatcher("views/place/placeList.jsp").forward(req, resp);
+//			}
+//		}else {
+//		
+//		req.getRequestDispatcher("views/member/boss/register.jsp").forward(req, resp);}
 		
 		//사장님인증 여기까지!
 
