@@ -916,6 +916,81 @@ public class TravelerDao {
 			
 		}//deleteReport
 
+		// 사진 업로드 (TRAVELER_MYPAGE_PHOTO에 데이터 저장)
+		public void createTravelerAttachment(Connection conn, TravelerAttachmentVo tav) {
+			String sql = "insert into TRAVELER_MYPAGE_PHOTO "
+					+ " (NO, ORIGN_NAME, CHANGE_NAME, FILE_PATH, TRAVELER_NO) " 
+					+ " values (SEQ_TRAVELER_MYPAGE_PHOTO_NO.NEXTVAL, ?, ?, ?, ?)"
+					;
+
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, tav.getOriginName());
+				pstmt.setString(2, tav.getChangeName());
+				pstmt.setString(3, tav.getFilePath());
+				pstmt.setString(4, tav.getTravelerNo());
+				
+				// SQL 실행
+				rs = pstmt.executeQuery();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+				close(rs);
+			}
+		} // createTravelerAttachment
+
+		// 사진 가져오기
+		public TravelerAttachmentVo getAttachment(Connection conn, int userNo) {
+			String sql = "select * from (select no, orign_name as originName, "
+					+ "change_name as changeName, file_path as filePath, "
+					+ "upload_date as uploadDate, status, traveler_no as travelerNo "
+					+ "from TRAVELER_MYPAGE_PHOTO where traveler_no = ? "
+					+ "order by upload_date desc) where rownum = 1 ";
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;		
+			TravelerAttachmentVo tav = new TravelerAttachmentVo();
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, userNo);
+
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					String no = rs.getString("no");  	 	 				 
+					String originName = rs.getString("originName");  	 	 
+					String changeName = rs.getString("changeName");   		
+					String filePath = rs.getString("filePath");    	 			 
+					String uploadDate = rs.getString("uploadDate");    	 	
+					String status = rs.getString("status");   		 
+					String travelerNo = rs.getString("travelerNo");   
+					
+					tav.setNo(no);
+					tav.setOriginName(originName);
+					tav.setChangeName(changeName);
+					tav.setFilePath(filePath);
+					tav.setStatus(status);
+					tav.setTravelerNo(travelerNo);
+					tav.setUploaDate(uploadDate);
+
+				}
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+				close(rs);
+			}
+			
+			return tav;
+		}
+
 		
 
 }// class

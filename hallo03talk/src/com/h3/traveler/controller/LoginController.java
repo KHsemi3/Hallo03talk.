@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.h3.traveler.service.TravelerService;
+import com.h3.traveler.vo.TravelerAttachmentVo;
 import com.h3.traveler.vo.TravelerVo;
 
 @WebServlet(urlPatterns = "/traveler/login")
@@ -39,12 +40,14 @@ public class LoginController extends HttpServlet {
 			
 		//서비스 호출
 		TravelerVo travelerLoginMember = new TravelerService().login(vo);
-				
-	
+		
 		//결과에 따라 화면 선택
 		if(travelerLoginMember != null) {
 			//로그인 성공 
 			req.getSession().setAttribute("travelerLoginMember", travelerLoginMember);
+			
+			TravelerAttachmentVo tav =  new TravelerService().getAttachment(travelerLoginMember.getNo());
+			req.getSession().setAttribute("travelerAttachment", tav);
 			
 			req.getSession().setAttribute("alertMsg", "일반회원 로그인 성공!");   
 

@@ -6,6 +6,8 @@ import static com.h3.common.JDBCTemplate.getConnection;
 import static com.h3.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -660,8 +662,73 @@ public class TravelerService {
 		
 	}//deleteReport
 
-
+	// 트래블러 사진 저장
+	public void uploadProfilePic(TravelerAttachmentVo tav) {
+		Connection conn = null;
+		try {
+			
+			conn = getConnection();
+			
+			dao.createTravelerAttachment(conn, tav);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+	} // uploadProfilePic
 	
+
+	/*
+	 * 원본 파일명을 중복되지 않을 이름으로 변경
+	 */
+	public String createChangeName(String originName) {
+		
+		// 원래 이름에서 확장자 가져오기
+		int dotIdx = originName.lastIndexOf('.');    		
+		String ext = originName.substring(dotIdx);			
+		
+		String fileName= originName.substring(0, dotIdx);
+		
+		
+	    // 현재 날짜 구하기        
+		LocalDate now = LocalDate.now();         
+		// 포맷 정의        
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyMMdd");         
+		// 포맷 적용        
+		String formatedNow = now.format(formatter);
+	
+		// 원본파일이름(확장자x) + 현재날짜(ex 220824) + 확장자
+		String changeName = fileName + "_" + formatedNow + ext;   
+		
+		return changeName;
+		
+	}
+
+	// 트래블러 사진 가져오기
+	public TravelerAttachmentVo getAttachment(int no) {
+		
+		Connection conn = null;
+		
+		TravelerAttachmentVo tav = new TravelerAttachmentVo();
+		try {
+			
+			conn = getConnection();
+			
+			// dao 호출
+			tav = dao.getAttachment(conn, no);
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		
+		// 실행결과 리턴
+		return tav;
+	
+	}
 
 
 
