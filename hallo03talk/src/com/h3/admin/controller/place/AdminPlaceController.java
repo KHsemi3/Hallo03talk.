@@ -20,7 +20,7 @@ public class AdminPlaceController extends HttpServlet{
 		ArrayList<PlaceVo> voList  =	new AdminPlaceService().selectListPlace();
 		
 		//결과에 따라 화면 선택
-		
+		System.out.println(voList.size());
 		
 		
 		req.setAttribute("voList", voList);

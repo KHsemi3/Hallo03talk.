@@ -21,7 +21,7 @@ public class AdminPlaceDao {
 		ArrayList<PlaceVo> voList = new ArrayList<PlaceVo>();
 		ResultSet rs = null;
 
-		String sql = "SELECT P.NO NO,P.NAME NAME,P.CONTENT CONTENT,P.ADDRESS ADDRESS,P.BOSS_NO BOSS_NO,P.CATEGORY_NO CATEGORY_NO,P.ENROLL_DATE ENROLL_DATE,P.CNT CNT, Z.TRAVELER_NO TRAVELER_NO FROM PLACE P LEFT OUTER JOIN ZZIM Z ON P.NO = Z.PLACE_NO WHERE P.STATUS='Y' ORDER BY P.NO DESC";
+		String sql = "SELECT P.NO, P.NAME,  P.ADDRESS ,PP.NAME AS PNAME FROM PLACE P JOIN PLACE_PHOTO PP ON PP.PLACE_NO= P.NO WHERE P.STATUS='Y' AND PP.PHOTO_PROFILE = 'Y'";
 		int tno = 0;
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -31,18 +31,10 @@ public class AdminPlaceDao {
 				PlaceVo pv = new PlaceVo();
 				pv.setNo(rs.getString("NO"));
 				pv.setName(rs.getString("NAME"));
-				pv.setContent(rs.getString("CONTENT"));
 				pv.setAddress(rs.getString("ADDRESS"));
-				pv.setBossNo(rs.getString("BOSS_NO"));
-				pv.setCategoryNo(rs.getString("CATEGORY_NO"));
-				pv.setEnrollDate(rs.getString("ENROLL_DATE"));
-				pv.setCnt(Integer.parseInt(rs.getString("CNT")));
-				if (rs.getString("TRAVELER_NO") == null) {
-					tno = 0;
-					pv.setZzim(tno);
-				} else {
-					pv.setZzim(rs.getInt("TRAVELER_NO"));
-				}
+				pv.setPhotoName(rs.getString("PNAME"));
+				
+				
 
 				voList.add(pv);
 			}

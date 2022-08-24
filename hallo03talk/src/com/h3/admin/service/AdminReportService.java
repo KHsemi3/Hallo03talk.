@@ -6,6 +6,7 @@ import static com.h3.common.JDBCTemplate.getConnection;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.h3.admin.AdminPageVo;
 import com.h3.admin.repository.AdminReportUserDao;
 import com.h3.common.JDBCTemplate;
 import com.h3.reportBoard.vo.ReportBoardVo;
@@ -14,7 +15,7 @@ import com.h3.reportUser.vo.ReportUserVo;
 
 public class AdminReportService {
 
-	public ArrayList<ReportUserVo> selectListUser() {
+	public ArrayList<ReportUserVo> selectListUser(AdminPageVo pageVo) {
 		Connection conn = null;
 		ArrayList<ReportUserVo> voList = null;
 		try {
@@ -215,6 +216,85 @@ public class AdminReportService {
 			
 		}finally {
 			close(conn);
+		}
+		return result;
+	}
+
+
+
+	public ReportBoardVo selectBoard(String num) {
+		// TODO Auto-generated method stub
+				ReportBoardVo vo = null;
+				Connection conn = null;
+				try {
+					conn = JDBCTemplate.getConnection();
+					vo =	new AdminReportUserDao().selectBoard(conn, num);
+					
+				}catch(Exception e) {
+					e.printStackTrace();
+				}finally {
+					close(conn);
+				}
+				return vo;
+	}
+
+
+
+	public ReportCommentVo selectReply(String num) {
+		// TODO Auto-generated method stub
+		ReportCommentVo vo = null;
+		Connection conn = null;
+		try {
+			conn = JDBCTemplate.getConnection();
+			vo =	new AdminReportUserDao().selectReply(conn, num);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		return vo;
+	}
+
+
+
+	public ReportUserVo selectUser(String num) {
+		// TODO Auto-generated method stub
+		ReportUserVo vo = null;
+		Connection conn = null;
+		try {
+			conn = JDBCTemplate.getConnection();
+			vo =	new AdminReportUserDao().selectUser(conn, num);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		return vo;
+	}
+
+
+
+	public int getCount() {
+	//데이터 검사
+		
+		//dao 호출
+		Connection conn = null;
+		int result = 0;
+		
+		try {
+			conn = getConnection();
+		
+	    result = AdminReportUserDao.getCount(conn);
+	
+	    return result;
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+			
 		}
 		return result;
 	}

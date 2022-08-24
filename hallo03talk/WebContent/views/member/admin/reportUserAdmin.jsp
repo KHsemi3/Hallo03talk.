@@ -1,3 +1,4 @@
+<%@page import="com.h3.admin.AdminPageVo"%>
 <%@page import="com.h3.reportUser.vo.ReportUserVo"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -5,7 +6,12 @@
     <%
     ArrayList<ReportUserVo> voList = (ArrayList<ReportUserVo>)request.getAttribute("voList");
    
-   
+   	AdminPageVo pv = (AdminPageVo)request.getAttribute("pv");
+    
+   	int currentPage = pv.getCurrentPage();
+   	int startPage = pv.getStartPage();
+   	int endPage = pv.getEndPage();
+   	int MaxPage = pv.getMaxPage();
     %>
 <!DOCTYPE html>
 <html>
@@ -185,24 +191,57 @@ opacity:0.5;
       </tbody>
     </table>
     <div id="page">
-     <a href=""> &lt;</a>
-     <a href="">1</a>
-      <a href="">2</a>
-       <a href="">3</a>
-        <a href="">4</a>
-         <a href="">5</a>
-          <a href="">6</a>
-           <a href="">7</a>
-            <a href="">8</a>
-             <a href="">9</a>
-              <a href="">10</a>
-               <a href="">&gt;</a>
+     <%if(currentPage !=1) {%>
+			<a href="<%=request.getContextPath() %>/admin/reportUser?p=<%=currentPage-1%>"> &lt; </a>
+			<%} %>
+			
+			<%for(int i = startPage; i<= endPage; ++i) {%>
+				<%if(i ==currentPage){ %>
+				
+				<a style ="background-color:orange; color:#fff"><%=i%></a>
+				<%} else{ %>
+					<a  href="<%=request.getContextPath() %>/admin/reportUser?p=<%=i%>"><%=i%></a>
+				<%} %>
+				
+			
+			<%} %>
+			<%if(currentPage !=MaxPage) {%>
+			<a  href="<%=request.getContextPath() %>/admin/reportUser?p=<%=currentPage+1%>">&gt;</a>
+			<%} %>
                <div class="btn-area">
                  <span onclick="f01();">
                 신고목록 삭제</span>
                 
                 <span> 페널티 부여</span>
                </div>
+               
+               
+               	<div id="dtn-area">
+			
+			
+		</div>
+		
+		<div id="page-area">
+			<%if(currentPage !=1) {%>
+			<a class="btn btn-sm btn-primary" href="<%=request.getContextPath() %>/admin/reportUser?p=<%=currentPage-1%>"> &lt; </a>
+			<%} %>
+			
+			<%for(int i = startPage; i<= endPage; ++i) {%>
+				<%if(i ==currentPage){ %>
+				
+				<a class="btn btn-sm btn-primary"><%=i %></a>
+				<%} else{ %>
+					<a class="btn btn-sm btn-primary" href="<%=request.getContextPath() %>/admin/reportUser?p=<%=i%>"><%=i%></a>
+				<%} %>
+				
+			
+			<%} %>
+			<%if(currentPage !=MaxPage) {%>
+			<a class="btn btn-sm btn-primary" href="<%=request.getContextPath() %>/admin/reportUser?p=<%=currentPage+1%>">&gt;</a>
+			<%} %>
+			
+		</div>
+               
               
      </div>
     
@@ -257,6 +296,19 @@ opacity:0.5;
 			alert("취소 하셨습니다");
 		}
 	}
+	$(function(){
+		$('tbody>tr').click(function(){
+			//행 클릭 되었을때 , 동작 할 내용
+			
+			//글 번호 가져오기
+			var num =$(this).children().eq(0).text();
+			console.log(num);
+			
+			//해당 번호 이용해서 요청 보내기
+			location.href='/hallo03talk/admin/userDetail?num=' + num;
+			
+		})
+	})
 </script>
 </body>
 </html>

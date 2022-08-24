@@ -9,6 +9,10 @@
    
    
     %>
+    
+    
+    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -149,7 +153,7 @@ opacity:0.5;
 
 					
 		<ul>
-	<li id="reportImg"><img src="<%=request.getContextPath()%>/resources/img/report.png" alt="" /> 신고 댓글관리</li>
+	<li id="reportImg"><img src="<%=request.getContextPath()%>/resources/img/report.png" alt="" /> 신고 게시글 관리</li>
 </ul>			
 <hr />
 <div class="right-nav">
@@ -296,6 +300,21 @@ function f02(){
 			alert("취소 하셨습니다");
 		}
 	}
+
+$(function(){
+	$('tbody>tr').click(function(){
+		//행 클릭 되었을때 , 동작 할 내용
+		
+		//글 번호 가져오기
+		var num =$(this).children().eq(0).text();
+		console.log(num);
+		
+		//해당 번호 이용해서 요청 보내기
+		location.href='/hallo03talk/admin/contentDetail?num=' + num;
+		
+	})
+})
+
 	
 </script>
 </body>
