@@ -205,8 +205,8 @@ opacity:0.5;
 		
       <div class="acc-data">
         <div class="acc-image-area">
-        <input type="checkbox" name="num" value="<%=voList.get(i).getNo()%>" /><%=voList.get(i).getNo()%>
-         <img class="acc-img" src="../../../resources/img/house_2.png"/>
+        <input type="checkbox" name="num" value="<%=voList.get(i).getNo()%>" />
+         <img class="acc-img" src="<%=request.getContextPath()%>/resources/img/house_2.png"/>
         </div>
         <div class="acc-info">
           <div class="acc-title"><%=voList.get(i).getName()%></div>

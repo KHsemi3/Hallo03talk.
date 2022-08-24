@@ -289,6 +289,170 @@ String sql = "UPDATE COMMUNITY SET STATUS = 'N' WHERE CATEGORY_NO =(SELECT TYPE 
 		}
 		return result;
 	}
+
+	public ReportBoardVo selectBoard(Connection conn, String num) {
+		PreparedStatement pstmt = null;
+		ResultSet rs =null;
+		ReportBoardVo vo = null;
+		String sql="SELECT NO, GUILTY, CONTENT, PROCESS, TYPE, BOARD_NO,ENROLL_DATE FROM REPORT_CONTENT WHERE PROCESS='N' AND NO = ? ORDER BY NO DESC";
+		try {
+		
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1,  num);
+		
+		rs =pstmt.executeQuery();
+		if(rs.next()) {
+			String no =	rs.getString("NO");
+			String guilty =	rs.getString("GUILTY");
+			String content =	rs.getString("CONTENT");
+			String process =	rs.getString("PROCESS");
+			String type =	rs.getString("TYPE");
+			String boardNo =	rs.getString("BOARD_NO");
+			Timestamp	enrollDate = rs.getTimestamp("ENROLL_DATE");
+			
+			vo = new ReportBoardVo();
+			vo.setNo(no);
+			vo.setGuilty(guilty);
+			vo.setContent(content);
+			vo.setProcess(process);
+			vo.setType(type);
+			vo.setBoardNo(boardNo);
+			vo.setEnrollDate(enrollDate);
+			
+			
+			
+		}
+		
+		
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(pstmt);
+		}
+		return vo;
+	}
+
+	public ReportCommentVo selectReply(Connection conn, String num) {
+		PreparedStatement pstmt = null;
+		ResultSet rs =null;
+		ReportCommentVo vo = null;
+		String sql="SELECT NO, GUILTY, CONTENT, PROCESS, TYPE, REPLY_NO,ENROLL_DATE FROM REPORT_REPLY WHERE PROCESS='N' AND NO = ? ORDER BY NO DESC";
+		try {
+		
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1,  num);
+		
+		rs =pstmt.executeQuery();
+		if(rs.next()) {
+			String no =	rs.getString("NO");
+			String guilty =	rs.getString("GUILTY");
+			String content =	rs.getString("CONTENT");
+			String process =	rs.getString("PROCESS");
+			String type =	rs.getString("TYPE");
+			String replyNo =	rs.getString("REPLY_NO");
+			Timestamp	enrollDate = rs.getTimestamp("ENROLL_DATE");
+			
+			vo = new ReportCommentVo();
+			vo.setNo(no);
+			vo.setGuilty(guilty);
+			vo.setContent(content);
+			vo.setProcess(process);
+			vo.setType(type);
+			vo.setReplyNo(replyNo);
+			vo.setEnrollDate(enrollDate);
+			
+			
+			
+		}
+		
+		
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(pstmt);
+		}
+		return vo;
+	}
+
+	public ReportUserVo selectUser(Connection conn, String num) {
+		String sql="SELECT R.NO, R.GUILTY, R.CONTENT, R.PROCESS, R.REPORTED_TRAVELER_NO,R.ENROLL_DATE,T.ID AS REPORT_USER_ID FROM REPORT_USER R JOIN TRAVELER T ON R.REPORTED_TRAVELER_NO = T.NO WHERE R.PROCESS='N' ORDER BY NO DESC";
+		PreparedStatement pstmt = null;
+		ResultSet rs =null;
+		ReportUserVo vo = null;
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			
+			rs =pstmt.executeQuery();
+			
+			while(rs.next()) {
+				String no =	rs.getString("NO");
+				String guilty =	rs.getString("GUILTY");
+				String content =	rs.getString("CONTENT");
+				String process =	rs.getString("PROCESS");
+				String reportedTravelerNo =	rs.getString("REPORTED_TRAVELER_NO");
+				String reportUserId =	rs.getString("REPORT_USER_ID");
+				Timestamp	enrollDate = rs.getTimestamp("ENROLL_DATE");
+				
+				vo = new ReportUserVo();
+				vo.setNo(no);
+				vo.setGuilty(guilty);
+				vo.setContent(content);
+				vo.setProcess(process);
+				vo.setReportedTravelerNo(reportedTravelerNo);
+				vo.setReportUserId(reportUserId);
+				vo.setEnrollDate(enrollDate);
+				
+		}
+		
+		
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(pstmt);
+		}
+		return vo;
+	}
+
+	public static int getCount(Connection conn) {
+		// TODO Auto-generated method stub
+				//Connection 준비
+				
+				//SQL 준비
+				String sql = "SELECT COUNT(NO) AS COUNT FROM REPORT_USER WHERE PROCESS = 'N'";
+				PreparedStatement pstmt  =null;
+				ResultSet rs = null;
+				int count = 0;
+				
+				try {
+					pstmt = conn.prepareStatement(sql);
+					//SQL 을 객체에 담기 및 SQL 완성
+					
+					//SQL 실행 및 결과 저장
+					rs = pstmt.executeQuery();
+					//실행결과 - > 자바 데이터
+					if(rs.next()) {
+						count = rs.getInt("COUNT");
+					}
+					
+				}catch(Exception e) {
+					e.printStackTrace();
+				}finally {
+					JDBCTemplate.close(pstmt);
+					JDBCTemplate.close(rs);
+					
+				}
+				
+			
+				
+
+				//실행결과 리턴
+				return count;
+				
+	}
 		
 	}
 	

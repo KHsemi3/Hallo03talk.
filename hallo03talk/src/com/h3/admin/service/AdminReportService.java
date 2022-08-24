@@ -219,4 +219,83 @@ public class AdminReportService {
 		return result;
 	}
 
+
+
+	public ReportBoardVo selectBoard(String num) {
+		// TODO Auto-generated method stub
+				ReportBoardVo vo = null;
+				Connection conn = null;
+				try {
+					conn = JDBCTemplate.getConnection();
+					vo =	new AdminReportUserDao().selectBoard(conn, num);
+					
+				}catch(Exception e) {
+					e.printStackTrace();
+				}finally {
+					close(conn);
+				}
+				return vo;
+	}
+
+
+
+	public ReportCommentVo selectReply(String num) {
+		// TODO Auto-generated method stub
+		ReportCommentVo vo = null;
+		Connection conn = null;
+		try {
+			conn = JDBCTemplate.getConnection();
+			vo =	new AdminReportUserDao().selectReply(conn, num);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		return vo;
+	}
+
+
+
+	public ReportUserVo selectUser(String num) {
+		// TODO Auto-generated method stub
+		ReportUserVo vo = null;
+		Connection conn = null;
+		try {
+			conn = JDBCTemplate.getConnection();
+			vo =	new AdminReportUserDao().selectUser(conn, num);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+		}
+		return vo;
+	}
+
+
+
+	public int getCount() {
+	//데이터 검사
+		
+		//dao 호출
+		Connection conn = null;
+		int result = 0;
+		
+		try {
+			conn = getConnection();
+		
+	    result = AdminReportUserDao.getCount(conn);
+	
+	    return result;
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+			
+		}
+		return result;
+	}
+
 }

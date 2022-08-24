@@ -170,7 +170,7 @@ opacity:0.5;
         <%
 		for(int i = 0; i<voList.size(); i++){
 		%>
-		<tr>
+		<tr id="trh">
 			<th><input class="check"type="checkbox" name="num" value="<%=voList.get(i).getNo()%>"  /><%=voList.get(i).getNo()%></th>
 			
 			<th><%=voList.get(i).getGuilty()%></th>
@@ -294,7 +294,19 @@ function f01(){
 			alert("취소 하셨습니다");
 		}
 	}
-	
+$(function(){
+	$('tbody>tr').click(function(){
+		//행 클릭 되었을때 , 동작 할 내용
+		
+		//글 번호 가져오기
+		var num =$(this).children().eq(0).text();
+		console.log(num);
+		
+		//해당 번호 이용해서 요청 보내기
+		location.href='/hallo03talk/admin/replyDetatil?num=' + num;
+		
+	})
+})
 </script>
 </body>
 </html>
