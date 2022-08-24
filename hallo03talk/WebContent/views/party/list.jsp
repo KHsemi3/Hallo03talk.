@@ -23,11 +23,11 @@
             <div class="list_wrap">
                 <div class="board_list">
                     <div class="top">
-                        <div class="num">번호</div>
-                        <div class="title">제목</div>
-                        <div class="writer">작성자</div>
-                        <div class="date">작성일</div>
-                        <div class="count">조회</div>
+                        <div class="num" name=num>번호</div>
+                        <div class="title" name=title>제목</div>
+                        <div class="writer" name=writer>작성자</div>
+                        <div class="date" name=date>작성일</div>
+                        <div class="count" name=count>조회</div>
                     </div>  
                     <div>
                         <div class="num">5</div>
