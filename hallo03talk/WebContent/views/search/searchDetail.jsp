@@ -38,7 +38,7 @@
                         <div class="inner">
 
                         <br><br><br><br><br>
-                        <div class="text" style=" width: 50%; float: left;">
+                        <div class="text" style=" width: 50%; float: left;" >
                             <h1 style="margin-left: 60px;"><b>검색</b></h1>
                         </div>
                         <div style=" width: 45%; float: right; margin-top: 20px; margin-right: 60px;">
@@ -59,10 +59,11 @@
 
                         <h1 style="margin-left: 60px;  font-family: somi; font-size: 60px; font-weight: lighter;"><b>장소</b></h1>
                         <br>
+                        <div class ="d-flex flex-wrap w-100 " style = " margin-left : 5%;">
                         <%for(int i = 0 ; i < pvoList.size(); i++){%>
-                        <div class="row" d-flex flex-row>
+                        <div class="row" >
                             <div class="col-md-4 ">
-                                <div class="card" onclick ="location.href ='/hallo03talk/place/one?placeNo=<%=pvoList.get(i).getNo()%>' " style="width: 18rem; float: none; margin:0 auto;">
+                                <div class="card" onclick ="location.href ='/hallo03talk/place/one?placeNo=<%=pvoList.get(i).getNo()%>' " style="width: 18rem; height : 300px; float: none; margin-top:20px; margin-right : 5px;">
                                     <img src="/hallo03talk/resources/upload/place/<%= pvoList.get(i).getPhotoName() %>" class="card-img-top" alt="">
                                     <div class="card-body">
                                     <h5 class="card-title"><%= pvoList.get(i).getName() %></h5>
@@ -75,6 +76,7 @@
                             </div>
                         </div>
                         <%}%>
+                        </div>
 
                         <br>
                         <br>
@@ -83,10 +85,21 @@
 
                         <h1 style="margin-left: 60px; font-family: somi; font-size: 60px; font-weight: lighter;"><b>커뮤니티</b></h1>
                         <br>
-                        <%for(int i = 0 ; i < cvoList.size(); i++){%>
-                        <div class="row" d-flex flex-row>
                         
-                            <div class="col-md-4">
+                        <div class="d-flex flex-wrap" style="width: 100%; padding-left : 5%;">
+                        <%for(int i = 0 ; i < cvoList.size(); i++){%>
+					        <div class="border rounded" style="width: 17rem; height: 100px; margin : 5px;" onclick ="location.href ='/hallo03talk/comm/detail?no=<%=cvoList.get(i).getNo()%>' ">
+					            <div ><h4 style ="margin : 5px"><%= cvoList.get(i).getTitle() %></h4></div>
+					            <div style ="margin : 5px"><%= cvoList.get(i).getWriter() %></div>
+					            <div style ="margin : 5px"><%= cvoList.get(i).getEnroll_date() %></div>
+					           
+					        </div>
+					        <%} %> 
+					    </div>
+
+<%--                         <div class="row">
+                        <%for(int i = 0 ; i < cvoList.size(); i++){%>
+                            <div class="col-4">
                                 <div class="card" style="width: 18rem; float: none; margin:0 auto;">
                                     <div class="card-body"  onclick ="location.href ='/hallo03talk/comm/detail?no=<%=cvoList.get(i).getNo()%>' ">
                                     <h5 class="card-title"><%= cvoList.get(i).getTitle() %></h5>
@@ -94,9 +107,13 @@
                                     <p class="card-text"><%= cvoList.get(i).getEnroll_date() %></p>
                                     </div>
                                 </div>
-                            </div>
                             <%} %>
-                        </div>
+                            
+                            </div> 
+
+                        </div>--%>
+                        
+                        
                         <br>
                         <br>
 

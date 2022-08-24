@@ -1,9 +1,6 @@
 package com.h3.place.controller;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -12,11 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.h3.boss.service.BossService;
 import com.h3.boss.vo.BossVo;
-import com.h3.common.JDBCTemplate;
+import com.h3.place.service.PlaceService;
 import com.h3.place.vo.PlaceVo;
-import com.h3.placePhoto.vo.PlacePhotoVo;
 import com.h3.placelList.service.PlaceListService;
 
 @WebServlet("/place/list")

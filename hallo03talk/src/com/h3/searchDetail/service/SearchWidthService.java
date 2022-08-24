@@ -23,7 +23,7 @@ public class SearchWidthService {
 			try {
 				conn = getConnection();
 				
-				wvoList = new WithSearchDao().wselectList(conn, widthKeyword, cate5, cate5, startDate, endDate);
+				wvoList = new WithSearchDao().wselectList(conn, widthKeyword, cate4, cate5, startDate, endDate);
 				
 			} catch (Exception e) {
 				e.printStackTrace();
