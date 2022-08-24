@@ -26,19 +26,20 @@ public class ReportUser extends HttpServlet{
 		
 		req.setCharacterEncoding("UTF-8");
 		
+		String userNo = req.getParameter("userNo");
+		
 		String guilty = req.getParameter("guilty");
 		String content = req.getParameter("content");
 		String type = req.getParameter("type");
 		String reportedTravelerNo = req.getParameter("reportedTravelerNo");
 		
 		
-		//신고 타입 없을때에 방어
-		String tguilty = "";
-		if(guilty != null) {
-			tguilty = String.join(",", guilty);
-		}
-		
 		ReportUserVo vo = new ReportUserVo();  
+		
+		vo.setGuilty(guilty);
+		vo.setContent(content);
+//		vo.setType(type);
+		vo.setReportedTravelerNo(reportedTravelerNo);
 		
 		//객체 이용해서 신고 진행
 		int result = new ReportService().ujoin(vo);

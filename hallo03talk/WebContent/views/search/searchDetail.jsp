@@ -84,11 +84,7 @@
                         <%}%>
 
                         <br>
-            
-                        <div style="text-align: right; margin-right: 60px;">
-                            <a href="" onclick="" id="load" style="text-decoration: none; color: gray;">더보기...</a>
-                        </div>
-                        
+          
                         <br>
                         <hr style="width: 90%; margin: 0 auto;">
                         <br><br>
@@ -111,9 +107,6 @@
                             
                         </div>
                         <br>
-                        <div style="text-align: right; margin-right: 60px; ">
-                            <a href="" onclick="" id="load" style="text-decoration: none; color: gray;">더보기...</a>
-                        </div>
                         <br>
                         <hr style="width: 90%; margin: 0 auto;">
                         <br><br>
@@ -135,12 +128,8 @@
                             <%} %>
                         </div>
                         <br>
-                        <div style="text-align: right; margin-right: 60px;">
-                            <a href="" onclick="" id="load" style="text-decoration: none; color: gray;">더보기...</a>
-                        </div>
                         <br>
-                        <hr style="width: 90%; margin: 0 auto;">
-                        <br><br><br>
+
                     </div>
                     </div>
 

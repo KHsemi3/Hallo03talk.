@@ -70,7 +70,7 @@ public class SearchService {
 		try {
 			conn = getConnection();
 			
-			rvoList = new SearchDao().rselectList(conn);
+			rvoList = new SearchDao().rselectList(conn, placeKeyword, cate1, cate2, cate3);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
