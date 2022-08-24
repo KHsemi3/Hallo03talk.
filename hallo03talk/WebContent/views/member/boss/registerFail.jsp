@@ -1,15 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%String regAlert = (String)session.getAttribute("registerFail"); %>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>메인페이지</title>
+<title>인증실패</title>
 </head>
 <body>
+ 	<h1><%=regAlert%></h1>
 	<script>
-   <h1>다시 메인페이지로 이동하세요</h1>
+  	alert(<%=regAlert%>);
  </script> 
 </body>
 </html>

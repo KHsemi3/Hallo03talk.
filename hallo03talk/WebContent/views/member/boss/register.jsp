@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<% String regAlert = (String)session.getAttribute("registerOk");
+//알람창은 한번만!
+session.removeAttribute("registerOk"); 
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,9 +37,13 @@
            				<label>주소</label>
             			<input type="text" name="busAddress" placeholder="주소를 검색하세요">
             			<input type="button" value="주소검색"><br>
-       					<button type="submit" onclick="Swal.fire('인증되었습니다. <br> 다시 로그인해주세요.');" >작성완료</button>
+       					<button type="submit" >작성완료</button>
    						</div>
         			 </form>
+        			 <script>
+        			 <%if(regAlert !=null){%>
+        			 alert('<%=regAlert%>');
+        			 <%}%></script>
     			</div>
 	</main>
 
