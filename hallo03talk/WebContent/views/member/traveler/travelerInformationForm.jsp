@@ -29,6 +29,20 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <style>
+
+.choice{
+	margin-top:260px;
+	position: absolute;
+	
+}
+
+.choose{
+      margin-top:270px;
+	
+}
+
+
+
 /*할로영삼talk 폰트*/
 @font-face {
 	font-family: 'Somi';
@@ -71,9 +85,11 @@ aside.context .explanation {
 	text-transform: uppercase;
 	transition: all 0.1s ease-in-out;
 }
-.id__wrapper {
+ .id__wrapper {
 	display: grid;
 	width: 100%;
+			//height: 350px;
+	
 	transition: width 0.2s ease-in-out;
 	margin: auto;
 	grid-gap: 15px;
@@ -84,7 +100,12 @@ aside.context .explanation {
 	grid-template-rows: repeat(4, auto);
 	grid-template-areas: "your-face name name" "your-face job country"
 		"your-face twitter codepen" "your-face blood blood";
-}
+} 
+
+
+
+
+
 .id__wrapper>div {
 	transition: all 0.1s ease;
 }
@@ -194,7 +215,7 @@ input.full:focus, textarea.full:focus {
 	left: -16px;
 	top: 6px;
 }
-.deco {
+ .deco {
 	position: absolute;
 	background: linear-gradient(to top left, rgba(0, 242, 96, 0.8),
 		rgba(76, 162, 205, 0.8));
@@ -451,6 +472,8 @@ width
 					<div class="main-content printed">
 						<div class="id__wrapper">
 							<div class="deco"></div>
+							<!-- ------------------------------------------------------------------------------ -->
+							
 							
 							<!-- ------------------------------------------------------------------------------ -->
 							
@@ -459,14 +482,14 @@ width
 								<c:when test="${empty tav.getChangeName()}">
 									<label class="your-face" id="image-form" for="image-input">
 									<input class="file" type="file" name="f"id="image-input" /> <!-- onchange="setThumbnail(event)" -->
-									<button type="button" id="upload">upload</button>
+									<button type="button" class="choose" id="upload" style="width:265px;">upload</button>
 	    							<div class="image-persuader">Upload Image Here</div> 
 	    							</label>
 								</c:when>
 								<c:otherwise> 
-									<img src="<%=contextPath %>/resources/upload/traveler_profile/<%=tav.getChangeName() %>" alt="image" width="250px" height="auto"/>
-									<input class="file" type="file" name="f" id="image-input"/> <!-- onchange="setThumbnail(event)" -->
-									<button type="button" id="upload">upload</button>
+									<img class="your-face" src="<%=contextPath %>/resources/upload/traveler_profile/<%=tav.getChangeName() %>" alt="image" width="250px" height="auto"/>
+									<input class="file choice" type="file" name="f" id="image-input"/> <!-- onchange="setThumbnail(event)" -->
+									<button type="button" id="upload" class="hello" style="width:250px;" >upload</button>
 									
 								</c:otherwise>
 								</c:choose> 
