@@ -270,7 +270,7 @@ public class TravelerDao {
 				+ "	LEFT JOIN COMMUNITY C ON T.NO = C.WRITER WHERE T.NO = ? AND C.STATUS = 'Y') " + "	UNION "
 				+ "	(SELECT W.TRAVELER_NO AS WRITER, W.NO, W.TITLE, W.CONTENT, TO_CHAR(W.ENROLL_DATE, 'YY/MM/DD HH:MI') AS ENROLLDATE, '동행자 게시판' AS BOARD "
 				+ "	FROM WITH_ W WHERE W.TRAVELER_NO = ? AND W.STATUS = 'Y') " + "	UNION "
-				+ "	(SELECT R.TRAVELER_NO AS WRITER, R.NO, R.TITLE, R.CONTENT, TO_CHAR(R.ENROLL_DATE, 'YY/MM/DD HH:MI') AS ENROLLDATE, '장소 리뷰' AS BOARD "
+				+ "	(SELECT R.TRAVELER_NO AS WRITER, R.PLACE_NO AS NO, R.TITLE, R.CONTENT, TO_CHAR(R.ENROLL_DATE, 'YY/MM/DD HH:MI') AS ENROLLDATE, '장소 리뷰' AS BOARD "
 				+ "	FROM PLACE_REVIEW R WHERE R.TRAVELER_NO = ? AND R.STATUS = 'Y') " + "	ORDER BY ENROLLDATE DESC"; 
 																														
 		
@@ -324,7 +324,7 @@ public class TravelerDao {
 	public ArrayList<CommReplyVo> selectReplyList(Connection conn, int userNo) {
 
 		// SQL 준비
-		String sql ="SELECT R.NO , R.CONTENT , TO_CHAR(R.ENROLL_DATE, 'YY/MM/DD HH:MI') AS ENROLL_DATE FROM REPLY R JOIN TRAVELER T ON R.TRAVELER_NO = T.NO WHERE R.TRAVELER_NO = ? ORDER BY ENROLL_DATE DESC";
+		String sql ="SELECT R.COMMUNITY_NO AS NO , R.CONTENT , TO_CHAR(R.ENROLL_DATE, 'YY/MM/DD HH:MI') AS ENROLL_DATE FROM REPLY R JOIN TRAVELER T ON R.TRAVELER_NO = T.NO WHERE R.TRAVELER_NO = ? ORDER BY ENROLL_DATE DESC";
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -916,6 +916,8 @@ public class TravelerDao {
 			
 		}//deleteReport
 
+		
+		
 		// 사진 업로드 (TRAVELER_MYPAGE_PHOTO에 데이터 저장)
 		public void createTravelerAttachment(Connection conn, TravelerAttachmentVo tav) {
 			String sql = "insert into TRAVELER_MYPAGE_PHOTO "
@@ -944,6 +946,7 @@ public class TravelerDao {
 			}
 		} // createTravelerAttachment
 
+		
 		// 사진 가져오기
 		public TravelerAttachmentVo getAttachment(Connection conn, int userNo) {
 			String sql = "select * from (select no, orign_name as originName, "

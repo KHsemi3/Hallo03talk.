@@ -1,8 +1,13 @@
+
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%
+BossVo bv = (BossVo)session.getAttribute("BossLoginMember");
+
 request.setCharacterEncoding("UTF-8"); //한글깨지면 주석제거
 //request.setCharacterEncoding("EUC-KR"); //해당시스템의 인코딩타입이 EUC-KR일경우에 String inputYn =
 request.getParameter("inputYn");

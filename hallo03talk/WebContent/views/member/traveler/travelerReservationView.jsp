@@ -126,12 +126,11 @@
                       		<input type="checkbox" name="ckNo" value="<%= voList.get(i).getNo()%>">
 	                    </th>
 	                    <th scope="row"><%=voList.get(i).getNo() %></th>
-	                    <td><%=voList.get(i).getName() %></td>
+	                    <td onclick="goRsvDetail('<%= voList.get(i).getNo()%>');"><%=voList.get(i).getName() %></td>
 	                    <td class="text-center"><%=voList.get(i).getStartDate() %></td>
-	                  </tr>  
+	                </tr>  
 	              <%}%>
                 </tbody>
-<!-- -------------------------------------------------------------- -->
               </table>
     
 <!-- -------------------------------------------------------- -->
@@ -141,12 +140,12 @@
      <!-- --------행 클릭하면 해당 내용 보이기------------------------------ -->
    
 <script>
-		$(function(){
-			$('#reservationTable>tbody>tr').click(function(){
+		/* $(function(){
+			$('#reservationTable>tbody>tr>td').click(function(){
 				//행 클릭 되었을 때, 동작할 내용
 				
 				//글 번호 가져오기
-				const num = $(this).children().eq(1).text();
+				const num = document.querySelector('[name="ckNo"]').value;
 				
 				//해당 번호 이용해서 요청 보내기
 				//alert(num);				
@@ -154,7 +153,13 @@
 
 				
 			});
-		})
+		}) */
+		
+		function goRsvDetail(num){
+			location.href='/hallo03talk/traveler/rsvDetail?num=' + num;
+
+		}
+		
 	</script>
 	
 	

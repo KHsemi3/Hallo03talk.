@@ -38,37 +38,30 @@
 	font-weight: normal;
 	font-style: normal;
 }
-
 #MyPageText {
 	font-family: 'Somi';
 	font-size: 50px;
 	margin-top: -20px;
 }
-
 .content {
 	padding: 150px;
 }
-
 /* --------네비게이션 바------------------------------------------------------------------- */
 .navbar {
 	margin-top: 60px;
 }
-
 /* ----------------내 정보-------------------------------------------------- */
 aside.context {
 	text-align: center;
 }
-
 aside.context .explanation {
 	/* max-width: 700px; */
 	margin: 2em auto 0;
 }
-
 .explanation>input {
 	/* border: 3px solid purple; */
 	margin-left: 30px;
 }
-
 .main-content {
 	margin: 4em auto;
 	max-width: 900px;
@@ -78,7 +71,6 @@ aside.context .explanation {
 	text-transform: uppercase;
 	transition: all 0.1s ease-in-out;
 }
-
 .id__wrapper {
 	display: grid;
 	width: 100%;
@@ -93,15 +85,12 @@ aside.context .explanation {
 	grid-template-areas: "your-face name name" "your-face job country"
 		"your-face twitter codepen" "your-face blood blood";
 }
-
 .id__wrapper>div {
 	transition: all 0.1s ease;
 }
-
 textarea::-webkit-scrollbar {
 	display: none;
 }
-
 .your-face {
 	grid-area: your-face;
 	background: #fff;
@@ -111,7 +100,6 @@ textarea::-webkit-scrollbar {
 	max-height: 300px;
 	overflow: hidden;
 }
-
 .your-face img {
 	width: 100%;
 	height: 100%;
@@ -120,7 +108,6 @@ textarea::-webkit-scrollbar {
 	position: relative;
 	visibility: hidden;
 }
-
 .your-face .image-persuader {
 	position: absolute;
 	top: 40%;
@@ -128,18 +115,15 @@ textarea::-webkit-scrollbar {
 	width: 70%;
 	left: 15%;
 }
-
 .your-face input {
 	display: none;
 }
-
 label {
 	font: 600 16px "Prompt";
 	margin-bottom: 2px;
 	display: block;
 	flex: 0 0 auto;
 }
-
 input.full, textarea.full {
 	font: 400 20px "Prompt";
 	border: none;
@@ -151,40 +135,31 @@ input.full, textarea.full {
 	overflow: visible;
 	line-height: 1;
 }
-
 input.full:focus, textarea.full:focus {
 	outline: none;
 }
-
 .Id {
 	grid-area: name;
 }
-
 .Name {
 	grid-area: job;
 }
-
 .Nick {
 	grid-area: country;
 }
-
 .Phone {
 	grid-area: twitter;
 }
-
 .Email {
 	grid-area: codepen;
 }
-
 .blood {
 	grid-area: blood;
 }
-
 .checkbox__wrapper {
 	display: flex;
 	flex-wrap: wrap;
 }
-
 .checkbox__wrapper .checkbox {
 	flex: 0 0 auto;
 	padding-right: 30px;
@@ -192,18 +167,15 @@ input.full:focus, textarea.full:focus {
 	align-items: center;
 	margin: 2px 0;
 }
-
 .checkbox__wrapper input {
 	visibility: hidden;
 }
-
 .checkbox__wrapper label {
 	position: relative;
 	padding-left: 5px;
 	cursor: pointer;
 	margin-left: 10px;
 }
-
 .checkbox__wrapper label:before {
 	content: "";
 	width: 16px;
@@ -213,7 +185,6 @@ input.full:focus, textarea.full:focus {
 	left: -20px;
 	top: 2px;
 }
-
 .checkbox__wrapper input:checked+label:after {
 	content: "";
 	width: 12px;
@@ -223,7 +194,6 @@ input.full:focus, textarea.full:focus {
 	left: -16px;
 	top: 6px;
 }
-
 .deco {
 	position: absolute;
 	background: linear-gradient(to top left, rgba(0, 242, 96, 0.8),
@@ -235,7 +205,6 @@ input.full:focus, textarea.full:focus {
 	transform: rotate(55deg);
 	opacity: 0;
 }
-
 .deco:before {
 	content: "";
 	background: linear-gradient(to top right, rgba(0, 242, 96, 0.6),
@@ -247,27 +216,22 @@ input.full:focus, textarea.full:focus {
 	bottom: 0px;
 	margin-left: -140px;
 }
-
 .as-card {
 	box-shadow: none;
 	background: none;
 	pointer-events: none;
 }
-
 .as-card .header span:nth-child(1) {
 	display: none;
 }
-
 .as-card .header span:nth-child(2) {
 	display: block;
 }
-
 .as-card .deco, .as-card .deco:before {
 	opacity: 1;
 	width: 120%;
 	animation: 0.8s deco-piece forwards;
 }
-
 .as-card .id__wrapper {
 	width: 325px;
 	overflow: hidden;
@@ -284,7 +248,6 @@ input.full:focus, textarea.full:focus {
 	grid-template-areas: "your-face your-face" "name name" "job job"
 		"country country" "blood blood" "twitter codepen";
 }
-
 .as-card .id__wrapper:before {
 	content: "Attendee";
 	background: linear-gradient(to top right, #4ca2cd, #00f260);
@@ -298,7 +261,6 @@ input.full:focus, textarea.full:focus {
 	text-align: center;
 	color: #fff;
 }
-
 .as-card .id__wrapper:after {
 	content: "";
 	position: absolute;
@@ -311,22 +273,18 @@ input.full:focus, textarea.full:focus {
 	border-radius: 20px;
 	box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1);
 }
-
 .as-card .id__wrapper input.full, .as-card .id__wrapper textarea.full {
 	background: transparent;
 	border: none;
 	padding: 0;
 }
-
 .as-card .id__wrapper textarea.full {
 	line-height: 0.9;
 	height: 63px;
 }
-
 .as-card .id__wrapper .checkbox__wrapper {
 	margin: 5px;
 }
-
 .as-card .id__wrapper .checkbox__wrapper label {
 	padding: 0;
 	font-size: 14px;
@@ -334,26 +292,21 @@ input.full:focus, textarea.full:focus {
 	margin: 0;
 	padding-right: 10px;
 }
-
 .as-card .id__wrapper .checkbox__wrapper label:before, .as-card .id__wrapper .checkbox__wrapper label:after
 	{
 	content: none;
 }
-
 .as-card .id__wrapper .checkbox__wrapper input {
 	display: none;
 }
-
 .as-card .id__wrapper .checkbox {
 	padding-right: 0;
 }
-
 .as-card .id__wrapper .checkbox input:not(:checked), .as-card .id__wrapper .checkbox input:not(:checked)+label
 	{
 	display: none;
 	padding: 0;
 }
-
 .as-card .your-face {
 	border-radius: 50%;
 	width: 100px;
@@ -361,57 +314,47 @@ input.full:focus, textarea.full:focus {
 	padding: 2px;
 	border: 4px solid #4ca2cd;
 }
-
 .as-card .your-face img {
 	border-radius: 50%;
 }
-
 .as-card .your-face .image-persuader {
 	display: none;
 }
-
 .as-card .name label:not(.label-check), .as-card .job label:not(.label-check),
 	.as-card .country label:not(.label-check), .as-card .blood label:not(.label-check)
 	{
 	display: none;
 }
-
 .as-card .name textarea {
 	font: 600 32px "Prompt";
 	margin: 5px 5px 0;
 	color: #374e71;
 	position: relative;
 }
-
 .as-card .job input {
 	color: #4ca2cd;
 	font: 600 20px "Prompt";
 	margin: 0 5px;
 }
-
 .as-card .country input {
 	color: #4ca2cd;
 	font: 400 18px "Prompt";
 	margin: -15px 5px 10px;
 }
-
 .as-card .twitter, .as-card .codepen {
 	text-align: center;
 	margin: 10px 0;
 }
-
 .as-card .twitter label, .as-card .codepen label {
 	font: 600 12px "Prompt";
 	color: #999;
 	margin: 0 0 -2px;
 }
-
 .as-card .twitter input, .as-card .codepen input {
 	font: 400 16px "Prompt";
 	color: #374e71;
 	text-align: center;
 }
-
 .js-switch {
 	cursor: pointer;
 	margin: 0 0 3em;
@@ -428,12 +371,10 @@ input.full:focus, textarea.full:focus {
 	transition: 0.1s ease;
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
 }
-
 .js-switch:hover {
 	top: -5px;
 	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
 }
-
 @
 keyframes deco-piece { 0% {
 	opacity: 0;
@@ -515,23 +456,20 @@ width
 							
 							<c:set var="tav" value="<%=tav %>" />
 							<c:choose> 
-							<!-- 유저 사진이 없다면 -->
 								<c:when test="${empty tav.getChangeName()}">
 									<label class="your-face" id="image-form" for="image-input">
-									<input class="file" type="file" name="f" id="image-input" /> <!-- onchange="setThumbnail(event)" -->
+									<input class="file" type="file" name="f"id="image-input" /> <!-- onchange="setThumbnail(event)" -->
 									<button type="button" id="upload">upload</button>
 	    							<div class="image-persuader">Upload Image Here</div> 
 	    							</label>
 								</c:when>
-								<!-- 유저 사진이 있다면 -->
 								<c:otherwise> 
-									<img src="<%=contextPath %>/resources/upload/traveler_profile/<%=tav.getChangeName() %>" alt="image" width="200px" height="auto"/>
+									<img src="<%=contextPath %>/resources/upload/traveler_profile/<%=tav.getChangeName() %>" alt="image" width="250px" height="auto"/>
 									<input class="file" type="file" name="f" id="image-input"/> <!-- onchange="setThumbnail(event)" -->
 									<button type="button" id="upload">upload</button>
 									
 								</c:otherwise>
-							</c:choose> 
-							<img id="preview" width="150px" height="auto" alt=""/>
+								</c:choose> 
 							
 							<!-- ------------------------------------------------------------------------------ -->
 							
@@ -597,7 +535,6 @@ width
 					
 					$('input:radio[name=travelerJoinGender]').each(function(){
 						
-
 				        var result = travelerJoinGender.indexOf(this.value);
 				        
 				        console.log(result);
@@ -719,7 +656,6 @@ width
 		 }
 		 
 			<!-- 신규 비밀번호 체크 -->
-
 			function checkPwd(){
 				
 				var isSame = $('input[name=travelerJoinPwdNew]').val() == $('input[name=travelerJoinPwdNew2]').val()
@@ -763,7 +699,7 @@ width
 
 										<div class="form-floating mb-3">
 											<input type="password" class="form-control"
-												name="travelerJoinPwd" id="floatingInput"
+												name="travelerJoinPwd" id="pwdpwd"
 												placeholder="Password"> <label for="floatingInput">비밀번호</label>
 										</div>
 										<div class="form-floating mb-3">
@@ -794,14 +730,15 @@ width
 				<!------------------------------------------------------------------------------------>
 
 				<!-- 회원탈퇴 체크 -->
-				<!-- 얘 왜 안되냐..... -->
 
 				<script>
 		
 			function quit(){
+				var isSame = $('#pwdpwd').val() == $('input[name="travelerJoinPwd2"]').val()
 				
-				var isSame = $('input[name=travelerJoinPwd]').val() == $('input[name=travelerJoinPwd2]').val()
-				
+				alert($('#pwdpwd').val());
+				alert($('input[name="travelerJoinPwd2"]').val());
+
 				if(isSame == true){
 					return true;
 				}else{

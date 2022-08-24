@@ -114,7 +114,7 @@
 		                  </th>
 		                 	<th scope="row"><%=voList.get(i).getNo() %></th>                   
 		                  	<td><%=voList.get(i).getBoard() %></td>  	
-		                  	<td><%=voList.get(i).getContent() %></td>  	
+		                  	<td onclick="goboard('<%=voList.get(i).getBoard() %>', '<%=voList.get(i).getNo()%>');"><%=voList.get(i).getContent() %></td>  	
 		                  	<td class="text-center"><%=voList.get(i).getEnrollDate() %></td>	
 	                </tr>
                 <%}%>
@@ -127,6 +127,26 @@
 <!-- -------------------------------------------------------- -->
         </div>
     </main>
+	 
+	      <!-- --------행 클릭하면 해당 내용 보이기------------------------------ -->
+   
+	<script>
+		function goboard(board, no){
+			
+			if(board=='장소 등록'){
+				location.href = '/hallo03talk/place/one?placeNo=' + no;
+			}else{
+				location.href = '/hallo03talk/party/list?o=' + no;
+
+			}
+			
+		}
+			 
+		</script>
+	
+	
+	<!-- ------------------------------------------------------------------ -->
+	 
 	 
 	 <footer></footer> 
 

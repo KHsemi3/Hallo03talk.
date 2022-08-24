@@ -213,7 +213,7 @@
 									style="width: ${ r.star * 10 }%;">★★★★★</span>
 								</span>
 							</div>
-							<c:if test="${r.travelerNo eq travelerLoginMember.no}">
+							<c:if test="${r.travelerNo eq travelerLoginMember.nick}">
 								<div class="d-flex col justify-content-end align-items-center">
 									<button class="btn btn-primary px-1" id="reviewForm"
 										onclick="reviewDel(${travelerLoginMember.no},${r.no});">리뷰

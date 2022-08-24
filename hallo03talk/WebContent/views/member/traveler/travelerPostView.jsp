@@ -122,7 +122,8 @@
               </thead>
 
               <tbody>
-               <%for(int i=0; i < voList.size(); i++){ %> 
+               <%for(int i=0; i < voList.size(); i++){
+            	   %> 
 	                <tr>
 		                  <th scope="row">
 		                  <!-- 인풋 엘리먼트의 밸류 프로퍼티에 어떤 게시물인지 밸류 값 주기 -->
@@ -131,9 +132,10 @@
 		                  </th>
 		                 	<th scope="row"><%=voList.get(i).getNo() %></th>                   
 		                  	<td ><%=voList.get(i).getBoard() %></td>  	
-		                  	<td ><%=voList.get(i).getTitle() %></td>  						
+		                  	<td onclick="goboard('<%=voList.get(i).getBoard() %>', '<%=voList.get(i).getNo()%>');"><%=voList.get(i).getTitle() %></td>  						
 		                  	<td class="text-center"><%=voList.get(i).getEnrollDate() %></td>	
 	                </tr>
+	                
                <%}%>
               </tbody>
 <!-- -------------------------------------------------------------- -->
@@ -147,23 +149,22 @@
     
        <!-- --------행 클릭하면 해당 내용 보이기------------------------------ -->
    
-<script>
-/* 		$(function(){
-			$('#writeTable>tbody>tr').click(function(){
-				//행 클릭 되었을 때, 동작할 내용
-				//글 번호 가져오기
-				const num = $(this).children().eq(1).text();
-				
-				//해당 번호 이용해서 요청 보내기
-				//alert(num);				
-				location.href='/hallo03talk/traveler/travelerPostDetail?num=' + num;
-				
-				//location.href='/hallo03talk/with/detail?no=1';
+	<script>
+		function goboard(board, no){
+			
+			if(board=='장소 리뷰'){
+				location.href = '/hallo03talk/place/one?placeNo=' + no;
+			}else if(board=='커뮤니티'){
+				location.href = '/hallo03talk/comm/detail?no=' + no;
 
-				
-			});
-		}) */
-	</script>
+			}else{
+				location.href = '/hallo03talk/with/detail?no=' + no;
+
+			}
+			
+		}
+			 
+		</script>
 	
 	
 	<!-- ------------------------------------------------------------------ -->

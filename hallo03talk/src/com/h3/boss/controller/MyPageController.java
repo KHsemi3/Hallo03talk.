@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.h3.boss.service.BossService;
+import com.h3.boss.vo.BossAttachmentVo;
 import com.h3.boss.vo.BossVo;
 
 
@@ -23,6 +24,13 @@ public class MyPageController extends HttpServlet{
 
 		if(BossLoginMember != null) {
 			req.getRequestDispatcher("/views/member/boss/bossInformationForm.jsp").forward(req, resp);
+		
+
+			// 유저 사진 불러오기 
+			BossAttachmentVo bav = new BossService().getAttachment(BossLoginMember.getNo());
+			
+			req.getSession().setAttribute("bossAttachment", bav);
+		
 		}else {
 			req.getSession().setAttribute("alertMsg", "로그인 후 접근 가능합니다.");
 			resp.sendRedirect(req.getContextPath());   

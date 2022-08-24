@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.h3.boss.service.BossService;
+import com.h3.boss.vo.BossAttachmentVo;
 import com.h3.boss.vo.BossVo;
+import com.h3.traveler.service.TravelerService;
 
 
 @WebServlet(urlPatterns = "/boss/login")
@@ -44,6 +46,11 @@ public class LoginController  extends HttpServlet{
 		if(BossLoginMember != null) {
 			//로그인 성공 
 			req.getSession().setAttribute("BossLoginMember", BossLoginMember);
+			
+			
+			BossAttachmentVo bav =  new BossService().getAttachment(BossLoginMember.getNo());
+			req.getSession().setAttribute("bossAttachment", bav);
+			
 			
 			req.getSession().setAttribute("alertMsg", "사장님 로그인 성공!");   
 

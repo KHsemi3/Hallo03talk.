@@ -128,7 +128,7 @@
                       <input type="checkbox" name="ckNo" value="<%= voList.get(i).getNo()%>">
                     </th>
                     <th scope="row"><%=voList.get(i).getNo() %></th>
-                    <td><%=voList.get(i).getContent() %></td>
+                    <td onclick="gocommunity('<%=voList.get(i).getNo() %>')"><%=voList.get(i).getContent() %></td>
                     <td class="text-center"><%=voList.get(i).getEnrollDate() %></td>
                   </tr>     
 					<%}%>
@@ -139,7 +139,20 @@
 <!-- -------------------------------------------------------- -->
         </div>
     </main>
-    
+       <!-- --------행 클릭하면 해당 내용 보이기------------------------------ -->
+   
+	<script>
+		function gocommunity(no){
+			
+				location.href = '/hallo03talk/comm/detail?no=' + no;
+			console.log(no);
+		}
+			 
+		</script>
+	
+	
+	<!-- ------------------------------------------------------------------ -->
+	 
     <footer></footer> 
     
 	<!-- ------선택 삭제------------------------------------------------------- -->
