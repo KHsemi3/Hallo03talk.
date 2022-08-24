@@ -163,4 +163,60 @@ public class AdminReportService {
 		return result;
 	}
 
+
+
+	public int deleteContentReal(int[] dNum) {
+		Connection conn = null;
+		int result = 0;
+		
+		
+		try {
+			conn = getConnection();
+			
+			//DAO 호출
+			result =new AdminReportUserDao().deleteContentReal(conn,dNum);
+			if(result == dNum.length) {
+				JDBCTemplate.commit(conn);
+			}else {
+				JDBCTemplate.rollback(conn);
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			JDBCTemplate.rollback(conn);
+			
+		}finally {
+			close(conn);
+		}
+		return result;
+	}
+
+
+
+	public int deleteReplyReal(int[] dNum) {
+		Connection conn = null;
+		int result = 0;
+		
+		
+		try {
+			conn = getConnection();
+			
+			//DAO 호출
+			result =new AdminReportUserDao().deleteReplyReal(conn,dNum);
+			if(result == dNum.length) {
+				JDBCTemplate.commit(conn);
+			}else {
+				JDBCTemplate.rollback(conn);
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			JDBCTemplate.rollback(conn);
+			
+		}finally {
+			close(conn);
+		}
+		return result;
+	}
+
 }

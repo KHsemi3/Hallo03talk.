@@ -115,7 +115,7 @@ public class AdminReportUserDao {
 
 
 	public ArrayList<ReportBoardVo> selectListBoard(Connection conn) {
-		String sql="SELECT NO, GUILTY, CONTENT, PROCESS, TYPE, BOARD_NO FROM REPORT_CONTENT WHERE PROCESS='N' ORDER BY NO DESC";
+		String sql="SELECT NO, GUILTY, CONTENT, PROCESS, TYPE, BOARD_NO,ENROLL_DATE FROM REPORT_CONTENT WHERE PROCESS='N' ORDER BY NO DESC";
 		PreparedStatement pstmt = null;
 		ResultSet rs =null;
 		ArrayList<ReportBoardVo> list = new ArrayList<ReportBoardVo>();
@@ -224,6 +224,59 @@ String sql = "UPDATE REPORT_REPLY SET PROCESS = 'Y' WHERE NO= ?";
 			pstmt = conn.prepareStatement(sql);
 			for(int i=0; i<dNum.length; i ++) {
 				pstmt.setInt(1, dNum[i]);
+				result += pstmt.executeUpdate();
+			}
+			
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public int deleteContentReal(Connection conn, int[] dNum) {
+String sql = "UPDATE COMMUNITY SET STATUS = 'N' WHERE CATEGORY_NO =(SELECT TYPE FROM REPORT_CONTENT WHERE NO =? ) AND NO = (SELECT BOARD_NO FROM REPORT_CONTENT WHERE NO = ?)";
+		   
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			for(int i=0; i<dNum.length; i ++) {
+				pstmt.setInt(1, dNum[i]);
+				pstmt.setInt(2, dNum[i]);
+				result += pstmt.executeUpdate();
+			}
+			
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public int deleteReplyReal(Connection conn, int[] dNum) {
+		
+		String sql = "DELETE REPLY WHERE COMMUNITY_NO =(SELECT TYPE FROM REPORT_REPLY WHERE NO = ?) AND NO = (SELECT REPLY_NO FROM REPORT_REPLY WHERE NO = ?)";
+		   
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			for(int i=0; i<dNum.length; i ++) {
+				pstmt.setInt(1, dNum[i]);
+				pstmt.setInt(2, dNum[i]);
 				result += pstmt.executeUpdate();
 			}
 			

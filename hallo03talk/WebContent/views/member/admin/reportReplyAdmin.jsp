@@ -201,6 +201,7 @@ opacity:0.5;
                <div class="btn-area">
                  <span onclick="f01();">
                 신고목록 삭제</span>
+                <span onclick="f02();">신고 댓글삭제</span>
                 
                
                </div>
@@ -258,6 +259,42 @@ opacity:0.5;
 			alert("취소 하셨습니다");
 		}
 	}
+function f01(){
+		
+	
+		
+		if(confirm("삭제 하시겟습니까?")){
+		alert("삭제 완료");
+		
+		const elemArr = $('input[name=num]');
+		const numArr = [];
+		
+		for(let i = 0; i < elemArr.length; ++i){
+			 if( elemArr[i].checked == true ) {
+				 numArr.push(elemArr[i].value);
+	            }
+	
+		//	numArr.push(elemArr[i].value);
+		}
+		
+		console.log(numArr);
+		
+		let str = '';
+		
+		for(let i = 0; i < numArr.length; ++i){
+			str += 'num=' + numArr[i];
+			str += '&';	
+			
+		
+		}
+		
+		
+		location.href='/hallo03talk/admin/DeleteReply?' + str;
+		}else{
+			alert("취소 하셨습니다");
+		}
+	}
+	
 </script>
 </body>
 </html>
