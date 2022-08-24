@@ -37,8 +37,10 @@ public class AdminLoginController extends HttpServlet {
 		
 	}else{
 		//로그인실패
-		req.setAttribute("errorMsg", "로그인실패!");
-		req.getRequestDispatcher("/views/error/errorPage.jsp").forward(req, resp);
+		req.getSession().setAttribute("alertMsg", "관리자 로그인 실패");
+		
+		resp.sendRedirect("/hallo03talk/views/member/admin/adminPage.jsp");
+		
 	}
 	}
 	}

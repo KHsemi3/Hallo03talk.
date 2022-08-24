@@ -221,26 +221,7 @@ opacity:0.5;
 			
 		</div>
 		
-		<div id="page-area">
-			<%if(currentPage !=1) {%>
-			<a class="btn btn-sm btn-primary" href="<%=request.getContextPath() %>/admin/reportUser?p=<%=currentPage-1%>"> &lt; </a>
-			<%} %>
-			
-			<%for(int i = startPage; i<= endPage; ++i) {%>
-				<%if(i ==currentPage){ %>
-				
-				<a class="btn btn-sm btn-primary"><%=i %></a>
-				<%} else{ %>
-					<a class="btn btn-sm btn-primary" href="<%=request.getContextPath() %>/admin/reportUser?p=<%=i%>"><%=i%></a>
-				<%} %>
-				
-			
-			<%} %>
-			<%if(currentPage !=MaxPage) {%>
-			<a class="btn btn-sm btn-primary" href="<%=request.getContextPath() %>/admin/reportUser?p=<%=currentPage+1%>">&gt;</a>
-			<%} %>
-			
-		</div>
+		
                
               
      </div>

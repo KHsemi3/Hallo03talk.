@@ -1,3 +1,4 @@
+<%@page import="com.h3.admin.AdminPageVo"%>
 <%@page import="com.h3.place.vo.PlaceVo"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -6,6 +7,12 @@
     <% 
     ArrayList<PlaceVo> voList = (ArrayList<PlaceVo>)request.getAttribute("voList");
     
+	AdminPageVo pv = (AdminPageVo)request.getAttribute("pv");
+    
+   	int currentPage = pv.getCurrentPage();
+   	int startPage = pv.getStartPage();
+   	int endPage = pv.getEndPage();
+   	int MaxPage = pv.getMaxPage();
     %>
 <!DOCTYPE html>
 <html>
@@ -136,15 +143,15 @@ opacity:0.5;
     }
 
     .acc-data {
-      width:170px;
-      height:280px;
+      width:250px;
+      height:300px;
       border:1px solid darkgray;
       float:left;
       margin-right:15px;
     }
 
     .acc-image-area {
-      width:170px;
+      width:249px;
       height:170px;
     }
 
@@ -165,7 +172,7 @@ opacity:0.5;
     }
 
     .acc-col{
-      width:50%;
+      width:100%;
       height:50%;
       float:left;
     }
@@ -211,8 +218,8 @@ opacity:0.5;
         <div class="acc-info">
           <div class="acc-title"><%=voList.get(i).getName()%></div>
           <div class="acc-sub-data">
-            <div class="acc-col"><img src="../../../resources/img/star.png" alt="" /><%=voList.get(i).getAddress()%></div>
-            <div class="acc-col"><img src="../../../resources/img/good.png">44</div>
+            <div class="acc-col"><%=voList.get(i).getAddress()%></div>
+           
           </div>
         </div>
       </div>
@@ -227,18 +234,23 @@ opacity:0.5;
   </div>
 </div>
  <div id="page">
-     <a href=""> &lt;</a>
-     <a href="">1</a>
-      <a href="">2</a>
-       <a href="">3</a>
-        <a href="">4</a>
-         <a href="">5</a>
-          <a href="">6</a>
-           <a href="">7</a>
-            <a href="">8</a>
-             <a href="">9</a>
-              <a href="">10</a>
-               <a href="">&gt;</a>
+   <%if(currentPage !=1) {%>
+			<a href="<%=request.getContextPath() %>/admin/placeAdmin?p=<%=currentPage-1%>"> &lt; </a>
+			<%} %>
+			
+			<%for(int i = startPage; i<= endPage; ++i) {%>
+				<%if(i ==currentPage){ %>
+				
+				<a style ="background-color:orange; color:#fff"><%=i%></a>
+				<%} else{ %>
+					<a  href="<%=request.getContextPath() %>/admin/placeAdmin?p=<%=i%>"><%=i%></a>
+				<%} %>
+				
+			
+			<%} %>
+			<%if(currentPage !=MaxPage) {%>
+			<a  href="<%=request.getContextPath() %>/admin/placeAdmin?p=<%=currentPage+1%>">&gt;</a>
+			<%} %>
                <div class="btn-area">
                 <span onclick="f01();"> 숙소 삭제</span>
                 

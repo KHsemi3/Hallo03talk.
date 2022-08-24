@@ -24,7 +24,7 @@ public class AdminReportService {
 			
 			
 			//DAO 호출
-			voList = new AdminReportUserDao().selectListUser(conn);
+			voList = new AdminReportUserDao().selectListUser(conn, pageVo);
 			
 			//실행결과 리턴
 			
@@ -39,7 +39,7 @@ public class AdminReportService {
 
 	
 
-	public ArrayList<ReportCommentVo> selectListComment() {
+	public ArrayList<ReportCommentVo> selectListComment(AdminPageVo pageVo) {
 		Connection conn = null;
 		ArrayList<ReportCommentVo> voList = null;
 		try {
@@ -48,7 +48,7 @@ public class AdminReportService {
 			
 			
 			//DAO 호출
-			voList = new AdminReportUserDao().selectListComment(conn);
+			voList = new AdminReportUserDao().selectListComment(conn, pageVo);
 			
 			//실행결과 리턴
 			
@@ -61,7 +61,7 @@ public class AdminReportService {
 		return voList;
 	}
 
-	public ArrayList<ReportBoardVo> selectListBoard() {
+	public ArrayList<ReportBoardVo> selectListBoard(AdminPageVo pageVo) {
 		Connection conn = null;
 		ArrayList<ReportBoardVo> voList = null;
 		try {
@@ -70,7 +70,7 @@ public class AdminReportService {
 			
 			
 			//DAO 호출
-			voList = new AdminReportUserDao().selectListBoard(conn);
+			voList = new AdminReportUserDao().selectListBoard(conn, pageVo);
 			
 			//실행결과 리턴
 			
@@ -287,6 +287,73 @@ public class AdminReportService {
 			conn = getConnection();
 		
 	    result = AdminReportUserDao.getCount(conn);
+	
+	    return result;
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+			
+		}
+		return result;
+	}
+
+
+
+	public int getCountBoard() {
+		//dao 호출
+				Connection conn = null;
+				int result = 0;
+				
+				try {
+					conn = getConnection();
+				
+			    result = AdminReportUserDao.getCountBoard(conn);
+			
+			    return result;
+					
+				}catch(Exception e) {
+					e.printStackTrace();
+				}finally {
+					close(conn);
+					
+				}
+				return result;
+	}
+
+
+
+	public int getCountReply() {
+		Connection conn = null;
+		int result = 0;
+		
+		try {
+			conn = getConnection();
+		
+	    result = AdminReportUserDao.getCountReply(conn);
+	
+	    return result;
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(conn);
+			
+		}
+		return result;
+	}
+
+
+
+	public int getCountPlace() {
+		Connection conn = null;
+		int result = 0;
+		
+		try {
+			conn = getConnection();
+		
+	    result = AdminReportUserDao.getCountPlace(conn);
 	
 	    return result;
 			

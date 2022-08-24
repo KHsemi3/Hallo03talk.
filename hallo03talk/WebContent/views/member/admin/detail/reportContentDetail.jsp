@@ -367,28 +367,28 @@ margin-bottom: 30;
         </div> 
         <div class="content_wrap">
             <div class="content">
-                <div class="title">
+                <div class="title" style="text-overflow: ellipsis;">
                    <%=vo.getGuilty() %>
                    
                 </div>
                 <div class="info">
                     <dl>
                         <dt>번호</dt>
-                        <dd><%=vo.getNo() %></dd>
+                        <dd style="text-overflow: ellipsis;"><%=vo.getNo() %></dd>
                     </dl>
                     <dl>
                       
                     </dl>
                     <dl>
                         <dt>작성일</dt>
-                        <dd><%=vo.getEnrollDate() %></dd>
+                        <dd style="text-overflow: ellipsis;"><%=vo.getEnrollDate() %></dd>
                     </dl>
                     <dl>
                       
                     </dl>
                 </div>
                 <div class="cont">
-                    <p>
+                    <p >
                       <%=vo.getContent()%>
                     </p>
                 </div>

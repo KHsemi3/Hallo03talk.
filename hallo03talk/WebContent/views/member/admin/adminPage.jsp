@@ -324,9 +324,12 @@
          <%if(loginAdmin == null){%>
           <li><a class="btn" onclick="location.href='/hallo03talk/comm/list?view=notice'">공지사항</a></li>
           <li><a  href="" id="testBtn" class="btn" >로그인</a></li>
+          <li><a   onclick="location.href='/hallo03talk/search/searchPlace'" class="btn" >검색</a></li>
+
            <%} else {%>
    	
     	<li><a class="btn" onclick="location.href='/hallo03talk/comm/list?view=notice'">공지사항</a></li>
+    	<li><a  onclick="location.href='/hallo03talk/search/searchPlace'" class="btn" >검색</a></li>
     	<li class="btn"  onclick="location.href='/hallo03talk/admin/placeAdmin'">숙소관리</li>
     	<li><a  class="btn"  onclick="location.href='/hallo03talk/admin/reportUser?p=1'">신고관리</a></li>
           <li><a  href="/hallo03talk/admin/logout"  class="btn" >로그아웃</a></li>

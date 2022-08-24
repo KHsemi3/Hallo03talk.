@@ -11,14 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.h3.admin.AdminPageVo;
 import com.h3.admin.service.AdminReportService;
-import com.h3.reportBoard.vo.ReportBoardVo;
 import com.h3.reportUser.vo.ReportUserVo;
+import com.h3.with.vo.PageVo;
 @WebServlet(urlPatterns = "/admin/reportUser")
 public class AdminReportUserController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
 		int listCount;   //현재 총 게시글 갯수
 		int currentPage; 	//현재 페이지(==사용자가 요청한)
 		int pageLimit;	 //페이지 하단에 보여질 페이지 버튼의 최대 개수
@@ -81,12 +80,17 @@ public class AdminReportUserController extends HttpServlet {
 		pageVo.setMaxPage(maxPage);
 		pageVo.setPageLimit(pageLimit);
 		pageVo.setStartPage(startPage);
+		
+		//게시글 관련 데이터 준비
+		
+		//데이터 꺼내기 (클라이언트 가 보낸)
+				//데이터 뭉치기 
+				
+				//서비스 호출
 				ArrayList<ReportUserVo> voList  =	new AdminReportService().selectListUser(pageVo);
 				
 				//결과에 따라 화면 선택
 				String [] nums = req.getParameterValues("num");
-				
-				
 				
 				
 				
