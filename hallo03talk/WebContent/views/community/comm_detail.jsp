@@ -103,17 +103,29 @@ session.removeAttribute("alertMsg");
 <!-- 뎃글 폼태그 -->
 					<form action="/hallo03talk/comm/reply/post" method="post">
 						<div class="d-flex">
-							<div class="form-floating flex-grow-1">
-	<!-- 댓글 내용 -->				<input type="hidden" name="travelerNo" value="${travelerLoginMember.no}">
-								<input type="hidden" name="communityNo" value="${vo.no}">
-								
-								<textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px; resize: none;" name="content" required="required"></textarea>
-								<label for="floatingTextarea2">Comments</label>
-							</div>
-							<c:if test="${empty travelerLoginMember }">
-								<input class="ms-2 btn btn-outline-warning" type="submit" value="로그인 하세요" disabled="disabled">
+							<c:if test="${empty loginAdmin}">
+								<div class="form-floating flex-grow-1">
+		<!-- 댓글 내용 -->				<input type="hidden" name="travelerNo" value="${travelerLoginMember.no}">
+									<input type="hidden" name="communityNo" value="${vo.no}">
+									
+									<textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px; resize: none;" name="content" required="required"></textarea>
+									<label for="floatingTextarea2">Comments</label>
+								</div>
+								<c:if test="${empty travelerLoginMember}">
+									<input class="ms-2 btn btn-outline-warning" type="submit" value="로그인 하세요" disabled="disabled">
+								</c:if>
+								<c:if test="${not empty travelerLoginMember }">
+									<input class="ms-2 btn btn-outline-warning" type="submit" value="등록" >
+								</c:if>
 							</c:if>
-							<c:if test="${not empty travelerLoginMember }">
+							<c:if test="${not empty loginAdmin}">
+								<div class="form-floating flex-grow-1">
+		<!-- 댓글 내용 -->				<input type="hidden" name="travelerNo" value="0">
+									<input type="hidden" name="communityNo" value="${vo.no}">
+									
+									<textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px; resize: none;" name="content" required="required"></textarea>
+									<label for="floatingTextarea2">Comments</label>
+								</div>
 								<input class="ms-2 btn btn-outline-warning" type="submit" value="등록" >
 							</c:if>
 						</div>
