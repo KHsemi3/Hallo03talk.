@@ -41,7 +41,7 @@
             </div>    
              
                 <div class="bt_wrap">
-                    <a href="#", class="on">등록</a>
+                    <input type="submit", class="on">등록</a>
                     <a href="#">취소</a>
                 </div>
      

@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="com.h3.party.vo.PartyVo"%>
+<%@page import="java.util.ArrayList"%>
+
+    
+<%
+	ArrayList<PartyVo> voList = (ArrayList<PartyVo>)request.getAttribute("PartyList");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,8 +16,6 @@
 </head>
 
 <body>
-
-
 			<%@ include file="/views/common/header.jsp"%>
 
 			<main>
@@ -22,74 +27,81 @@
             </div> 
             <div class="list_wrap">
                 <div class="board_list">
-                    <div class="top">
-                        <div class="num" name=num>번호</div>
-                        <div class="title" name=title>제목</div>
-                        <div class="writer" name=writer>작성자</div>
-                        <div class="date" name=date>작성일</div>
-                        <div class="count" name=count>조회</div>
-                    </div>  
-                    <div>
-                        <div class="num">5</div>
-                        <div class="title"><a href="content.jsp">글 제목을 입력하세요.</a></div>
-                        <div class="writer">박찬규</div>
-                        <div class="date">2022.8.25</div>
-                        <div class="count">17</div>
-                    </div>
-                    <div>
-                        <div class="num">4</div>
-                        <div class="title"><a href="content.jsp">글 제목을 입력하세요.</a></div>
-                        <div class="writer">민동언</div>
-                        <div class="date">2022.8.13</div>
-                        <div class="count">17</div>
-                    </div>
-                    <div>
-                        <div class="num">3</div>
-                        <div class="title"><a href="content.jsp">글 제목을 입력하세요.</a></div>
-                        <div class="writer">박서영</div>
-                        <div class="date">2022.7.28</div>
-                        <div class="count">17</div>
-                    </div>
-                    <div>
-                        <div class="num">2</div>
-                        <div class="title"><a href="content.jsp">글 제목을 입력하세요.</a></div>
-                        <div class="writer">유시영</div>
-                        <div class="date">2022.7.19</div>
-                        <div class="count">17</div>
-                    </div>
-                    <div>
-                        <div class="num">1</div>
-                        <div class="title"><a href="content.jsp">글 제목을 입력하세요.</a></div>
-                        <div class="writer">오준혁</div>
-                        <div class="date">2022.7.17</div>
-                        <div class="count">17</div>
-                    </div>
-                </div>
-                <div class="board_page">
-                    <a href="#" class="bt first"><<</a>
-                    <a href="#" class="bt prev"><</a>
-                    <a href="#" class="num on">1</a>
-                    <a href="#" class="num">2</a>
-                    <a href="#" class="num">3</a>
-                    <a href="#" class="num">4</a>
-                    <a href="#" class="num">5</a>
-                    <a href="#" class="bt next">></a>
-                    <a href="#" class="bt last">>></a>
-                </div>
+                    <table id="top">
+                   <thead>
+                <tr>
+                    <td>글번호</td>
+                    <td>글제목</td>
+                    <td>작성자</td>
+                    <td>조회수</td>
+                    <td>작성일</td>
+                </tr>
+            </thead>     
+            <tbody>
+                <%for(int i = 0 ; i < voList.size(); i++){%>
+                    <tr>
+                        <td><%= voList.get(i).getNo() %></td>
+                        <td><%= voList.get(i).getTitle() %></td>
+                        <td><%= voList.get(i).getBossId() %></td>
+                        <td><%= voList.get(i).getCnt() %></td>
+                        <td><%= voList.get(i).getEnrollDate() %></td>
+                    </tr>
+                <%}%>
+            </tbody>
+        </table>
+	</div>
+         </div>  
+              
+            </div>
+                
                 <div class="bt_wrap">
-                    <a href="write.jsp" class="on">등록</a>
+                    <a href="/hallo03talk/party/write" class="on">등록</a>
                 </div>
+                
             </div>
         </div>
-
-					
-
+	<script>
+		$(function(){
+			$('#table-main>tbody>tr').click(function(){
+				//행 클릭 되었을 때, 동작할 내용
+				
+				//글 번호 가져오기
+				const num = $(this).children().eq(0).text();
+				//해당 번호 이용해서 요청 보내기
+				location.href='/semi/notice/detail?num=' + num;
+			});
+		})
+	</script>
 					</div>
 			</main>
 
 
 	<footer></footer>
 
+
+</body>
+</html>
+
+
+
+
+    
+
+    
+
+
+
+	
+    
+		
+
+    	
+   
+
+
+
+	
+	
 
 </body>
 </html>
