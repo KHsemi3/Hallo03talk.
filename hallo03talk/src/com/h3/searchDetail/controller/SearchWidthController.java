@@ -18,7 +18,15 @@ public class SearchWidthController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		ArrayList<WithVo> wvoList = new SearchWidthService().wselectList();
+		req.setCharacterEncoding("UTF-8");
+		
+		String widthKeyword = req.getParameter("widthKeyword");
+		String cate4 = req.getParameter("cate4");
+		String cate5 = req.getParameter("cate5");
+		String startDate = req.getParameter("startDate");
+		String endDate = req.getParameter("endDate");
+		
+		ArrayList<WithVo> wvoList = new SearchWidthService().wselectList( widthKeyword, cate4, cate5, startDate, endDate);
 		
 		System.out.println(wvoList);
 		

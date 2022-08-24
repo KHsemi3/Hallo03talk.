@@ -9,6 +9,8 @@
     ArrayList<PlaceVo> pvoList = (ArrayList<PlaceVo>)request.getAttribute("pvoList");
     ArrayList<CommVo> cvoList = (ArrayList<CommVo>)request.getAttribute("cvoList");
     ArrayList<PlaceReviewVo> rvoList = (ArrayList<PlaceReviewVo>)request.getAttribute("rvoList");
+    
+    String contextPath = request.getContextPath();
 %>
 <!DOCTYPE html>
 <html>
@@ -48,64 +50,32 @@
 						</form>
 
                         <br><br>
-                        <button type="button" class="btn btn-warning" id="send" style="float:right; margin-right: 65px; ">검색</button>
-                        <button type="button" class="btn btn-primary" style="float:left; margin-left: 65px; ">이전</button>
                         
-                        <script type="text/javascript">
-                        $(document).ready(function(){
-                            $("#send").click(function(){
-                                
-                                if($(".placeSearch").val() == ''){
-                                    alert("검색어를 입력해주세요");
-                                    return;
-                                }
-                                $("#pform").attr("action", "/hallo03talk/searchPlace/searchDetail"); // attribute setting
-                                $("#pform").submit();
-                            });
-                        });
-						</script>
+                        <button type="button" class="btn btn-warning" id="send" style="float:right; margin-right: 65px; ">검색</button>
+                        <button onclick ="location.href='<%=contextPath%>/search/searchPlace'" type="button" class="btn btn-primary" style="float:left; margin-left: 65px; ">이전</button>
+                        
+
                         <br><br><br><br><br>
 
                         <h1 style="margin-left: 60px;  font-family: somi; font-size: 60px; font-weight: lighter;"><b>장소</b></h1>
                         <br>
                         <%for(int i = 0 ; i < pvoList.size(); i++){%>
-                        <div class="row">
+                        <div class="row" d-flex flex-row>
                             <div class="col-md-4 ">
-                                <div class="card" onclick="" style="width: 18rem; float: none; margin:0 auto;">
-                                    <img src="/hallo03talk/resources/img/search_1.jpg" class="card-img-top" alt="">
+                                <div class="card" onclick ="location.href ='/hallo03talk/place/one?placeNo=<%=pvoList.get(i).getNo()%>' " style="width: 18rem; float: none; margin:0 auto;">
+                                    <img src="/hallo03talk/resources/upload/place/<%= pvoList.get(i).getPhotoName() %>" class="card-img-top" alt="">
                                     <div class="card-body">
                                     <h5 class="card-title"><%= pvoList.get(i).getName() %></h5>
                                     <h6 class="card-subtitle mb-2 text-muted"><%= pvoList.get(i).getAddress() %></h6>
                                     <p class="card-text"><%= pvoList.get(i).getContent() %></p>
+
+                               
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <%}%>
 
-                        <br>
-          
-                        <br>
-                        <hr style="width: 90%; margin: 0 auto;">
-                        <br><br>
-
-                        <h1 style="margin-left: 60px; font-family: somi; font-size: 60px; font-weight: lighter;"><b>후기</b></h1>
-                        <br>
-                        <%for(int i = 0 ; i < rvoList.size(); i++){%>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="card" onclick="" style="width: 18rem; float: none; margin:0 auto;">
-                                    <img src="/hallo03talk/resources/img/search_1.jpg" class="card-img-top" alt="">
-                                    <div class="card-body">
-                                    <h5 class="card-title"><%= rvoList.get(i).getTitle() %></h5>
-                                    <h6 class="card-subtitle mb-2 text-muted"><%= rvoList.get(i).getNo() %></h6>
-                                    <p class="card-text"><%= rvoList.get(i).getContent() %></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <%} %>
-                            
-                        </div>
                         <br>
                         <br>
                         <hr style="width: 90%; margin: 0 auto;">
@@ -114,14 +84,14 @@
                         <h1 style="margin-left: 60px; font-family: somi; font-size: 60px; font-weight: lighter;"><b>커뮤니티</b></h1>
                         <br>
                         <%for(int i = 0 ; i < cvoList.size(); i++){%>
-                        <div class="row">
+                        <div class="row" d-flex flex-row>
+                        
                             <div class="col-md-4">
-                                <div class="card" onclick="" style="width: 18rem; float: none; margin:0 auto;">
-                                    <img src="/hallo03talk/resources/img/search_1.jpg" class="card-img-top" alt="">
-                                    <div class="card-body">
+                                <div class="card" style="width: 18rem; float: none; margin:0 auto;">
+                                    <div class="card-body"  onclick ="location.href ='/hallo03talk/comm/detail?no=<%=cvoList.get(i).getNo()%>' ">
                                     <h5 class="card-title"><%= cvoList.get(i).getTitle() %></h5>
                                     <h6 class="card-subtitle mb-2 text-muted"><%= cvoList.get(i).getWriter() %></h6>
-                                    <p class="card-text"><%= cvoList.get(i).getContent() %></p>
+                                    <p class="card-text"><%= cvoList.get(i).getEnroll_date() %></p>
                                     </div>
                                 </div>
                             </div>

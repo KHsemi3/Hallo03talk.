@@ -11,14 +11,11 @@ import com.h3.with.vo.PageVo;
 import com.h3.with.vo.WithVo;
 
 public class SearchWidthService {
-	
-	private final WithVo wvo = new WithVo();
-	private String widthKeyword;
-	private String cate4;
-	private String cate5;
-	
-	//장소
-		public ArrayList<WithVo> wselectList(){
+
+
+
+		//장소
+		public ArrayList<WithVo> wselectList(String widthKeyword, String cate4, String cate5, String startDate, String endDate){
 			
 			Connection conn = null;
 			ArrayList<WithVo> wvoList = null;
@@ -26,7 +23,7 @@ public class SearchWidthService {
 			try {
 				conn = getConnection();
 				
-				wvoList = new WithSearchDao().wselectList(conn, wvo, widthKeyword, cate4, cate5);
+				wvoList = new WithSearchDao().wselectList(conn, widthKeyword, cate5, cate5, startDate, endDate);
 				
 			} catch (Exception e) {
 				e.printStackTrace();

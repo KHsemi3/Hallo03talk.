@@ -3,6 +3,7 @@ package com.h3.searchDetail.repository;
 import static com.h3.common.JDBCTemplate.close;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -13,37 +14,41 @@ import com.h3.with.vo.WithVo;
 public class WithSearchDao {
 	
 	//동행 검색
-	public ArrayList<WithVo> wselectList(Connection conn, WithVo vo, String widthKeyword, String cate4, String cate5){
+	public ArrayList<WithVo> wselectList(Connection conn, String widthKeyword, String cate4, String cate5, String startDate, String endDate){
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<WithVo> wlist = new ArrayList<WithVo>();
-		String sql = "SELECT (A.NO, A.TITLE, A.CONTENT, A.START_DATE, A.END_DATE,  B.NO) FROM TABLE WITH_ A LEFT OUTER JOIN WITH_PHOTO  B ON A.NO = B.NO WHERE A.TITLE LIKE '%' || ? ||'%' OR A.CONTENT LIKE '%' || ? ||'%' AND A.START_DATE LIKE '?' AND A.END_DATE LIKE '?'";
-		String sql2 = "SELECT (A.NO, A.TITLE, A.CONTENT, A.START_DATE, A.END_DATE,  B.NO) FROM TABLE WITH_ A LEFT OUTER JOIN WITH_PHOTO  B ON A.NO = B.NO WHERE A.TITLE LIKE '%' || ? ||'%' OR A.CONTENT LIKE '%' || ? ||'%' AND A.START_DATE LIKE '?' AND A.END_DATE LIKE '?'";
-		String sql3 = "SELECT (A.NO, A.TITLE, A.CONTENT, A.START_DATE, A.END_DATE,  B.NO) FROM TABLE WITH_ A LEFT OUTER JOIN WITH_PHOTO  B ON A.NO = B.NO WHERE A.TITLE LIKE '%' || ? ||'%' OR A.CONTENT LIKE '%' || ? ||'%' AND A.START_DATE LIKE '?' AND A.END_DATE LIKE '?'";
+		String sql = "SELECT NO, TITLE, CONTENT, START_DATE, END_DATE FROM WITH_ WHERE (TITLE LIKE '%' || ? ||'%'  OR CONTENT LIKE '%' || ? ||'%') AND (START_DATE LIKE ? OR END_DATE LIKE ?) AND (PLACE LIKE '%' || ? ||'%' OR PLACE LIKE '%' || ? ||'%')";
 
 		try {
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, widthKeyword);
-			pstmt.setDate(2, vo.getStart_date());
-			pstmt.setDate(3, vo.getEnd_date());
-			
-			pstmt = conn.prepareStatement(sql2);
-			pstmt.setString(1, cate4);
-			pstmt.setDate(2, vo.getStart_date());
-			pstmt.setDate(3, vo.getEnd_date());
-			
-			pstmt = conn.prepareStatement(sql2);
-			pstmt.setString(1, cate5);
-			pstmt.setDate(2, vo.getStart_date());
-			pstmt.setDate(3, vo.getEnd_date());
-			
+			pstmt.setString(2, widthKeyword);
+			pstmt.setString(3, startDate);
+			pstmt.setString(4, endDate);
+			pstmt.setString(5, cate4);
+			pstmt.setString(6, cate5);
 
-//			rs = pstmt.executeQuery();
+
+			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
+				System.out.println("test");
+				String no = rs.getString("NO");
+				String title = rs.getString("TITLE");
+				String content = rs.getString("CONTENT");
+				Date DbStartDate = rs.getDate("START_DATE");
+				Date DbEndDate = rs.getDate("END_DATE");
+				
 				WithVo wvo = new WithVo();
+				wvo.setNo(no);
+				wvo.setTitle(title);
+				wvo.setContent(content);
+				wvo.setStart_date(DbStartDate);
+				wvo.setEnd_date(DbEndDate);
+				
 
 				wlist.add(wvo);
 				
