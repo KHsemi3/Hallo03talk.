@@ -12,16 +12,9 @@ import com.h3.searchDetail.repository.SearchDao;
 
 public class SearchService {
 	
-	private final PlaceVo pvo = new PlaceVo();
-	private final CommVo cvo = new CommVo();
-	private final PlaceReviewVo rvo = new PlaceReviewVo();
-	private String placeKeyword;
-	private String cate1;
-	private String cate2;
-	private String cate3;
-	
+
 	//장소
-	public ArrayList<PlaceVo> pselectList(){
+	public ArrayList<PlaceVo> pselectList(String placeKeyword, String cate1, String cate2, String cate3){
 		
 		Connection conn = null;
 		ArrayList<PlaceVo> pvoList = null;
@@ -41,7 +34,7 @@ public class SearchService {
 	}
 	
 	//커뮤니티
-	public ArrayList<CommVo> cselectList(){
+	public ArrayList<CommVo> cselectList(String placeKeyword, String cate1, String cate2, String cate3){
 		
 		Connection conn = null;
 		ArrayList<CommVo> cvoList = null;
@@ -61,24 +54,6 @@ public class SearchService {
 	}
 
 	
-	//후기
-	public ArrayList<PlaceReviewVo> rselectList(){
-		
-		Connection conn = null;
-		ArrayList<PlaceReviewVo> rvoList = null;
-		
-		try {
-			conn = getConnection();
-			
-			rvoList = new SearchDao().rselectList(conn, placeKeyword, cate1, cate2, cate3);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			close(conn);
-		}
-		
-		return rvoList;
-	}
+
 
 }

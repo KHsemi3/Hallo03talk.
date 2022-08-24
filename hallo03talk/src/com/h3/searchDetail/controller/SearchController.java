@@ -26,26 +26,19 @@ public class SearchController extends HttpServlet{
 		
 		req.setCharacterEncoding("UTF-8");
 
+		String placeKeyword = req.getParameter("placeKeyword");
+		String cate1 = req.getParameter("cate1");
+		String cate2 = req.getParameter("cate2");
+		String cate3 = req.getParameter("cate3");
 		System.out.println("==============================");
 		
 		//호출
-		ArrayList<PlaceVo> pvoList = new SearchService().pselectList();
-		ArrayList<PlaceReviewVo> rvoList = new SearchService().rselectList();
-		ArrayList<CommVo> cvoList = new SearchService().cselectList();
+		ArrayList<PlaceVo> pvoList = new SearchService().pselectList(placeKeyword, cate1, cate2, cate3);
+		ArrayList<CommVo> cvoList = new SearchService().cselectList(placeKeyword, cate1, cate2, cate3);
 		
-		
-//		String placeKeyword =req.getParameter("placeKeyword");
-//		String cate1 = req.getParameter("cate1");
-//		String cate2 = req.getParameter("cate2");
-//		String cate3 = req.getParameter("cate3");
-		
-		
-//		PlaceVo pvo = new PlaceVo();
-//		CommVo cvo = new CommVo();
-//		PlaceReviewVo rvo = new PlaceReviewVo();
+
 		
 		System.out.println(pvoList);
-		System.out.println(rvoList);
 		System.out.println(cvoList);
 //		System.out.println(placeKeyword);
 //		System.out.println(cate1);
@@ -56,7 +49,6 @@ public class SearchController extends HttpServlet{
 		
 		//결과에 따라 화면 만들기
 		req.setAttribute("pvoList", pvoList);
-		req.setAttribute("rvoList", rvoList);
 		req.setAttribute("cvoList", cvoList);
 		req.getRequestDispatcher("/views/search/searchDetail.jsp").forward(req, resp);
 		

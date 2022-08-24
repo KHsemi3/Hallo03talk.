@@ -275,13 +275,7 @@
                                     if($(".withSearch").val() == ''){
                                         alert("검색어를 입력해주세요");
                                         return;
-                                    } if($("#stratDate").val() == ''){
-                                        alert("가는날을 입력해주세요");
-                                        return;
-                                    }  if($("#endDate").val() == ''){
-                                        alert("오는날을 입력해주세요");
-                                        return;
-                                    } 
+                                    }
                                     $("#wform").attr("action", "/hallo03talk/searchWidth/searchWidthDetail"); // attribute setting
                                     $("#wform").submit();
                                 });
@@ -293,10 +287,10 @@
                     </div>
                     
 
+                   <button type="submit" id="wsend"  value="검색" class="btn btn-warning" style="float:right; margin-right: 60px; margin-top: 50px;">검색</button>
 
                    </form> 
 
-                   <button type="submit" id="wsend" onclick="getWidthCate" value="검색" class="btn btn-warning" style="float:right; margin-right: 60px; margin-top: 50px;">검색</button>
 
                 </div>
 
