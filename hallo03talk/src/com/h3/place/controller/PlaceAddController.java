@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import com.h3.boss.service.BossService;
 import com.h3.boss.vo.BossVo;
 import com.h3.common.RandomName;
 import com.h3.place.service.PlaceService;
@@ -29,26 +30,31 @@ import com.h3.placePhoto.vo.PlacePhotoVo;
 @WebServlet("/place/add")
 public class PlaceAddController extends HttpServlet{
 	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		BossVo vo = (BossVo) req.getSession().getAttribute("BossLoginMember");
+		req.getSession().setAttribute("BossLoginMember", vo);
+		resp.sendRedirect("/hallo03talk/views/place/placeAdd.jsp");
+	}
+	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		
-		if(req.getParameter("placeName") == null || req.getParameter("placeContent") == null || req.getParameter("placeAddr") == null || req.getSession().getAttribute("BossLoginMember") == null || req.getParameter("category_no") == null) {
-			resp.sendRedirect("/hallo03talk/place/list?categoryNo=0&cityNo=0&insideNo=0");
-		}
 		
 		
 		String name = req.getParameter("placeName");
 		String content = req.getParameter("placeContent");
 		String address = req.getParameter("placeAddr");
-		BossVo bv = (BossVo)req.getSession().getAttribute("BossLoginMember");
+		String bv = req.getParameter("no");
 		String categoryNo = req.getParameter("category_no");
+		String id = req.getParameter("id");
+		String pwd = req.getParameter("pwd");
 		
 		
 		PlaceVo placeVo = new PlaceVo();
 		placeVo.setName(name);
 		placeVo.setContent(content);
 		placeVo.setAddress(address);
-		placeVo.setBossNo(Integer.toString(bv.getNo()));
+		placeVo.setBossNo(bv);
 		placeVo.setCategoryNo(categoryNo);
 		
 //		슬라이드 사진 저장
@@ -99,6 +105,12 @@ public class PlaceAddController extends HttpServlet{
 		
 		if(result == 1) {
 			//성공
+			BossVo bv1 = new BossVo();
+			bv1.setId(id);
+			bv1.setPwd(pwd);
+			
+			BossVo bv2 = new BossService().login(bv1);
+			req.getSession().setAttribute("BossLoginMember", bv2);
 			resp.sendRedirect("/hallo03talk/place/list?categoryNo=0&cityNo=0&insideNo=0");
 		} else {
 			//실패
