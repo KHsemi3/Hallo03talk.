@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.h3.party.service.PartyService;
 import com.h3.party.vo.PartyVo;
 
-@WebServlet(urlPatterns = "/notice/edit")
+@WebServlet(urlPatterns = "/party/edit")
 public class PartyEditController extends HttpServlet {
 	
 	/*
@@ -20,23 +20,13 @@ public class PartyEditController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		//데이터 꺼내기
 		String num = req.getParameter("num");
 		
-		//서비스 호출
-		PartyVo vo = new PartyService().selectOne(num);
+		PartyVo pv = new PartyService().detailParty(num);
 		
-		//결과에 따라, 화면 선택
-		if(vo != null) {
-			//성공 //수정하기 화면 보여주기
-			req.setAttribute("vo", vo);
-			req.getRequestDispatcher("/views/party/partyEdit.jsp").forward(req, resp);
-			
-		}else {
-			//실패 //에러페이지
-			req.setAttribute("errorMsg", "이벤트 수정하기 화면 불러오는 중 에러 발생 !");
-			req.getRequestDispatcher("/views/error/errorPage.jsp").forward(req, resp);
-		}
+		req.setAttribute("pv", pv);
+		
+		req.getRequestDispatcher("/views/party/Edit.jsp").forward(req, resp);
 		
 	}//method
 	
@@ -46,29 +36,26 @@ public class PartyEditController extends HttpServlet {
 	 */
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setCharacterEncoding("UTF-8");
 		
-		//데이터 꺼내기
+		String pno = req.getParameter("pNo");
+		String category = req.getParameter("category");
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
-		String num = req.getParameter("num");
-		//데이터 뭉치기
-		PartyVo vo = new PartyVo();
-		vo.setTitle(title);
-		vo.setContent(content);
-		vo.setNo(Integer.parseInt(num));
 		
-		//서비스 호출
-		int result = new PartyService().edit(vo);	//update 쿼리
 		
-		//결과에 따라 화면 선택
-		if(result == 1) {
-			//성공 -> 상세보기 페이지
-			resp.sendRedirect(req.getContextPath() + "/notice/detail?num=" + num);
-		}else {
-			//실패 -> 에러페이지
-			req.setAttribute("errorMsg", "이벤트 안내 수정 실패 ...");
-			req.getRequestDispatcher("/views/party/errorPage.jsp").forward(req, resp);
+		PartyVo pv = new PartyVo();
+		pv.setNo(Integer.parseInt(pno));
+		pv.setCategoryName(category);
+		pv.setTitle(title);
+		pv.setContent(content);
+		
+		int result = new PartyService().editParty(pv);
+		
+
+		if (result == 1) {
+			resp.sendRedirect("/hallo03talk/party/detail?num="+pno);
+		} else {
+			
 		}
 	}
 

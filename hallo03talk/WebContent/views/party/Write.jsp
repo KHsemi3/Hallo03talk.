@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="/views/common/header.jsp"%>
 <!DOCTYPE html>
 <html>
@@ -13,7 +14,12 @@
 
 
 
-
+	<c:if test="${empty BossLoginMember  }">
+		<script>
+			alert('로그인하세요')
+			history.go(-1);
+		</script>
+	</c:if>
 	<main>
 		<div id="container" class="container-xxl">
 			<div class="board_wrap">
@@ -23,33 +29,37 @@
 				</div>
 				<form action="/hallo03talk/party/write" method="post" id="pform">
 					<div class="write_wrap">
+					<input type="hidden" value="${ BossLoginMember.no }" name="bossNo">
 						<div class="write">
 							<div class="catag"></div>
 							<dl>
 								<dt>말머리</dt>
-								<dd></dd>
+								<select name="category">
+									<option value="1">지역축제</option>
+									<option value="2">가게홍보</option>	
+								</select>
 							</dl>
 							<div class="title">
 								<dl>
 									<dt>제목</dt>
 									<dd>
-										<input type="text" placeholder="제목 입력">
+										<input type="text" placeholder="제목 입력" name="title">
 									</dd>
 								</dl>
 							</div>
 
 							<div class="cont">
-								<textarea placeholder="내용 입력"></textarea>
+								<textarea placeholder="내용 입력" name="content"></textarea>
 							</div>
 						</div>
 					</div>
 					<button type="submit" class="btn btn-dark">등록</button>
+					<div class="bt_wrap">
+					<button type="button" class="btn btn-danger" onclick="location.href='/hallo03talk/party/list'">취소</button>
+					</div>
 				</form>
 
-				<div class="bt_wrap">
-					<input type="button" value="취소" onclick="history.go(-1)">
-					
-				</div>
+				
 
 
 			</div>
@@ -61,14 +71,6 @@
 
 
 	<footer></footer>
-	<script type="text/javascript">
-	alert('asdfasdf')
-		function onsubmit() {
-			const bform = document.querySelector('#pform');
-			alert(bform);
-			bform.submit();
-		}
-	</script>
 
 </body>
 </html>
