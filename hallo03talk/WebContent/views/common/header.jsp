@@ -97,9 +97,9 @@ session.removeAttribute("registerOk");
           </a>
           <ul class="dropdown-menu text-small">
             <li><a onclick="location.href='/hallo03talk/admin/placeAdmin'"class="dropdown-item" href="#">숙소관리</a></li>
-            <li><a onclick="location.href='/hallo03talk/admin/reportUser'"class="dropdown-item" href="#">유저신고관리</a></li>
-            <li><a onclick="location.href='/hallo03talk/admin/reportContent'"class="dropdown-item"g href="#">게시글 신고관리</a></li>
-            <li><a onclick="location.href='/hallo03talk/admin/reportReply'"class="dropdown-item" href="#">댓글 신고관리</a></li>
+            <li><a onclick="location.href='/hallo03talk/admin/reportUser?p=1'"class="dropdown-item" href="#">유저신고관리</a></li>
+            <li><a onclick="location.href='/hallo03talk/admin/reportContent?p=1'"class="dropdown-item"g href="#">게시글 신고관리</a></li>
+            <li><a onclick="location.href='/hallo03talk/admin/reportReply?p=1'"class="dropdown-item" href="#">댓글 신고관리</a></li>
             
             <li><hr class="dropdown-divider"></li>
             <li><a onclick="location.href='/hallo03talk/admin/logout'" class="dropdown-item" href="#">로그아웃</a></li>
