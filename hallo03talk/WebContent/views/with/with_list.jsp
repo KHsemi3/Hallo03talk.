@@ -5,17 +5,17 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-String alertMsg = (String)session.getAttribute("alertMsg");
-session.removeAttribute("alertMsg");
-
-ArrayList<WithVo> voList = (ArrayList<WithVo>) request.getAttribute("voList");
-
-PageVo pv = (PageVo)request.getAttribute("pageVo");
-
-int currentPage = pv.getCurrentPage();
-int startPage = pv.getStartPage();
-int endPage = pv.getEndPage();
-int maxPage = pv.getMaxPage();
+	String alertMsg = (String)session.getAttribute("alertMsg");
+	session.removeAttribute("alertMsg");
+	
+	ArrayList<WithVo> voList = (ArrayList<WithVo>) request.getAttribute("voList");
+	
+	PageVo pv = (PageVo)request.getAttribute("pageVo");
+	
+	int currentPage = pv.getCurrentPage();
+	int startPage = pv.getStartPage();
+	int endPage = pv.getEndPage();
+	int maxPage = pv.getMaxPage();
 %>
 
 <!DOCTYPE html>
@@ -25,52 +25,52 @@ int maxPage = pv.getMaxPage();
 <title>Insert title here</title>
 
 <style>
-#container {
-	padding: 3rem;
-}
-
-#container-header {
-	display: flex;
-	align-items: baseline;
-	justify-content: space-between;
-}
-
-.chi:nth-child(1) {
-	flex-grow: 1;
-}
-
-.chi:nth-child(2) {
-	flex-grow: 50;
-}
-
-.chi:nth-child(3) {
-	flex-grow: 0;
-}
-
-#align-dropdown {
-	display: flex;
-	justify-content: flex-end;
-}
-
-/* 여기서부터 아이템들 */
-#content-items {
-	margin: 1rem;
-	width: 100%;
-	height: 120px;
-}
-
-#content-items:hover {
-	background-color: bisque;
-	cursor: pointer;;
-}
-
-#content-items * {
-	margin: 10px;
-}
-
-#content-items-title {
-	width: 40%;
-}
+	#container {
+		padding: 3rem;
+	}
+	
+	#container-header {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+	}
+	
+	.chi:nth-child(1) {
+		flex-grow: 1;
+	}
+	
+	.chi:nth-child(2) {
+		flex-grow: 50;
+	}
+	
+	.chi:nth-child(3) {
+		flex-grow: 0;
+	}
+	
+	#align-dropdown {
+		display: flex;
+		justify-content: flex-end;
+	}
+	
+	/* 여기서부터 아이템들 */
+	#content-items {
+		margin: 1rem;
+		width: 100%;
+		height: 120px;
+	}
+	
+	#content-items:hover {
+		background-color: bisque;
+		cursor: pointer;;
+	}
+	
+	#content-items * {
+		margin: 10px;
+	}
+	
+	#content-items-title {
+		width: 40%;
+	}
 </style>
 
 </head>
@@ -91,9 +91,7 @@ int maxPage = pv.getMaxPage();
 			</div>
 			<hr>
 			<div class="dropdown" id="align-dropdown">
-				<button class="btn btn-secondary dropdown-toggle" type="button"
-					id="dropdownMenuButton1" data-bs-toggle="dropdown"
-					aria-expanded="false">최신순</button>
+				<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">최신순</button>
 				<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 					<li><a class="dropdown-item" href="<%= request.getContextPath()%>/with/list">최신순</a></li>
 					<li><a class="dropdown-item" href="<%= request.getContextPath()%>/with/list?s=v">조회순</a></li>
@@ -104,17 +102,17 @@ int maxPage = pv.getMaxPage();
 			<div id="contents">
 
 				<%
-				for (WithVo vo : voList) {
-					String content = vo.getContent();
-					String imgPath = null;
-					int findex = content.indexOf("<img src=\"") + "<img src=\"".length();
-					
-					if(content.indexOf("<img src=\"") != -1){
-						int lindex = content.indexOf("\"",findex);
-						imgPath = content.substring(findex,lindex);
-					}
-				%>	
-					<div id="content-items" class="d-flex" onclick="location.href = '<%= request.getContextPath()%>/with/detail?no=<%=vo.getNo()%>'">
+					for (WithVo vo : voList) {
+						String content = vo.getContent();
+						String imgPath = null;
+						int findex = content.indexOf("<img src=\"") + "<img src=\"".length();
+						
+						if(content.indexOf("<img src=\"") != -1){
+							int lindex = content.indexOf("\"",findex);
+							imgPath = content.substring(findex,lindex);
+						}
+				%>
+				<div id="content-items" class="d-flex" onclick="location.href = '<%= request.getContextPath()%>/with/detail?no=<%=vo.getNo()%>'">
 						
 						<%if(imgPath == null){ %>
 							<img src="/hallo03talk/resources/img/with/with_board_defaultimg.jpg" class="rounded" height="100" width="150">
